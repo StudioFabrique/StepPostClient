@@ -20,38 +20,29 @@
 				<p>
 					Suivre votre recommandé
 				</p>
-				<form id="form">
-					<input type="text" id="searchInput" autofocus></form>
+				<div>
+					<form id="form">
+						<input type="text" id="searchInput">
+					</form>
+					<img src="img/ri_search-line.png" alt="icone loupe">
+				</div>
 			</article>
 		</section>
-		<!-- affichage du résultat de la recherche -->
-		<section>
-			<!-- timeline -->
-			<article class="timeline">
-				<div></div>
-
-			</article>
-			<!-- détails du courrier recherché ou sélectionné par click -->
-			<article id="details">
-				<div>
-					<h5 class="date"></h5>
-				</div>
-				<div>
-					<p></p>
-				</div>
-			</article>
+		<!--Affichage du résultat de la recherche-->
+		<section id="detailsRecherche">
+			<h4>Courrier n° :
+			</h4>
+			<div></div>
 		</section>
 		<!-- Historique envois -->
 		<section>
 			<div>
 				<h3>
-					{% if results != 0 %}
-                    Résultats de votre recherche pour : {{ nom }}
-                    {% else %}
-                        Aucun courrier en cours pour : {{ nom }}
-                    {% endif %} 
+					Statut de vos envois en cours :
 				</h3>
-				<a href="{{path('app_main')}}">Retour vers la page d'accueil</a>
+				<button>
+					+
+				</button>
 			</div>
 			{% for statut in statuts %}
 				<article class="courrier" id="{{ statut.courrier.id }}">
@@ -109,13 +100,10 @@
 							{% endif %}
 						</span>
 					</div>
+					<div id="detailsLivraison"></div>
 				</article>
 			{% endfor %}
 		</section>
-		<section>
-			<button>
-				+
-			</button>
-		</section>
+		<section></section>
 	</main>
 {% endblock %}

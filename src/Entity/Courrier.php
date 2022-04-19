@@ -45,6 +45,10 @@ class Courrier
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $telephone;
 
+    #[ORM\ManyToOne(targetEntity: Expediteur::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $expediteur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -169,4 +173,17 @@ class Courrier
 
         return $this;
     }
+
+    public function getExpediteur(): ?Expediteur
+    {
+        return $this->expediteur;
+    }
+
+    public function setExpediteur(?Expediteur $expediteur): self
+    {
+        $this->expediteur = $expediteur;
+
+        return $this;
+    }
+
 }

@@ -4,9 +4,6 @@ $orange: #FF5E1A;
     padding: 1.5vw;
     border-radius: 5px;
     box-shadow: 4px 4px 4px #646464;
-    background-image: url('../img/ri_search-line.png');
-    background-repeat: no-repeat;
-    background-position: center right;
 }
 #searchBtn {
     padding: .5vw;
@@ -92,23 +89,33 @@ body {
                 flex-direction: column;
                 columns: 5vw;
                 > p {
-                    font-size: 10px;
+                    font-size: 1rem;
                     font-style: italic;
                     color: #646464;
                 }
                 > div {
                     display: flex;
                     align-items: center;
+                    column-gap: 1vw;
+                    > img {
+                        width: 32px;
+                        height: auto;
+                    }
                 }
             }
         }
         section:nth-child(2) {
             width: 40%;
             display: none;
-            justify-content: center;
-            padding: 1vw;
-            border: 1px solid darkgray;
-            border-radius: 5px;
+            flex-direction: column;
+            row-gap: 2vh;
+            > div {
+                display: flex;
+                justify-content: center;
+                padding: 1vw;
+                border: 1px solid darkgray;
+                border-radius: 5px;
+            }
         }
         section:nth-child(3) {
             width: 80%;

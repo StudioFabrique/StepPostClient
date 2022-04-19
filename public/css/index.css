@@ -4,9 +4,6 @@
   border-radius: 5px;
   -webkit-box-shadow: 4px 4px 4px #646464;
           box-shadow: 4px 4px 4px #646464;
-  background-image: url("../img/ri_search-line.png");
-  background-repeat: no-repeat;
-  background-position: center right;
 }
 
 #searchBtn {
@@ -150,7 +147,7 @@ body > main section:nth-child(1) > article {
 }
 
 body > main section:nth-child(1) > article > p {
-  font-size: 10px;
+  font-size: 1rem;
   font-style: italic;
   color: #646464;
 }
@@ -162,11 +159,29 @@ body > main section:nth-child(1) > article > div {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
+}
+
+body > main section:nth-child(1) > article > div > img {
+  width: 32px;
+  height: auto;
 }
 
 body > main section:nth-child(2) {
   width: 40%;
   display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 2vh;
+}
+
+body > main section:nth-child(2) > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

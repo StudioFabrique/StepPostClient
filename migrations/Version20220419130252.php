@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220415120334 extends AbstractMigration
+final class Version20220419130252 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,16 @@ final class Version20220415120334 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE courrier ADD civilite VARCHAR(10) DEFAULT NULL, ADD prenom VARCHAR(255) DEFAULT NULL, ADD adresse VARCHAR(255) NOT NULL, ADD complement VARCHAR(255) DEFAULT NULL, ADD code_postal INT NOT NULL, ADD ville VARCHAR(255) NOT NULL, ADD telephone VARCHAR(100) DEFAULT NULL');
+        $this->addSql('ALTER TABLE courrier ADD user_id INT NOT NULL');
+        $this->addSql('ALTER TABLE courrier ADD CONSTRAINT FK_BEF47CAAA76ED395 FOREIGN KEY (user_id) REFERENCES `user` (id)');
+        $this->addSql('CREATE INDEX IDX_BEF47CAAA76ED395 ON courrier (user_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE courrier DROP civilite, DROP prenom, DROP adresse, DROP complement, DROP code_postal, DROP ville, DROP telephone');
+        $this->addSql('ALTER TABLE courrier DROP FOREIGN KEY FK_BEF47CAAA76ED395');
+        $this->addSql('DROP INDEX IDX_BEF47CAAA76ED395 ON courrier');
+        $this->addSql('ALTER TABLE courrier DROP user_id');
     }
 }

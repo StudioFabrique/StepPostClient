@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\StatutCourrier;
+use App\Repository\ClientRepository;
 use App\Repository\CourrierRepository;
+use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,15 +26,16 @@ class MainController extends AbstractController
 
     #[Route('/', name: 'app_main')]
     public function index(
+        UserRepository $userRepository,
         CourrierRepository $courrierRepository,
         StatutCourrierRepository $statutCourrierRepository,
     ): Response {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
-        } else {
-            $user = $this->getUser();
-            $id = $user->getUserIdentifier();
-            $courriers = $courrierRepository->findBy(['date' => 'DESC']);
+        } else {/*
+            $user = $userRepository->findOneBy(['email' => $_SESSION['client']]);
+*/
+            $courriers = $courrierRepository->findAll();
             $datas = array();
             foreach ($courriers as $courrier) :
                 $statut = $statutCourrierRepository->findBy(
@@ -69,7 +74,7 @@ class MainController extends AbstractController
                 return $this->json([
                     'statuts' => $statuts,
                 ]);
-            else:
+            else :
                 return $this->json(['statuts' => true]);
             endif;
         else :
@@ -78,20 +83,25 @@ class MainController extends AbstractController
     }
 
     #[Route('/detailsCourrier', name: 'app_detailsCourrier')]
-    public function detailsCourrier(StatutCourrierRepository $statutCourrierRepository): Response
+    public function detailsCourrier(
+        StatutCourrierRepository $statutCourrierRepository,
+        CourrierRepository $courrierRepository
+        ): Response
     {
-        $data = $this->stripTag();
-        $courrier = $statutCourrierRepository->findBy(
-            ['courrier' => $data[0]],
-            ['date' => 'ASC'],
-        );
-        return $this->json(['courrier' => $courrier]);
+            $data = $this->stripTag();
+            $courrier = $courrierRepository->findBy(['id' => $data[0]]);
+            $statuts = $statutCourrierRepository->findBy(['courrier' => $courrier]);
+
+            return $this->json([
+                'courrier' => $statuts,
+                'date' => 'ASC'    
+            ]);
     }
 
     #[Route('/searchCourrierByNom', name: 'app_searchCourrierbyNom')]
-    public function searchCourrierBynom(CourrierRepository $courrierRepository, StatutCourrierRepository $statutCourrierRepository): Response
+    public function searchCourrierByNom(CourrierRepository $courrierRepository, StatutCourrierRepository $statutCourrierRepository): Response
     {
-        $data = $_GET['nom'];
+        $data = strip_tags($_GET['nom']);
         $courriers = $courrierRepository->findBy(['nom' => $data]);
         $datas = array();
         foreach ($courriers as $courrier) :

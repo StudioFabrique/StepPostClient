@@ -20,81 +20,86 @@
 				<p>
 					Suivre votre recommandé
 				</p>
-				<form id="form">
-					<input type="text" id="searchInput" autofocus></form>
+				<div>
+					<form id="form">
+						<input type="text" id="searchInput">
+					</form>
+					<img src="img/ri_search-line.png" alt="icone loupe">
+				</div>
 			</article>
 		</section>
 		<!--Affichage du résultat de la recherche-->
 		<section id="detailsRecherche"></section>
-	<!-- Historique envois -->
-	<section>
-		<div>
-			<h3>
-				Statut de vos envois en cours :
-			</h3>
-			<button>
-				+
-			</button>
-		</div>
-		{% for statut in statuts %}
-			<article class="courrier" id="{{ statut.courrier.id }}">
-				<div>
-					<h4 class="date">
-						{{ statut.date | date('d/m/Y à H:i') }}
-					</h4>
-				</div>
-				<div>
-					<span>
-						{% if statut.statut.etat == "distribué" %}
-							<p>
-								Le destinataire
-								{{ statut.courrier.nom }}
-								a bien reçu
-							</p>
-						{% else %}
-							{% if statut.statut.etat == "avisé" %}
+		<!-- Historique envois -->
+		<section>
+			<div>
+				<h3>
+					Statut de vos envois en cours :
+				</h3>
+				<button>
+					+
+				</button>
+			</div>
+			{% for statut in statuts %}
+				<article class="courrier" id="{{ statut.courrier.id }}">
+					<div>
+						<h4 class="date">
+							{{ statut.date | date('d/m/Y à H:i') }}
+						</h4>
+					</div>
+					<div>
+						<span>
+							{% if statut.statut.etat == "distribué" %}
 								<p>
-									Le facteur a laissé un avis de passage chez
+									Le destinataire
 									{{ statut.courrier.nom }}
+									a bien reçu
 								</p>
 							{% else %}
-								{% if statut.statut.etat == "instancié" %}
+								{% if statut.statut.etat == "avisé" %}
 									<p>
-										Le courrier pour
+										Le facteur a laissé un avis de passage chez
 										{{ statut.courrier.nom }}
-										a été laissé à un point de retrait
 									</p>
 								{% else %}
-									{% if statut.statut.etat == "NPAI" %}
-										<p>Le destinataire
+									{% if statut.statut.etat == "instancié" %}
+										<p>
+											Le courrier pour
 											{{ statut.courrier.nom }}
-											n'habite pas à l'adresse indiquée</p>
+											a été laissé à un point de retrait
+										</p>
 									{% else %}
-										{% if statut.statut.etat == "retour" %}
-											<p>Le courrier pour
+										{% if statut.statut.etat == "NPAI" %}
+											<p>Le destinataire
 												{{ statut.courrier.nom }}
-												a été retourné à l'expéditeur</p>
+												n'habite pas à l'adresse indiquée</p>
+										{% else %}
+											{% if statut.statut.etat == "retour" %}
+												<p>Le courrier pour
+													{{ statut.courrier.nom }}
+													a été retourné à l'expéditeur</p>
+											{% endif %}
 										{% endif %}
 									{% endif %}
 								{% endif %}
 							{% endif %}
-						{% endif %}
-					</span>
-					<span>
-						{% if statut.courrier.type == 0 %}
-							<p>
-								Colis
-							</p>
-						{% else %}
-							<p>
-								Lettre
-							</p>
-						{% endif %}
-					</span>
-				</div>
-				<div id="detailsLivraison"></div>
-			</article>
-		{% endfor %}
-	</section>
-	<section></section>
-</main>{% endblock %}
+						</span>
+						<span>
+							{% if statut.courrier.type == 0 %}
+								<p>
+									Colis
+								</p>
+							{% else %}
+								<p>
+									Lettre
+								</p>
+							{% endif %}
+						</span>
+					</div>
+					<div id="detailsLivraison"></div>
+				</article>
+			{% endfor %}
+		</section>
+		<section></section>
+	</main>
+{% endblock %}

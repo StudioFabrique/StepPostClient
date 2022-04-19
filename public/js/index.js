@@ -20,12 +20,14 @@ search.addEventListener('submit', async (event) => {
             console.log('ce courrier a déjà été livré, veuillez regarder dans votre historiques');
         } else {
             const section = document.querySelector('#detailsRecherche');
+            const div = section.querySelector('div');
             section.style.display = "flex";
+            section.querySelector('h4').textContent = "Courrier n° : " + result.statuts[0].courrier.bordereau;
             if (section.querySelector('.timeline') !== null) {
                 closeDetailsRecherche(section);
             }
-            displayStatuts(result.statuts, section);
-            displayDetails(result.statuts, section);
+            displayStatuts(result.statuts, div);
+            displayDetails(result.statuts, div);
         }
     } catch (err) {
         console.log("coucou");
@@ -36,9 +38,9 @@ search.addEventListener('submit', async (event) => {
 courrierLog.forEach((elem) => {
     elem.addEventListener('click', async function() {
         const data = [elem.id];
-        const courrier = await postData('/detailsCourrier', data);
         const div = this.querySelector('#detailsLivraison');
         if (etat === null) {
+            const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
             displayDetails(courrier.courrier, div);
             etat = elem.id;
@@ -47,6 +49,7 @@ courrierLog.forEach((elem) => {
             etat = null;
         } else {
             closeStatut(div);
+            const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
             displayDetails(courrier.courrier, div);
             etat = elem.id;
