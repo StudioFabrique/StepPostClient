@@ -1,0 +1,171 @@
+$orange: #FF5E1A;
+#searchInput {
+    width: 30vw;
+    padding: 1.5vw;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px #646464;
+    background-image: url('../img/ri_search-line.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+#searchBtn {
+    padding: .5vw;
+    color: white;
+    font-weight: bold;
+    background-color: #24A640;
+    border: none;
+    border-radius: 5px;
+    
+}
+#detailsLivraison {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    > .details {
+        font-size: .75rem;
+    }
+}
+.date {
+    color: $orange;
+}
+.cercle {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    width: 1vw;
+    height: 1vw;
+    background-color: darkgrey;
+}
+.trait {
+    display: flex;;
+    width: 27%;
+    height: .25vw;
+    background-color: darkgrey;
+}
+.timeline {
+    width: 40%;
+    display: flex;
+    > div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+.cercle-container {
+    position: relative;
+}
+.statuts {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .75rem;
+}
+.statuts-date {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .5rem;
+}
+body {
+    > main {
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 15vh;
+        section:nth-child(1) {
+            display: flex;
+            flex-direction: column;
+            row-gap: 3vh;
+            > article {
+                display: flex;
+                flex-direction: column;
+                columns: 5vw;
+                > p {
+                    font-size: 10px;
+                    font-style: italic;
+                    color: #646464;
+                }
+                > div {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+        section:nth-child(2) {
+            width: 40%;
+            display: none;
+            justify-content: center;
+            padding: 1vw;
+            border: 1px solid darkgray;
+            border-radius: 5px;
+        }
+        section:nth-child(3) {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 5vh;
+            align-items: center;
+            > div:nth-child(1) {
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                > a {
+                    margin-left: .5vw;
+                    color: $orange;
+                    font-weight: bold;
+                    font-size: .75rem;
+                }
+                > button {
+                    width: 3vw;
+                    height: 3vw;
+                    background-color: $orange;
+                    border-radius: 50%;
+                    font-size: 2rem;
+                    color: white;
+                    border: none;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            > article {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 3vh;
+                padding: 1vh;
+                border-bottom: solid #646464 2px;
+                padding: 1.5vw;
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid darkgray;
+                    border-radius: 5px;
+                    box-shadow: 4px 4px 4px #646464;
+                }
+                > div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    > span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                    }
+                }
+            }
+        }
+    }
+}

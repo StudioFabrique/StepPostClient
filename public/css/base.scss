@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+$blue: #140A82;
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: $blue;
+    font-family: rubik;
+}

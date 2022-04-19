@@ -1,0 +1,46 @@
+$blue: #140A82;
+.bouton {
+    padding: .5vw;
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+}
+body {
+    main {
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 5vh;
+        > section:nth-child(1) {
+            width: 35%;
+            display: flex;
+            justify-content: left;
+        }
+        > section:nth-child(2) {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            > form {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                row-gap: 2vh;
+                > input {
+                    padding: 1vw;
+                    border-radius: 5px;
+                    border: solid 1px #646464;
+                    box-shadow: 4px 4px 4px #646464;
+                }
+                > div {
+                    width: 95%;
+                    display: flex;
+                    justify-content: right;
+                }
+            }
+        }
+    }
+}
