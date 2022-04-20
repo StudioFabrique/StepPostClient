@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Courrier;
 use App\Entity\StatutCourrier;
 use App\Repository\ClientRepository;
 use App\Repository\CourrierRepository;
@@ -25,17 +26,34 @@ class MainController extends AbstractController
         return $data;
     }
 
+    private function getInfosCourrier(array $statuts, Courrier $courrier) : array
+    {
+        $result = array();
+        foreach($statuts as $statut) :
+            array_push($result, [
+                'date' => $statut->getDate(),
+                'etat' => $statut->getStatut()->getEtat(),
+            ]);
+        endforeach;
+        $destinataire = [
+            'civilite' => $courrier->getCivilite(),
+            'prenom' => $courrier->getPrenom(),
+            'nom' => $courrier->getNom(),
+            'adresse' => $courrier->getAdresse(),
+            'codePostal' => $courrier->getCodePostal(),
+            'ville' => $courrier->getVille(),
+        ];
+        return [$result, $destinataire];
+    }
+
     #[Route('/', name: 'app_main')]
     public function index(
-        UserRepository $userRepository,
         CourrierRepository $courrierRepository,
         StatutCourrierRepository $statutCourrierRepository,
     ): Response {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
-        } else {/*
-            $user = $userRepository->findOneBy(['email' => $_SESSION['client']]);
-*/
+        } else {
             $courriers = $courrierRepository->findAll();
             $datas = array();
             foreach ($courriers as $courrier) :
@@ -72,8 +90,11 @@ class MainController extends AbstractController
             );
             $tmp = $statuts[0]->getStatut()->getEtat();
             if ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI") :
+                $data = $this->getInfosCourrier($statuts, $courrier);
+                $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
                 return $this->json([
-                    'statuts' => $statuts,
+                    'statuts' => $data[0],
+                    'destinataire' => $data[1],
                 ]);
             else :
                 return $this->json(['statuts' => true]);
@@ -88,29 +109,14 @@ class MainController extends AbstractController
         StatutCourrierRepository $statutCourrierRepository,
         CourrierRepository $courrierRepository
         ): Response
-    {
+    {       
             $data = $this->stripTag();
             $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
             $statuts = $statutCourrierRepository->findBy(['courrier' => $courrier]);
-            $result = array();
-            foreach($statuts as $statut) :
-                $tmp = [
-                    'date' => $statut->getDate(),
-                    'etat' => $statut->getStatut()->getEtat(),
-                ];
-                array_push($result, $tmp);
-            endforeach;
-            $destinataire = [
-                'civilite' => $courrier->getCivilite(),
-                'prenom' => $courrier->getPrenom(),
-                'nom' => $courrier->getNom(),
-                'adresse' => $courrier->getAdresse(),
-                'codePostal' => $courrier->getCodePostal(),
-                'ville' => $courrier->getVille(),
-            ];
+            $data = $this->getInfosCourrier($statuts, $courrier);
             return $this->json([
-                'courrier' => $result,  
-                'destinataire' => $destinataire              
+                'courrier' => $data[0],  
+                'destinataire' => $data[1]              
             ]);
     }
 

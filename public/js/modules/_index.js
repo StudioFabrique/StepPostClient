@@ -2,10 +2,10 @@
  * fonctions utilisées dans le fichier index.js
  */
 
- export function displayStatuts(courrier, article) {
-     courrier.forEach((elem) => {
-         elem.date = formatDate(elem.date);
-     });    
+export function displayStatuts(courrier, article) {
+    courrier.forEach((elem) => {
+        elem.date = formatDate(elem.date);
+    });
     const timeline = document.createElement('article');
     timeline.classList = "timeline";
     const div = document.createElement('div');
@@ -27,7 +27,7 @@
             const trait = document.createElement('div');
             trait.classList = "trait";
             anchor.appendChild(trait);
-            trait.style.backgroundColor = setColor(courrier[i + 1].etat);
+            trait.style.backgroundColor = "#FF5E1A";
         }
     }
 }
@@ -74,9 +74,9 @@ export function displayDetails(courrier, anchor) {
     const nom = document.createElement('p');
     const adresse = document.createElement('p');
     const ville = document.createElement('p');
-    nom.textContent = `${courrier.civilite} ${courrier.prenom} ${courrier.nom}`;
-    adresse.textContent = courrier.adresse;
-    ville.textContent = `${courrier.codePostal} ${courrier.ville}`;
+    nom.textContent = toTitleCase(`${courrier.civilite} ${courrier.prenom} ${courrier.nom}`);
+    adresse.textContent = toTitleCase(courrier.adresse);
+    ville.textContent = toTitleCase(`${courrier.codePostal} ${courrier.ville}`);
     article.classList = "details";
     div.appendChild(nom);
     div.appendChild(adresse);
@@ -88,4 +88,13 @@ export function displayDetails(courrier, anchor) {
 function formatDate(date) {
     const tmp = Date.parse(date);
     return new Intl.DateTimeFormat('fr-FR').format(tmp);
+}
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
 }

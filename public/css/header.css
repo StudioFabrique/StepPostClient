@@ -4,34 +4,21 @@
 }
 
 body > header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 body > header > div {
   width: 50vw;
-  padding: .5vw;
+  padding: 0.5vw;
 }
-
 body > header > div > img {
   height: 8vh;
   width: auto;
 }
-
 body > header > div:nth-child(2) {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
+  justify-content: end;
 }
-
 body > header > div:nth-child(2) > ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   list-style-type: none;
-}
-/*# sourceMappingURL=header.css.map */
+}/*# sourceMappingURL=header.css.map */

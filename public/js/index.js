@@ -14,23 +14,24 @@ search.addEventListener('submit', async (event) => {
     const data = [searchInput.value];
     try {
         const result = await postData('/searchCourrier', data);
+        console.log('result', result.destinataire);
         if (!result.statuts) {
             window.location.href = "/searchCourrierByNom/?nom=" + searchInput.value;
         } else if (result.statuts === true) {
-            console.log('ce courrier a déjà été livré, veuillez regarder dans votre historiques');
+            console.log('ce courrier a déjà été livré, veuillez regarder dans votre historique');
         } else {
             const section = document.querySelector('#detailsRecherche');
             const div = section.querySelector('div');
             section.style.display = "flex";
-            section.querySelector('h4').textContent = "Courrier n° : " + result.statuts[0].courrier.bordereau;
+            section.querySelector('h4').textContent = "Courrier n° : " + result.destinataire.bordereau;
             if (section.querySelector('.timeline') !== null) {
                 closeDetailsRecherche(section);
             }
             displayStatuts(result.statuts, div);
-            displayDetails(result.statuts, div);
+            displayDetails(result.destinataire, div);
         }
     } catch (err) {
-        console.log("coucou");
+        console.log("toto");
     }
 });
 
@@ -38,7 +39,7 @@ search.addEventListener('submit', async (event) => {
 courrierLog.forEach((elem) => {
     elem.addEventListener('click', async function() {
         const data = [elem.id];
-        const div = this.querySelector('#detailsLivraison');
+        const div = this.querySelector('.detailsLivraison');
         if (etat === null) {
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
@@ -48,7 +49,9 @@ courrierLog.forEach((elem) => {
             closeStatut(div);
             etat = null;
         } else {
-            closeStatut(div);
+            const article = document.getElementById(etat);
+            console.log(article.querySelector('.detailsLivraison'));
+            closeStatut(article.querySelector('.detailsLivraison'));
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
             displayDetails(courrier.destinataire, div);

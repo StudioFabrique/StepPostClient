@@ -14,13 +14,13 @@ $orange: #FF5E1A;
     border-radius: 5px;
     
 }
-#detailsLivraison {
+.detailsLivraison {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 90%;
+    width: 60%;
     > .details {
-        font-size: .75rem;
+        font-size: 1rem;
     }
 }
 .date {
@@ -177,6 +177,9 @@ body {
                         align-items: center;
                         justify-content: start;
                     }
+                }
+                > div:nth-child(3) {
+                    width: 60%;
                 }
             }
         }

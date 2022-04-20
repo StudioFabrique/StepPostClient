@@ -32,7 +32,7 @@ class Destinataires
     #[ORM\Column(type: 'string', length: 255)]
     private $adresse;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $complement;
 
     #[ORM\Column(type: 'integer')]

@@ -55,37 +55,39 @@
 						<h4 class="date">
 							{{ statut.date | date('d/m/Y à H:i') }}
 						</h4>
+					<p>Bordereau n° : {{ statut.courrier.bordereau }}</p>
 					</div>
 					<div>
 						<span>
+							{% set nom = statut.courrier.nom | title %}
 							{% if statut.statut.etat == "distribué" %}
 								<p>
 									Le destinataire
-									{{ statut.courrier.nom }}
+									{{ nom }}
 									a bien reçu
 								</p>
 							{% else %}
 								{% if statut.statut.etat == "avisé" %}
 									<p>
-										Le facteur a laissé un avis de passage chez
-										{{ statut.courrier.nom }}
+										Le facteur a laissé un avis de passage à : 
+										{{ nom }}
 									</p>
 								{% else %}
 									{% if statut.statut.etat == "instancié" %}
 										<p>
 											Le courrier pour
-											{{ statut.courrier.nom }}
+											{{ nom }}
 											a été laissé à un point de retrait
 										</p>
 									{% else %}
 										{% if statut.statut.etat == "NPAI" %}
 											<p>Le destinataire
-												{{ statut.courrier.nom }}
+												{{ nom }}
 												n'habite pas à l'adresse indiquée</p>
 										{% else %}
 											{% if statut.statut.etat == "retour" %}
 												<p>Le courrier pour
-													{{ statut.courrier.nom }}
+													{{ nom }}
 													a été retourné à l'expéditeur</p>
 											{% endif %}
 										{% endif %}
@@ -105,7 +107,7 @@
 							{% endif %}
 						</span>
 					</div>
-					<div id="detailsLivraison"></div>
+					<div class="detailsLivraison"></div>
 				</article>
 			{% endfor %}
 		</section>
