@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+	{{parent()}}
+	<link rel="stylesheet" href="css/adressesFavorites.css">
+{% endblock %}
+{% block javascripts %}
+	{{parent()}}
+{% endblock %}
+{% block body %}
+	<main>
+		<section>
+			<h1>Adresses Favorites</h1>
+            </section>
+            <section>
+			{% for destinataire in destinataires %}
+				<article>
+					<p>
+						{% if (destinataire.civilite) %}
+							{{destinataire.civilite}}
+						{% endif %}
+						{{destinataire.prenom}}
+						{{destinataire.nom}}</p>
+					<p>{{destinataire.adresse}}</p>
+					<p>{{destinataire.codePostal}}
+						{{destinataire.ville}}</p>
+				</article>
+			{% endfor %}
+		</section>
+	</main>
+{% endblock %}

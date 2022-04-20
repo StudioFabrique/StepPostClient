@@ -218,16 +218,20 @@ body > main section:nth-child(3) > div:nth-child(1) {
           align-items: center;
 }
 
-body > main section:nth-child(3) > div:nth-child(1) > a {
-  margin-left: .5vw;
-  color: #FF5E1A;
-  font-weight: bold;
-  font-size: .75rem;
+body > main section:nth-child(3) > div:nth-child(1) > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
 }
 
-body > main section:nth-child(3) > div:nth-child(1) > button {
-  width: 3vw;
-  height: 3vw;
+body > main section:nth-child(3) > div:nth-child(1) > div > a > button {
+  width: 2.5vw;
+  height: 2.5vw;
   background-color: #FF5E1A;
   border-radius: 50%;
   font-size: 2rem;
@@ -235,8 +239,15 @@ body > main section:nth-child(3) > div:nth-child(1) > button {
   border: none;
 }
 
-body > main section:nth-child(3) > div:nth-child(1) > button:hover {
+body > main section:nth-child(3) > div:nth-child(1) > div > a > button:hover {
   cursor: pointer;
+}
+
+body > main section:nth-child(3) > div:nth-child(1) > a {
+  margin-left: .5vw;
+  color: #FF5E1A;
+  font-weight: bold;
+  font-size: .75rem;
 }
 
 body > main section:nth-child(3) > article {

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,IADA,GACE,OAAO,AAAA,UAAW,CAAA,CAAC,EAAE;EACnB,KAAK,EAAE,GAAG;EACV,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,WAAW,EAAE,MAAM;CACtB",
+    "sources": [
+        "adressesFavorites.scss"
+    ],
+    "names": [],
+    "file": "adressesFavorites.css"
+}

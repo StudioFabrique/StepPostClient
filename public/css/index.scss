@@ -128,23 +128,29 @@ body {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                > div {
+                    display: flex;
+                    align-items: center;
+                    column-gap: .5vw;
+                    > a {
+                        > button {
+                            width: 2.5vw;
+                            height: 2.5vw;
+                            background-color: $orange;
+                            border-radius: 50%;
+                            font-size: 2rem;
+                            color: white;
+                            border: none;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }}
+                }
                 > a {
                     margin-left: .5vw;
                     color: $orange;
                     font-weight: bold;
                     font-size: .75rem;
-                }
-                > button {
-                    width: 3vw;
-                    height: 3vw;
-                    background-color: $orange;
-                    border-radius: 50%;
-                    font-size: 2rem;
-                    color: white;
-                    border: none;
-                    &:hover {
-                        cursor: pointer;
-                    }
                 }
             }
             > article {

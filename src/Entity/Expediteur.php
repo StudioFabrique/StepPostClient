@@ -19,9 +19,8 @@ class Expediteur extends User
     #[ORM\JoinColumn(nullable: true)]
     private $client;
 
-    #[ORM\OneToMany(mappedBy: 'expediteur', targetEntity: Courrier::class)]
+    #[ORM\OneToMany(mappedBy: 'expediteur', targetEntity: Courrier::class, orphanRemoval: true)]
     private $courriers;
-
 
     public function __construct()
     {

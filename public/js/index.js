@@ -42,7 +42,7 @@ courrierLog.forEach((elem) => {
         if (etat === null) {
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
-            displayDetails(courrier.courrier, div);
+            displayDetails(courrier.destinataire, div);
             etat = elem.id;
         } else if (etat === elem.id) {
             closeStatut(div);
@@ -51,7 +51,7 @@ courrierLog.forEach((elem) => {
             closeStatut(div);
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
-            displayDetails(courrier.courrier, div);
+            displayDetails(courrier.destinataire, div);
             etat = elem.id;
         }
     });

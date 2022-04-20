@@ -29,16 +29,25 @@
 			</article>
 		</section>
 		<!--Affichage du résultat de la recherche-->
-		<section id="detailsRecherche"></section>
+		<section id="detailsRecherche">
+			<h4>Courrier n° :
+			</h4>
+			<div></div>
+		</section>
 		<!-- Historique envois -->
 		<section>
 			<div>
 				<h3>
 					Statut de vos envois en cours :
 				</h3>
-				<button>
-					+
-				</button>
+				<div>
+					<h4>Nouvel Envoi</h4>
+					<a href="{{path('app_adressesFavorites')}}">
+						<button>
+							+
+						</button>
+					</a>
+				</div>
 			</div>
 			{% for statut in statuts %}
 				<article class="courrier" id="{{ statut.courrier.id }}">

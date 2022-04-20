@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\StatutCourrier;
 use App\Repository\ClientRepository;
 use App\Repository\CourrierRepository;
+use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Repository\UserRepository;
@@ -67,7 +68,7 @@ class MainController extends AbstractController
         if ($courrier !== null) :
             $statuts = $statutCourrierRepository->findBy(
                 ['courrier' => $courrier->getId()],
-                ['date' => 'DESC']
+                ['date' => 'ASC']
             );
             $tmp = $statuts[0]->getStatut()->getEtat();
             if ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI") :
@@ -89,12 +90,27 @@ class MainController extends AbstractController
         ): Response
     {
             $data = $this->stripTag();
-            $courrier = $courrierRepository->findBy(['id' => $data[0]]);
+            $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
             $statuts = $statutCourrierRepository->findBy(['courrier' => $courrier]);
-
+            $result = array();
+            foreach($statuts as $statut) :
+                $tmp = [
+                    'date' => $statut->getDate(),
+                    'etat' => $statut->getStatut()->getEtat(),
+                ];
+                array_push($result, $tmp);
+            endforeach;
+            $destinataire = [
+                'civilite' => $courrier->getCivilite(),
+                'prenom' => $courrier->getPrenom(),
+                'nom' => $courrier->getNom(),
+                'adresse' => $courrier->getAdresse(),
+                'codePostal' => $courrier->getCodePostal(),
+                'ville' => $courrier->getVille(),
+            ];
             return $this->json([
-                'courrier' => $statuts,
-                'date' => 'ASC'    
+                'courrier' => $result,  
+                'destinataire' => $destinataire              
             ]);
     }
 
@@ -118,6 +134,16 @@ class MainController extends AbstractController
             'statuts' => $datas,
             'results' => count($datas),
             'nom' => $data,
+        ]);
+    }
+
+    #[Route('/adressesFavorites', name: 'app_adressesFavorites')]
+    public function adressesFavorites(DestinatairesRepository $destinatairesRepository) : Response
+    {
+        $userId = $this->getUser()->getUserIdentifier();
+        $destinataires = $destinatairesRepository->findBy(['expediteur' => $userId]);
+        return $this->render('main/adressesFavorites.html.twig', [
+            'destinataires' => $destinataires,            
         ]);
     }
 }

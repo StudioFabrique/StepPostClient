@@ -12,8 +12,6 @@
     timeline.appendChild(div);
     article.appendChild(timeline);
     const anchor = div;
-    console.log(anchor);
-    console.log(courrier);
     for (let i = 0; i < courrier.length; i++) {
         const cercleContainer = document.createElement('div');
         cercleContainer.classList = "cercle-container";
@@ -21,15 +19,15 @@
         cercle.classList = "cercle";
         cercleContainer.appendChild(cercle);
         anchor.appendChild(cercleContainer);
-        cercle.style.backgroundColor = setColor(courrier[i].statut.etat);
+        cercle.style.backgroundColor = setColor(courrier[i].etat);
         cercle.id = i;
-        cercleContainer.appendChild(setDetails(courrier[i].statut.etat, "statuts"));
+        cercleContainer.appendChild(setDetails(courrier[i].etat, "statuts"));
         cercleContainer.appendChild(setDetails(courrier[i].date, "statuts-date"));
         if (i < (courrier.length - 1)) {
             const trait = document.createElement('div');
             trait.classList = "trait";
             anchor.appendChild(trait);
-            trait.style.backgroundColor = setColor(courrier[i + 1].statut.etat);
+            trait.style.backgroundColor = setColor(courrier[i + 1].etat);
         }
     }
 }
@@ -76,9 +74,9 @@ export function displayDetails(courrier, anchor) {
     const nom = document.createElement('p');
     const adresse = document.createElement('p');
     const ville = document.createElement('p');
-    nom.textContent = courrier[0].courrier.civilite + " " + courrier[0].courrier.prenom + " " + courrier[0].courrier.nom;
-    adresse.textContent = courrier[0].courrier.adresse;
-    ville.textContent = courrier[0].courrier.codePostal + " " + courrier[0].courrier.ville;
+    nom.textContent = `${courrier.civilite} ${courrier.prenom} ${courrier.nom}`;
+    adresse.textContent = courrier.adresse;
+    ville.textContent = `${courrier.codePostal} ${courrier.ville}`;
     article.classList = "details";
     div.appendChild(nom);
     div.appendChild(adresse);

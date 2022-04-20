@@ -1,0 +1,8 @@
+main {
+    > section:nth-child(1) {
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
