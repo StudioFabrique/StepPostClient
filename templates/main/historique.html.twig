@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Step Post
+
+
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="css/historique.css">
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="module" src="js/historique.js"></script>
+{% endblock %}
+{% block body %}
+	<main>
+		<section>
+			<input type="text" id="searchField">
+			<button id="searchBtn">Chercher</button>
+		</section>
+		<section>
+			{#
+									{% for statut in statuts %}
+										<article>
+											<div class="date">{{statut.date | date('d/m/Y')}}</div>
+											<div>{{statut.courrier.nom | title}}
+												{{statut.courrier.prenom | title}}</div>
+											<div>{{statut.statut.etat | title}}</div>
+						                    <div>{{statut.courrier.bordereau}}</div>
+										</article>
+									{% endfor %}
+						            #}
+
+			<table>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Destinataire</th>
+						<th>Statut</th>
+						<th>Borderau</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for statut in statuts %}
+						<tr id="{{statut.courrier.id}}">
+							<td class="date">{{statut.date | date('d/m/Y')}}</td>
+							<td>{{statut.courrier.nom | title}}
+								{{statut.courrier.prenom | title}}</td>
+							<td>{{statut.statut.etat | title}}</td>
+							<td>{{statut.courrier.bordereau}}</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div class="detailsLivraison"></div>
+							</td>
+						</tr>
+					</body>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+</main>{% endblock %}

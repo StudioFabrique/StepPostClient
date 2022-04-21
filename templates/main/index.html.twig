@@ -1,144 +1,200 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Step Post
-    
-    
+	Step Post
+
+
 {% endblock %}
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="css/index.css">
-    {% endblock %}
-    {% block javascripts %}
-        {{ parent() }}
-        <script type="module" src="js/index.js"></script>
-    {% endblock %}
-    {% block body %}
-        <main>
-            <!-- formulaire de recherche de courrier -->
-            <section>
-                <article>
-                    <p>
-                        Suivre votre recommandé
-                        				
-                    </p>
-                    <div>
-                        <form id="form">
-                            <input type="text" id="searchInput"></form>
-                            <img src="img/ri_search-line.png" alt="icone loupe"></div>
-                        </article>
-                    </section>
-                    <!--Affichage du résultat de la recherche-->
-                    <section id="detailsRecherche">
-                        <h4>
-                            Courrier n° :
-                            			
-                        </h4>
-                        <div></div>
-                    </section>
-                    <!-- Historique envois -->
-                    <section>
-                        <div>
-                            {% if (statuts == null) %}
-                                <h3>
-                                    Aucun envoi en cours n'a été trouvé
-                                </h3>
-                            {% else %}
-                                <h3>
-                                    Statut de vos envois en cours :
-                                </h3>
-                            {% endif %}
-                            <div>
-                                <h4>
-                                    Nouvel Envoi
-                                </h4>
-                                <a href="{{ path('app_adressesFavorites') }}">
-                                    <button>
-                                        +
-                                        						
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                        {% for statut in statuts %}
-                            <article class="courrier" id="{{ statut.courrier.id }}">
-                                <div>
-                                    <h4 class="date">
-                                        {{ statut.date | date('d/m/Y à H:i') }}
-                                    </h4>
-                                    <p>
-                                        Bordereau n° : 
-                                        {{ statut.courrier.bordereau }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <span>
-                                        {% set nom = statut.courrier.nom | title %}
-                                        {% if statut.statut.etat == "distribué" %}
-                                            <p>
-                                                Le destinataire
-                                                									
-                                                {{ nom }}
-                                                a bien reçu
-                                                								
-                                            </p>
-                                        {% else %}
-                                            {% if statut.statut.etat == "avisé" %}
-                                                <p>
-                                                    Le facteur a laissé un avis de passage à : 
-                                                    										
-                                                    {{ nom }}
-                                                </p>
-                                            {% else %}
-                                                {% if statut.statut.etat == "instancié" %}
-                                                    <p>
-                                                        Le courrier pour
-                                                        											
-                                                        {{ nom }}
-                                                        a été déposé à un point de retrait
-                                                        										
-                                                    </p>
-                                                {% else %}
-                                                    {% if statut.statut.etat == "NPAI" %}
-                                                        <p>
-                                                            Le destinataire
-                                                            												
-                                                            {{ nom }}
-                                                            n'habite pas à l'adresse indiquée
-                                                        </p>
-                                                    {% else %}
-                                                        {% if statut.statut.etat == "retour" %}
-                                                            <p>
-                                                                Le courrier pour
-                                                                													
-                                                                {{ nom }}
-                                                                a été retourné à l'expéditeur
-                                                            </p>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endif %}
-                                    </span>
-                                    <span>
-                                        {% if statut.courrier.type == 0 %}
-                                            <p>
-                                                Colis
-                                                								
-                                            </p>
-                                        {% else %}
-                                            <p>
-                                                Lettre
-                                                								
-                                            </p>
-                                        {% endif %}
-                                    </span>
-                                </div>
-                                <div class="detailsLivraison"></div>
-                            </article>
-                        {% endfor %}
-                    </section>
-                    <section></section>
-                </main>
-            {% endblock %}
-            
+	{{ parent() }}
+	<link rel="stylesheet" href="css/index.css">
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="module" src="js/index.js"></script>
+{% endblock %}
+{% block body %}
+	<main>
+		<!-- formulaire de recherche de courrier -->
+		<section>
+			<article>
+				<p>
+					Suivre votre recommandé
+
+
+				</p>
+				<div>
+					<form id="form">
+						<input type="text" id="searchInput"></form>
+					<img src="img/ri_search-line.png" alt="icone loupe"></div>
+			</article>
+		</section>
+		<!--Affichage du résultat de la recherche-->
+		<section id="detailsRecherche">
+			<div>
+				<h4>
+					Courrier n° :
+
+
+				</h4>
+                <span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span>
+			</div>
+			<div></div>
+		</section>
+		<!-- Historique envois -->
+		<section>
+			<div>
+				{% if (statuts == null) %}
+					<div>
+						<h3>
+							Aucun envoi en cours n'a été trouvé
+
+
+						</h3>
+						<a href="{{path('app_main')}}">
+							<button>Retour</button>
+						</a>
+					</div>
+				{% else %}
+					{% if (nom) %}
+						<div>
+							<h3>Resultat de la recherche pour :
+								{{nom | title}}
+							</h3>
+							<a href="{{path('app_main')}}">
+								<button>Retour</button>
+							</a>
+						</div>
+					{% else %}
+
+						<h3>
+							Statut de vos envois en cours :
+
+
+						</h3>
+					{% endif %}
+				{% endif %}
+				<div>
+					<h4>
+						Nouvel Envoi
+
+
+					</h4>
+					<a href="{{ path('app_adressesFavorites') }}">
+						<button>
+							+
+
+
+						</button>
+					</a>
+				</div>
+			</div>
+			{% for statut in statuts %}
+				<article class="courrier" id="{{ statut.courrier.id }}">
+					<div>
+						<h4 class="date">
+							{{ statut.date | date('d/m/Y à H:i') }}
+						</h4>
+						<p>
+							Bordereau n° :
+
+
+							{{ statut.courrier.bordereau }}
+						</p>
+					</div>
+					<div>
+						<span>
+							{% set nom = statut.courrier.nom | title %}
+							{% if statut.statut.etat == "distribué" %}
+								<p>
+									Le destinataire
+
+
+									{{ nom }}
+									a bien reçu
+
+
+								</p>
+							{% else %}
+								{% if statut.statut.etat == "avisé" %}
+									<p>
+										Le facteur a laissé un avis de passage à :
+
+
+										{{ nom }}
+									</p>
+								{% else %}
+									{% if statut.statut.etat == "instancié" %}
+										<p>
+											Le courrier pour
+
+
+											{{ nom }}
+											a été déposé à un point de retrait
+
+
+										</p>
+									{% else %}
+										{% if statut.statut.etat == "NPAI" %}
+											<p>
+												Le destinataire
+
+
+												{{ nom }}
+												n'habite pas à l'adresse indiquée
+
+
+											</p>
+										{% else %}
+											{% if statut.statut.etat == "retour" %}
+												<p>
+													Le courrier pour
+
+
+													{{ nom }}
+													a été retourné à l'expéditeur
+
+
+												</p>
+
+											{% else %}
+												{% if statut.statut.etat  == "remise" %}
+													<p>
+														Le courrier pour
+
+
+														{{ nom }}
+														a été pris en charge
+
+													</p>
+												{% endif %}
+
+											{% endif %}
+										{% endif %}
+									{% endif %}
+								{% endif %}
+							{% endif %}
+						</span>
+						<span>
+							{% if statut.courrier.type == 0 %}
+								<p>
+									Colis
+
+
+								</p>
+							{% else %}
+								<p>
+									Lettre
+
+
+								</p>
+							{% endif %}
+						</span>
+					</div>
+					<div class="detailsLivraison"></div>
+				</article>
+			{% endfor %}
+		</section>
+		<section></section>
+	</main>
+{% endblock %}

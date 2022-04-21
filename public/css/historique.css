@@ -1,0 +1,104 @@
+.date {
+  color: #FF5E1A;
+}
+
+.cercle {
+  position: relative;
+  display: flex;
+  border-radius: 50%;
+  width: 1vw;
+  height: 1vw;
+  background-color: darkgrey;
+}
+
+.trait {
+  display: flex;
+  width: 27%;
+  height: 0.25vw;
+  background-color: darkgrey;
+}
+
+.timeline {
+  width: 40%;
+  display: flex;
+}
+.timeline > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cercle-container {
+  position: relative;
+}
+
+.statuts {
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+}
+
+.statuts-date {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+}
+
+.detailsLivraison {
+  width: 100%;
+  display: flex;
+  padding: 1.5vw;
+  -moz-column-gap: 1.5vw;
+       column-gap: 1.5vw;
+}
+
+main {
+  width: 100vw;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2vh;
+}
+main > section:nth-child(2) {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1vh;
+  /*
+  > article {
+      width: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 1vh 1vw;
+      border: 1px solid darkgray;
+      border-radius: 5px;
+  }
+  */
+}
+main > section:nth-child(2) > table {
+  width: 60%;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  padding: 1vh 1vw;
+}
+main > section:nth-child(2) > table > thead {
+  text-align: left;
+  background-color: black;
+  color: white;
+}
+main > section:nth-child(2) > table > tbody > tr:nth-child(even) {
+  display: none;
+}/*# sourceMappingURL=historique.css.map */

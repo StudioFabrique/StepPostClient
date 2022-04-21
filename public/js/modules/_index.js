@@ -29,9 +29,13 @@ export function displayStatuts(courrier, article) {
             const trait = document.createElement('div');
             trait.classList = "trait";
             anchor.appendChild(trait);
-            trait.style.backgroundColor = "#FF5E1A";
+            trait.style.backgroundColor = setColor(courrier[i + 1].etat);
         }
     }
+    const cercles = timeline.querySelectorAll('.cercle');
+    cercles[cercles.length - 1].style.backgroundColor = "#24A640";
+    const traits = timeline.querySelectorAll('.trait');
+    traits[traits.length - 1].style.backgroundColor = "#24A640";
 }
 
 export function closeStatut(div) {
