@@ -95,6 +95,7 @@ class AppFixtures extends Fixture
             $dest->setVille($destinataire['ville']);
             $dest->setTelephone($destinataire['telephone']);
             $dest->setExpediteur($expediteur1);
+            $manager->persist($dest);
 
             $courrier = new Courrier();
             $courrier->setType(1);

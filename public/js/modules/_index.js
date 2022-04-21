@@ -1,3 +1,5 @@
+import { formatDate, toTitleCase } from "./formatter.js";
+
 /**
  * fonctions utilisées dans le fichier index.js
  */
@@ -83,18 +85,4 @@ export function displayDetails(courrier, anchor) {
     div.appendChild(ville);
     article.appendChild(div);
     anchor.appendChild(article);
-}
-
-function formatDate(date) {
-    const tmp = Date.parse(date);
-    return new Intl.DateTimeFormat('fr-FR').format(tmp);
-}
-
-function toTitleCase(str) {
-    return str.replace(
-        /\w\S*/g,
-        function (txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-    );
 }

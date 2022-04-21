@@ -50,11 +50,13 @@ class MainController extends AbstractController
     public function index(
         CourrierRepository $courrierRepository,
         StatutCourrierRepository $statutCourrierRepository,
+        ExpediteurRepository $expediteurRepository,
     ): Response {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         } else {
-            $courriers = $courrierRepository->findAll();
+            $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
+            $courriers = $courrierRepository->findBy(['expediteur' => $user]);
             $datas = array();
             foreach ($courriers as $courrier) :
                 $statut = $statutCourrierRepository->findBy(
@@ -66,6 +68,7 @@ class MainController extends AbstractController
                     array_push($datas, $statut[0]);
                 endif;
             endforeach;
+            
             return $this->render('main/index.html.twig', ['statuts' => $datas]);
         }
     }
