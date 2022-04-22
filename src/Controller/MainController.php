@@ -266,4 +266,60 @@ class MainController extends AbstractController
             return $this->json(['statuts' => false]);
         endif;
     }
+
+    #[Route('/historique', 'app_historique')]
+    public function historique() : Response
+    {
+        return $this->render('main/historique.html.twig', []);
+    }    
+
+    #[Route('/getLogs', name: 'app_getLogs')]
+    public function getLogs(
+        ExpediteurRepository $expediteurRepository,
+        CourrierRepository $courrierRepository,
+        StatutCourrierRepository $statutCourrierRepository,
+        Service $service,
+    ): Response {
+        $tmp = $service->stripTag();
+        $page = $tmp[0];
+        $max = $tmp[1];
+        $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
+        $courriers = $courrierRepository->findBy(
+            ['expediteur' => $user],
+            ['id' => 'DESC']
+        );
+        /*
+        if ((($page + 1) * $max) > (count($courriers) + 1)) :
+            if ($page > 1) :
+                $page--;
+            endif;
+        endif;
+        */
+        $datas = array();
+        if (count($courriers) < ($max * ($page + 1))) :
+            $length = count($courriers);
+        else :
+            $length = ($max * ($page + 1));
+        endif;
+        for ($i = ($page * $max); $i < $length; $i++) :
+            $statut = $statutCourrierRepository->findBy(
+                ['courrier' => $courriers[$i]->getId()],
+                ['date' => 'DESC']
+            );
+            $tmp = $statut[0]->getStatut()->getEtat();
+            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
+                $courrierTmp = [
+                    'date' => $statut[0]->getDate(),
+                    'nom' => $statut[0]->getCourrier()->getNom(),
+                    'prenom' => $statut[0]->getCourrier()->getPrenom(),
+                    'etat' => $tmp,
+                    'bordereau' => $statut[0]->getCourrier()->getBordereau(),
+                ];
+                array_push($datas, $courrierTmp);
+            endif;
+        endfor;
+        return $this->json([
+            'statuts' => $datas,
+        ]);
+    }
 }

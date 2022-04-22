@@ -10,60 +10,58 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
-	<script type="module" src="js/historique.js"></script>
+	<script type="module" src="js/historique-test.js"></script>
 {% endblock %}
 {% block body %}
 	<main>
 		<section id="recherche">
 			<div>
-			<label>Bordereau / Nom : 
-				<input type="text" id="searchInput" value="10160">
+				<label>Bordereau / Nom :
+					<input type="text" id="searchInput" value="10160">
 				</label>
 				<button id="searchBtn">Chercher</button>
 			</div>
 			<article id="detailsRecherche">
-			<div>
-				<h4>
-					Courrier n° :
+				<div>
+					<h4>
+						Courrier n° :
 
 
-				</h4>
-                <span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span>
-			</div>
-			<div></div>
-			</article>
-		</section>
-		<section>
-			<table>
-				<thead>
-					<tr>
-						<th>Date</th>
-						<th>Destinataire</th>
-						<th>Statut</th>
-						<th>Bordereau</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for statut in statuts %}
-						<tr id="{{statut.courrier.id}}">
-							<td class="date">{{statut.date | date('d/m/Y')}}</td>
-							<td>{{statut.courrier.nom | title}}
-								{{statut.courrier.prenom | title}}</td>
-							<td class="etat"><div class="cercle"></div><p>{{statut.statut.etat | title}}<p></td>
-							<td>{{statut.courrier.bordereau}}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<div>
-				<a href="{{path('app_previousPage', { page: page, max: max })}}">
-					<</a>
-					<p>{{page}}</p>
-					<a href="{{path('app_nextPage',{page: page, max: max })}}">>
-				</a>
-			</div>
-		</section>
-		<section></section>
-	</main>
-{% endblock %}
- 
+					</h4>
+					<span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span></div>
+						<div></div>
+					</article>
+				</section>
+				<section>
+					<table>
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Destinataire</th>
+								<th>Statut</th>
+								<th>Bordereau</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#
+												{% for statut in statuts %}
+													<tr id="{{statut.courrier.id}}">
+														<td class="date">{{statut.date | date('d/m/Y')}}</td>
+														<td>{{statut.courrier.nom | title}}
+															{{statut.courrier.prenom | title}}</td>
+														<td class="etat"><div class="cercle"></div><p>{{statut.statut.etat | title}}<p></td>
+														<td>{{statut.courrier.bordereau}}</td>
+													</tr>
+												{% endfor %}
+												#}
+						</tbody>
+					</table>
+					<div>
+					<p><button id="prevPage"><</button></p>
+					<p id="page"></p>
+					<p><button id="nextPage">></button></p>
+					</div>
+				</section>
+				<section></section>
+			</main>
+		{% endblock %}
