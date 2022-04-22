@@ -7,6 +7,7 @@ use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Services\Service as Service;
+use LDAP\Result;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -288,13 +289,6 @@ class MainController extends AbstractController
             ['expediteur' => $user],
             ['id' => 'DESC']
         );
-        /*
-        if ((($page + 1) * $max) > (count($courriers) + 1)) :
-            if ($page > 1) :
-                $page--;
-            endif;
-        endif;
-        */
         $datas = array();
         if (count($courriers) < ($max * ($page + 1))) :
             $length = count($courriers);

@@ -48,19 +48,19 @@ class CourrierRepository extends ServiceEntityRepository
     // /**
     //  * @return Courrier[] Returns an array of Courrier objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findWithLimit($id, $max)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $id)
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults($max)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Courrier

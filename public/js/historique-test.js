@@ -6,58 +6,76 @@ console.log("coucou page historique-test");
 
 let page = 0;
 let max = 25;
-const tbody = document.querySelector('tbody');
+const table = document.querySelector('table');
+let tbody = document.querySelector('tbody');
 const currentPage = document.querySelector('#page');
 const prevBtn = document.querySelector('#prevPage');
 const nextBtn = document.querySelector('#nextPage');
 
-currentPage.textContent = page + 1;
 
-const response = await postData('/getLogs', [page, max]);
-checkButtons();
-console.log(response);
-// remplissage du tableau
-response.statuts.forEach((courrier) => {
-    const tr = document.createElement('tr');
-    const cell = [];
-    for (let i = 0; i < 4; i++) {
-        const td = document.createElement('td');
-        cell.push(td);
-    }
-    cell[0].classList = "date";
-    cell[0].textContent = formatDate(courrier.date);
-    cell[1].textContent = toTitleCase(`${courrier.nom} ${courrier.prenom}`);
-    const cercle = document.createElement('div');
-    cercle.classList = "cercle";
-    cercle.style.backgroundColor = setEtatColor(courrier.etat);
-    const p = document.createElement('p');
-    p.textContent = toTitleCase(courrier.etat);
-    cell[2].appendChild(cercle);
-    cell[2].appendChild(p);
-    cell[3].textContent = courrier.bordereau;
-    cell.forEach((td) => {
-        tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-});
+setTable(page, max);
 
 nextBtn.addEventListener('click', () => {
-    
-})
+    page++;
+    setTable(page, max);
+});
 
+prevBtn.addEventListener('click', () => {
+    page--;
+    setTable(page, max);
+});
 
-
-function checkButtons() {
+async function setTable(page, max) {
+    nextBtn.style.visibility = "hidden";
+    currentPage.style.visibility = "hidden";
+    prevBtn.style.visibility = "hidden";
+    tbody.remove()
+    tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    // remplissage du tableau
+    const response = await postData('/getLogs', [page, max]);
+    console.log('toto', response.statuts.length);
+    response.statuts.forEach((courrier) => {
+        const tr = document.createElement('tr');
+        const cell = [];
+        for (let i = 0; i < 4; i++) {
+            const td = document.createElement('td');
+            cell.push(td);
+        }
+        cell[0].classList = "date";
+        cell[0].textContent = formatDate(courrier.date);
+        cell[1].textContent = toTitleCase(`${courrier.nom} ${courrier.prenom}`);
+        const cercle = document.createElement('div');
+        cercle.classList = "cercle";
+        cercle.style.backgroundColor = setEtatColor(courrier.etat);
+        const p = document.createElement('p');
+        p.textContent = toTitleCase(courrier.etat);
+        cell[2].appendChild(cercle);
+        cell[2].appendChild(p);
+        cell[3].textContent = courrier.bordereau;
+        cell.forEach((td) => {
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    nextBtn.style.visibility = "visible";
+    currentPage.style.visibility = "visible";
+    prevBtn.style.visibility = "visible";
+    setCurrentPage();
     if (page === 0) {
         prevBtn.style.display = "none";
     } else {
         prevBtn.style.display = "flex";
     }
-    if (response.statuts.length > max) {
+    if (response.statuts.length < max) {
         nextBtn.style.display = "none";
     } else {
         nextBtn.style.display = "flex";
     }
+}
+
+function setCurrentPage() {
+    currentPage.textContent = page + 1;
 }
 
 function setEtatColor(etat) {
