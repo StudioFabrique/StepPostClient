@@ -34,7 +34,6 @@ async function setTable(page, max) {
     table.appendChild(tbody);
     // remplissage du tableau
     const response = await postData('/getLogs', [page, max]);
-    console.log('toto', response.statuts.length);
     response.statuts.forEach((courrier) => {
         const tr = document.createElement('tr');
         const cell = [];

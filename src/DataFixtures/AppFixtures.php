@@ -104,7 +104,7 @@ class AppFixtures extends Fixture
             $dest->setTelephone($destinataire['telephone']);
             $dest->setExpediteur($expediteur1);
             $manager->persist($dest);
-            for ($i = 0; $i < 4; $i++) :
+            for ($i = 0; $i < 7; $i++) :
                 $bordereau++;
                 $courrier = new Courrier();
                 $courrier->setType(1);
@@ -130,7 +130,7 @@ class AppFixtures extends Fixture
 
         foreach ($destinataires as $destinataire) :
 
-            for ($i = 0; $i < 50; $i++) :
+            for ($i = 0; $i < 17; $i++) :
                 $bordereau++;
                 $courrier = new Courrier();
                 $courrier->setType(1);
