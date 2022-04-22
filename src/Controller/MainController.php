@@ -7,6 +7,7 @@ use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Services\Service as Service;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -149,8 +150,10 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/historique', name: 'app_historique')]
-    public function historique(
+    #[Route('/nextPage-{page}, {max}', name: 'app_nextPage')]
+    public function nextPage(
+        int $page,
+        int $max,
         ExpediteurRepository $expediteurRepository,
         CourrierRepository $courrierRepository,
         StatutCourrierRepository $statutCourrierRepository,
@@ -160,19 +163,107 @@ class MainController extends AbstractController
             ['expediteur' => $user],
             ['id' => 'DESC']
         );
+        if ((($page + 1) * $max) > (count($courriers) + 1)) :
+            if ($page > 1) :
+                $page--;
+            endif;
+        endif;
         $datas = array();
-
-        foreach ($courriers as $courrier) :
+        if (count($courriers) < ($max * ($page + 1) + 1)) :
+            $length = count($courriers);
+        else :
+            $length = ($max * ($page + 1) + 1);
+        endif;
+        for ($i = ($page * $max); $i < $length; $i++) :
             $statut = $statutCourrierRepository->findBy(
-                ['courrier' => $courrier->getId()],
+                ['courrier' => $courriers[$i]->getId()],
                 ['date' => 'DESC']
             );
             $tmp = $statut[0]->getStatut()->getEtat();
             if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
                 array_push($datas, $statut[0]);
             endif;
-        endforeach;
+        endfor;
+        $page++;
+        return $this->render('main/historique.html.twig', [
+            'statuts' => $datas,
+            'page' => $page,
+            'max' => $max,
+        ]);
+    }
 
-        return $this->render('main/historique.html.twig', ['statuts' => $datas]);
+    #[Route('/previousPage-{page}, {max}', name: 'app_previousPage')]
+    public function previousPage(
+        int $page,
+        int $max,
+        ExpediteurRepository $expediteurRepository,
+        CourrierRepository $courrierRepository,
+        StatutCourrierRepository $statutCourrierRepository,
+    ): Response {
+        if ($page === 1) :
+            return $this->redirectToRoute('app_nextPage', ['page' => $page - 1, 'max' => $max]);
+        endif;
+        $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
+        $courriers = $courrierRepository->findBy(
+            ['expediteur' => $user],
+            ['id' => 'DESC']
+        );
+        $datas = array();
+        $page--;
+        if (count($courriers) < ($max * $page)) :
+            $length = count($courriers);
+        else :
+            $length = ($max * $page);
+        endif;
+        for ($i = ($page - 1) * $max; $i < $length; $i++) :
+            $statut = $statutCourrierRepository->findBy(
+                ['courrier' => $courriers[$i]->getId()],
+                ['date' => 'DESC']
+            );
+            $tmp = $statut[0]->getStatut()->getEtat();
+            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
+                array_push($datas, $statut[0]);
+            endif;
+        endfor;
+        return $this->render('main/historique.html.twig', [
+            'statuts' => $datas,
+            'page' => $page,
+            'max' => $max,
+        ]);
+    }
+
+    #[Route('/searchLogs', name: 'app_searchLogs')]
+    public function searchLogs(
+        Service $service,
+        CourrierRepository $courrierRepository,
+        StatutCourrierRepository $statutCourrierRepository,
+    ): Response {
+        $data = $service->stripTag();
+        $user = $this->getUser()->getUserIdentifier();
+        $courrier = $courrierRepository->findOneBy(
+            [
+                'expediteur' => $user,
+                'bordereau' => $data[0],
+            ],
+        );
+        if (isset($courrier)) :
+            $statuts = $statutCourrierRepository->findBy(
+                ['courrier' => $courrier->getId()],
+                ['date' => 'ASC']
+            );
+            $tmp = end($statuts)->getStatut()->getEtat();
+            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
+                $data = $service->getInfosCourrier($statuts, $courrier);
+                $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+                return $this->json([
+                    'statuts' => $data[0],
+                    'destinataire' => $data[1],
+                ]);
+            else :
+                return $this->json(['statuts' => true]);
+            endif;
+        else :
+            return $this->json(['statuts' => false]);
+        endif;
     }
 }

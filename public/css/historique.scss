@@ -60,42 +60,95 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 2vh;
+    row-gap: 5vh;
+    > section:nth-child(1) {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5vh;
+        > div {
+            width: 70%;
+            display: flex;
+            justify-content: flex-end;
+            column-gap: .5vw;
+            > label {
+                > input {
+                    padding: 1vh 1vw;
+                }
+            }
+            > button {
+                background-color: $orange;
+                padding: 0 .5vw;
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+        }
+        > article {
+            width: 70%;
+            display: none;
+            flex-direction: column;
+            row-gap: 5vh;
+            > div:nth-child(1) {
+                display: flex;
+                justify-content: space-between;
+                > span {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            > div:nth-child(2) {
+                display: flex;
+                justify-content: space-around;
+            }
+
+        }
+    }
     > section:nth-child(2) {
         width: 60%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         row-gap: 1vh;
-        /*
-        > article {
-            width: 60%;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 1vh 1vw;
-            border: 1px solid darkgray;
-            border-radius: 5px;
-        }
-        */
         > table {
-            width: 60%;
+            th, td {
+                padding: .2vh .2vw;
+            }
+            width: 70%;
             border: 1px solid darkgray;
             border-radius: 5px;
-            padding: 1vh 1vw;
+            padding: 1vw 1vw;
             > thead {
                 text-align: left;
                 background-color: black;
                 color:white;
             }
             > tbody {
-                > tr:nth-child(odd) {
-                }
                 > tr:nth-child(even) {
-                    width: 100%;
-                    display: none;
+                    background-color: lightgray;
+                }
+                > tr {
+                    cursor: pointer;
+                    > td:nth-child(1), > td:nth-child(3) {
+                        font-weight: bold;
+                    }
+                    > td:nth-child(3) {
+                        display: flex;
+                        align-items: center;
+                        column-gap: .5vw;
+                    }
+                    > td:nth-child(4) {
+                        text-align: right;
+                    }
                 }
             }
+        }
+        > div {
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            column-gap: .5vw;
         }
     }
 }

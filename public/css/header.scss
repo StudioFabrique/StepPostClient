@@ -8,18 +8,21 @@ body {
         display: flex;
         > div {
             width: 50vw;
-            padding: .5vw;
+            padding: .75vw;
             > img {
-                height: 8vh;
+                height: 6vh;
                 width: auto;
             }
         }
         > div:nth-child(2) {
             display: flex;
             justify-content: end;
+            
             > ul {
                 display: flex;
                 list-style-type: none;
+                column-gap: 1vw;
+                align-items: center;
             };
         }
     }

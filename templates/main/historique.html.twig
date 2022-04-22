@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
 	Step Post
 
@@ -15,30 +14,33 @@
 {% endblock %}
 {% block body %}
 	<main>
-		<section>
-			<input type="text" id="searchField">
-			<button id="searchBtn">Chercher</button>
+		<section id="recherche">
+			<div>
+			<label>Bordereau / Nom : 
+				<input type="text" id="searchInput" value="10160">
+				</label>
+				<button id="searchBtn">Chercher</button>
+			</div>
+			<article id="detailsRecherche">
+			<div>
+				<h4>
+					Courrier n° :
+
+
+				</h4>
+                <span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span>
+			</div>
+			<div></div>
+			</article>
 		</section>
 		<section>
-			{#
-									{% for statut in statuts %}
-										<article>
-											<div class="date">{{statut.date | date('d/m/Y')}}</div>
-											<div>{{statut.courrier.nom | title}}
-												{{statut.courrier.prenom | title}}</div>
-											<div>{{statut.statut.etat | title}}</div>
-						                    <div>{{statut.courrier.bordereau}}</div>
-										</article>
-									{% endfor %}
-						            #}
-
 			<table>
 				<thead>
 					<tr>
 						<th>Date</th>
 						<th>Destinataire</th>
 						<th>Statut</th>
-						<th>Borderau</th>
+						<th>Bordereau</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,17 +49,21 @@
 							<td class="date">{{statut.date | date('d/m/Y')}}</td>
 							<td>{{statut.courrier.nom | title}}
 								{{statut.courrier.prenom | title}}</td>
-							<td>{{statut.statut.etat | title}}</td>
+							<td class="etat"><div class="cercle"></div><p>{{statut.statut.etat | title}}<p></td>
 							<td>{{statut.courrier.bordereau}}</td>
 						</tr>
-						<tr>
-							<td colspan="4">
-								<div class="detailsLivraison"></div>
-							</td>
-						</tr>
-					</body>
-				{% endfor %}
-			</tbody>
-		</table>
-	</section>
-</main>{% endblock %}
+					{% endfor %}
+				</tbody>
+			</table>
+			<div>
+				<a href="{{path('app_previousPage', { page: page, max: max })}}">
+					<</a>
+					<p>{{page}}</p>
+					<a href="{{path('app_nextPage',{page: page, max: max })}}">>
+				</a>
+			</div>
+		</section>
+		<section></section>
+	</main>
+{% endblock %}
+ 

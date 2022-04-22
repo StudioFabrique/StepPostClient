@@ -68,31 +68,63 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 2vh;
+  row-gap: 5vh;
+}
+main > section:nth-child(1) {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5vh;
+}
+main > section:nth-child(1) > div {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+}
+main > section:nth-child(1) > div > label > input {
+  padding: 1vh 1vw;
+}
+main > section:nth-child(1) > div > button {
+  background-color: #FF5E1A;
+  padding: 0 0.5vw;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+main > section:nth-child(1) > article {
+  width: 70%;
+  display: none;
+  flex-direction: column;
+  row-gap: 5vh;
+}
+main > section:nth-child(1) > article > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+}
+main > section:nth-child(1) > article > div:nth-child(1) > span:hover {
+  cursor: pointer;
+}
+main > section:nth-child(1) > article > div:nth-child(2) {
+  display: flex;
+  justify-content: space-around;
 }
 main > section:nth-child(2) {
   width: 60%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   row-gap: 1vh;
-  /*
-  > article {
-      width: 60%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 1vh 1vw;
-      border: 1px solid darkgray;
-      border-radius: 5px;
-  }
-  */
 }
 main > section:nth-child(2) > table {
-  width: 60%;
+  width: 70%;
   border: 1px solid darkgray;
   border-radius: 5px;
-  padding: 1vh 1vw;
+  padding: 1vw 1vw;
+}
+main > section:nth-child(2) > table th, main > section:nth-child(2) > table td {
+  padding: 0.2vh 0.2vw;
 }
 main > section:nth-child(2) > table > thead {
   text-align: left;
@@ -100,5 +132,27 @@ main > section:nth-child(2) > table > thead {
   color: white;
 }
 main > section:nth-child(2) > table > tbody > tr:nth-child(even) {
-  display: none;
+  background-color: lightgray;
+}
+main > section:nth-child(2) > table > tbody > tr {
+  cursor: pointer;
+}
+main > section:nth-child(2) > table > tbody > tr > td:nth-child(1), main > section:nth-child(2) > table > tbody > tr > td:nth-child(3) {
+  font-weight: bold;
+}
+main > section:nth-child(2) > table > tbody > tr > td:nth-child(3) {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+}
+main > section:nth-child(2) > table > tbody > tr > td:nth-child(4) {
+  text-align: right;
+}
+main > section:nth-child(2) > div {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
 }/*# sourceMappingURL=historique.css.map */
