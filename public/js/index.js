@@ -10,7 +10,6 @@ const closeBtn = document.querySelector('#closeBtn');
 const detailsRecherche = document.querySelector('#detailsRecherche');
 let etat = null;
 
-
 closeBtn.addEventListener('click', () => {
     detailsRecherche.style.display = "none";
 });
@@ -51,14 +50,18 @@ courrierLog.forEach((elem) => {
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
             displayDetails(courrier.destinataire, div);
+            this.style.backgroundColor = "#E0E0E0";
             etat = elem.id;
         } else if (etat === elem.id) {
             closeStatut(div);
+            this.style.backgroundColor = "white";
             etat = null;
         } else {
             const article = document.getElementById(etat);
             console.log(article.querySelector('.detailsLivraison'));
             closeStatut(article.querySelector('.detailsLivraison'));
+            article.style.backgroundColor = "white";
+            this.style.backgroundColor = "#E0E0E0";
             const courrier = await postData('/detailsCourrier', data);
             displayStatuts(courrier.courrier, div);
             displayDetails(courrier.destinataire, div);

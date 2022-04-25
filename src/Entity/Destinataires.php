@@ -41,7 +41,7 @@ class Destinataires
     #[ORM\Column(type: 'string', length: 255)]
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $telephone;
 
     public function getId(): ?int

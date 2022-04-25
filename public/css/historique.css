@@ -1,9 +1,19 @@
+.button {
+  background-color: #FF5E1A;
+  padding: 0.5vh .5vw;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
 .date {
   color: #FF5E1A;
 }
 
 .cercle {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-radius: 50%;
   width: 1vw;
@@ -12,20 +22,29 @@
 }
 
 .trait {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 27%;
-  height: 0.25vw;
+  height: .25vw;
   background-color: darkgrey;
 }
 
 .timeline {
   width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .timeline > div {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .cercle-container {
@@ -36,123 +55,198 @@
   position: absolute;
   top: -150%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.75rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: .75rem;
 }
 
 .statuts-date {
   position: absolute;
   top: 150%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.75rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: .75rem;
 }
 
 .detailsLivraison {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding: 1.5vw;
-  -moz-column-gap: 1.5vw;
-       column-gap: 1.5vw;
+  -webkit-column-gap: 1.5vw;
+          column-gap: 1.5vw;
+}
+
+.errorMessage {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
 }
 
 main {
   width: 100vw;
   min-height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   row-gap: 5vh;
 }
+
 main > section:nth-child(1) {
-  width: 60%;
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 5vh;
 }
+
 main > section:nth-child(1) > div {
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
 }
+
 main > section:nth-child(1) > div > label > input {
   padding: 1vh 1vw;
 }
-main > section:nth-child(1) > div > button {
-  background-color: #FF5E1A;
-  padding: 0 0.5vw;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
+
 main > section:nth-child(1) > article {
-  width: 70%;
+  width: 100%;
   display: none;
-  flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   row-gap: 5vh;
 }
-main > section:nth-child(1) > article > div:nth-child(1) {
+
+main > section:nth-child(1) > article > div {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
-main > section:nth-child(1) > article > div:nth-child(1) > span:hover {
+
+main > section:nth-child(1) > article > div > span {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+main > section:nth-child(1) > article > div > span:hover {
   cursor: pointer;
 }
-main > section:nth-child(1) > article > div:nth-child(2) {
-  display: flex;
-  justify-content: space-around;
-}
+
 main > section:nth-child(2) {
-  width: 60%;
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   row-gap: 1vh;
 }
+
 main > section:nth-child(2) > table {
-  width: 70%;
+  width: 100%;
   border: 1px solid darkgray;
   border-radius: 5px;
   padding: 1vw 1vw;
 }
+
 main > section:nth-child(2) > table th, main > section:nth-child(2) > table td {
-  padding: 0.2vh 0.2vw;
+  padding: 1vh 1vw;
+  font-weight: bold;
 }
+
 main > section:nth-child(2) > table > thead {
   text-align: left;
-  background-color: black;
+  background-color: #140A82;
   color: white;
 }
+
 main > section:nth-child(2) > table > tbody > tr:nth-child(even) {
   background-color: lightgray;
 }
-main > section:nth-child(2) > table > tbody > tr {
+
+main > section:nth-child(2) > table > tbody > tr > td:nth-child(4) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+}
+
+main > section:nth-child(2) > table > tbody > tr:hover {
   cursor: pointer;
 }
-main > section:nth-child(2) > table > tbody > tr > td:nth-child(1), main > section:nth-child(2) > table > tbody > tr > td:nth-child(3) {
-  font-weight: bold;
-}
-main > section:nth-child(2) > table > tbody > tr > td:nth-child(3) {
-  display: flex;
-  align-items: center;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
-}
-main > section:nth-child(2) > table > tbody > tr > td:nth-child(4) {
-  text-align: right;
-}
+
 main > section:nth-child(2) > div {
-  width: 70%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
-}/*# sourceMappingURL=historique.css.map */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+  font-size: .75rem;
+}
+/*# sourceMappingURL=historique.css.map */

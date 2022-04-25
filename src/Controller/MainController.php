@@ -2,16 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Courrier;
-use App\Entity\StatutCourrier;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
-use App\Repository\StatutRepository;
 use App\Services\Service as Service;
-use LDAP\Result;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +24,8 @@ class MainController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         } else {
+            return $this->render('main/index-test.html.twig', []);
+            /*
             $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
             $courriers = $courrierRepository->findBy(
                 ['expediteur' => $user],
@@ -52,6 +49,7 @@ class MainController extends AbstractController
                 'results' => '',
                 'nom' => '',
             ]);
+            */
         }
     }
 
@@ -205,11 +203,25 @@ class MainController extends AbstractController
         $tmp = $service->stripTag();
         $page = $tmp[0];
         $max = $tmp[1];
+        $nom = $tmp[2];
         $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
-        $datas = $courrierRepository->findBy(
-            ['expediteur' => $user],
-            ['id' => 'DESC']
-        );
+        if ($nom === "") :
+            $datas = $courrierRepository->findBy(
+                ['expediteur' => $user],
+                ['id' => 'DESC']
+            );
+        else :
+            $datas = $courrierRepository->findBy([
+                'expediteur' => $user,
+                'nom' => $nom
+            ],
+            [
+                'id' => 'DESC'
+            ]);
+        endif;
+        if (count($datas) === 0) :
+            return $this->json(['statuts' => false]);
+        endif;
         $courriers = array();
         foreach ($datas as $data) :
             $statut = $statutCourrierRepository->findBy(
@@ -217,7 +229,7 @@ class MainController extends AbstractController
                 ['date' => 'DESC']
             );
             $tmp = $statut[0]->getStatut()->getEtat();
-            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") : 
+            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
                 array_push($courriers, $statut[0]);
             endif;
         endforeach;
@@ -228,13 +240,13 @@ class MainController extends AbstractController
         endif;
         $statuts = array();
         for ($i = ($page * $max); $i < $length; $i++) :
-                $statuts = [... $statuts, [
-                    'date' => $courriers[$i]->getDate(),
-                    'nom' => $courriers[$i]->getCourrier()->getNom(),
-                    'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
-                    'etat' => $courriers[$i]->getStatut()->getEtat(),
-                    'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
-                ]];
+            $statuts = [...$statuts, [
+                'date' => $courriers[$i]->getDate(),
+                'nom' => $courriers[$i]->getCourrier()->getNom(),
+                'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
+                'etat' => $courriers[$i]->getStatut()->getEtat(),
+                'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
+            ]];
         endfor;
         return $this->json([
             'statuts' => $statuts,
