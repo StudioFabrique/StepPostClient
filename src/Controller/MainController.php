@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\StatutCourrier;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
@@ -204,6 +205,7 @@ class MainController extends AbstractController
         $page = $tmp[0];
         $max = $tmp[1];
         $nom = $tmp[2];
+        $filtre = $tmp [3];
         $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
         if ($nom === "") :
             $datas = $courrierRepository->findBy(
@@ -229,9 +231,12 @@ class MainController extends AbstractController
                 ['date' => 'DESC']
             );
             $tmp = $statut[0]->getStatut()->getEtat();
+            $this->isDistributed($tmp, $filtre);
+            /*
             if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
                 array_push($courriers, $statut[0]);
             endif;
+            */
         endforeach;
         if (count($courriers) < ($max * ($page + 1))) :
             $length = count($courriers);
@@ -251,5 +256,14 @@ class MainController extends AbstractController
         return $this->json([
             'statuts' => $statuts,
         ]);
+    }
+
+    private function isDistributed(string $tmp, bool $filtre) : bool
+    {
+        if (!filtre) :
+        return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
+        else :
+            return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
+        endif;
     }
 }

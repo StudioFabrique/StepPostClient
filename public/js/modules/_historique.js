@@ -1,33 +1,18 @@
-import { formatDate, toTitleCase } from "./modules/formatter.js";
-import postData from "./modules/postData.js";
-import { closeDetailsRecherche, displayDetails, displayStatuts } from "./modules/_index.js";
-
-console.log("coucou page historique-test");
+import { formatDate, toTitleCase } from "./formatter.js";
+import postData from "./postData.js";
+import { closeDetailsRecherche, displayDetails, displayStatuts } from "./_index.js";
+export { page, nom, nextBtn, prevBtn };
 
 let url = '/getLogs';
 let page = 0;
-let max = 10;
-let nom = "";
+let max = 10; let nom = "";
 const table = document.querySelector('table');
 let tbody = document.querySelector('tbody');
 const currentPage = document.querySelector('#page');
 const prevBtn = document.querySelector('#prevPage');
 const nextBtn = document.querySelector('#nextPage');
 
-
-setTable();
-
-nextBtn.addEventListener('click', () => {
-    page++;
-    setTable();
-});
-
-prevBtn.addEventListener('click', () => {
-    page--;
-    setTable();
-});
-
-async function setTable() {
+export async function setTable() {
     nextBtn.style.visibility = "hidden";
     currentPage.style.visibility = "hidden";
     prevBtn.style.visibility = "hidden";
@@ -39,7 +24,7 @@ async function setTable() {
     if (response.statuts === false) {
         if (document.querySelector('#detailsRecherche').style.display === "flex") {
             document.querySelector('#detailsRecherche').style.display = "none";
-        console.log('toto')
+            console.log('toto')
         }
         const article = document.querySelector('.errorMessage');
         article.style.display = "flex";
@@ -94,7 +79,7 @@ async function setTable() {
     });
 }
 
-function setCurrentPage() {
+export function setCurrentPage() {
     currentPage.textContent = page + 1;
 }
 
@@ -111,12 +96,7 @@ function setEtatColor(etat) {
     return color;
 }
 
-document.querySelector('#searchBtn').addEventListener('click', async () => {
-    const data = document.querySelector('#searchInput').value;
-    searchCourrier(data);
-});
-
-async function searchCourrier(tmp) {
+export async function searchCourrier(tmp) {
     try {
         const data = [tmp];
         const response = await postData('/searchLogs', data);
@@ -142,27 +122,15 @@ async function searchCourrier(tmp) {
     }
 }
 
-document.querySelector('#closeBtn').addEventListener('click', () => {
-    document.querySelector('#detailsRecherche').style.display = "none";
-});
-
 function animatedTimeline(div) {
     div.animate([
         {
             opacity: "0"
         },
-        { 
+        {
             opacity: "1"
         }
     ], {
         duration: 500
     });
 }
-
-document.querySelector('#goBackBtn').addEventListener('click', () => {
-    page = 0; 
-    document.querySelector('#searchInput').value = "";
-    nom = "";
-    setTable();
-    document.querySelector('.errorMessage').style.display = "none";
-})
