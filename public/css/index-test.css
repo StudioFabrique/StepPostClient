@@ -276,23 +276,4 @@ main > section:nth-child(2) > div {
           column-gap: .5vw;
   font-size: .75rem;
 }
-
-main > section:nth-child(3) {
-  width: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-main > section:nth-child(3) > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
 /*# sourceMappingURL=index-test.css.map */

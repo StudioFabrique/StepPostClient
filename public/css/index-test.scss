@@ -164,13 +164,4 @@ main {
             font-size: .75rem;
         }
     }
-    > section:nth-child(3) {
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        > div {
-            display: flex;
-            align-items: center;
-        }
-    }
 }

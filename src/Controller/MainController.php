@@ -25,8 +25,6 @@ class MainController extends AbstractController
         endif;
     }
 
-
-
     #[Route('/getEnvoi', name: 'app_getEnvoi')]
     public function getEnvoi(
         CourrierRepository $courrierRepository,
@@ -57,6 +55,8 @@ class MainController extends AbstractController
                     ['id' => 'DESC']
                 );
             endif;
+
+            /*
             $statuts = array();
             foreach ($courriers as $courrier) :
                 $statut = $statutCourrierRepository->findBy(
@@ -77,6 +77,7 @@ class MainController extends AbstractController
                     ]];
                 endif;
             endforeach;
+            */
         }
         return $this->json([
             'statuts' => $statuts
