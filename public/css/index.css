@@ -15,6 +15,23 @@
   border-radius: 5px;
 }
 
+.errorMessage {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+}
+
+.button {
+  background-color: #FF5E1A;
+  padding: 0.5vh .5vw;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
 .detailsLivraison {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -205,7 +222,7 @@ body > main > section:nth-child(2) > div:nth-child(2) {
   border-radius: 5px;
 }
 
-body > main > section:nth-child(3) {
+body > main > section:nth-child(4) {
   width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -220,8 +237,8 @@ body > main > section:nth-child(3) {
           align-items: center;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) {
-  width: 80%;
+body > main > section:nth-child(4) > div:nth-child(1) {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -233,7 +250,7 @@ body > main > section:nth-child(3) > div:nth-child(1) {
           align-items: center;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(1) {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(1) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -244,7 +261,7 @@ body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(1) {
           column-gap: 1vw;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(1) > a > button {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(1) > a > button {
   background-color: #FF5E1A;
   border-radius: 5px;
   font-size: 1rem;
@@ -253,11 +270,11 @@ body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(1) > a > b
   padding: .5vw;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(1) > a > button:hover {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(1) > a > button:hover {
   cursor: pointer;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(2) {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(2) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -268,7 +285,7 @@ body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(2) {
           column-gap: .5vw;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(2) > a > button {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(2) > a > button {
   width: 2.5vw;
   height: 2.5vw;
   background-color: #FF5E1A;
@@ -278,18 +295,18 @@ body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(2) > a > b
   border: none;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > div:nth-child(2) > a > button:hover {
+body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(2) > a > button:hover {
   cursor: pointer;
 }
 
-body > main > section:nth-child(3) > div:nth-child(1) > a {
+body > main > section:nth-child(4) > div:nth-child(1) > a {
   margin-left: .5vw;
   color: #FF5E1A;
   font-weight: bold;
   font-size: .75rem;
 }
 
-body > main > section:nth-child(3) > .anchor {
+body > main > section:nth-child(4) > .anchor {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -304,7 +321,7 @@ body > main > section:nth-child(3) > .anchor {
           align-items: center;
 }
 
-body > main > section:nth-child(3) > .anchor > .courrier {
+body > main > section:nth-child(4) > .anchor > .courrier {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -322,7 +339,7 @@ body > main > section:nth-child(3) > .anchor > .courrier {
   padding: 1.5vw;
 }
 
-body > main > section:nth-child(3) > .anchor > .courrier:hover {
+body > main > section:nth-child(4) > .anchor > .courrier:hover {
   cursor: pointer;
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -330,7 +347,7 @@ body > main > section:nth-child(3) > .anchor > .courrier:hover {
           box-shadow: 4px 4px 4px #646464;
 }
 
-body > main > section:nth-child(3) > .anchor > .courrier > div {
+body > main > section:nth-child(4) > .anchor > .courrier > div {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -340,7 +357,7 @@ body > main > section:nth-child(3) > .anchor > .courrier > div {
           justify-content: space-between;
 }
 
-body > main > section:nth-child(3) > .anchor > .courrier > div > span {
+body > main > section:nth-child(4) > .anchor > .courrier > div > span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -352,11 +369,11 @@ body > main > section:nth-child(3) > .anchor > .courrier > div > span {
           justify-content: start;
 }
 
-body > main > section:nth-child(3) > .anchor > .courrier > div:nth-child(3) {
+body > main > section:nth-child(4) > .anchor > .courrier > div:nth-child(3) {
   width: 60%;
 }
 
-body > main > section:nth-child(4) {
+body > main > section:nth-child(5) {
   width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -366,13 +383,19 @@ body > main > section:nth-child(4) {
           justify-content: center;
 }
 
-body > main > section:nth-child(4) > div {
+body > main > section:nth-child(5) > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
+}
+
+body > main > section:nth-child(5) > div > p {
+  font-size: .75rem;
 }
 
 @media screen and (max-width: 1000px) {

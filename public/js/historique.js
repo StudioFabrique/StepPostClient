@@ -1,6 +1,6 @@
 import { formatDate, toTitleCase } from "./modules/formatter.js";
 import postData from "./modules/postData.js";
-import { closeDetailsRecherche, displayDetails, displayStatuts } from "./modules/_index.js";
+import { closeDetailsRecherche, displayDetails, displayStatuts, setEtatColor, setCurrentPage } from "./modules/affichage.js";
 
 console.log("coucou page historique-test");
 
@@ -10,7 +10,6 @@ let max = 10;
 let nom = "";
 const table = document.querySelector('table');
 let tbody = document.querySelector('tbody');
-const currentPage = document.querySelector('#page');
 const prevBtn = document.querySelector('#prevPage');
 const nextBtn = document.querySelector('#nextPage');
 
@@ -71,7 +70,7 @@ async function setTable() {
     nextBtn.style.visibility = "visible";
     currentPage.style.visibility = "visible";
     prevBtn.style.visibility = "visible";
-    setCurrentPage();
+    setCurrentPage(page);
     if (page === 0) {
         prevBtn.style.display = "none";
     } else {
@@ -93,22 +92,6 @@ async function setTable() {
     });
 }
 
-function setCurrentPage() {
-    currentPage.textContent = page + 1;
-}
-
-function setEtatColor(etat) {
-    let color;
-    switch (etat) {
-        case "distribué":
-            color = "#24A640";
-            break;
-        default:
-            color = "red";
-            break;
-    }
-    return color;
-}
 // gestion du bouton recherche
 document.querySelector('#searchBtn').addEventListener('click', async () => {
     const data = document.querySelector('#searchInput').value;

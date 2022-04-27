@@ -1,17 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}
-	Step Post
-
-
-{% endblock %}
+{% extends "base.html.twig" %}
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="css/index.css">
 {% endblock %}
 {% block javascripts %}
+	<script src="js/index.js" type="module"></script>
 	{{ parent() }}
-	<script type="module" src="js/index.js"></script>
 {% endblock %}
 {% block body %}
 	<main>
@@ -37,43 +31,23 @@
 
 
 				</h4>
-                <span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span>
-			</div>
-			<div></div>
-		</section>
-		<!-- Historique envois -->
-		<section>
-			<div>
-				{% if (statuts == null) %}
+				<span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span></div>
+					<div></div>
+				</section>
+					<section class="errorMessage">
+						<h4>Aucun Résultat trouvé</h4>
+						<button class="button" id="goBackBtn">Retour</button>
+					</section>
+				<section>
+				<div>
 					<div>
-						<h3>
-							Aucun envoi en cours n'a été trouvé
-
-
-						</h3>
-						<a href="{{path('app_main')}}">
-							<button>Retour</button>
-						</a>
-					</div>
-				{% else %}
-					{% if (nom) %}
-						<div>
-							<h3>Resultat de la recherche pour :
-								{{nom | title}}
-							</h3>
-							<a href="{{path('app_main')}}">
-								<button>Retour</button>
-							</a>
-						</div>
-					{% else %}
 
 						<h3>
 							Statut de vos envois en cours :
 
 
 						</h3>
-					{% endif %}
-				{% endif %}
+						</div>
 				<div>
 					<h4>
 						Nouvel Envoi
@@ -88,117 +62,15 @@
 						</button>
 					</a>
 				</div>
-			</div>
-			{% for statut in statuts %}
-				<article class="courrier" id="{{ statut.courrier.id }}">
+				</div>
+					<div class="anchor"></div>
+				</section>
+				<section>
 					<div>
-						<h4 class="date">
-							{{ statut.date | date('d/m/Y à H:i') }}
-						</h4>
-						<p>
-							Bordereau n° :
-
-
-							{{ statut.courrier.bordereau }}
-						</p>
+						<button id="prevPage">{{'<'}}</button>
+						<p id="currentPage"></p>
+						<button id="nextPage">{{'>'}}</button>
 					</div>
-					<div>
-						<span>
-							{% set nom = statut.courrier.nom | title %}
-							{% if statut.statut.etat == "distribué" %}
-								<p>
-									Le destinataire
-
-
-									{{ nom }}
-									a bien reçu
-
-
-								</p>
-							{% else %}
-								{% if statut.statut.etat == "avisé" %}
-									<p>
-										Le facteur a laissé un avis de passage à :
-
-
-										{{ nom }}
-									</p>
-								{% else %}
-									{% if statut.statut.etat == "instancié" %}
-										<p>
-											Le courrier pour
-
-
-											{{ nom }}
-											a été déposé à un point de retrait
-
-
-										</p>
-									{% else %}
-										{% if statut.statut.etat == "NPAI" %}
-											<p>
-												Le destinataire
-
-
-												{{ nom }}
-												n'habite pas à l'adresse indiquée
-
-
-											</p>
-										{% else %}
-											{% if statut.statut.etat == "retour" %}
-												<p>
-													Le courrier pour
-
-
-													{{ nom }}
-													a été retourné à l'expéditeur
-
-
-												</p>
-
-											{% else %}
-												{% if statut.statut.etat  == "remise" %}
-													<p>
-														Le courrier pour
-
-
-														{{ nom }}
-														a été pris en charge
-
-													</p>
-												{% endif %}
-
-											{% endif %}
-										{% endif %}
-									{% endif %}
-								{% endif %}
-							{% endif %}
-						</span>
-						<span>
-							{% if statut.courrier.type == 0 %}
-								<p>
-									Colis
-
-
-								</p>
-							{% else %}
-								<p>
-									Lettre
-
-
-								</p>
-							{% endif %}
-						</span>
-					</div>
-					<div class="detailsLivraison"></div>
-				</article>
-			{% endfor %}
-
-					<div>
-						<button id="prevPage"><</button><p id="page"></p><button id="nextPage">></button>
-					</div>
-		</section>
-		<section></section>
-	</main>
-{% endblock %}
+				</section>
+			</main>
+		{% endblock %}

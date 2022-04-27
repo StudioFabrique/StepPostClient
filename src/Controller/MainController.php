@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\StatutCourrier;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
@@ -16,12 +15,13 @@ class MainController extends AbstractController
 {
 
     #[Route('/', name: 'app_main')]
-    public function index(): Response
+    public function index(
+    ): Response
     {
         if (!$this->getUser()) :
             return $this->redirectToRoute('app_login');
         else :
-            return $this->render('main/index-test.html.twig', []);
+            return $this->render('main/index.html.twig', []);
         endif;
     }
 
@@ -35,55 +35,17 @@ class MainController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         } else {
-            if (!isset($_POST['data'])) :
-                $datas = [0, 3, "", false];
-            else :
-                $datas = $service->stripTag();
-            endif;
-            $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
-            if ($datas[2] === "") :
-                $courriers = $courrierRepository->findBy(
-                    ['expediteur' => $user],
-                    ['id' => 'DESC']
-                );
-            else :
-                $courriers = $courrierRepository->findBy(
-                    [
-                        'expediteur' => $user,
-                        'nom' => $datas[2]
-                    ],
-                    ['id' => 'DESC']
-                );
-            endif;
-
-            /*
-            $statuts = array();
-            foreach ($courriers as $courrier) :
-                $statut = $statutCourrierRepository->findBy(
-                    ['courrier' => $courrier->getId()],
-                    ['date' => 'DESC']
-                );
-                $tmp = $statut[0]->getStatut()->getEtat();
-                if ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI") :
-
-                    $statuts = [...$statuts, [
-                        'id' => $courrier->getId(),
-                        'type' => $courrier->getType(),
-                        'date' => $statut[0]->getDate(),
-                        'nom' => $courrier->getNom(),
-                        'prenom' => $courrier->getPrenom(),
-                        'etat' => $statut[0]->getStatut()->getEtat(),
-                        'bordereau' => $courrier->getBordereau(),
-                    ]];
-                endif;
-            endforeach;
-            */
+            $user = $this->getUser()->getUserIdentifier();
+            return $this->json([
+                'statuts' => $service->getDatas(
+                    $user,
+                    $expediteurRepository,
+                    $courrierRepository,
+                    $statutCourrierRepository
+                ),
+            ]);
         }
-        return $this->json([
-            'statuts' => $statuts
-        ]);
     }
-
 
     /**
      * retourne false qd la recherche par bordereau n'a rien trouvé,
@@ -106,8 +68,7 @@ class MainController extends AbstractController
                     ['courrier' => $courrier->getId()],
                     ['date' => 'ASC']
                 );
-                $tmp = end($statuts)->getStatut()->getEtat();
-                if ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI") :
+                if ($service->isDistributed(end($statuts)->getStatut()->getEtat(), false)) :
                     $data = $service->getInfosCourrier($statuts, $courrier);
                     $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
                     return $this->json([
@@ -143,36 +104,6 @@ class MainController extends AbstractController
         }
     }
 
-    #[Route('/searchCourrierByNom', name: 'app_searchCourrierbyNom')]
-    public function searchCourrierByNom(CourrierRepository $courrierRepository, StatutCourrierRepository $statutCourrierRepository): Response
-    {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        } else {
-            $data = strip_tags($_GET['nom']);
-            $courriers = $courrierRepository->findBy(
-                ['nom' => $data],
-                ['id' => 'DESC']
-            );
-            $datas = array();
-            foreach ($courriers as $courrier) :
-                $statut = $statutCourrierRepository->findBy(
-                    ['courrier' => $courrier->getId()],
-                    ['date' => 'DESC'],
-                );
-                $tmp = $statut[0]->getStatut()->getEtat();
-                if ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI") :
-                    array_push($datas, $statut[0]);
-                endif;
-            endforeach;
-            return $this->render('main/index.html.twig', [
-                'statuts' => $datas,
-                'results' => count($datas),
-                'nom' => $data,
-            ]);
-        }
-    }
-
     #[Route('/adressesFavorites', name: 'app_adressesFavorites')]
     public function adressesFavorites(DestinatairesRepository $destinatairesRepository): Response
     {
@@ -203,7 +134,7 @@ class MainController extends AbstractController
                 ['date' => 'ASC']
             );
             $tmp = end($statuts)->getStatut()->getEtat();
-            if ($this->isDistributed($tmp, true)) :
+            if ($service->isDistributed($tmp, true)) :
                 //if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
                 $data = $service->getInfosCourrier($statuts, $courrier);
                 $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
@@ -269,7 +200,7 @@ class MainController extends AbstractController
                     ['date' => 'DESC']
                 );
                 $tmp = $statut[0]->getStatut()->getEtat();
-                if ($this->isDistributed($tmp, $filtre)) :
+                if ($service->isDistributed($tmp, $filtre)) :
                     array_push($courriers, $statut[0]);
                 endif;
             endforeach;
@@ -294,81 +225,4 @@ class MainController extends AbstractController
         }
     }
 
-    private function isDistributed(string $tmp, bool $filtre): bool
-    {
-        if (!$filtre) :
-            return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
-        else :
-            return ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI");
-        endif;
-    }
-
-    private function getDatas(
-        array $tmp,
-        ExpediteurRepository $expediteurRepository,
-        CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
-        Service $service,
-    ) {
-        $page = $tmp[0];
-        $max = $tmp[1];
-        $nom = $tmp[2];
-        $filtre = $tmp[3];
-        $user = $expediteurRepository->findOneBy(['id' => $this->getUser()->getUserIdentifier()]);
-        if ($nom === "") :
-            $datas = $courrierRepository->findBy(
-                ['expediteur' => $user],
-                ['id' => 'DESC']
-            );
-        else :
-            $datas = $courrierRepository->findBy(
-                [
-                    'expediteur' => $user,
-                    'nom' => $nom
-                ],
-                [
-                    'id' => 'DESC'
-                ]
-            );
-        endif;
-        if (count($datas) === 0) :
-            return $this->json(['statuts' => false]);
-        endif;
-        $courriers = array();
-        foreach ($datas as $data) :
-            $statut = $statutCourrierRepository->findBy(
-                ['courrier' => $data->getId()],
-                ['date' => 'DESC']
-            );
-            $tmp = $statut[0]->getStatut()->getEtat();
-            if ($this->isDistributed($tmp, $filtre)) :
-                array_push($courriers, $statut[0]);
-            endif;
-        /*
-            if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
-                array_push($courriers, $statut[0]);
-            endif;
-            */
-        endforeach;
-        if (count($courriers) < ($max * ($page + 1))) :
-            $length = count($courriers);
-        else :
-            $length = ($max * ($page + 1));
-        endif;
-        $statuts = array();
-        for ($i = ($page * $max); $i < $length; $i++) :
-            $statuts = [...$statuts, [
-                'id' => $courriers[$i]->getId(),
-                'type' => $courriers[$i]->getCourrier()->getType(),
-                'date' => $courriers[$i]->getDate(),
-                'nom' => $courriers[$i]->getCourrier()->getNom(),
-                'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
-                'etat' => $courriers[$i]->getStatut()->getEtat(),
-                'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
-            ]];
-
-        endfor;
-        //dd($statuts);
-        return $statuts;
-    }
 }
