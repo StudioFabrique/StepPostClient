@@ -1,0 +1,176 @@
+$orange: #FF5E1A;
+$blue: #140A82;
+.button {
+    background-color: $orange;
+    padding: 0.5vh .5vw;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.date {
+    color: $orange;
+}
+.cercle {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    width: 1vw;
+    height: 1vw;
+    background-color: darkgrey;
+}
+.trait {
+    display: flex;;
+    width: 27%;
+    height: .25vw;
+    background-color: darkgrey;
+}
+.timeline {
+    width: 40%;
+    display: flex;
+    > div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+.cercle-container {
+    position: relative;
+}
+.statuts {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .75rem;
+}
+.statuts-date {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .75rem;
+}
+.detailsLivraison {
+    width: 100%;
+    display: flex;
+    padding: 1.5vw;
+    column-gap: 1.5vw;
+}
+.errorMessage {
+    display: none;
+    align-items: center;
+    column-gap: .5vw;
+
+}
+main {
+    width: 100vw;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 5vh;
+    > section:nth-child(1) {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5vh;
+        > div {
+            width: 70%;
+            display: flex;
+            justify-content: flex-start;
+            column-gap: .5vw;
+            > label {
+                > input {
+                    padding: 1vh 1vw;
+                }
+            }
+        }
+        > article {
+            width: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            row-gap: 5vh;
+            > div {
+                width: 60%;
+                display: flex;
+                justify-content: space-around;
+                > span {
+                    height: 100%;
+                    display: flex;
+                    align-items: flex-start;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+        }
+    }
+    > section:nth-child(2) {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 1vh;
+        > .anchor {
+            display: flex;
+            flex-direction: column;
+            row-gap: 2vh;
+            > .courrier {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 3vh;
+                padding: 1vh;
+                border-bottom: solid #646464 2px;
+                padding: 1.5vw;
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid darkgray;
+                    border-radius: 5px;
+                    box-shadow: 4px 4px 4px #646464;
+                }
+                > div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    > span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                    }
+                }
+                > div:nth-child(3) {
+                    width: 60%;
+                    display: none;
+                }
+            }
+        }
+        > div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: .5vw;
+            font-size: .75rem;
+        }
+    }
+    > section:nth-child(3) {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        > div {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

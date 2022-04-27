@@ -289,8 +289,23 @@ body > main > section:nth-child(3) > div:nth-child(1) > a {
   font-size: .75rem;
 }
 
-body > main > section:nth-child(3) > article {
-  width: 80%;
+body > main > section:nth-child(3) > .anchor {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 2vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body > main > section:nth-child(3) > .anchor > .courrier {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -307,7 +322,7 @@ body > main > section:nth-child(3) > article {
   padding: 1.5vw;
 }
 
-body > main > section:nth-child(3) > article:hover {
+body > main > section:nth-child(3) > .anchor > .courrier:hover {
   cursor: pointer;
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -315,7 +330,7 @@ body > main > section:nth-child(3) > article:hover {
           box-shadow: 4px 4px 4px #646464;
 }
 
-body > main > section:nth-child(3) > article > div {
+body > main > section:nth-child(3) > .anchor > .courrier > div {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -325,7 +340,7 @@ body > main > section:nth-child(3) > article > div {
           justify-content: space-between;
 }
 
-body > main > section:nth-child(3) > article > div > span {
+body > main > section:nth-child(3) > .anchor > .courrier > div > span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -337,8 +352,27 @@ body > main > section:nth-child(3) > article > div > span {
           justify-content: start;
 }
 
-body > main > section:nth-child(3) > article > div:nth-child(3) {
+body > main > section:nth-child(3) > .anchor > .courrier > div:nth-child(3) {
   width: 60%;
+}
+
+body > main > section:nth-child(4) {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body > main > section:nth-child(4) > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 @media screen and (max-width: 1000px) {

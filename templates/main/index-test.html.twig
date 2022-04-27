@@ -1,46 +1,48 @@
-{% extends 'base.html.twig' %}
-{% block title %}
-	Step Post
-
-
-{% endblock %}
+{% extends "base.html.twig" %}
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="css/historique.css">
+	<link rel="stylesheet" href="css/index.css">
 {% endblock %}
 {% block javascripts %}
+	<script src="js/index-test.js" type="module"></script>
 	{{ parent() }}
-	<script type="module" src="js/historique.js"></script>
 {% endblock %}
 {% block body %}
 	<main>
-		<section id="recherche">
+		<!-- formulaire de recherche de courrier -->
+		<section>
+			<article>
+				<p>
+					Suivre votre recommandé
+
+
+				</p>
+				<div>
+					<form id="form">
+						<input type="text" id="searchInput"></form>
+					<img src="img/ri_search-line.png" alt="icone loupe"></div>
+			</article>
+		</section>
+		<!--Affichage du résultat de la recherche-->
+		<section id="detailsRecherche">
 			<div>
-				<label>Bordereau / Nom :
-					<input type="text" id="searchInput" value="10160">
-				</label>
-				<button class="button" id="searchBtn">Rechercher</button>
-			</div>
-			<article id="detailsRecherche">
-					<h4>
-						Courrier n° :
+				<h4>
+					Courrier n° :
 
 
-					</h4>
+				</h4>
+				<span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span></div>
 					<div></div>
-					<span id="closeBtn"><img src="img/close-icone.png" alt="fermer"><span>
-					</article>
 				</section>
 				<section>
-				<article class="errorMessage">
-				<h4>Aucun Résultat trouvé</h4>
-				<button class="button" id="goBackBtn">Retour</button>
-				</article>
-                <div class="anchor"></div>
-					<div>
-						<button id="prevPage"><</button><p id="page"></p><button id="nextPage">></button>
-					</div>
+				<div class="anchor"></div>
 				</section>
-				<section></section>
+				<section>
+				<div>
+				<button id="prevBtn">{{'<'}}</button>
+				<p></p>
+				<button id="nextBtn">{{'>'}}</button>
+				</div>
+				</section>
 			</main>
 		{% endblock %}

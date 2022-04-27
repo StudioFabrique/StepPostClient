@@ -4,7 +4,7 @@ import { formatDate, toTitleCase } from "./formatter.js";
  * fonctions utilisées dans le fichier index.js
  */
 
-export function displayStatuts(courrier, article) {
+ export function displayStatuts(courrier, article) {
     courrier.forEach((elem) => {
         elem.date = formatDate(elem.date);
     });
@@ -37,6 +37,7 @@ export function displayStatuts(courrier, article) {
     const traits = timeline.querySelectorAll('.trait');
     traits[traits.length - 1].style.backgroundColor = "#24A640";
 }
+
 
 export function closeStatut(div) {
     div.querySelector('.timeline').remove();

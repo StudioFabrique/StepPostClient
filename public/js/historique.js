@@ -34,18 +34,17 @@ async function setTable() {
     tbody.remove()
     tbody = document.createElement('tbody');
     table.appendChild(tbody);
-    // remplissage du tableau
-    const response = await postData(url, [page, max, nom]);
+    const response = await postData(url, [page, max, nom, true]);
     if (response.statuts === false) {
         if (document.querySelector('#detailsRecherche').style.display === "flex") {
             document.querySelector('#detailsRecherche').style.display = "none";
-        console.log('toto')
         }
         const article = document.querySelector('.errorMessage');
         article.style.display = "flex";
         animatedTimeline(article);
         return;
     }
+    // remplissage du tableau
     response.statuts.forEach((courrier) => {
         const tr = document.createElement('tr');
         const cell = [];
@@ -110,7 +109,7 @@ function setEtatColor(etat) {
     }
     return color;
 }
-
+// gestion du bouton recherche
 document.querySelector('#searchBtn').addEventListener('click', async () => {
     const data = document.querySelector('#searchInput').value;
     searchCourrier(data);
@@ -118,7 +117,11 @@ document.querySelector('#searchBtn').addEventListener('click', async () => {
 
 async function searchCourrier(tmp) {
     try {
-        const data = [tmp];
+        const section = document.querySelector('#detailsRecherche');
+        if (section.style.display === "flex") {
+            section.style.display = "none";
+        }
+        const data = [tmp, true];
         const response = await postData('/searchLogs', data);
         if (response.statuts === false) {
             console.log("oops");
@@ -165,4 +168,4 @@ document.querySelector('#goBackBtn').addEventListener('click', () => {
     nom = "";
     setTable();
     document.querySelector('.errorMessage').style.display = "none";
-})
+});

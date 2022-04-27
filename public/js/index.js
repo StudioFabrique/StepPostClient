@@ -9,6 +9,11 @@ const courrierLog = document.querySelectorAll('.courrier');
 const closeBtn = document.querySelector('#closeBtn');
 const detailsRecherche = document.querySelector('#detailsRecherche');
 let etat = null;
+let page = 0;
+let max = 3;
+const filter = false;
+
+
 
 closeBtn.addEventListener('click', () => {
     detailsRecherche.style.display = "none";
