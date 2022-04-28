@@ -15,13 +15,12 @@ class MainController extends AbstractController
 {
 
     #[Route('/', name: 'app_main')]
-    public function index(
-    ): Response
+    public function index(): Response
     {
         if (!$this->getUser()) :
             return $this->redirectToRoute('app_login');
         else :
-            return $this->render('main/index.html.twig', []);
+            return $this->render('main/index.html.twig', ['isLogged' => true]);
         endif;
     }
 
@@ -105,13 +104,29 @@ class MainController extends AbstractController
     }
 
     #[Route('/adressesFavorites', name: 'app_adressesFavorites')]
-    public function adressesFavorites(DestinatairesRepository $destinatairesRepository): Response
+    public function adressesFavorites(DestinatairesRepository $destinatairesRepository, Service $service): Response
     {
         $userId = $this->getUser()->getUserIdentifier();
-        $destinataires = $destinatairesRepository->findBy(['expediteur' => $userId]);
-        return $this->render('main/adressesFavorites.html.twig', [
-            'destinataires' => $destinataires,
-        ]);
+        $destinataires = $destinatairesRepository->findBy(['expediteur' => $userId], ['nom' => 'ASC']);
+        $nom = "";
+        if (isset($_POST['data'])) :
+            $nom = strip_tags($_POST['data']);
+            $datas = array();
+            foreach ($destinataires as $dest) :
+                if (str_contains($dest->getNom(), $nom)) :
+                    array_push($datas, $dest);
+                endif;
+            endforeach;
+            return $this->render('main/adressesFavorites.html.twig', [
+                'destinataires' => $datas,
+                'nom' => $nom
+            ]);
+        else :
+            return $this->render('main/adressesFavorites.html.twig', [
+                'destinataires' => $destinataires,
+                'nom' => $nom
+            ]);
+        endif;
     }
 
     #[Route('/searchLogs', name: 'app_searchLogs')]
@@ -143,7 +158,7 @@ class MainController extends AbstractController
                     'destinataire' => $data[1],
                 ]);
             else :
-                return $this->json(['statuts' => true]);
+                return $this->json(['statuts' => false]);
             endif;
         else :
             return $this->json(['statuts' => false]);
@@ -153,7 +168,11 @@ class MainController extends AbstractController
     #[Route('/historique', 'app_historique')]
     public function historique(): Response
     {
-        return $this->render('main/historique.html.twig', []);
+        if (!$this->getUser()) :
+            return $this->redirectToRoute('app_login');
+        else :
+            return $this->render('main/historique.html.twig', ['isLogged' => true]);
+        endif;
     }
 
     #[Route('/getLogs', name: 'app_getLogs')]
@@ -225,4 +244,36 @@ class MainController extends AbstractController
         }
     }
 
+    #[Route('/isLogged', name: 'app_isLogged')]
+    public function isLogged(): Response
+    {
+        $result = false;
+        if ($this->getUser()) :
+            $result = true;
+        endif;
+        return $this->json(['isLogged' => $result]);
+    }
+
+    #[Route('/previewBordereau-{id}', name: 'app_previewBordereau')]
+    public function previewBordereau(DestinatairesRepository $destinatairesRepository, int $id): Response
+    {
+        if (!$this->getUser()) :
+            return $this->redirectToRoute('app_login');
+        else :
+            $dest = $destinatairesRepository->findOneBy(['id' => $id]);
+            return $this->render('main/previewBordereau.html.twig', ['destinataire' => $dest]);
+        endif;
+    }
+
+    #[Route('/getAdresse', name: 'app_deleteAdresse')]
+    public function deleteAdresse(DestinatairesRepository $destinatairesRepository, Service $service) : Response
+    {
+        if (!$this->getUser()) :
+            return $this->redirectToRoute('app_login');
+        else:
+            $id = $service->stripTag()[0];
+            $dest = $destinatairesRepository->findOneBy(['id' => $id]);
+            return $this->json(['destinataire' => $dest]);
+        endif;            
+    }
 }

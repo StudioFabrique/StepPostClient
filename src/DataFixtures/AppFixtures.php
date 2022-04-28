@@ -81,6 +81,16 @@ class AppFixtures extends Fixture
                 'telephone' => '0559567854',
             ],
             [
+                'civilite' => '',
+                'prenom' => 'service comm',
+                'nom' => 'mairie',
+                'email' => 'comm.mairie@pau.fr',
+                'adresse' => '2 place royale',
+                'codePostal' => 64000,
+                'ville' => 'pau',
+                'telephone' => '0559567864',
+            ],
+            [
                 'civilite' => 'mlle',
                 'prenom' => 'Clarisse',
                 'nom' => 'david',
@@ -89,7 +99,36 @@ class AppFixtures extends Fixture
                 'codePostal' => 64360,
                 'ville' => 'jurançon',
                 'telephone' => '07851234',
-            ]
+            ],
+            [
+                'civilite' => 'mlle',
+                'prenom' => 'Bérangère',
+                'nom' => 'de la roche-foucault',
+                'email' => 'lilith666d@yahoo.fr',
+                'adresse' => '34 rue Léo Poivrier',
+                'codePostal' => 64230,
+                'ville' => 'Bizanos',
+                'telephone' => '07851234',
+            ],
+            [
+                'civilite' => 'mr',
+                'prenom' => 'elmut',
+                'nom' => 'von mumuth',
+                'email' => 'clarisse.david@yahoo.fr',
+                'adresse' => '76 avenue Yann Klein',
+                'codePostal' => 64000,
+                'ville' => 'pau',
+                'telephone' => '07851234',
+            ],
+            [
+                'civilite' => '',
+                'prenom' => 'Maniaco-dépressifs',
+                'nom' => 'chp des pyrénées',
+                'email' => 'clarisse.david@yahoo.fr',
+                'adresse' => '296 bvd Germain Robert',
+                'codePostal' => 64000,
+                'ville' => 'pau',
+                'telephone' => '07851234',]
         ];
         $compteur = 0;
         foreach ($destinataires as $destinataire) :
@@ -130,7 +169,7 @@ class AppFixtures extends Fixture
 
         foreach ($destinataires as $destinataire) :
 
-            for ($i = 0; $i < 77; $i++) :
+            for ($i = 0; $i < 12; $i++) :
                 $bordereau++;
                 $courrier = new Courrier();
                 $courrier->setType(1);

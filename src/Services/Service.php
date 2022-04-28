@@ -89,7 +89,7 @@ class Service {
         $statuts = array();
         for ($i = ($page * $max); $i < $length; $i++) :
             $statuts = [...$statuts, [
-                'id' => $courriers[$i]->getId(),
+                'id' => $courriers[$i]->getCourrier()->getId(),
                 'type' => $courriers[$i]->getCourrier()->getType(),
                 'date' => $courriers[$i]->getDate(),
                 'nom' => $courriers[$i]->getCourrier()->getNom(),

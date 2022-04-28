@@ -34,6 +34,7 @@ async function setTable() {
     tbody = document.createElement('tbody');
     table.appendChild(tbody);
     const response = await postData(url, [page, max, nom, true]);
+    console.log('response', response);
     if (response.statuts === false) {
         if (document.querySelector('#detailsRecherche').style.display === "flex") {
             document.querySelector('#detailsRecherche').style.display = "none";
@@ -106,6 +107,7 @@ async function searchCourrier(tmp) {
         }
         const data = [tmp, true];
         const response = await postData('/searchLogs', data);
+        console.log('bordereau', response);
         if (response.statuts === false) {
             console.log("oops");
             page = 0;

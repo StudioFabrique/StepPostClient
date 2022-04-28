@@ -5,26 +5,58 @@
 {% endblock %}
 {% block javascripts %}
 	{{parent()}}
+	<script type="module" src="js/adressesFavorites.js"></script>
 {% endblock %}
 {% block body %}
 	<main>
 		<section>
-			<h1>Adresses Favorites</h1>
-            </section>
-            <section>
+			{% if (nom) %}
+				<div>
+					<h4>Résultat(s) de la recherche pour :
+						{{ nom | title }}</h4>
+					<button class="button" id="retourBtn">Retour</button>
+				</div>
+			{% else %}
+				<form action="" method="POST">
+					<label>Nom / Raison Sociale :
+						<input type="text" id="searchInput" name="data" placeholder="Durand">
+					</label>
+					<button class="button" id="searchBtn">Rechercher</button>
+				</form>
+			{% endif %}
+		</section>
+		<section>
 			{% for destinataire in destinataires %}
-				<article>
-					<p>
-						{% if (destinataire.civilite) %}
-							{{destinataire.civilite}}
-						{% endif %}
-						{{destinataire.prenom}}
-						{{destinataire.nom}}</p>
-					<p>{{destinataire.adresse}}</p>
-					<p>{{destinataire.codePostal}}
-						{{destinataire.ville}}</p>
+				<article class="adresse" id="{{destinataire.id}}">
+					<div>
+						<p>
+							{% if (destinataire.civilite) %}
+								{{destinataire.civilite | title}}
+							{% endif %}
+							{{destinataire.nom | upper}}
+							{{destinataire.prenom | title}}</p>
+						<p>{{destinataire.adresse | title}}</p>
+						<p>{{destinataire.codePostal}}
+							{{destinataire.ville | title}}</p>
+					</div>
+					<ul>
+						<li id="{{destinataire.id}}">
+							<a href="{{path('app_previewBordereau', { id: destinataire.id })}}">
+								<img src="img/icone-poste.png" alt="icone envoyer courrier">
+							</a>
+						</li>
+						<li id="{{destinataire.id}}">
+							<img src="img/icone-edit.png" alt="icone editer adresse">
+						</li>
+						<li id="{{destinataire.id}}">
+							<img src="img/icone-delete.png" alt="icone supprimer adresse">
+						</li>
+					</ul>
 				</article>
 			{% endfor %}
+		</section>
+		<section class="screen">
+		<article class="popup"></article>
 		</section>
 	</main>
 {% endblock %}

@@ -145,7 +145,9 @@ async function searchCourrier(tmp) {
         console.log(response);
         if (response.statuts === false) {
             console.log("oops");
-            setDatas([0, max, tmp, false]);
+            page = 0;
+            nom = tmp;
+            setDatas([page, max, nom, false]);
         } else {
             const section = document.querySelector('#detailsRecherche');
             const div = section.querySelector('div:nth-child(2)');
