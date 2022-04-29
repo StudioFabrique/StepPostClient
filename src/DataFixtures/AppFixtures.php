@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
             $manager->persist($exp);
         endforeach;
 
-        $statuts = ["remise", "avisé", "instancié", "distribué", "retour", "npai"];
+        $statuts = ["pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
         $etats = array();
         for ($k = 0; $k < 6; $k++) :
             $etats[$k] = new Statut();
@@ -110,25 +110,6 @@ class AppFixtures extends Fixture
                 'ville' => 'Bizanos',
                 'telephone' => '07851234',
             ],
-            [
-                'civilite' => 'mr',
-                'prenom' => 'elmut',
-                'nom' => 'von mumuth',
-                'email' => 'clarisse.david@yahoo.fr',
-                'adresse' => '76 avenue Yann Klein',
-                'codePostal' => 64000,
-                'ville' => 'pau',
-                'telephone' => '07851234',
-            ],
-            [
-                'civilite' => '',
-                'prenom' => 'Maniaco-dépressifs',
-                'nom' => 'chp des pyrénées',
-                'email' => 'clarisse.david@yahoo.fr',
-                'adresse' => '296 bvd Germain Robert',
-                'codePostal' => 64000,
-                'ville' => 'pau',
-                'telephone' => '07851234',]
         ];
         $compteur = 0;
         foreach ($destinataires as $destinataire) :

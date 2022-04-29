@@ -21,8 +21,8 @@ function setColor(statut) {
 
 function setDetails(data, classe) {
     const div = document.createElement('div');
-    div.className = classe;
-    div.textContent = data;
+    div.classList = classe;
+    div.innerText = data;
     return div;
 }
 
@@ -90,6 +90,7 @@ export function displayStatuts(courrier, article) {
         anchor.appendChild(cercleContainer);
         cercle.style.backgroundColor = setColor(courrier[i].etat);
         cercle.id = i;
+        console.log('eteta', courrier[i].etat);
         cercleContainer.appendChild(setDetails(courrier[i].etat, "statuts"));
         cercleContainer.appendChild(setDetails(courrier[i].date, "statuts-date"));
         if (i < (courrier.length - 1)) {
@@ -108,7 +109,7 @@ export function displayStatuts(courrier, article) {
 export function setEtatMessage(etat, nom) {
     let message;
     switch (etat) {
-        case "remise":
+        case "pris en charge":
             message = `Le courrier pour ${nom} a été pris en charge`;
             break;
         case "distribué":
@@ -117,13 +118,13 @@ export function setEtatMessage(etat, nom) {
         case "avisé":
             message = `Le facteur a laissé un avis de passage pour : ${nom}`;
             break;
-        case "instancié":
+        case "mis en instance":
             message = ` Le courrier pour ${nom} a été déposé à un point de retrait`;
             break;
         case "npai":
             message = `Le destinataire ${nom} n'habite pas à l'adresse indiquée`;
             break;
-        case "retour":
+        case "non réclaamé":
             message = `Le courrier pour ${nom} a été retourné )'expéditeur`;
             break;
 

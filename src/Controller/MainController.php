@@ -67,16 +67,12 @@ class MainController extends AbstractController
                     ['courrier' => $courrier->getId()],
                     ['date' => 'ASC']
                 );
-                if ($service->isDistributed(end($statuts)->getStatut()->getEtat(), false)) :
-                    $data = $service->getInfosCourrier($statuts, $courrier);
-                    $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
-                    return $this->json([
-                        'statuts' => $data[0],
-                        'destinataire' => $data[1],
-                    ]);
-                else :
-                    return $this->json(['statuts' => true]);
-                endif;
+                $data = $service->getInfosCourrier($statuts, $courrier);
+                $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+                return $this->json([
+                    'statuts' => $data[0],
+                    'destinataire' => $data[1],
+                ]);
             else :
                 return $this->json(['statuts' => false]);
             endif;
@@ -266,14 +262,14 @@ class MainController extends AbstractController
     }
 
     #[Route('/getAdresse', name: 'app_deleteAdresse')]
-    public function deleteAdresse(DestinatairesRepository $destinatairesRepository, Service $service) : Response
+    public function deleteAdresse(DestinatairesRepository $destinatairesRepository, Service $service): Response
     {
         if (!$this->getUser()) :
             return $this->redirectToRoute('app_login');
-        else:
+        else :
             $id = $service->stripTag()[0];
             $dest = $destinatairesRepository->findOneBy(['id' => $id]);
             return $this->json(['destinataire' => $dest]);
-        endif;            
+        endif;
     }
 }

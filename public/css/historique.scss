@@ -20,12 +20,12 @@ $orange: #FF5E1A;
 }
 .trait {
     display: flex;;
-    width: 27%;
+    width: 70%;
     height: .25vw;
     background-color: darkgrey;
 }
 .timeline {
-    width: 40%;
+    width: 50%;
     display: flex;
     > div {
         width: 100%;
@@ -38,6 +38,7 @@ $orange: #FF5E1A;
 }
 .statuts {
     position: absolute;
+    white-space: nowrap;
     top: -150%;
     left: 50%;
     transform: translateX(-50%);
@@ -99,7 +100,7 @@ main {
             justify-content: center;
             row-gap: 5vh;
             > div {
-                width: 60%;
+                width: 100%;
                 display: flex;
                 justify-content: space-around;
                 > span {

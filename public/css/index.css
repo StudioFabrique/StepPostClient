@@ -36,13 +36,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 60%;
+  width: 100%;
 }
 
 .detailsLivraison > .details {
@@ -68,13 +68,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 27%;
+  width: 70%;
   height: .25vw;
   background-color: darkgrey;
 }
 
 .timeline {
-  width: 40%;
+  width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,6 +96,7 @@
 
 .statuts {
   position: absolute;
+  white-space: nowrap;
   top: -150%;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -104,8 +105,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: .75rem;
 }
 
@@ -119,8 +121,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: .75rem;
 }
 
@@ -189,7 +192,7 @@ body > main > section:nth-child(1) > article > div > img {
 }
 
 body > main > section:nth-child(2) {
-  width: 40%;
+  width: 80%;
   display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -264,7 +267,7 @@ body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(1) {
 body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(1) > a > button {
   background-color: #FF5E1A;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: .75rem;
   color: white;
   border: none;
   padding: .5vw;
@@ -290,7 +293,7 @@ body > main > section:nth-child(4) > div:nth-child(1) > div:nth-child(2) > a > b
   height: 2.5vw;
   background-color: #FF5E1A;
   border-radius: 50%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: white;
   border: none;
 }
@@ -370,7 +373,11 @@ body > main > section:nth-child(4) > .anchor > .courrier > div > span {
 }
 
 body > main > section:nth-child(4) > .anchor > .courrier > div:nth-child(3) {
-  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 body > main > section:nth-child(5) {
