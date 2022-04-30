@@ -1,0 +1,17 @@
+section {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2vh;
+    > ul {
+        display: flex;
+        flex-direction: column;
+        row-gap: 2vh;
+        width: 100%;
+        list-style-type: none;
+        > li {
+            width: 100%;
+        }
+    }
+}

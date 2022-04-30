@@ -1,0 +1,52 @@
+.bouton {
+  padding: 0.5vw;
+  background-color: #140A82;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.connexion-form-main {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5vh;
+}
+.connexion-form-main > section:nth-child(1) {
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.connexion-form-main > section:nth-child(2) {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.connexion-form-main > section:nth-child(2) > form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vh;
+}
+.connexion-form-main > section:nth-child(2) > form > label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+}
+.connexion-form-main > section:nth-child(2) > form > label > input {
+  width: 80%;
+  padding: 1vw;
+  border-radius: 5px;
+  border: solid 1px #646464;
+  box-shadow: 4px 4px 4px #646464;
+}
+.connexion-form-main > section:nth-child(2) > form > div {
+  width: 80%;
+  display: flex;
+  justify-content: right;
+}/*# sourceMappingURL=ConnexionForm.css.map */

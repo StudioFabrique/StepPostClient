@@ -1,0 +1,37 @@
+$orange: #FF5E1A;
+.date {
+    color: $orange;
+}
+
+.courrier {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3vh;
+    padding: 1vh;
+    border-bottom: solid #646464 2px;
+    padding: 1.5vw;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        box-shadow: 4px 4px 4px #646464;
+    }
+    > div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        > span {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+    }
+    > div:nth-child(3) {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        font-size: .75rem;
+    }
+}

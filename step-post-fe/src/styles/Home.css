@@ -1,0 +1,25 @@
+.button {
+  padding: 0.5vw;
+  color: white;
+  font-weight: bold;
+  background-color: #FF5E1A;
+  border: none;
+  border-radius: 5px;
+}
+
+.home-main {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 3vh;
+}
+.home-main > div:last-child {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
+  font-size: 0.75rem;
+}/*# sourceMappingURL=Home.css.map */

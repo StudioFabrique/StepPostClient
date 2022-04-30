@@ -1,0 +1,84 @@
+#searchInput {
+  width: 30vw;
+  padding: 1.5vw;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px #646464;
+}
+
+#searchBtn {
+  padding: 0.5vw;
+  color: white;
+  font-weight: bold;
+  background-color: #24A640;
+  border: none;
+  border-radius: 5px;
+}
+
+.detailsLivraison {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detailsLivraison > .details {
+  font-size: 1rem;
+}
+
+.date {
+  color: #FF5E1A;
+}
+
+.cercle {
+  position: relative;
+  display: flex;
+  border-radius: 50%;
+  width: 1vw;
+  height: 1vw;
+  background-color: darkgrey;
+}
+
+.trait {
+  display: flex;
+  width: 15vw;
+  height: 0.25vw;
+}
+
+.timeline {
+  display: flex;
+}
+.timeline > div {
+  list-style-type: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.timeline > div > .trait:last-child {
+  display: none;
+}
+
+.cercleContainer {
+  position: relative;
+}
+
+.statuts {
+  position: absolute;
+  white-space: nowrap;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+}
+
+.statuts-date {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+}/*# sourceMappingURL=DetailsCourrier.css.map */

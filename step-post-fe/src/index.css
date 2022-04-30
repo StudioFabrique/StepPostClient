@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: #140A82;
+  font-family: rubik;
+}
+body #root {
+  min-height: 100vh;
+}/*# sourceMappingURL=index.css.map */
