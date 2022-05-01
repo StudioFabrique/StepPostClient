@@ -1,10 +1,12 @@
 $orange: #FF5E1A;
+
 #searchInput {
     width: 30vw;
     padding: 1.5vw;
     border-radius: 5px;
     box-shadow: 4px 4px 4px #646464;
 }
+
 #searchBtn {
     padding: .5vw;
     color: white;
@@ -12,19 +14,23 @@ $orange: #FF5E1A;
     background-color: #24A640;
     border: none;
     border-radius: 5px;
-    
+
 }
+
 .detailsLivraison {
     display: flex;
     justify-content: center;
     align-items: center;
-    > .details {
+
+    >.details {
         font-size: 1rem;
     }
 }
+
 .date {
     color: $orange;
 }
+
 .cercle {
     position: relative;
     display: flex;
@@ -33,27 +39,33 @@ $orange: #FF5E1A;
     height: 1vw;
     background-color: darkgrey;
 }
+
 .trait {
     display: flex;
-    width: 15vw;
+    width: 10vw;
     height: .25vw;
 }
+
 .timeline {
     display: flex;
-    > div {
+
+    >div {
         list-style-type: none;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        > .trait:last-child {
+
+        >.trait:last-child {
             display: none;
         }
     }
 }
+
 .cercleContainer {
     position: relative;
 }
+
 .statuts {
     position: absolute;
     white-space: nowrap;
@@ -65,6 +77,7 @@ $orange: #FF5E1A;
     justify-content: space-around;
     font-size: .75rem;
 }
+
 .statuts-date {
     position: absolute;
     top: 150%;
@@ -74,4 +87,29 @@ $orange: #FF5E1A;
     display: flex;
     justify-content: space-around;
     font-size: .75rem;
+}
+
+@media screen and (max-width: 1700px) {
+    .trait {
+        width: 8vw;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .trait {
+        width: 7vw;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .trait {
+        width: 6vw;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .trait {
+        width: 5vw;
+    }
 }

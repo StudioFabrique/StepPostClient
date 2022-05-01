@@ -1,9 +1,17 @@
 .detailsRecherche {
   width: 70%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   border: 1px solid #646464;
   padding: 1vw;
   border-radius: 5px;
+}
+.detailsRecherche > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1vh;
 }/*# sourceMappingURL=DetailsRecherche.css.map */

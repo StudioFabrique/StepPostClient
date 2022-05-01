@@ -15,22 +15,22 @@ export function setEtatMessage(etat, nom) {
     let message;
     switch (etat) {
         case "pris en charge":
-            message = `Le courrier pour ${nom} a été pris en charge`;
+            message = `Le courrier pour ${nom} a été pris en charge.`;
             break;
         case "distribué":
-            message = `Le destinataire ${nom} a bien reçu son courrier`;
+            message = `Le destinataire ${nom} a bien reçu son courrier.`;
             break;
         case "avisé":
-            message = `Le facteur a laissé un avis de passage pour : ${nom}`;
+            message = `Le facteur a laissé un avis de passage pour : ${nom}.`;
             break;
         case "mis en instance":
-            message = ` Le courrier pour ${nom} a été déposé à un point de retrait`;
+            message = ` Le courrier pour ${nom} a été déposé à un point de retrait.`;
             break;
         case "npai":
-            message = `Le destinataire ${nom} n'habite pas à l'adresse indiquée`;
+            message = `Le destinataire ${nom} n'habite pas à l'adresse indiquée.`;
             break;
         case "non réclamé":
-            message = `Le courrier pour ${nom} a été retourné )'expéditeur`;
+            message = `Le courrier pour ${nom} a été retourné )'expéditeur.`;
             break;
 
     }

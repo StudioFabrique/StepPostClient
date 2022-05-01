@@ -5,10 +5,9 @@
 }
 
 body {
-  min-height: 100vh;
   color: #140A82;
   font-family: rubik;
 }
 body #root {
-  min-height: 100vh;
+  min-height: 100%;
 }/*# sourceMappingURL=index.css.map */

@@ -5,6 +5,7 @@ import '../styles/ConnexionForm.css';
 function ConnexionForm({message, onFormSubmit }) {
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
+    const [erreur, updateErreur] = useState(false);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -13,10 +14,11 @@ function ConnexionForm({message, onFormSubmit }) {
         if (response.code === 401) {
             //window.location.href = '/';
             console.log('toto');
-            onFormSubmit(false, "Email ou mot de passe incorrect(s), essayez à nouveau svp");
+            onFormSubmit(false);
+            updateErreur(true);
         } else {
             sessionStorage.setItem('token', response.token);
-            onFormSubmit(true, '');
+            onFormSubmit(true);
         }
     }
 
@@ -35,7 +37,7 @@ function ConnexionForm({message, onFormSubmit }) {
                             <input type="password" onChange={(e) => updatePassword(e.target.value)} />
                         </label>
                         {
-                            !message ? <p>{message}</p> : null
+                            erreur ? <p>Email ou mot de passe incorrect(s), essayez à nouveau svp</p> : null
                         }
                         <div>
                             <button className="bouton">Envoyer</button>

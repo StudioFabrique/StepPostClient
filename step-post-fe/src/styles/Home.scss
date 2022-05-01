@@ -1,4 +1,5 @@
 $orange: #FF5E1A;
+
 .button {
   padding: .5vw;
   color: white;
@@ -6,19 +7,33 @@ $orange: #FF5E1A;
   background-color: $orange;
   border: none;
   border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
-.home-main {
-    width: 100vw;
+
+body {
+  height: 90vh;
+
+  #root {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 3vh;
-    > div:last-child {
+
+    .home-main {
+      width: 100vw;
+      height: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      column-gap: 1vw;
-      font-size: .75rem;
+      justify-content: center;
+      row-gap: 5vh;
+
+      >div:last-child {
+        display: flex;
+        align-items: center;
+        column-gap: 1vw;
+        font-size: .75rem;
+      }
     }
   }
+}

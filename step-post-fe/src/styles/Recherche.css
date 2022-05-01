@@ -3,4 +3,11 @@
   padding: 1.5vw;
   border-radius: 5px;
   box-shadow: 4px 4px 4px #646464;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
 }/*# sourceMappingURL=Recherche.css.map */

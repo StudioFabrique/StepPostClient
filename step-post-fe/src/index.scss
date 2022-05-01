@@ -5,10 +5,9 @@ $blue: #140A82;
     padding: 0;
 }
 body {
-    min-height: 100vh;
     color: $blue;
     font-family: rubik;
     #root {
-        min-height: 100vh;
+        min-height: 100%;
     }
 }

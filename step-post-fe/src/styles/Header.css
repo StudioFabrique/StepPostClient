@@ -24,4 +24,7 @@ nav > div:nth-child(2) > ul {
   -moz-column-gap: 1vw;
        column-gap: 1vw;
   align-items: center;
+}
+nav > div:nth-child(2) > ul > li {
+  padding: 0.5vw;
 }/*# sourceMappingURL=Header.css.map */

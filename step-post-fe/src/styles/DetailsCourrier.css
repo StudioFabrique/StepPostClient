@@ -38,7 +38,7 @@
 
 .trait {
   display: flex;
-  width: 15vw;
+  width: 10vw;
   height: 0.25vw;
 }
 
@@ -81,4 +81,25 @@
   display: flex;
   justify-content: space-around;
   font-size: 0.75rem;
+}
+
+@media screen and (max-width: 1700px) {
+  .trait {
+    width: 8vw;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .trait {
+    width: 7vw;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .trait {
+    width: 6vw;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .trait {
+    width: 5vw;
+  }
 }/*# sourceMappingURL=DetailsCourrier.css.map */

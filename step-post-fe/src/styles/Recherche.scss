@@ -4,3 +4,9 @@
     border-radius: 5px;
     box-shadow: 4px 4px 4px #646464;
 }
+
+form {
+    display: flex;
+    align-items: center;
+    column-gap: 1vw;
+}

@@ -16,6 +16,7 @@ function Recherche({ onRecherche }) {
         <>
             <form onSubmit={handleSubmit}>
                 <input type="text" id="searchInput" onChange={(e) => setValue(e.target.value)} />
+                <img src="img/icone-loupe.png" alt="icone loupe" />
             </form>
         </>
     )

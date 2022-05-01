@@ -11,7 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { noResults: false, rechercheNom: false, statuts: [], baseUrl: "http://127.0.0.1:8000/api/client/", page: 0, isRechercheActive: false, rechercheValue: [] };
-    this.max = 4;
+    this.max = 3;
     this.nom = "";
     this.tmpName = '';
   }
@@ -28,15 +28,12 @@ class Home extends Component {
     } else {
       this.setState({ statuts: response.statuts, page: this.state.page + 1 });
     }
-    console.log('longueur', this.state.statuts);
   }
 
   handleRecherche = async msg => {
     const response = await postData(`${this.state.baseUrl}searchCourrier`, [msg]);
     if (response.statuts !== false && response.statuts !== true) {
-      console.log('tata', response.statuts);
       this.setState({ isRechercheActive: true, rechercheValue: response });
-      console.log('toto', this.state.rechercheValue);
     } else if (response.statuts === false) {
       this.nom = msg;
       const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, false]);
@@ -44,7 +41,7 @@ class Home extends Component {
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
         this.nom = response.statuts[0].nom;
       } else {
-        this.setState({ noResults: true });
+        this.setState({ noResults: true, rechercheNom: false });
         this.tmpName = this.nom;
         this.nom = '';
       }

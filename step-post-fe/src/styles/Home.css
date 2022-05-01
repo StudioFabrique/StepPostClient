@@ -6,17 +6,26 @@
   border: none;
   border-radius: 5px;
 }
+.button:hover {
+  cursor: pointer;
+}
 
-.home-main {
+body {
+  height: 90vh;
+}
+body #root {
+  height: 100%;
+}
+body #root .home-main {
   width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 3vh;
+  row-gap: 5vh;
 }
-.home-main > div:last-child {
+body #root .home-main > div:last-child {
   display: flex;
   align-items: center;
   -moz-column-gap: 1vw;

@@ -25,6 +25,9 @@ nav {
             list-style-type: none;
             column-gap: 1vw;
             align-items: center;
+            >li {
+                padding: .5vw;
+            }
         }
 
     }

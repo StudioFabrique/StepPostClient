@@ -10,7 +10,6 @@
   row-gap: 3vh;
   padding: 1vh;
   border-bottom: solid #646464 2px;
-  padding: 1.5vw;
 }
 .courrier:hover {
   cursor: pointer;

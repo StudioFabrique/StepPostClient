@@ -1,17 +1,43 @@
-section {
+.listecourriers-section {
+  margin-top: 5vh;
   width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 2vh;
 }
-section > ul {
+.listecourriers-section > div:nth-child(1) {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.listecourriers-section > div:nth-child(1) > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -moz-column-gap: 0.75vw;
+       column-gap: 0.75vw;
+}
+.listecourriers-section > div:nth-child(1) > span > a > button {
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: #FF5E1A;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+.listecourriers-section > div:nth-child(1) > span > a > button:hover {
+  cursor: pointer;
+}
+.listecourriers-section > ul {
+  margin-top: 2vh;
   display: flex;
   flex-direction: column;
   row-gap: 2vh;
   width: 100%;
   list-style-type: none;
 }
-section > ul > li {
+.listecourriers-section > ul > li {
   width: 100%;
 }/*# sourceMappingURL=ListeCourriers.css.map */

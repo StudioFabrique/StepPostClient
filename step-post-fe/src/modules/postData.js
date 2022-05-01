@@ -13,7 +13,7 @@ export async function postData(url, data) {
             }
         })).json();
         if (response.code === 401) {
-            window.location.href = "/logs";
+            window.location.href = "/connexion";
         }
         return response
     } catch (err) {
