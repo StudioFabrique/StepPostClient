@@ -11,7 +11,7 @@ function DetailsRecherche(props) {
 
     return (
         <>
-            <article class="detailsRecherche">
+            <article className="detailsRecherche">
                     <div>
                         <h4>Courrier n° : {courrier.destinataire.bordereau}</h4>
                         <button className="button" onClick={handleClick}>Fermer</button>

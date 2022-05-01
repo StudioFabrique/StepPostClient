@@ -36,3 +36,22 @@ export function setEtatMessage(etat, nom) {
     }
     return message;
 }
+
+export function setColor(statut) {
+    let color;
+    switch (statut) {
+        case "NPAI":
+            color = "red";
+            break;
+        case "non réclamé":
+            color = "red";
+            break;
+        case "distribué":
+            color = "#24A640";
+            break;
+        default:
+            color = "#FF5E1A";
+            break;
+    }
+    return color;
+}

@@ -6,15 +6,20 @@ import DetailsRecherche from './DetailsRecherche';
 import RechercheNom from './RechercheNom';
 import NoResults from './NoResults';
 import Logs from './Logs';
+import '../styles/Historique.css';
+import { resetSortArray } from '../modules/sortArray.js';
 
 class Historique extends Component {
     constructor(props) {
         super(props);
         this.state = { noResults: false, rechercheNom: false, statuts: [], baseUrl: "http://127.0.0.1:8000/api/client/", page: 0, isRechercheActive: false, rechercheValue: [] };
-        this.max = 3;
+        this.max = 10;
         this.nom = "";
         this.tmpName = '';
         this.filtre = true;
+        // false = 'DESC' true = 'ASC'
+        this.direction = [false, false, false, false];
+        this.sort = 0;
     }
 
     async componentDidMount() {
@@ -22,7 +27,7 @@ class Historique extends Component {
     }
 
     async handleClick(p, operator) {
-        const datas = [p, this.max, this.nom, this.filtre];
+        const datas = [p, this.max, this.nom, this.filtre, this.sort, this.direction[this.sort]];
         const response = await postData(`${this.state.baseUrl}getLogs`, datas);
         if (operator === 'minus') {
             this.setState({ statuts: response.statuts, page: this.state.page - 1 });
@@ -32,12 +37,15 @@ class Historique extends Component {
     }
 
     handleRecherche = async msg => {
+        if (this.state.isRechercheActive) {
+            this.setState({ isRechercheActive: false });
+        }
         const response = await postData(`${this.state.baseUrl}searchCourrier`, [msg]);
-        if (response.statuts !== false && response.statuts !== true) {
+        if (response.statuts) {
             this.setState({ isRechercheActive: true, rechercheValue: response });
         } else if (response.statuts === false) {
             this.nom = msg;
-            const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.flitre]);
+            const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.filtre, 0, false]);
             if (response.statuts !== false) {
                 this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
                 this.nom = response.statuts[0].nom;
@@ -47,6 +55,15 @@ class Historique extends Component {
                 this.nom = '';
             }
         }
+        this.direction = resetSortArray();
+        this.sort = 0;
+    }
+
+    handleSort = async (sort) => {
+        this.direction[sort] = !this.direction[sort];
+        this.sort = sort;
+        const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.filtre, this.sort, this.direction[this.sort]]);
+        this.setState({ statuts: response.statuts, page: 0 });
     }
 
     handleCloseRecherche = () => {
@@ -57,11 +74,12 @@ class Historique extends Component {
         /**
          * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
          */
-        const datas = [0, this.max, "", this.filtre];
+        this.direction = resetSortArray();
+        this.sort = 0;
+        const datas = [0, this.max, "", this.filtre, this.sort, this.direction[this.sort]];
         const response = await postData(`${this.state.baseUrl}getLogs`, datas);
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
         this.nom = "";
-        console.log('longueur', this.state.statuts);
     }
 
     handleBtnRetour = () => {
@@ -82,7 +100,30 @@ class Historique extends Component {
                     {
                         this.state.noResults ? <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} /> : null
                     }
-                    <Logs courriers={this.state.statuts} baseUrl={this.state.baseUrl} />
+                    <section className='section-historique'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th onClick={() => this.handleSort(0)}>Bordereau</th>
+                                    <th onClick={() => this.handleSort(1)}>Date</th>
+                                    <th onClick={() => this.handleSort(2)}>Nom</th>
+                                    <th onClick={() => this.handleSort(3)}>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.statuts.map((courrier) => {
+                                        return (
+                                            <>
+                                                <Logs courrier={courrier} baseUrl={this.state.baseUrl} onRowClick={this.handleRecherche} />
+                                            </>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </section>
                     <div>
                         <button onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
                         <p>{this.state.page + 1}</p>

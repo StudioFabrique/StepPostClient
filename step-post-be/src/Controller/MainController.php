@@ -13,6 +13,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+
+
+
+    #[Route('/', name: 'app_main')]
+    public function index(CourrierRepository $courrierRepository, StatutCourrierRepository $statutCourrierRepository): Response
+    {
+        $courriers = $courrierRepository->findBy([], ['nom' => 'DESC']);
+        $data = array();
+
+        foreach ($courriers as $courrier) :
+            $statuts = $statutCourrierRepository->findBy(
+                ['courrier' => $courrier->getId()],
+                ['date' => 'ASC']
+            );
+            array_push($data, $statuts[0]);
+        endforeach;
+
+        usort($data, function ($a, $b) {
+            return $b->getDate() <=> $a->getDate();
+        });
+
+        foreach ($data as $key => $val) :
+            echo "clé : " . $key . " val : " . $val->getCourrier()->getId() . "\n";
+        endforeach;
+        return $this->json(['courriers' => 'toto']);
+    }
+
+
+
     /**
      * retourne false qd la recherche par bordereau n'a rien trouvé,
      * sinon retourne les infos sur le courrier recherché
@@ -33,12 +62,12 @@ class MainController extends AbstractController
                     ['courrier' => $courrier->getId()],
                     ['date' => 'ASC']
                 );
-                    $data = $service->getInfosCourrier($statuts, $courrier);
-                    $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
-                    return $this->json([
-                        'statuts' => $data[0],
-                        'destinataire' => $data[1],
-                    ]);
+                $data = $service->getInfosCourrier($statuts, $courrier);
+                $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+                return $this->json([
+                    'statuts' => $data[0],
+                    'destinataire' => $data[1],
+                ]);
             else :
                 return $this->json(['statuts' => false]);
             endif;
@@ -71,48 +100,6 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/searchLogs', name: 'app_searchLogs')]
-    public function searchLogs(
-        Service $service,
-        CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
-    ): Response {
-        $data = $service->stripTag();
-        $user = $this->getUser()->getUserIdentifier();
-        $courrier = $courrierRepository->findOneBy(
-            [
-                'expediteur' => $user,
-                'bordereau' => $data[0],
-            ],
-        );
-        if (isset($courrier)) :
-            $statuts = $statutCourrierRepository->findBy(
-                ['courrier' => $courrier->getId()],
-                ['date' => 'ASC']
-            );
-            $tmp = end($statuts)->getStatut()->getEtat();
-            if ($service->isDistributed($tmp, true)) :
-                //if ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI") :
-                $data = $service->getInfosCourrier($statuts, $courrier);
-                $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
-                return $this->json([
-                    'statuts' => $data[0],
-                    'destinataire' => $data[1],
-                ]);
-            else :
-                return $this->json(['statuts' => true]);
-            endif;
-        else :
-            return $this->json(['statuts' => false]);
-        endif;
-    }
-
-    #[Route('api/client/historique', 'app_historique')]
-    public function historique(): Response
-    {
-        return $this->render('main/historique.html.twig', []);
-    }
-
     #[Route('/api/client/getLogs', name: 'app_getLogs')]
     public function getLogs(
         ExpediteurRepository $expediteurRepository,
@@ -125,6 +112,10 @@ class MainController extends AbstractController
         $max = $tmp[1];
         $nom = $tmp[2];
         $filtre = $tmp[3];
+        if (isset($tmp[4])) :
+            $sort = $tmp[4];
+            $direction = $tmp[5];
+        endif;
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         if ($nom === "") :
             $datas = $courrierRepository->findBy(
@@ -153,9 +144,19 @@ class MainController extends AbstractController
             );
             $tmp = $statut[0]->getStatut()->getEtat();
             if ($service->isDistributed($tmp, $filtre)) :
-                array_push($courriers, $statut[0]);
+                $courriers = [...$courriers, [
+                    'id' => $statut[0]->getCourrier()->getId(),
+                    'date' => $statut[0]->getDate(),
+                    'nom' => $statut[0]->getCourrier()->getNom(),
+                    'prenom' => $statut[0]->getCourrier()->getPrenom(),
+                    'etat' => $statut[0]->getStatut()->getEtat(),
+                    'bordereau' => $statut[0]->getCourrier()->getBordereau(),
+                ]];
             endif;
         endforeach;
+        if (isset($sort)) :
+            $courriers = $service->sortArrayByType($courriers, $sort, $direction);
+        endif;
         if (count($courriers) < ($max * ($page + 1))) :
             $length = count($courriers);
         else :
@@ -163,14 +164,7 @@ class MainController extends AbstractController
         endif;
         $statuts = array();
         for ($i = ($page * $max); $i < $length; $i++) :
-            $statuts = [...$statuts, [
-                'id' => $courriers[$i]->getCourrier()->getId(),
-                'date' => $courriers[$i]->getDate(),
-                'nom' => $courriers[$i]->getCourrier()->getNom(),
-                'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
-                'etat' => $courriers[$i]->getStatut()->getEtat(),
-                'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
-            ]];
+            array_push($statuts, $courriers[$i]);
         endfor;
         return $this->json([
             'statuts' => $statuts,

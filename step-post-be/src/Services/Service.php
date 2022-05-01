@@ -7,9 +7,10 @@ use App\Repository\CourrierRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 
-class Service {
+class Service
+{
 
-    function stripTag(): array
+    public function stripTag(): array
     {
         $tmp = json_decode($_POST['data']);
         $data = array();
@@ -19,10 +20,10 @@ class Service {
         return $data;
     }
 
-    function getInfosCourrier(array $statuts, Courrier $courrier) : array
+    public function getInfosCourrier(array $statuts, Courrier $courrier): array
     {
         $result = array();
-        foreach($statuts as $statut) :
+        foreach ($statuts as $statut) :
             array_push($result, [
                 'date' => $statut->getDate(),
                 'etat' => $statut->getStatut()->getEtat(),
@@ -39,7 +40,7 @@ class Service {
         return [$result, $destinataire];
     }
 
-    function getDatas(
+    public function getDatas(
         int $user,
         ExpediteurRepository $expediteurRepository,
         CourrierRepository $courrierRepository,
@@ -102,12 +103,70 @@ class Service {
         return $statuts;
     }
 
-    function isDistributed(string $tmp, bool $filtre): bool
+    public function isDistributed(string $tmp, bool $filtre): bool
     {
         if (!$filtre) :
             return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
         else :
             return ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI");
         endif;
+    }
+
+    public function sortArrayByType(array $data, int $sort, bool $direction): array
+    {
+        switch ($sort):
+
+            case 0:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['bordereau'] <=> $b['bordereau'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['bordereau'] <=> $a['bordereau'];
+                    });
+                endif;
+                break;
+
+            case 1:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['date'] <=> $b['date'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['date'] <=> $a['date'];
+                    });
+                endif;
+                break;
+
+            case 2:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['nom'] <=> $b['nom'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['nom'] <=> $a['nom'];
+                    });
+                endif;
+                break;
+
+            case 3:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['etat'] <=> $b['etat'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['etat'] <=> $a['etat'];
+                    });
+                endif;
+                break;
+
+            case 'default':
+                break;
+        endswitch;
+        return $data;
     }
 }
