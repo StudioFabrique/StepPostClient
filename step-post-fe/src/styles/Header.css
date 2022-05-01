@@ -16,7 +16,7 @@ nav > div > img {
 }
 nav > div:nth-child(2) {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 nav > div:nth-child(2) > ul {
   display: flex;

@@ -25,6 +25,9 @@ function ListeCourriers(props) {
         });
         updateCourriers(tmp);
     }
+
+    // effet d'arcodéon
+
     const handleCourrierClick = newId => {
         if (id) {
             courriers.find((statut) => statut.id === id).isActive = false;
@@ -32,9 +35,8 @@ function ListeCourriers(props) {
         if (id === newId) {
             courriers.find((statut) => statut.id === id).isActive = false;
             newId = null;
-        }
-        const newCourrier = courriers.find((statut) => statut.id === newId);
-        if (newCourrier) {
+        } else {
+            const newCourrier = courriers.find((statut) => statut.id === newId);
             newCourrier.isActive = true;
         }
         updateId(newId);

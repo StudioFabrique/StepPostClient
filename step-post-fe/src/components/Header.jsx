@@ -4,7 +4,7 @@ import Logout from "./Logout";
 import Connexion from "./Connexion";
 import '../styles/Header.css';
 import NouvelEnvoi from "./NouvelEnvoi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Historique from "./Historique";
 
 function Header() {

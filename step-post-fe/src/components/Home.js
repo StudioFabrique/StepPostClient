@@ -14,7 +14,6 @@ class Home extends Component {
     this.max = 3;
     this.nom = "";
     this.tmpName = '';
-    this.filtre = false
   }
 
   async componentDidMount() {
@@ -22,7 +21,7 @@ class Home extends Component {
   }
 
   async handleClick(p, operator) {
-    const datas = [p, this.max, this.nom, this.filtre];
+    const datas = [p, this.max, this.nom, false];
     const response = await postData(`${this.state.baseUrl}getLogs`, datas);
     if (operator === 'minus') {
       this.setState({ statuts: response.statuts, page: this.state.page - 1 });
@@ -37,7 +36,7 @@ class Home extends Component {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
-      const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.filtre]);
+      const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, false]);
       if (response.statuts !== false) {
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
         this.nom = response.statuts[0].nom;
@@ -57,7 +56,7 @@ class Home extends Component {
     /**
      * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
      */
-    const datas = [0, this.max, "", this.filtre];
+    const datas = [0, this.max, "", false];
     const response = await postData(`${this.state.baseUrl}getLogs`, datas);
     this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
     this.nom = "";
