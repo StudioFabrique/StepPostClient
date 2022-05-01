@@ -50,6 +50,12 @@ $blue: #140A82;
                 }
             }
 
+            > p {
+                width: 100%;
+                font-size: .75rem;
+                color: red;
+            }
+
             >div {
                 width: 70%;
                 display: flex;

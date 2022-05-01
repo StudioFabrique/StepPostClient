@@ -1,25 +1,31 @@
 import { useState } from "react";
+import { testField } from "../modules/chjeckForm";
 import { getToken } from "../modules/postData";
 import '../styles/ConnexionForm.css';
+import { regexMail, regexPassword } from '../modules/data.js';
 
-function ConnexionForm({message, onFormSubmit }) {
+function ConnexionForm({ message, onFormSubmit }) {
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
     const [erreur, updateErreur] = useState(false);
 
     const handleSubmit = async event => {
         event.preventDefault();
-        const response = await getToken('http://127.0.0.1:8000/api/login_check', [email, password]);
-        console.log('response', response);
-        if (response.code === 401) {
-            //window.location.href = '/';
-            console.log('toto');
-            onFormSubmit(false);
-            updateErreur(true);
-        } else {
-            sessionStorage.setItem('token', response.token);
-            onFormSubmit(true);
-        }
+        let testMail = testField(regexMail, email);
+        let testPassword = testField(regexPassword, password);
+
+        if (testMail && testPassword) {
+            const response = await getToken('http://127.0.0.1:8000/api/login_check', [email, password]);
+            console.log('response', response);
+            if (response.code === 401) {
+                onFormSubmit(false);
+                updateErreur(true);
+            } else {
+                sessionStorage.setItem('token', response.token);
+                updateErreur(false);
+                onFormSubmit(true);
+            }
+        } else updateErreur(true);
     }
 
     return (

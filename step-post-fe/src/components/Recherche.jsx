@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { testField } from "../modules/chjeckForm";
+import { regexName, regexNumbers } from "../modules/data";
 import { postData } from "../modules/postData";
 import '../styles/Recherche.css';
 
@@ -7,7 +9,9 @@ function Recherche({ onRecherche }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        if (value) {
+        let testName = testField(regexName, value);
+        let testNumbers = testField(regexNumbers, value);
+        if (testName || testNumbers) {
             onRecherche(value);
         }
     }

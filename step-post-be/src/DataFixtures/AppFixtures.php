@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
         foreach ($expediteurs as $expediteur) :
             $exp = new Expediteur();
             $exp->setEmail($expediteur);
-            $hash = $this->passwordHasher->hashPassword($exp, "aze");
+            $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
             $exp->setPassword($hash);
             $exp->setNom("Dupont");
             $exp->setClient($client);

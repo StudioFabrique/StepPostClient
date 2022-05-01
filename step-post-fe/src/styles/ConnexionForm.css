@@ -46,6 +46,11 @@
   border: solid 1px #646464;
   box-shadow: 4px 4px 4px #646464;
 }
+.connexion-form-main > section:nth-child(2) > form > p {
+  width: 100%;
+  font-size: 0.75rem;
+  color: red;
+}
 .connexion-form-main > section:nth-child(2) > form > div {
   width: 70%;
   display: flex;
