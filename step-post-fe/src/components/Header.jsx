@@ -28,9 +28,16 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/historique"
+                                <Link to="/nouvel-envoi"
                                     style={{ borderBottom: isActive === 1 ? "1px solid #140A82" : "0px solid #140A82" }}
                                     onClick={() => updateActive(1)}>
+                                    <img className="icone" src="img/icone-favoris.png" alt="icone-adresses-envois" />                                
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/historique"
+                                    style={{ borderBottom: isActive === 2 ? "1px solid #140A82" : "0px solid #140A82" }}
+                                    onClick={() => updateActive(2)}>
                                     <img className="icone" src="img/icone-tableau.png" alt="icone-historique-envois" />
                                 </Link>
                             </li>

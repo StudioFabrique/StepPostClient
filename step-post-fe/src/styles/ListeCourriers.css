@@ -1,23 +1,43 @@
 .listecourriers-section {
   margin-top: 5vh;
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   row-gap: 2vh;
 }
+
 .listecourriers-section > div:nth-child(1) {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 .listecourriers-section > div:nth-child(1) > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  -moz-column-gap: 0.75vw;
-       column-gap: 0.75vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-column-gap: .75vw;
+          column-gap: .75vw;
 }
+
 .listecourriers-section > div:nth-child(1) > span > a > button {
   width: 2.5vw;
   height: 2.5vw;
@@ -27,17 +47,26 @@
   color: white;
   border: none;
 }
+
 .listecourriers-section > div:nth-child(1) > span > a > button:hover {
   cursor: pointer;
 }
+
 .listecourriers-section > ul {
   margin-top: 2vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 2vh;
   width: 100%;
   list-style-type: none;
 }
+
 .listecourriers-section > ul > li {
   width: 100%;
-}/*# sourceMappingURL=ListeCourriers.css.map */
+}
+/*# sourceMappingURL=ListeCourriers.css.map */

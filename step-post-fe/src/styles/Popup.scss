@@ -1,0 +1,52 @@
+$blue: #140A82;
+$orange: #FF5E1A;
+
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: .5;
+    z-index: 1;
+}
+
+.popup {
+    width: 25vw;
+    height: 27vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10000;
+    background-color: white;
+    border: 1px solid #646464;
+    border-radius: 20px;
+
+    >.popup-buttons {
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+
+        >button {
+            padding: 1vh 1VW;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+        }
+
+        >button:nth-child(1) {
+            background-color: $blue;
+        }
+
+        >button:nth-child(2) {
+            background-color: $orange;
+        }
+    }
+}

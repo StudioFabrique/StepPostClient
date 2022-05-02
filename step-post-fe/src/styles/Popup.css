@@ -1,0 +1,63 @@
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: .5;
+  z-index: 1;
+}
+
+.popup {
+  width: 25vw;
+  height: 27vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10000;
+  background-color: white;
+  border: 1px solid #646464;
+  border-radius: 20px;
+}
+
+.popup > .popup-buttons {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.popup > .popup-buttons > button {
+  padding: 1vh 1VW;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.popup > .popup-buttons > button:nth-child(1) {
+  background-color: #140A82;
+}
+
+.popup > .popup-buttons > button:nth-child(2) {
+  background-color: #FF5E1A;
+}
+/*# sourceMappingURL=Popup.css.map */

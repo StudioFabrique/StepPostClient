@@ -7,6 +7,9 @@ use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Services\Service as Service;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,12 +94,44 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/client/adressesFavorites', name: 'app_adressesFavorites')]
-    public function adressesFavorites(DestinatairesRepository $destinatairesRepository): Response
-    {
-        $userId = $this->getUser()->getUserIdentifier();
-        $destinataires = $destinatairesRepository->findBy(['expediteur' => $userId]);
-        return $this->render('main/adressesFavorites.html.twig', [
-            'destinataires' => $destinataires,
+    public function adressesFavorites(
+        DestinatairesRepository $destinatairesRepository,
+        ExpediteurRepository $expediteurRepository,
+        Service $service,
+    ): Response {
+        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $destinataires = $destinatairesRepository->findBy(['expediteur' => $user]);
+        $nom = "";
+        if (isset($_POST['data'])) :
+            $nom = $service->stripTag()[0];
+            $tmp = array();
+                foreach ($destinataires as $el) :
+                    if (str_contains($el->getNom(), $nom)) :
+                        array_push($tmp, $el);
+                    endif;
+                endforeach;
+                $destinataires = $tmp;
+        endif;
+        if (count($destinataires) === 0) :
+            return $this->json(['destinataires' => false]);
+        endif;
+        $adresses = array();
+        foreach ($destinataires as $el) :
+            $adresses = [...$adresses, [
+                'id' => $el->getId(),
+                'civilite' => $el->getCivilite(),
+                'prenom' => $el->getPrenom(),
+                'nom' => $el->getNom(),
+                'adresse' => $el->getAdresse(),
+                'complement' => $el->getComplement(),
+                'codePostal' => $el->getCodePostal(),
+                'ville' => $el->getVille(),
+                'telephone' => $el->getTelephone(),
+                'email' => $el->getEmail(),
+            ]];
+        endforeach;
+        return $this->json([
+            'destinataires' => $adresses,
         ]);
     }
 
@@ -169,5 +204,22 @@ class MainController extends AbstractController
         return $this->json([
             'statuts' => $statuts,
         ]);
+    }
+
+    #[Route('/api/client/deleteAdresse', name: 'app_deleteAdresse')]
+    public function deleteAdresse(
+        Service $service,
+        DestinatairesRepository $destinatairesRepository,
+        ManagerRegistry $doctrine) : Response
+    {
+        $id = $service->stripTag($_POST['data'])[0];
+        $dest = $destinatairesRepository->findOneBy(['id' => $id]);
+
+        $manager = $doctrine->getManager();
+
+        $manager->remove($dest);
+        $manager->flush();
+
+        return $this->json(['result' => true]);
     }
 }

@@ -110,6 +110,36 @@ class AppFixtures extends Fixture
                 'ville' => 'Bizanos',
                 'telephone' => '07851234',
             ],
+            [
+                'civilite' => 'mr',
+                'prenom' => 'john',
+                'nom' => 'bonham',
+                'email' => 'bonzo@ledzep.co.uk',
+                'adresse' => '13 place Marin Robiert',
+                'codePostal' => 64000,
+                'ville' => 'Pau',
+                'telephone' => '07851234',
+            ],
+            [
+                'civilite' => 'mlle',
+                'prenom' => 'janis',
+                'nom' => 'joplin',
+                'email' => 'pearl@yahoo.fr',
+                'adresse' => '67 rue Romain Pilino',
+                'codePostal' => 64470,
+                'ville' => 'Serres-Castets',
+                'telephone' => '07851234',
+            ],
+            [
+                'civilite' => 'mr',
+                'prenom' => 'lou',
+                'nom' => 'reed',
+                'email' => 'vu@yahoo.fr',
+                'adresse' => '278 bvd Olga d\'ukraine',
+                'codePostal' => 64000,
+                'ville' => 'pau',
+                'telephone' => '07851234',
+            ],
         ];
         $compteur = 0;
         foreach ($destinataires as $destinataire) :
