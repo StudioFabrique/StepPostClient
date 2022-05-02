@@ -14,6 +14,7 @@ class NouvelEnvoi extends Component {
     }
     componentDidMount() {
         this.handleRefreshAdresses();
+        this.props.onPageLanding(1);
     }
 
     handleRecherche = async nom => {
@@ -42,7 +43,7 @@ class NouvelEnvoi extends Component {
 
     handleRefreshAdresses = async () => {
         const response = await this.getAdresses();
-        this.setState({ adresses: response.destinataires });
+        this.setState({ adresses: response.destinataires, section: 'adresses' });
     }
     render() {
         return (
@@ -68,7 +69,12 @@ class NouvelEnvoi extends Component {
                                 console.log('adresse', adresse);
                                 return (
                                     <>
-                                        <Destinataire key={adresse.id} onDelete={this.handleRefreshAdresses} baseUrl={this.state.baseUrl} adresse={adresse} />
+                                        <Destinataire
+                                            key={adresse.id}
+                                            onDelete={this.handleRefreshAdresses}
+                                            baseUrl={this.state.baseUrl}
+                                            adresse={adresse}
+                                        />
                                     </>
                                 )
                             })

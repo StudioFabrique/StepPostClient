@@ -37,7 +37,7 @@ function ConnexionForm({ message, onFormSubmit }) {
                 <section>
                     <form onSubmit={handleSubmit}>
                         <label>Adresse email :&nbsp;
-                            <input type="email" onChange={(e) => updateEmail(e.target.value)} />
+                            <input type="email" autofocus onChange={(e) => updateEmail(e.target.value)} />
                         </label>
                         <label>Mot de passe :&nbsp;
                             <input type="password" onChange={(e) => updatePassword(e.target.value)} />

@@ -14,14 +14,10 @@ $orange: #FF5E1A;
 }
 
 body {
-  height: 90vh;
 
   #root {
-    height: 100%;
-
     .home-main {
       width: 100vw;
-      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;

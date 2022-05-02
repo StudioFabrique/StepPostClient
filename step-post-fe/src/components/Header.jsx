@@ -9,7 +9,11 @@ import Historique from "./Historique";
 
 function Header() {
 
-    const [isActive, updateActive] = useState(0);
+    const [isActive, updateActive] = useState(null);
+
+    const handlePageActive = (page) => {
+        updateActive(page);
+    }
 
     return (
         <>
@@ -18,43 +22,41 @@ function Header() {
                     <div>
                         <img src="img/logo.png" alt="logo step" />
                     </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <Link to="/home"
-                                    style={{ borderBottom: isActive === 0 ? "1px solid #140A82" : "0px solid #140A82" }}
-                                    onClick={() => updateActive(0)}>
-                                    <img className="icone" src="img/icone-home.png" alt="icone-accueil" />
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/nouvel-envoi"
-                                    style={{ borderBottom: isActive === 1 ? "1px solid #140A82" : "0px solid #140A82" }}
-                                    onClick={() => updateActive(1)}>
-                                    <img className="icone" src="img/icone-favoris.png" alt="icone-adresses-envois" />                                
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/historique"
-                                    style={{ borderBottom: isActive === 2 ? "1px solid #140A82" : "0px solid #140A82" }}
-                                    onClick={() => updateActive(2)}>
-                                    <img className="icone" src="img/icone-tableau.png" alt="icone-historique-envois" />
-                                </Link>
-                            </li>
-                            <li id="logout">
-                                <Link to="/logout">
-                                    <img className="icone" src="img/icone-logout.png" alt="icone-deconnexion" />
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    {
+                        sessionStorage.getItem('token') ?
+                            <div>
+                                <ul>
+                                    <li>
+                                        <Link to="/home" style={{ borderBottom: isActive === 0 ? "1px solid #140A82" : "0px solid #140A82" }}>
+                                            <img className="icone" src="img/icone-home.png" alt="icone-accueil" />
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/nouvel-envoi" style={{ borderBottom: isActive === 1 ? "1px solid #140A82" : "0px solid #140A82" }}>
+                                            <img className="icone" src="img/icone-favoris.png" alt="icone-adresses-envois" />
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/historique" style={{ borderBottom: isActive === 2 ? "1px solid #140A82" : "0px solid #140A82" }}>
+                                            <img className="icone" src="img/icone-tableau.png" alt="icone-historique-envois" />
+                                        </Link>
+                                    </li>
+                                    <li id="logout">
+                                        <Link to="/logout">
+                                            <img className="icone" src="img/icone-logout.png" alt="icone-deconnexion" />
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            : null
+                    }
                 </nav>
                 <Routes>
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/home" element={<Home onPageLanding={handlePageActive} />} />
                     <Route path="/" element={<Connexion />} />
-                    <Route path="/historique" element={<Historique />} />
+                    <Route path="/historique" element={<Historique onPageLanding={handlePageActive} />} />
                     <Route path="/logout" element={<Logout />} />
-                    <Route path="/nouvel-envoi" element={<NouvelEnvoi />} />
+                    <Route path="/nouvel-envoi" element={<NouvelEnvoi onPageLanding={handlePageActive} />} />
                 </Routes>
             </BrowserRouter>
         </>

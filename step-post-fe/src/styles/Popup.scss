@@ -13,8 +13,8 @@ $orange: #FF5E1A;
 }
 
 .popup {
-    width: 25vw;
-    height: 27vh;
+    width: 450px;
+    height: 250px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -26,8 +26,12 @@ $orange: #FF5E1A;
     z-index: 10000;
     background-color: white;
     border: 1px solid #646464;
-    border-radius: 20px;
+    border-radius: 5px;
 
+    > div:nth-child(2) {
+        padding: 1vh 1vw;
+        border: 1px solid $blue;
+    }
     >.popup-buttons {
         width: 50%;
         display: flex;
@@ -39,14 +43,17 @@ $orange: #FF5E1A;
             border-radius: 5px;
             font-weight: bold;
             color: white;
+            &:hover {
+                cursor: pointer;
+            }
         }
 
         >button:nth-child(1) {
-            background-color: $blue;
+            background-color: $orange;
         }
 
         >button:nth-child(2) {
-            background-color: $orange;
+            background-color: $blue;
         }
     }
 }

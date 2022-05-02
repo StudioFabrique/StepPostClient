@@ -18,6 +18,7 @@ class Home extends Component {
 
   async componentDidMount() {
     this.handleResetList();
+    this.props.onPageLanding(0);
   }
 
   async handleClick(p, operator) {

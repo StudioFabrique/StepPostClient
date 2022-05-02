@@ -7,43 +7,13 @@ use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Services\Service as Service;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-
-
-
-    #[Route('/', name: 'app_main')]
-    public function index(CourrierRepository $courrierRepository, StatutCourrierRepository $statutCourrierRepository): Response
-    {
-        $courriers = $courrierRepository->findBy([], ['nom' => 'DESC']);
-        $data = array();
-
-        foreach ($courriers as $courrier) :
-            $statuts = $statutCourrierRepository->findBy(
-                ['courrier' => $courrier->getId()],
-                ['date' => 'ASC']
-            );
-            array_push($data, $statuts[0]);
-        endforeach;
-
-        usort($data, function ($a, $b) {
-            return $b->getDate() <=> $a->getDate();
-        });
-
-        foreach ($data as $key => $val) :
-            echo "clé : " . $key . " val : " . $val->getCourrier()->getId() . "\n";
-        endforeach;
-        return $this->json(['courriers' => 'toto']);
-    }
-
-
 
     /**
      * retourne false qd la recherche par bordereau n'a rien trouvé,

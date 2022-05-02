@@ -21,6 +21,10 @@ function Destinataire(props) {
         }
     }
 
+    const handleNewBordereau = () => {
+        props.onNewBordereau(adresse.id);
+    }
+
     return (
         <>
             <article className="adresse" id="adresse.id">
@@ -37,7 +41,7 @@ function Destinataire(props) {
                 </div>
                 <ul>
                     <li key={Date.now()} id="adresse.id">
-                        <a href="#"><img src="img/icone-poste.png" alt="envoyer" /></a>
+                        <img src="img/icone-poste.png" alt="envoyer" onClick={handleNewBordereau} />
                     </li>
                     <li key={Date.now() + 1} id="adresse.id">
                         <a href="#"><img src="img/icone-edit.png" alt="editer" /></a>

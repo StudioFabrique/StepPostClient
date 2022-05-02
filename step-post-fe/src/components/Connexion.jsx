@@ -1,9 +1,11 @@
 import ConnexionForm from "./ConnexionForm";
 
-function Connexion() {
+function Connexion({onIsLogged}) {
 
     const handleConnexion = (result) => {
-        window.location.href = "/home";
+        if (result) {
+            window.location.href = "/home";
+        }
     }
 
     return (

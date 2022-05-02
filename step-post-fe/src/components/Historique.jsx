@@ -24,6 +24,7 @@ class Historique extends Component {
 
     async componentDidMount() {
         this.handleResetList();
+        this.props.onPageLanding(2);
     }
 
     async handleClick(p, operator) {

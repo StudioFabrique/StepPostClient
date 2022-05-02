@@ -10,8 +10,8 @@
 }
 
 .popup {
-  width: 25vw;
-  height: 27vh;
+  width: 450px;
+  height: 250px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -32,7 +32,12 @@
   z-index: 10000;
   background-color: white;
   border: 1px solid #646464;
-  border-radius: 20px;
+  border-radius: 5px;
+}
+
+.popup > div:nth-child(2) {
+  padding: 1vh 1vw;
+  border: 1px solid #140A82;
 }
 
 .popup > .popup-buttons {
@@ -53,11 +58,15 @@
   color: white;
 }
 
+.popup > .popup-buttons > button:hover {
+  cursor: pointer;
+}
+
 .popup > .popup-buttons > button:nth-child(1) {
-  background-color: #140A82;
+  background-color: #FF5E1A;
 }
 
 .popup > .popup-buttons > button:nth-child(2) {
-  background-color: #FF5E1A;
+  background-color: #140A82;
 }
 /*# sourceMappingURL=Popup.css.map */
