@@ -21,7 +21,7 @@ faire les migrations :
 - symfony console make:migration
 - symfony console doctrine:migrations:migrate
 
-enregistrer des données fictive dans la base de données :
+enregistrer des données fictives dans la base de données :
 - symfony console doctrine:fixtures:load
 - (si ça ne fonctionne pas, installer le bundle fixtures) :
 - composer require orm-fixtures
