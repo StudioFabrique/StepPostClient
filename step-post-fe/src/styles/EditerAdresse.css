@@ -1,0 +1,129 @@
+.obligatoire {
+  color: red;
+}
+
+main > article {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+main > article .form-edition {
+  width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  row-gap: 2vh;
+  padding: 2vw;
+  border: 1px solid #646464;
+  border-radius: 5px;
+}
+
+main > article .form-edition > div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+main > article .form-edition > div > label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+}
+
+main > article .form-edition > div > label > input,
+main > article .form-edition > div > label > textarea,
+main > article .form-edition > div > label > select {
+  padding: 1vw;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 4px #646464;
+          box-shadow: 4px 4px 4px #646464;
+}
+
+main > article .form-edition > div > label > textarea {
+  width: 100%;
+}
+
+main > article .form-edition > div > label > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main > article .form-edition > div:first-child {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main > article .form-edition > div:first-child > p {
+  font-size: .75rem;
+}
+
+main > article .form-edition > div:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+main > article .form-edition > div:last-child > .button {
+  padding: 1vw;
+}
+
+main > article > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  row-gap: 2vh;
+}
+
+main > article > div > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main > article > div > div > .button {
+  display: block;
+  padding: 1vw;
+}
+/*# sourceMappingURL=EditerAdresse.css.map */

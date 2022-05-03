@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { testField } from "../modules/chjeckForm";
+import { testField } from "../modules/checkForm";
 import { getToken } from "../modules/postData";
 import '../styles/ConnexionForm.css';
 import { regexMail, regexPassword } from '../modules/data.js';
@@ -15,7 +15,7 @@ function ConnexionForm({ message, onFormSubmit }) {
         let testPassword = testField(regexPassword, password);
 
         if (testMail && testPassword) {
-            const response = await getToken('http://127.0.0.1:8000/api/login_check', [email, password]);
+            const response = await getToken([email, password]);
             console.log('response', response);
             if (response.code === 401) {
                 onFormSubmit(false);

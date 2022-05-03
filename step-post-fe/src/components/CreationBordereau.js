@@ -8,7 +8,7 @@ class CreationBordereau extends Component {
     render() { 
         return (
             <>
-                <h2>Coucou bordereau !</h2>
+                <h2>Creation Bordereau pour {this.props.id} !</h2>
             </>
         );
     }

@@ -8,11 +8,12 @@ import NoResults from './NoResults';
 import Logs from './Logs';
 import '../styles/Historique.css';
 import { resetSortArray } from '../modules/sortArray.js';
+import { baseUrl } from '../modules/data.js';
 
 class Historique extends Component {
     constructor(props) {
         super(props);
-        this.state = { noResults: false, rechercheNom: false, statuts: [], baseUrl: "http://127.0.0.1:8000/api/client/", page: 0, isRechercheActive: false, rechercheValue: [] };
+        this.state = { noResults: false, rechercheNom: false, statuts: [], page: 0, isRechercheActive: false, rechercheValue: [] };
         this.max = 10;
         this.nom = "";
         this.tmpName = '';
@@ -29,7 +30,7 @@ class Historique extends Component {
 
     async handleClick(p, operator) {
         const datas = [p, this.max, this.nom, this.filtre, this.sort, this.direction[this.sort]];
-        const response = await postData(`${this.state.baseUrl}getLogs`, datas);
+        const response = await postData(`/getLogs`, datas);
         if (operator === 'minus') {
             this.setState({ statuts: response.statuts, page: this.state.page - 1 });
         } else {
@@ -41,12 +42,12 @@ class Historique extends Component {
         if (this.state.isRechercheActive) {
             this.setState({ isRechercheActive: false });
         }
-        const response = await postData(`${this.state.baseUrl}searchCourrier`, [msg]);
+        const response = await postData(`/searchCourrier`, [msg]);
         if (response.statuts) {
             this.setState({ isRechercheActive: true, rechercheValue: response });
         } else if (response.statuts === false) {
             this.nom = msg;
-            const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.filtre, 0, false]);
+            const response = await postData(`/getLogs`, [0, this.max, this.nom, this.filtre, 0, false]);
             if (response.statuts !== false) {
                 this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
                 this.nom = response.statuts[0].nom;
@@ -63,7 +64,7 @@ class Historique extends Component {
     handleSort = async (sort) => {
         this.direction[sort] = !this.direction[sort];
         this.sort = sort;
-        const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, this.filtre, this.sort, this.direction[this.sort]]);
+        const response = await postData(`/getLogs`, [0, this.max, this.nom, this.filtre, this.sort, this.direction[this.sort]]);
         this.setState({ statuts: response.statuts, page: 0 });
     }
 
@@ -78,7 +79,7 @@ class Historique extends Component {
         this.direction = resetSortArray();
         this.sort = 0;
         const datas = [0, this.max, "", this.filtre, this.sort, this.direction[this.sort]];
-        const response = await postData(`${this.state.baseUrl}getLogs`, datas);
+        const response = await postData(`/getLogs`, datas);
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
         this.nom = "";
     }
@@ -116,7 +117,7 @@ class Historique extends Component {
                                     this.state.statuts.map((courrier) => {
                                         return (
                                             <>
-                                                <Logs courrier={courrier} baseUrl={this.state.baseUrl} onRowClick={this.handleRecherche} />
+                                                <Logs courrier={courrier} onRowClick={this.handleRecherche} />
                                             </>
                                         )
                                     })

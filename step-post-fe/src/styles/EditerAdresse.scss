@@ -1,0 +1,82 @@
+
+.obligatoire {
+    color: red;
+}
+main {
+    >article {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        .form-edition {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 2vh;
+            padding: 2vw;
+            border: 1px solid #646464;
+            border-radius: 5px;
+        
+            >div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+        
+                >label {
+                    display: flex;
+                    flex-direction: column;
+                    column-gap: .5vw;
+        
+                    >input,
+                    >textarea,
+                    >select {
+                        padding: 1vw;
+                        border-radius: 5px;
+                        box-shadow: 4px 4px 4px #646464;
+                    }
+        
+                    >textarea {
+                        width: 100%;
+                    }
+        
+                    >div {
+                        display: flex;
+                    }
+                }
+            }
+        
+            >div:first-child {
+                align-items: center;
+                >p {
+                    font-size: .75rem;
+                }
+            }
+        
+            >div:last-child {
+                display: flex;
+                justify-content: flex-end;
+        
+                >.button {
+                    padding: 1vw;
+                }
+            }
+        
+        }
+        > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            row-gap: 2vh;
+            >div {
+                display: flex;
+                justify-content: center;
+                > .button {
+                    display: block;
+                    padding: 1vw;
+                }
+            }
+        }
+    }
+}

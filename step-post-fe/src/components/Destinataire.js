@@ -14,7 +14,7 @@ function Destinataire(props) {
     }
 
     const handleConfirm = async id => {
-        const response = await postData(`${props.baseUrl}deleteAdresse`, [id]);
+        const response = await postData(`/deleteAdresse`, [id]);
         if (response.result) {
             updatePopupIsActive(false);
             props.onDelete();
@@ -25,9 +25,13 @@ function Destinataire(props) {
         props.onNewBordereau(adresse.id);
     }
 
+    const handleClickIcone = (newId, section) => {
+        props.onClickIcone(newId, section);
+    }
+
     return (
         <>
-            <article className="adresse" id="adresse.id">
+            <article className="adresse" id="{adresse.id}">
                 <div>
                     <span>
                         {
@@ -41,10 +45,10 @@ function Destinataire(props) {
                 </div>
                 <ul>
                     <li key={Date.now()} id="adresse.id">
-                        <img src="img/icone-poste.png" alt="envoyer" onClick={handleNewBordereau} />
+                        <img src="img/icone-poste.png" alt="envoyer" onClick={() => handleClickIcone(adresse, 1)} />
                     </li>
                     <li key={Date.now() + 1} id="adresse.id">
-                        <a href="#"><img src="img/icone-edit.png" alt="editer" /></a>
+                        <img src="img/icone-edit.png" alt="editer" onClick={() => handleClickIcone(adresse, 2)} />
                     </li>
                     <li key={Date.now() + 2} id="adresse.id">
                         <img src="img/icone-delete.png" alt="supprimer" onClick={() => updatePopupIsActive(true)} />

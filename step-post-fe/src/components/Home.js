@@ -10,7 +10,7 @@ import NoResults from './NoResults';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { noResults: false, rechercheNom: false, statuts: [], baseUrl: "http://127.0.0.1:8000/api/client/", page: 0, isRechercheActive: false, rechercheValue: [] };
+    this.state = { noResults: false, rechercheNom: false, statuts: [], page: 0, isRechercheActive: false, rechercheValue: [] };
     this.max = 3;
     this.nom = "";
     this.tmpName = '';
@@ -23,7 +23,7 @@ class Home extends Component {
 
   async handleClick(p, operator) {
     const datas = [p, this.max, this.nom, false];
-    const response = await postData(`${this.state.baseUrl}getLogs`, datas);
+    const response = await postData(`/getLogs`, datas);
     if (operator === 'minus') {
       this.setState({ statuts: response.statuts, page: this.state.page - 1 });
     } else {
@@ -32,12 +32,12 @@ class Home extends Component {
   }
 
   handleRecherche = async msg => {
-    const response = await postData(`${this.state.baseUrl}searchCourrier`, [msg]);
+    const response = await postData(`/searchCourrier`, [msg]);
     if (response.statuts !== false && response.statuts !== true) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
-      const response = await postData(`${this.state.baseUrl}getLogs`, [0, this.max, this.nom, false]);
+      const response = await postData(`/getLogs`, [0, this.max, this.nom, false]);
       if (response.statuts !== false) {
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
         this.nom = response.statuts[0].nom;
@@ -58,7 +58,7 @@ class Home extends Component {
      * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
      */
     const datas = [0, this.max, "", false];
-    const response = await postData(`${this.state.baseUrl}getLogs`, datas);
+    const response = await postData(`/getLogs`, datas);
     this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
     this.nom = "";
     console.log('longueur', this.state.statuts);
@@ -82,7 +82,7 @@ class Home extends Component {
           {
             this.state.noResults ? <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} /> : null
           }
-          <ListeCourriers statuts={this.state.statuts} baseUrl={this.state.baseUrl} />
+          <ListeCourriers statuts={this.state.statuts} />
           <div>
             <button onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
             <p>{this.state.page + 1}</p>

@@ -19,7 +19,7 @@ class MainController extends AbstractController
      * retourne false qd la recherche par bordereau n'a rien trouvé,
      * sinon retourne les infos sur le courrier recherché
      */
-    #[Route('/api/client/searchCourrier', name: 'app_searchCourrier')]
+    #[Route('/api/client/searchCourrier', name: 'api_searchCourrier')]
     public function searchCourrier(
         CourrierRepository $courrierRepository,
         StatutCourrierRepository $statutCourrierRepository,
@@ -47,7 +47,7 @@ class MainController extends AbstractController
         }
     }
 
-    #[Route('/api/client/detailsCourrier', name: 'app_detailsCourrier')]
+    #[Route('/api/client/detailsCourrier', name: 'api_detailsCourrier')]
     public function detailsCourrier(
         StatutCourrierRepository $statutCourrierRepository,
         CourrierRepository $courrierRepository,
@@ -63,7 +63,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/api/client/adressesFavorites', name: 'app_adressesFavorites')]
+    #[Route('/api/client/adressesFavorites', name: 'api_adressesFavorites')]
     public function adressesFavorites(
         DestinatairesRepository $destinatairesRepository,
         ExpediteurRepository $expediteurRepository,
@@ -105,7 +105,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/api/client/getLogs', name: 'app_getLogs')]
+    #[Route('/api/client/getLogs', name: 'api_getLogs')]
     public function getLogs(
         ExpediteurRepository $expediteurRepository,
         CourrierRepository $courrierRepository,
@@ -176,7 +176,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/api/client/deleteAdresse', name: 'app_deleteAdresse')]
+    #[Route('/api/client/deleteAdresse', name: 'api_deleteAdresse')]
     public function deleteAdresse(
         Service $service,
         DestinatairesRepository $destinatairesRepository,
@@ -191,5 +191,33 @@ class MainController extends AbstractController
         $manager->flush();
 
         return $this->json(['result' => true]);
+    }
+
+    #[Route('/api/client/editAdresse', name: 'api_editAdresse')]
+    public function editAdresse(
+        DestinatairesRepository $destinatairesRepository,
+        ManagerRegistry $doctrine,
+        Service $service,
+        ) : Response
+    {
+        $data = $service->stripTag();
+
+        $dest = $destinatairesRepository->findOneBy(['id' => $data[0]]);
+
+        $dest->setCivilite($data[1]);
+        $dest->setNom($data[2]);
+        $dest->setPrenom($data[3]);
+        $dest->setAdresse($data[4]);
+        $dest->setComplement($data[5]);
+        $dest->setCodePostal($data[6]);
+        $dest->setVille($data[7]);
+        $dest->setTelephone($data[8]);
+        $dest->setEmail($data[9]);
+
+        $manager = $doctrine->getManager();
+        $manager->persist($dest);
+        $manager->flush(); 
+
+        return $this->json(['result' => $data]);
     }
 }

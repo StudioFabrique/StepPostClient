@@ -1,0 +1,9 @@
+const port = 8003;
+const url = `http://127.0.0.1`;
+
+
+const baseUrl = `${url}:${port}/api/client`;
+
+const logUrl = `${url}:${port}/api/login_check`;
+
+export { baseUrl, logUrl };

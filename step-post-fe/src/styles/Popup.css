@@ -10,8 +10,7 @@
 }
 
 .popup {
-  width: 450px;
-  height: 250px;
+  padding: 2vw;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -24,8 +23,10 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  row-gap: 2vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -37,7 +38,6 @@
 
 .popup > div:nth-child(2) {
   padding: 1vh 1vw;
-  border: 1px solid #140A82;
 }
 
 .popup > .popup-buttons {
@@ -45,9 +45,11 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
 }
 
 .popup > .popup-buttons > button {

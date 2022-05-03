@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { testField } from "../modules/chjeckForm";
+import { testField } from "../modules/checkForm";
 import { regexName, regexNumbers } from "../modules/data";
-import { postData } from "../modules/postData";
 import '../styles/Recherche.css';
 
 function Recherche({ onRecherche }) {
@@ -18,7 +17,7 @@ function Recherche({ onRecherche }) {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form className="form-recherche" onSubmit={handleSubmit}>
                 <input type="text" id="searchInput" onChange={(e) => setValue(e.target.value)} />
                 <img src="img/icone-loupe.png" alt="icone loupe" />
             </form>

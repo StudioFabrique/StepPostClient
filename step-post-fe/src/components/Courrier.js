@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatDate, setEtatMessage, toTitleCase } from "../modules/formatter";
 import { postData } from "../modules/postData";
 import '../styles/Courrier.css';
 import DetailsCourrier from "./DetailsCourrier";
 
 function Courrier({statut, baseUrl, onCourrierClick}) {
-    const [isClicked, setIsClicked] = useState(false);
     const [detailsCourrier, setDetailsCourrier] = useState([]);
     const [destinataire, setDestinataire] = useState([]);
 
     async function handleClick() {
-            const response = await postData(`${baseUrl}detailsCourrier`, [statut.id]);
+            const response = await postData(`/detailsCourrier`, [statut.id]);
             setDetailsCourrier(response.courrier);
             setDestinataire(response.destinataire);
             onCourrierClick(statut.id);

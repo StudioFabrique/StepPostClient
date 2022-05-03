@@ -1,3 +1,5 @@
+import { baseUrl, logUrl } from "./data";
+
 export async function postData(url, data) {
     const token = sessionStorage.getItem('token');
     const fd = new FormData();
@@ -5,7 +7,7 @@ export async function postData(url, data) {
 
     fd.append('data', JSON.stringify(data));
     try {
-        response = await (await fetch(url, {
+        response = await (await fetch(`${baseUrl}${url}`, {
             method: 'POST',
             body: fd,
             headers: {
@@ -21,8 +23,16 @@ export async function postData(url, data) {
     }
 }
 
-export async function getToken(url, data) {
-    return await (await fetch(url, {
+export async function getData(url) {
+    return await (await fetch(`${baseUrl}${url}`, {
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        }
+    })).json();
+}
+
+export async function getToken(data) {
+    return await (await fetch(logUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 'username': data[0], 'password': data[1] })

@@ -6,7 +6,7 @@
           box-shadow: 4px 4px 4px #646464;
 }
 
-form {
+.form-recherche {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
