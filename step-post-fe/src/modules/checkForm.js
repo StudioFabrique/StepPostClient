@@ -1,4 +1,4 @@
-import { regexMail, regexName, regexNumbers } from "./data";
+import { regexAddress, regexMail, regexName, regexNumbers } from "./data";
 
 export function testField(reg, value) {
     if (reg.test(value)) {
@@ -8,14 +8,25 @@ export function testField(reg, value) {
     }
 }
 
-export function testStr(string) {
-    return testField(regexName, string);
-}
+export function testFormAdress(data) {
+    let result = false;
+    if (data.civilite) {
+        result = testField(regexName, data.civilite);
+    }
+    result = testField(regexName, data.prenom);
+    result = testField(regexName, data.ville);
+    result = testField(regexName, data.nom);
+    result = testField(regexNumbers, data.codePostal);
+    result = testField(regexAddress, data.adresse);
+    if (data.complement) {
+        result = testField(regexAddress, data.complement);
+    }
+    if (data.telephone) {
+        result = testField(regexAddress, data.telephone);
+    }
+    if (data.email) {
+        result = testField(regexMail, data.email);
+    }
 
-export function testNbr(nbr) {
-    return testField(regexNumbers, nbr);
-}
-
-export function testMail(mail) {
-    return testMail(regexMail, mail);
+    return result;
 }

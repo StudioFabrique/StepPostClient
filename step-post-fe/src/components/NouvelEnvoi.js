@@ -33,11 +33,13 @@ class NouvelEnvoi extends Component {
     handleAjouterAdresse = async adresse => {
         const response = await postData('/addAdresse', adresse);
         console.log('response', response);
+        this.setState({section: 0});
     }
 
     handleEditerAdresse = async adresse => {
         console.log('confirm', adresse);
         const response = await postData('/editAdresse', adresse);
+        this.setState({section: 0});
     }
 
     render() {

@@ -3,6 +3,7 @@ import { postData } from '../modules/postData';
 import PopupEdition from './PopupEdition';
 import '../styles/AdresseForm.css';
 import { toTitleCase } from '../modules/formatter';
+import { testFormAdress } from '../modules/checkForm';
 
 class AdresseForm extends Component {
     constructor(props) {
@@ -19,7 +20,8 @@ class AdresseForm extends Component {
             email: '',
             id:'',
             items: [],
-            isSubmitted: false
+            isSubmitted: false,
+            erreur: false,
         }
         this.dest = this.props.id;
         this.onAjouterAdresse = this.props.onAjouterAdresse;
@@ -64,9 +66,13 @@ class AdresseForm extends Component {
                 email: this.state.email,
                 id: this.state.id,
             },
-            isSubmitted: true
         });
         console.log("items", this.state.items);
+        if (testFormAdress(this.state.items)) {
+            this.setState({isSubmitted: true, erreur: false});
+        } else {
+            this.setState({erreur: true});
+        }
     }
 
     handleCancel = () => {
@@ -113,7 +119,9 @@ class AdresseForm extends Component {
                         </div>
                         <div>
                             <label><div><p>Adresse</p><p className="obligatoire">*</p></div>
+                            <div style={{width: "100%"}}>
                                 <textarea rows="2" value={toTitleCase(this.state.adresse)} name="adresse" onChange={this.handleChange} />
+                                </div>
                             </label>
                         </div>
                         <div>
@@ -137,6 +145,12 @@ class AdresseForm extends Component {
                                 <input type="text" value={this.state.email} name="email" onChange={this.handleChange} />
                             </label>
                         </div>
+                        {
+                            this.state.erreur &&
+                            <div className='msg-form-erreur'>
+                                <p>Un des champs est mal rempli !</p>
+                            </div>
+                        }
                         <div>
                             <input className="button" type="submit" value="Envoyer" />
                         </div>
