@@ -9,6 +9,7 @@ export function testField(reg, value) {
 }
 
 export function testFormAdress(data) {
+    console.log("items", data);
     let result = false;
     if (data.civilite) {
         result = testField(regexName, data.civilite);
@@ -27,6 +28,6 @@ export function testFormAdress(data) {
     if (data.email) {
         result = testField(regexMail, data.email);
     }
-
+    console.log('test', result);
     return result;
 }

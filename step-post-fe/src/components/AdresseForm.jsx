@@ -18,7 +18,7 @@ class AdresseForm extends Component {
             ville: '',
             telephone: '',
             email: '',
-            id:'',
+            id: '',
             items: [],
             isSubmitted: false,
             erreur: false,
@@ -28,21 +28,24 @@ class AdresseForm extends Component {
     }
 
     componentDidMount = () => {
-        console.log('dest', this.dest);
         if (this.dest) {
-            this.setState({
-                civilite: this.dest.civilite,
-                nom: this.dest.nom,
-                prenom: this.dest.prenom,
-                adresse: this.dest.adresse,
-                complement: this.dest.complement,
-                codePostal: this.dest.codePostal,
-                ville: this.dest.ville,
-                telephone: this.dest.telephone,
-                email: this.dest.email,
-                id: this.dest.id,
-            });
+            this.resetAdresse();
         }
+    }
+
+    resetAdresse = () => {
+        this.setState({
+            civilite: this.dest.civilite,
+            nom: this.dest.nom,
+            prenom: this.dest.prenom,
+            adresse: this.dest.adresse,
+            complement: this.dest.complement,
+            codePostal: this.dest.codePostal,
+            ville: this.dest.ville,
+            telephone: this.dest.telephone,
+            email: this.dest.email,
+            id: this.dest.id,
+        });
     }
 
     handleChange = (event) => {
@@ -53,29 +56,34 @@ class AdresseForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState({
-            items: {
-                civilite: this.state.civilite,
-                nom: this.state.nom,
-                prenom: this.state.prenom,
-                adresse: this.state.adresse,
-                complement: this.state.complement,
-                codePostal: this.state.codePostal,
-                ville: this.state.ville,
-                telephone: this.state.telephone,
-                email: this.state.email,
-                id: this.state.id,
-            },
-        });
-        console.log("items", this.state.items);
-        if (testFormAdress(this.state.items)) {
-            this.setState({isSubmitted: true, erreur: false});
+        const items = [{
+            civilite: this.state.civilite,
+            nom: this.state.nom,
+            prenom: this.state.prenom,
+            adresse: this.state.adresse,
+            complement: this.state.complement,
+            codePostal: this.state.codePostal,
+            ville: this.state.ville,
+            telephone: this.state.telephone,
+            email: this.state.email,
+            id: this.state.id,
+        }];
+        if (testFormAdress(items[0])) {
+            if (this.dest) {
+                console.log('dest', this.dest);
+                console.log('items', items[0]);
+                console.log('is same ', (JSON.parse(this.dest) === JSON.parse(items[0]))); 
+            }
+            this.setState({ items: items[0], isSubmitted: true, erreur: false });
         } else {
-            this.setState({erreur: true});
+            this.setState({ erreur: true });
         }
     }
 
     handleCancel = () => {
+        if (this.dest) {
+            this.resetAdresse();
+        }
         this.setState({ isSubmitted: false });
     }
 
@@ -92,16 +100,16 @@ class AdresseForm extends Component {
         return (
             <>
                 <article className='article-form-adresse'>
-                <div>
-                    <h3>Retour à la liste d'adresses</h3>
                     <div>
-                        <button className="button" onClick={() => this.props.onRetour()}>Retour</button>
+                        <h3>Retour à la liste d'adresses</h3>
+                        <div>
+                            <button className="button" onClick={() => this.props.onRetour()}>Retour</button>
+                        </div>
                     </div>
-                </div>
                     <form className="form-edition" onSubmit={this.handleSubmit}>
                         <div>
                             <label>Civilité
-                                <select value={this.state.civilite} onChange={this.handleChange} name="civilite">
+                                <select value={this.state.civilite} name="civilite" onChange={this.handleChange}>
                                     <option value="">----</option>
                                     <option value="mr">Mr</option>
                                     <option value="mme">Mme</option>
@@ -119,9 +127,7 @@ class AdresseForm extends Component {
                         </div>
                         <div>
                             <label><div><p>Adresse</p><p className="obligatoire">*</p></div>
-                            <div style={{width: "100%"}}>
                                 <textarea rows="2" value={toTitleCase(this.state.adresse)} name="adresse" onChange={this.handleChange} />
-                                </div>
                             </label>
                         </div>
                         <div>

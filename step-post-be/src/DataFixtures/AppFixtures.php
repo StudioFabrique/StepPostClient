@@ -135,7 +135,7 @@ class AppFixtures extends Fixture
                 'prenom' => 'lou',
                 'nom' => 'reed',
                 'email' => 'vu@yahoo.fr',
-                'adresse' => '278 bvd Olga d\'ukraine',
+                'adresse' => '278 bvd Olga ducresnes',
                 'codePostal' => 64000,
                 'ville' => 'pau',
                 'telephone' => '07851234',
