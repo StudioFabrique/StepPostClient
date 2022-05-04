@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { testStr } from "../modules/checkForm";
 import { postData } from "../modules/postData";
-import '../styles/EditerAdresse.css';
+import '../styles/AdresseForm.css';
 import PopupEdition from "./PopupEdition";
 
 function EditerAdresse(props) {
@@ -9,7 +9,7 @@ function EditerAdresse(props) {
     const dest = props.id;
     const [isSubmitted, updateSubmitted] = useState(false);
     const [civilite, updateCivilite] = useState('');
-    const [nom, updateNom] = useState();
+    const [nom, updateNom] = useState('');
     const [prenom, updatePrenom] = useState('');
     const [adresse, updateAdresse] = useState('');
     const [complement, updateComplement] = useState('');
@@ -18,6 +18,7 @@ function EditerAdresse(props) {
     const [email, updateEmail] = useState('');
     const [telephone, updateTelephone] = useState('');
     const [testForm, updateTestForm] = useState(false);
+
 
     useEffect(() => { init() }, [props]);
 
@@ -62,10 +63,16 @@ function EditerAdresse(props) {
 
     return (
         <>
-            <article>
+            <article className="article-form-adresse">
+                <div>
+                    <h3>Retour à la liste d'adresses</h3>
+                    <div>
+                        <button className="button" onClick={() => props.onRetour()}>Retour</button>
+                    </div>
+                </div>
                 <form className="form-edition" onSubmit={handleSubmit}>
                     <div>
-                        <label>Civilité
+                        <label>Civilitégr
                             <select onChange={(e) => updateCivilite(e.target.value)}>
                                 <option value="">----</option>
                                 <option value="mr">Mr</option>
@@ -76,7 +83,7 @@ function EditerAdresse(props) {
                     </div>
                     <div>
                         <label><div><p>Prénom / Service</p><p className="obligatoire">*</p></div>
-                            <input type="text" value={prenom} onChange={(e) => updatePrenom(e.target.value)} style={{ border: testStr(prenom) ? "1px green solid" : "1px red soldid" }} />
+                            <input type="text" value={prenom} onChange={(e) => updatePrenom(e.target.value)} />
                         </label>
                         <label><div><p>Nom / Entreprise</p><p className="obligatoire">*</p></div>
                             <input type="text" value={nom} onChange={(e) => updateNom(e.target.value)} />
@@ -84,7 +91,7 @@ function EditerAdresse(props) {
                     </div>
                     <div>
                         <label><div><p>Adresse</p><p className="obligatoire">*</p></div>
-                            <textarea cols="35" rows="3" value={adresse} onChange={(e) => updateAdresse(e.target.value)} ></textarea>
+                            <textarea rows="3" value={adresse} onChange={(e) => updateAdresse(e.target.value)} ></textarea>
                         </label>
                     </div>
                     <div>
@@ -104,17 +111,11 @@ function EditerAdresse(props) {
                         </label>
                     </div>
                     <div>
-                        <button className="button" type="submit">Mettre à jour</button>
+                        <input className="button" type="submit" value="Mettre à jour"  />
                     </div>
                 </form>
-                <div>
-                    <h3>Retour à la liste d'adresses</h3>
-                    <div>
-                        <button className="button" onClick={() => props.onRetour()}>Retour</button>
-                    </div>
-                </div>
                 {
-                    isSubmitted ? <PopupEdition onCancelClick={handleCancel} onConfirmClick={handleConfirm} /> : null
+                    isSubmitted && <PopupEdition onCancelClick={handleCancel} onConfirmClick={handleConfirm} />
                 }
             </article>
         </>

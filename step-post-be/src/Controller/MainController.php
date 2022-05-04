@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Destinataires;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
@@ -202,22 +203,53 @@ class MainController extends AbstractController
     {
         $data = $service->stripTag();
 
-        $dest = $destinatairesRepository->findOneBy(['id' => $data[0]]);
+        $dest = $destinatairesRepository->findOneBy(['id' => end($data)]);
 
-        $dest->setCivilite($data[1]);
-        $dest->setNom($data[2]);
-        $dest->setPrenom($data[3]);
-        $dest->setAdresse($data[4]);
-        $dest->setComplement($data[5]);
-        $dest->setCodePostal($data[6]);
-        $dest->setVille($data[7]);
-        $dest->setTelephone($data[8]);
-        $dest->setEmail($data[9]);
+        $dest->setCivilite($data[0]);
+        $dest->setNom($data[1]);
+        $dest->setPrenom($data[2]);
+        $dest->setAdresse($data[3]);
+        $dest->setComplement($data[4]);
+        $dest->setCodePostal($data[5]);
+        $dest->setVille($data[6]);
+        $dest->setTelephone($data[7]);
+        $dest->setEmail($data[8]);
 
         $manager = $doctrine->getManager();
         $manager->persist($dest);
         $manager->flush(); 
 
         return $this->json(['result' => $data]);
+    }
+
+    #[Route('/api/client/addAdresse', name: 'api_addAdresse')]
+    public function addAdresse(
+        DestinatairesRepository $destinataires,
+        Service $service,
+        ManagerRegistry $doctrine,
+        ExpediteurRepository $expediteurRepository,
+        ) : Response
+    {
+        $data = $service->stripTag();
+
+        $exp = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+
+        $dest = new Destinataires();
+        $dest->setCivilite($data[0]);
+        $dest->setNom($data[1]);
+        $dest->setPrenom($data[2]);
+        $dest->setAdresse($data[3]);
+        $dest->setComplement($data[4]);
+        $dest->setCodePostal($data[5]);
+        $dest->setVille($data[6]);
+        $dest->setTelephone($data[7]);
+        $dest->setEmail($data[8]);
+        $dest->setExpediteur($exp);
+
+        $manager = $doctrine->getManager();
+        $manager->persist($dest);
+        $manager->flush();
+
+        return $this->json(['result' => true]);
     }
 }

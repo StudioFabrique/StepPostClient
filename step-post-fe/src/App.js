@@ -7,6 +7,11 @@ class App extends Component {
     this.state = {  }
     document.title = "Step Post";
   }
+
+  // handshake si pas bon, return Route Login sinon tu return ta page
+  // isLogged // isLoading
+   
+
   render() { 
     return (
       <>

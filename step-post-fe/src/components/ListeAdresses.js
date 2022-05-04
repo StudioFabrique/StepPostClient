@@ -4,6 +4,7 @@ import Recherche from './Recherche';
 import RechercheNom from './RechercheNom';
 import NoResults from './NoResults';
 import Destinataire from './Destinataire'
+import BoutonAjouter from './BoutonAjouter.jsx';
 
 class ListeAdresses extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ListeAdresses extends Component {
         this.nom = nom;
         const response = await postData(`/adressesFavorites`, [nom]);
         if (response.destinataires !== false) {
-            this.setState({ adresses: response.destinataires, rechercheNom: true });
+            this.setState({ adresses: response.destinataires, rechercheNom: true, noResults: false});
         } else {
             this.setState({ noResults: true });
         }
@@ -48,27 +49,36 @@ class ListeAdresses extends Component {
                     <Recherche onRecherche={this.handleRecherche} />
                 </section>
                 {
-                    this.state.rechercheNom ? <section className='section-recherche-nom'>
-                        <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} />
-                    </section> : null
+                    this.state.rechercheNom ?
+                        <section className='section-recherche-nom'>
+                            <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} />
+                            <span className="bouton-ajouter">
+                                <h4>Nouvelle adresse</h4>
+                                <button className='button' onClick={this.props.onNewAdress}>+</button>
+                            </span>
+                        </section> :
+                        <section className='section-recherche-nom'>
+                            <span className="bouton-ajouter">
+                                <h4>Nouvelle adresse</h4>
+                                <button className='button' onClick={this.props.onNewAdress}>+</button>
+                            </span>
+                        </section>
                 }
                 {
-                    this.state.noResults ? <section className='section-no-results'>
+                    this.state.noResults && <section className='section-no-results'>
                         <NoResults nom={this.nom} onRetourBtn={this.handleBtnRetour} />
-                    </section> : null
+                    </section>
                 }
                 <section className='section-adresses'>
                     {
-                        this.state.adresses.map((adresse) => {
+                        this.state.adresses.map((adresse, index) => {
                             return (
-                                <>
-                                    <Destinataire
-                                        key={adresse.id}
-                                        onDelete={this.handleRefreshAdresses}
-                                        adresse={adresse}
-                                        onClickIcone={this.handleClickIcone}
-                                    />
-                                </>
+                                <Destinataire
+                                    key={`${index}-${adresse.id}`}
+                                    onDelete={this.handleRefreshAdresses}
+                                    adresse={adresse}
+                                    onClickIcone={this.handleClickIcone}
+                                />
                             )
                         })
                     }

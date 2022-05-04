@@ -1,3 +1,17 @@
+.bouton-ajouter > button {
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: #FF5E1A;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+
+.bouton-ajouter > button:hover {
+  cursor: pointer;
+}
+
 .main-nouvel-envoi {
   width: 100vw;
   display: -webkit-box;
@@ -33,5 +47,14 @@
 
 .main-nouvel-envoi > .section-recherche-nom, .main-nouvel-envoi > .section-no-results {
   width: 60%;
+}
+
+.main-nouvel-envoi > .section-recherche-nom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=NouvelEnvoi.css.map */

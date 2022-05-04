@@ -1,0 +1,32 @@
+.bouton-ajouter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-column-gap: .75vw;
+          column-gap: .75vw;
+}
+
+.bouton-ajouter > h4 {
+  white-space: nowrap;
+}
+
+.bouton-ajouter > a > button {
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: #FF5E1A;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+
+.bouton-ajouter > a > button:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=BoutonAjouter.css.map */

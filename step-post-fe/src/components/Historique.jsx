@@ -114,11 +114,9 @@ class Historique extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.state.statuts.map((courrier) => {
+                                    this.state.statuts.map((courrier, index) => {
                                         return (
-                                            <>
-                                                <Logs courrier={courrier} onRowClick={this.handleRecherche} />
-                                            </>
+                                                <Logs key={index} courrier={courrier} onRowClick={this.handleRecherche} />
                                         )
                                     })
                                 }

@@ -1,0 +1,28 @@
+$orange: #FF5E1A;
+
+.bouton-ajouter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: .75vw;
+
+    >h4 {
+        white-space: nowrap;
+    }
+
+    >a {
+        >button {
+            width: 2.5vw;
+            height: 2.5vw;
+            background-color: $orange;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: white;
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

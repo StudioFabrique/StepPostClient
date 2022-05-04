@@ -1,7 +1,7 @@
 import Courrier from './Courrier.js'
 import '../styles/ListeCourriers.css'
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import BoutonAjouter from './BoutonAjouter.jsx';
 
 function ListeCourriers(props) {
     const [courriers, updateCourriers] = useState([]);
@@ -47,22 +47,15 @@ function ListeCourriers(props) {
             <section className='listecourriers-section'>
                 <div>
                     <h3>Statut de vos envois en cours</h3>
-                    <span>
-                        <h4>Nouvel envoi</h4>
-                        <Link to="/nouvel-envoi">
-                            <button>+</button>
-                        </Link>
-                    </span>
+                    <BoutonAjouter msg={'Nouvel envoi : '} url={'/nouvel-envoi'} /> 
                 </div>
                 <ul>
                     {
-                        courriers.map((statut) => {
+                        courriers.map((statut, index) => {
                             return (
-                                <>
-                                    <li key={statut.id}>
+                                    <li key={index}>
                                         <Courrier statut={statut} baseUrl={props.baseUrl} onCourrierClick={handleCourrierClick} />
                                     </li>
-                                </>
                             )
                         })
                     }

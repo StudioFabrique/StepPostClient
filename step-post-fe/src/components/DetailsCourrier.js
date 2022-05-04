@@ -10,7 +10,7 @@ function DetailsCourrier(props) {
     for (let i = 0; i < statuts.length; i++) {
         tab.push(
             <>
-                <div key={statuts[i].id} className="cercleContainer">
+                <div className="cercleContainer">
                     <div className='cercle' style={{ backgroundColor: (i === l - 1) ? '#24A640' : '#FF5E1A' }}></div>
                     <div className='statuts'>{statuts[i].etat}</div>
                     <div className='statuts-date'>{formatDate(statuts[i].date)} </div>

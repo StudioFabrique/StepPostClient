@@ -74,13 +74,13 @@ class Home extends Component {
         <main className='home-main'>
           <Recherche onRecherche={this.handleRecherche} />
           {
-            this.state.isRechercheActive ? <DetailsRecherche courrier={this.state.rechercheValue} onCloseRecherche={this.handleCloseRecherche} /> : null
+            this.state.isRechercheActive && <DetailsRecherche courrier={this.state.rechercheValue} onCloseRecherche={this.handleCloseRecherche} />
           }
           {
-            this.state.rechercheNom ? <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} /> : null
+            this.state.rechercheNom && <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} />
           }
           {
-            this.state.noResults ? <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} /> : null
+            this.state.noResults && <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
           }
           <ListeCourriers statuts={this.state.statuts} />
           <div>
