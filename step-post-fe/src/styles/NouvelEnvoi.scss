@@ -1,8 +1,9 @@
 $blue: #140A82;
 $orange: #FF5E1A;
 
-main {
+.main-nouvel-envoi {
     height: 100%;
+    transform: scale(.75);
 
     .section-bordereau-exp {
         width: 80%;
@@ -111,6 +112,7 @@ main {
         display: flex;
         background-color: lightgray;
         padding: 1vw;
+
         >.article-dest-left {
             width: 50%;
             height: 100%;
@@ -118,17 +120,20 @@ main {
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+
             >div:nth-child(1) {
                 >img {
                     height: 30vh;
                 }
             }
+
             >div:nth-child(2) {
                 width: 100%;
                 display: flex;
                 justify-content: flex-start;
             }
         }
+
         >.article-dest-right {
             width: 50%;
             display: flex;
@@ -138,24 +143,32 @@ main {
             >div:nth-child(1) {
                 width: 80%;
             }
+
             >div:nth-child(2) {
                 width: 80%;
                 color: black;
                 font-weight: bold;
+
                 >article {
                     display: flex;
                     flex-direction: column;
                     row-gap: .5vh;
+
                     >p:nth-child(5) {
                         font-size: .85rem;
                     }
                 }
             }
+
             >div:nth-child(3) {
                 width: 50%;
                 height: 35%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
                 border: 1px solid black;
                 background-color: white;
+
                 >p {
                     color: $blue;
                     font-size: .86rem;
@@ -164,4 +177,60 @@ main {
             }
         }
     }
+}
+
+@media print {
+
+    nav {
+        display: none;
+    }
+
+    .main-nouvel-envoi {
+        height: 100%;
+        transform: scale(1);
+
+        >.section-bordereau-exp {
+            padding: 1vw;
+            width: 100%;
+            height: 50%;
+            >.article-exp-left {
+                >div:nth-child(1) {
+                    >div {
+                        >label {
+                            font-size: .5rem;
+                        }
+                    }
+                    >p {
+                        font-size: .5rem;
+                    }                   
+                }
+
+                >div:nth-child(2) {
+                    >p {
+                        font-size: .5rem;
+                    }
+                }
+            }
+            >.article-exp-right {
+                >div {
+                    width: 100%;
+                    transform: scale(.75);
+                }
+            }
+        }
+
+        >.section-bordereau-dest {
+            padding: 1vw;
+            width: 100%;
+            height: 50%;
+
+            >.article-dest-right {
+                >div {
+                    width: 100%;
+                    transform: scale(.75);
+                }
+            }
+        }
+    }
+
 }

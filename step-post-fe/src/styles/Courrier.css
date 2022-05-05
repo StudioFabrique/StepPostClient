@@ -4,59 +4,32 @@
 
 .courrier {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   row-gap: 3vh;
   padding: 1vh;
   border-bottom: solid #646464 2px;
 }
-
 .courrier:hover {
   cursor: pointer;
   border: 1px solid darkgray;
   border-radius: 5px;
-  -webkit-box-shadow: 4px 4px 4px #646464;
-          box-shadow: 4px 4px 4px #646464;
+  box-shadow: 4px 4px 4px #646464;
 }
-
 .courrier > div {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 .courrier > div > span {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  align-items: center;
+  justify-content: flex-start;
 }
-
 .courrier > div:nth-child(3) {
   width: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  font-size: .75rem;
-}
-/*# sourceMappingURL=Courrier.css.map */
+  justify-content: space-between;
+  font-size: 0.75rem;
+}/*# sourceMappingURL=Courrier.css.map */

@@ -31,5 +31,34 @@ body {
         font-size: .75rem;
       }
     }
+
+    .listecourriers-section {
+      margin-top: 5vh;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 2vh;
+
+      >div:nth-child(1) {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+      }
+
+      >ul {
+        margin-top: 2vh;
+        display: flex;
+        flex-direction: column;
+        row-gap: 2vh;
+        width: 100%;
+        list-style-type: none;
+
+        >li {
+          width: 100%;
+        }
+      }
+    }
   }
 }
