@@ -1,42 +1,167 @@
 $blue: #140A82;
 $orange: #FF5E1A;
-.bouton-ajouter {
-    >button {
-        width: 2.5vw;
-        height: 2.5vw;
-        background-color: $orange;
-        border-radius: 50%;
-        font-size: 1.5rem;
-        color: white;
-        border: none;
 
-        &:hover {
-            cursor: pointer;
+main {
+    height: 100%;
+
+    .section-bordereau-exp {
+        width: 80%;
+        height: 60vh;
+        display: flex;
+        background-color: lightgray;
+        padding: 1vw;
+
+        >.article-exp-left {
+            height: 100%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            >div:nth-child(1) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 1vh;
+
+                >img {
+                    height: 8vh;
+                }
+
+                >p {
+                    font-style: italic;
+                    font-size: .85rem;
+                }
+
+                >div {
+                    display: flex;
+                    justify-content: center;
+                    column-gap: .5vw;
+                    align-items: center;
+                }
+            }
+
+            >div:nth-child(2) {
+                >p {
+                    font-size: .9rem;
+                }
+
+                >p:nth-child(odd) {
+                    font-weight: bold;
+                }
+
+                >p:last-child {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        >.article-exp-right {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            >div:nth-child(1) {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+
+                >h2 {
+                    font-weight: 800;
+                }
+
+                >p {
+                    font-style: italic;
+                    font-size: .85rem;
+                }
+            }
+
+            >div:nth-child(2) {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                row-gap: 3vh;
+
+                >span {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    ;
+                    width: 60%;
+                    font-weight: bold;
+                    color: black;
+
+                    >article {
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: .5vh;
+                    }
+                }
+            }
         }
     }
-}
-.main-nouvel-envoi {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 5vh;
 
-    >.section-adresses {
-        width: 60%;
+    >.section-bordereau-dest {
+        width: 80%;
+        height: 60vh;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        row-gap: 2vh;
-        column-gap: 1vw;
-    }
-    >.section-recherche-nom, >.section-no-results {
-        width: 60%;
-    }
-    >.section-recherche-nom {
-        display: flex;
-        justify-content: space-between;
-    }
+        background-color: lightgray;
+        padding: 1vw;
+        >.article-dest-left {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            >div:nth-child(1) {
+                >img {
+                    height: 30vh;
+                }
+            }
+            >div:nth-child(2) {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+            }
+        }
+        >.article-dest-right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
+            >div:nth-child(1) {
+                width: 80%;
+            }
+            >div:nth-child(2) {
+                width: 80%;
+                color: black;
+                font-weight: bold;
+                >article {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: .5vh;
+                    >p:nth-child(5) {
+                        font-size: .85rem;
+                    }
+                }
+            }
+            >div:nth-child(3) {
+                width: 50%;
+                height: 35%;
+                border: 1px solid black;
+                background-color: white;
+                >p {
+                    color: $blue;
+                    font-size: .86rem;
+                    font-style: italic;
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,42 @@
+$blue: #140A82;
+$orange: #FF5E1A;
+.bouton-ajouter {
+    >button {
+        width: 2.5vw;
+        height: 2.5vw;
+        background-color: $orange;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        color: white;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.main-nouvel-envoi {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 5vh;
+
+    >.section-adresses {
+        width: 60%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        row-gap: 2vh;
+        column-gap: 1vw;
+    }
+    >.section-recherche-nom, >.section-no-results {
+        width: 60%;
+    }
+    >.section-recherche-nom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}

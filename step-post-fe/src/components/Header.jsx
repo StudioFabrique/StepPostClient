@@ -3,10 +3,9 @@ import Home from "./Home";
 import Logout from "./Logout";
 import Connexion from "./Connexion";
 import '../styles/Header.css';
-import NouvelEnvoi from "./NouvelEnvoi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Historique from "./Historique";
-import AdresseForm from "./AdresseForm";
+import AdressesFavorites from "./AdressesFavorites";
 
 function Header() {
 
@@ -33,7 +32,7 @@ function Header() {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/nouvel-envoi" style={{ borderBottom: isActive === 1 ? "1px solid #140A82" : "0px solid #140A82" }}>
+                                        <Link to="/carnet-d-adresses" style={{ borderBottom: isActive === 1 ? "1px solid #140A82" : "0px solid #140A82" }}>
                                             <img className="icone" src="img/icone-favoris.png" alt="icone-adresses-envois" />
                                         </Link>
                                     </li>
@@ -57,7 +56,7 @@ function Header() {
                     <Route path="/" element={<Connexion />} />
                     <Route path="/historique" element={<Historique onPageLanding={handlePageActive} />} />
                     <Route path="/logout" element={<Logout />} />
-                    <Route path="/nouvel-envoi" element={<NouvelEnvoi onPageLanding={handlePageActive} />} />
+                    <Route path="/carnet-d-adresses" element={<AdressesFavorites onPageLanding={handlePageActive} />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -27,21 +27,24 @@ class AppFixtures extends Fixture
 
 
         $client = new Client();
-        $client->setRaisonSociale("fSociety");
+        $client->setRaisonSociale("Toto Company");
         $manager->persist($client);
 
-        $expediteurs = ["toto@toto.fr", "tata@toto.fr"];
-        $expediteur1 = null;
-        foreach ($expediteurs as $expediteur) :
-            $exp = new Expediteur();
-            $exp->setEmail($expediteur);
-            $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
-            $exp->setPassword($hash);
-            $exp->setNom("Dupont");
-            $exp->setClient($client);
-            $expediteur1 = $exp;
-            $manager->persist($exp);
-        endforeach;
+        
+        $exp = new Expediteur();
+        $exp->setEmail("tata@toto.fr");
+        $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
+        $exp->setPassword($hash);
+        $exp->setCivilite('mme');
+        $exp->setPrenom('anne-sophie');
+        $exp->setNom("clementine");
+        $exp->setAdresse('12 rue Frodon Sacquet');
+        $exp->setCodePostal(64000);
+        $exp->setVille('pau');
+        $exp->setTelephone('12345678');
+        $exp->setClient($client);
+        $expediteur1 = $exp;
+        $manager->persist($exp);
 
         $statuts = ["pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
         $etats = array();

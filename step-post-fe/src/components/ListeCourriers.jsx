@@ -47,7 +47,7 @@ function ListeCourriers(props) {
             <section className='listecourriers-section'>
                 <div>
                     <h3>Statut de vos envois en cours</h3>
-                    <BoutonAjouter msg={'Nouvel envoi : '} url={'/nouvel-envoi'} /> 
+                    <BoutonAjouter msg={'Nouvel envoi : '} url={'/carnet-d-adresses'} /> 
                 </div>
                 <ul>
                     {

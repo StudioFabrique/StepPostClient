@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import '../styles/NouvelEnvoi.css';
+import '../styles/AdressesFavorites.css';
 import ListeAdresses from './ListeAdresses';
-import CreationBordereau from './CreationBordereau';
-import EditerAdresse from './EditerAdresse';
+import NouvelEnvoi from './NouvelEnvoi';
 import AdresseForm from './AdresseForm';
 import { postData } from '../modules/postData';
 
-class NouvelEnvoi extends Component {
+class AdressesFavorites extends Component {
     constructor(props) {
         super(props);
         this.state = { section: 0 };
@@ -50,7 +49,7 @@ class NouvelEnvoi extends Component {
                         this.state.section === 0 ? <ListeAdresses onClickIcone={this.handleSectionUpdate} onNewAdress={this.handleNouvelleAdresse} /> : null
                     }
                     {
-                        this.state.section === 1 ? <CreationBordereau id={this.newId} /> : null
+                        this.state.section === 1 ? <NouvelEnvoi adresse={this.newId} /> : null
                     }
                     {
                         this.state.section === 2 ? <AdresseForm id={this.newId} onRetour={this.handleRetour} onEditerAdresse={this.handleEditerAdresse} /> : null
@@ -64,4 +63,4 @@ class NouvelEnvoi extends Component {
     }
 }
 
-export default NouvelEnvoi;
+export default AdressesFavorites;

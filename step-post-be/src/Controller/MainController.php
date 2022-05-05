@@ -71,7 +71,10 @@ class MainController extends AbstractController
         Service $service,
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
-        $destinataires = $destinatairesRepository->findBy(['expediteur' => $user]);
+        $destinataires = $destinatairesRepository->findBy(
+            ['expediteur' => $user],
+            ['nom' => 'ASC']
+        );
         $nom = "";
         if (isset($_POST['data'])) :
             $nom = $service->stripTag()[0];
@@ -251,5 +254,23 @@ class MainController extends AbstractController
         $manager->flush();
 
         return $this->json(['result' => true]);
+    }
+
+    #[Route('/api/client/expediteur', name: 'api_expediteur')]
+    public function expediteur(ExpediteurRepository $expediteurRepository) : Response
+    {
+        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+
+        $exp = [
+            'civilite' => $user->getCivilite(),
+            'prenom' => $user->getPrenom(),
+            'nom' => $user->getNom(),
+            'adresse' => $user->getAdresse(),
+            'complement' => $user->getComplement(),
+            'codePostal' => $user->getCodePostal(),
+            'ville' => $user->getVille(),
+        ];
+
+        return $this->json(['exp' => $exp]);
     }
 }

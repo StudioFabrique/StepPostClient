@@ -3,6 +3,7 @@ import { toTitleCase } from '../modules/formatter';
 import '../styles/Destinataire.css';
 import PopupDelete from './PopupDelete';
 import { postData } from '../modules/postData'
+import { useNavigate } from 'react-router-dom';
 
 
 function Destinataire(props) {

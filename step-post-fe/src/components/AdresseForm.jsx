@@ -68,12 +68,8 @@ class AdresseForm extends Component {
             email: this.state.email,
             id: this.state.id,
         }];
+        console.log('toto', testFormAdress(items[0]));
         if (testFormAdress(items[0])) {
-            if (this.dest) {
-                console.log('dest', this.dest);
-                console.log('items', items[0]);
-                console.log('is same ', (JSON.parse(this.dest) === JSON.parse(items[0]))); 
-            }
             this.setState({ items: items[0], isSubmitted: true, erreur: false });
         } else {
             this.setState({ erreur: true });
@@ -131,7 +127,7 @@ class AdresseForm extends Component {
                             </label>
                         </div>
                         <div>
-                            <label><div><p>Complément d'adresse</p><p className="obligatoire">*</p></div>
+                            <label><div><p>Complément d'adresse</p><p className="obligatoire"></p></div>
                                 <textarea rows="2" value={toTitleCase(this.state.complement)} name="complement" onChange={this.handleChange} />
                             </label>
                         </div>
