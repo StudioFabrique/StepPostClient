@@ -79,12 +79,12 @@ class MainController extends AbstractController
         if (isset($_POST['data'])) :
             $nom = $service->stripTag()[0];
             $tmp = array();
-                foreach ($destinataires as $el) :
-                    if (str_contains($el->getNom(), $nom)) :
-                        array_push($tmp, $el);
-                    endif;
-                endforeach;
-                $destinataires = $tmp;
+            foreach ($destinataires as $el) :
+                if (str_contains($el->getNom(), $nom)) :
+                    array_push($tmp, $el);
+                endif;
+            endforeach;
+            $destinataires = $tmp;
         endif;
         if (count($destinataires) === 0) :
             return $this->json(['destinataires' => false]);
@@ -184,8 +184,8 @@ class MainController extends AbstractController
     public function deleteAdresse(
         Service $service,
         DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine) : Response
-    {
+        ManagerRegistry $doctrine
+    ): Response {
         $id = $service->stripTag($_POST['data'])[0];
         $dest = $destinatairesRepository->findOneBy(['id' => $id]);
 
@@ -202,8 +202,7 @@ class MainController extends AbstractController
         DestinatairesRepository $destinatairesRepository,
         ManagerRegistry $doctrine,
         Service $service,
-        ) : Response
-    {
+    ): Response {
         $data = $service->stripTag();
 
         $dest = $destinatairesRepository->findOneBy(['id' => end($data)]);
@@ -220,7 +219,7 @@ class MainController extends AbstractController
 
         $manager = $doctrine->getManager();
         $manager->persist($dest);
-        $manager->flush(); 
+        $manager->flush();
 
         return $this->json(['result' => $data]);
     }
@@ -231,8 +230,7 @@ class MainController extends AbstractController
         Service $service,
         ManagerRegistry $doctrine,
         ExpediteurRepository $expediteurRepository,
-        ) : Response
-    {
+    ): Response {
         $data = $service->stripTag();
 
         $exp = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
@@ -257,7 +255,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/client/expediteur', name: 'api_expediteur')]
-    public function expediteur(ExpediteurRepository $expediteurRepository) : Response
+    public function expediteur(ExpediteurRepository $expediteurRepository): Response
     {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
 
@@ -272,5 +270,26 @@ class MainController extends AbstractController
         ];
 
         return $this->json(['exp' => $exp]);
+    }
+
+    #[Route('/api/client/qrcode', name: 'api_qrcode')]
+    public function qrCode(): Response
+    {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') :
+            $url = "https";
+        else :
+            $url = "http";
+        endif;
+        $url .= "://";
+        $url .= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+
+        if (!isset($_GET['now'])) {
+            date_default_timezone_set('UTC'); // définir le fuseau horaire à utiliser par défaut
+            $now = date('D-M-j-Y-G-i');
+            $result = 'https://api.qrserver.com/v1/create-qr-code/?data=' . $url . '?now=' . $now . '&amp;size=400x400';
+
+            return $this->json(['result' => $result]);
+        }
     }
 }

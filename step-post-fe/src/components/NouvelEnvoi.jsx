@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { getData } from '../modules/postData';
+import { getData, getQrcode } from '../modules/postData';
 import Adresse from './Adresse';
 import '../styles/NouvelEnvoi.css';
 
 class NouvelEnvoi extends Component {
     constructor(props) {
         super(props);
-        this.state = { exp: [], dest: [], lettre: true, colis: false };
+        this.state = { exp: [], dest: [], lettre: true, colis: false, qrcode: '' };
         this.dest = this.props.adresse;
     }
 
@@ -17,6 +17,7 @@ class NouvelEnvoi extends Component {
         }
         this.setState({ exp: response.exp, dest: this.dest });
         console.log('exp', this.state.exp);
+
     }
 
     handleRetour = () => {
@@ -24,6 +25,11 @@ class NouvelEnvoi extends Component {
 
     handleChange = (event) => {
         this.setState({ lettre: event.target.checked, colis: !this.state.lettre });
+    }
+
+    handleToto = async () => {
+        const response = await getQrcode('123456789');
+        console.log('qrcode : ', response);
     }
 
     render() {
@@ -67,7 +73,7 @@ class NouvelEnvoi extends Component {
                 <section className='section-bordereau-dest'>
                     <article className='article-dest-left'>
                         <div>
-                            <img src="img/qrcode.png" alt="image qr code" />
+                            <img src={this.state.qrcode} />
                         </div>
                         <div>
                             <p>Bordereau n° 12345</p>
@@ -84,6 +90,7 @@ class NouvelEnvoi extends Component {
                             <p>(signature)</p>
                         </div>
                     </article>
+                    <button onClick={this.handleToto}>Toto</button>
                 </section>
             </>
         );
