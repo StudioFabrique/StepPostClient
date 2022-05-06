@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Courrier;
 use App\Entity\Destinataires;
+use App\Entity\StatutCourrier;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
+use App\Repository\StatutRepository;
 use App\Services\Service as Service;
+use App\Services\ServiceQrCode as Toto;
+use App\Services\Toto as ServicesToto;
+use Doctrine\ORM\Cache\TimestampRegion;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -273,23 +279,59 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/client/qrcode', name: 'api_qrcode')]
-    public function qrCode(): Response
+    public function qrCode(
+        ServicesToto $serviceToto,
+        Service $service,
+        ManagerRegistry $doctrine,
+        CourrierRepository $courrierRepository,
+        DestinatairesRepository $destinatairesRepository,
+        ExpediteurRepository $expediteurRepository,
+        StatutRepository $statutRepository,
+        ): Response
     {
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') :
-            $url = "https";
-        else :
-            $url = "http";
-        endif;
-        $url .= "://";
-        $url .= $_SERVER['HTTP_HOST'];
-        $url .= $_SERVER['REQUEST_URI'];
+        $data = $service->stripTag();
+        $dest = $destinatairesRepository->findOneBy(
+            ['id' => $data[0]]
+        );
+        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $courrier = new Courrier();
+        $courrier->setType($data[1]);
+        $courrier->setCivilite($dest->getCivilite());
+        $courrier->setPrenom($dest->getPrenom());
+        $courrier->setNom($dest->getNom());
+        $courrier->setAdresse($dest->getAdresse());
+        $courrier->setComplement($dest->getComplement());
+        $courrier->setCodePostal($dest->getCodePostal());
+        $courrier->setVille($dest->getVille());
+        $courrier->setExpediteur($user);
+        $courrier->setBordereau(0);
 
-        if (!isset($_GET['now'])) {
-            date_default_timezone_set('UTC'); // définir le fuseau horaire à utiliser par défaut
-            $now = date('D-M-j-Y-G-i');
-            $result = 'https://api.qrserver.com/v1/create-qr-code/?data=' . $url . '?now=' . $now . '&amp;size=400x400';
+        $statutCourrier = new StatutCourrier();
+        $statutCourrier->setDate(new \DateTime());
+        $statut = $statutRepository->findOneBy(['etat' => 'en attente']);
+        $statutCourrier->setStatut($statut);
+        $statutCourrier->setCourrier($courrier);
 
-            return $this->json(['result' => $result]);
-        }
+        $manager = $doctrine->getManager();
+        $manager->persist($courrier);
+        $manager->persist($statutCourrier);
+        $manager->flush();
+
+        $id = $courrier->getId();
+
+        $bordereau = 10000 + $id;
+
+        $courrier->setBordereau($bordereau);
+
+        $manager->persist($courrier);
+        $manager->flush();    
+
+        $qrcode = $serviceToto->qrcode($bordereau);
+        
+        return $this->json([
+            'qrcode' => $qrcode,
+            'bordereau' => $bordereau,
+            'type' => $data[1]
+        ]);
     }
 }

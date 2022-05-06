@@ -75,4 +75,13 @@ class CourrierRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findLastBordereau(): ?Courrier
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

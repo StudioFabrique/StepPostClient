@@ -46,20 +46,13 @@ class AppFixtures extends Fixture
         $expediteur1 = $exp;
         $manager->persist($exp);
 
-        $statuts = ["pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
+        $statuts = ["en attente", "pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
         $etats = array();
-        for ($k = 0; $k < 6; $k++) :
+        for ($k = 0; $k < 7; $k++) :
             $etats[$k] = new Statut();
             $etats[$k]->setEtat($statuts[$k]);
             $manager->persist($etats[$k]);
         endfor;
-        /*
-        foreach ($statuts as $statut) :
-            $etat = new Statut();
-            $etat->setEtat($statut);
-            $manager->persist($etat);
-        endforeach;
-*/
 
         $bordereau = 10000;
         $destinataires = [
@@ -196,7 +189,7 @@ class AppFixtures extends Fixture
                 $courrier->setVille($destinataire['ville']);
                 $courrier->setExpediteur($expediteur1);
                 $manager->persist($courrier);
-                for ($j = 0; $j < 4; $j++) :
+                for ($j = 0; $j < 5; $j++) :
                     $statutCourrier = new StatutCourrier();
                     $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
                     $statutCourrier->setStatut($etats[$j]);

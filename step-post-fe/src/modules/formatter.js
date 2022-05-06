@@ -34,6 +34,9 @@ export function setEtatMessage(etat, nom) {
         case "non réclamé":
             message = `Le courrier pour ${nom} a été retourné )'expéditeur.`;
             break;
+            case "en attente":
+                message = `Le courrier pour ${nom} n'a pas encore été collecté.`;
+                break;
 
     }
     return message;

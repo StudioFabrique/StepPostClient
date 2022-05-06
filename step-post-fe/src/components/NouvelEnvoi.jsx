@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { getData, getQrcode } from '../modules/postData';
+import { getData, getQrcode, postData } from '../modules/postData';
 import Adresse from './Adresse';
 import '../styles/NouvelEnvoi.css';
 
 class NouvelEnvoi extends Component {
     constructor(props) {
         super(props);
-        this.state = { exp: [], dest: [], lettre: true, colis: false, qrcode: '' };
+        this.state = { exp: [], dest: [], type: true, qrcode: '', bordereau: '-----' };
         this.dest = this.props.adresse;
     }
 
@@ -24,17 +24,30 @@ class NouvelEnvoi extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({ lettre: event.target.checked, colis: !this.state.lettre });
+        this.setState({ type: !this.state.type });
     }
 
-    handleToto = async () => {
-        const response = await getQrcode('123456789');
+    handleQrCode = async () => {
+        let type;
+        if (this.state.type) {
+            type = 1;
+        } else {
+            type = 0;
+        }
+        console.log('type', type);
+        const response = await postData('/qrcode', [this.state.dest.id, type]);
         console.log('qrcode : ', response);
+        this.setState({
+            qrcode: `http://127.0.0.1:8000/assets/qrcodes/${response.qrcode}`,
+            bordereau: response.bordereau
+        });
+        console.log('type-php', response.type);
     }
 
     render() {
         return (
             <>
+                <button onClick={this.handleQrCode}>Qrcode</button>
                 <section className='section-bordereau-exp'>
                     <article className='article-exp-left'>
                         <div>
@@ -62,35 +75,40 @@ class NouvelEnvoi extends Component {
                         </div>
                         <div>
                             <h3>Expéditeur</h3>
-
                             <span>
                                 <Adresse adresse={this.state.exp} isDest={false} />
                             </span>
                         </div>
-                        <div></div>
                     </article>
                 </section>
                 <section className='section-bordereau-dest'>
                     <article className='article-dest-left'>
                         <div>
-                            <img src={this.state.qrcode} />
+                            {
+                                this.state.qrcode ?
+                                    <img src={this.state.qrcode} alt='qrcode' /> :
+                                    <h5>Le QR code et le numéro de bordereau seront générés lors de l'impression.</h5>
+                            }
                         </div>
                         <div>
-                            <p>Bordereau n° 12345</p>
+                            <p>Bordereau n° {this.state.bordereau}</p>
                         </div>
                     </article>
                     <article className='article-dest-right'>
                         <div>
                             <h3>Destinataire</h3>
+                            <span>
+                                <Adresse adresse={this.state.dest} isDest={true} />
+                            </span>
                         </div>
                         <div>
-                            <Adresse adresse={this.state.dest} isDest={true} />
-                        </div>
-                        <div>
-                            <p>(signature)</p>
+                            <p>Signature :</p>
+                            <span>
+                                <p>Date :</p>
+                                <p>.. / .. / ..</p>
+                            </span>
                         </div>
                     </article>
-                    <button onClick={this.handleToto}>Toto</button>
                 </section>
             </>
         );

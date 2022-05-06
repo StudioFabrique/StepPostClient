@@ -1,1 +1,9 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"ListeCourriers.css"}
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "ListeCourriers.scss"
+    ],
+    "names": [],
+    "file": "ListeCourriers.css"
+}

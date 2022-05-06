@@ -16,7 +16,7 @@ class Courrier
     #[ORM\Column(type: 'integer')]
     private $type;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'integer')]
     private $bordereau;
 
     #[ORM\Column(type: 'string', length: 255)]

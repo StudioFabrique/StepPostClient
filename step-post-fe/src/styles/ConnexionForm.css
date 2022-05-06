@@ -1,5 +1,5 @@
 .bouton {
-  padding: 0.5vw;
+  padding: .5vw;
   background-color: #140A82;
   color: white;
   font-weight: bold;
@@ -8,51 +8,99 @@
 
 .connexion-form-main {
   height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   row-gap: 5vh;
 }
+
 .connexion-form-main > section:nth-child(1) {
   width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
+
 .connexion-form-main > section:nth-child(2) {
   width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .connexion-form-main > section:nth-child(2) > form {
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 3vh;
 }
+
 .connexion-form-main > section:nth-child(2) > form > label {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 1vh;
 }
+
 .connexion-form-main > section:nth-child(2) > form > label > input {
   width: 80%;
   padding: 1vw;
   border-radius: 5px;
   border: solid 1px #646464;
-  box-shadow: 4px 4px 4px #646464;
+  -webkit-box-shadow: 4px 4px 4px #646464;
+          box-shadow: 4px 4px 4px #646464;
 }
+
 .connexion-form-main > section:nth-child(2) > form > p {
   width: 100%;
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: red;
 }
+
 .connexion-form-main > section:nth-child(2) > form > div {
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: right;
-}/*# sourceMappingURL=ConnexionForm.css.map */
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+/*# sourceMappingURL=ConnexionForm.css.map */
