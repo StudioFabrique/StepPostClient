@@ -113,3 +113,34 @@ $orange: #FF5E1A;
         width: 5vw;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .statuts {
+        font-size: .5rem;
+    }
+
+    .statuts-date {
+        font-size: .5rem;
+    }
+
+    .details {
+        font-size: .75rem;
+    }
+
+    .trait {
+        width: 7vw;
+    }
+
+}
+@media screen and (max-width: 600px) {
+    .trait {
+        width: 15vw;
+    }
+    .details {
+        font-size: .5rem;
+    }
+
+    .statuts {
+        top: -300%;
+    }
+}

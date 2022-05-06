@@ -17,3 +17,28 @@
 
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .detailsRecherche {
+        width: 80%;
+    }
+
+}
+
+
+@media screen and (max-width: 600px) {
+    .detailsRecherche {
+        width:90%;
+        height: 15vh;
+        flex-direction: column;
+        row-gap: 2vh;
+        >div:nth-child(1) {
+            flex-direction: row;
+            column-gap: 5vw;
+            >h4, >button {
+                font-size: .75rem;
+            }
+        }
+    }
+
+}

@@ -11,9 +11,7 @@ use App\Repository\ExpediteurRepository;
 use App\Repository\StatutCourrierRepository;
 use App\Repository\StatutRepository;
 use App\Services\Service as Service;
-use App\Services\ServiceQrCode as Toto;
 use App\Services\Toto as ServicesToto;
-use Doctrine\ORM\Cache\TimestampRegion;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,6 +125,7 @@ class MainController extends AbstractController
         $max = $tmp[1];
         $nom = $tmp[2];
         $filtre = $tmp[3];
+        // par defaut les données sont triées par id décroissantes, les variables $sort et $direction (ASC ou DESc) servent à définir un tri différent que celui par défaut
         if (isset($tmp[4])) :
             $sort = $tmp[4];
             $direction = $tmp[5];
@@ -331,7 +330,6 @@ class MainController extends AbstractController
         return $this->json([
             'qrcode' => $qrcode,
             'bordereau' => $bordereau,
-            'type' => $data[1]
         ]);
     }
 }

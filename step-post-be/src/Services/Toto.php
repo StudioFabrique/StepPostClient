@@ -24,7 +24,7 @@ class Toto
         $result = $this->builder
         ->data($bordereau)
         ->encoding(new Encoding('UTF-8'))
-        ->size(200)
+        ->size(300)
         ->labelText($dateString)
         ->build();
 

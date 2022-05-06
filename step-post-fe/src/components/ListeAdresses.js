@@ -4,7 +4,6 @@ import Recherche from './Recherche';
 import RechercheNom from './RechercheNom';
 import NoResults from './NoResults';
 import Destinataire from './Destinataire'
-import BoutonAjouter from './BoutonAjouter.jsx';
 
 class ListeAdresses extends Component {
     constructor(props) {
