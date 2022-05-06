@@ -8,6 +8,7 @@ import { postData } from '../modules/postData';
 class AdressesFavorites extends Component {
     constructor(props) {
         super(props);
+        // section 0 : liste d'adresses, 1 : création de bordereau, 2 : édition d'adresse, 3 : création d'adresse
         this.state = { section: 0 };
         this.newId = null;
     }
@@ -31,19 +32,16 @@ class AdressesFavorites extends Component {
 
     handleAjouterAdresse = async adresse => {
         const response = await postData('/addAdresse', adresse);
-        console.log('response', response);
         this.setState({section: 0});
     }
 
     handleEditerAdresse = async adresse => {
-        console.log('confirm', adresse);
         const response = await postData('/editAdresse', adresse);
         this.setState({section: 0});
     }
 
     render() {
         return (
-            <>
                 <main className='main-nouvel-envoi'>
                     {
                         this.state.section === 0 ? <ListeAdresses onClickIcone={this.handleSectionUpdate} onNewAdress={this.handleNouvelleAdresse} /> : null
@@ -58,7 +56,6 @@ class AdressesFavorites extends Component {
                         this.state.section === 3 ? <AdresseForm onRetour={this.handleRetour} onAjouterAdresse={this.handleAjouterAdresse} /> : null
                     }
                 </main>
-            </>
         );
     }
 }

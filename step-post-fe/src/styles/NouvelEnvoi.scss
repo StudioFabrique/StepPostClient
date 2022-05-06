@@ -2,6 +2,9 @@ $blue: #140A82;
 $orange: #FF5E1A;
 
 .main-nouvel-envoi {
+    display: flex;
+    flex-direction: column-reverse;
+
     >section {
         transform: scale(.75);
     }

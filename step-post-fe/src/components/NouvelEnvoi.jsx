@@ -47,7 +47,6 @@ class NouvelEnvoi extends Component {
     render() {
         return (
             <>
-                <button onClick={this.handleQrCode}>Qrcode</button>
                 <section className='section-bordereau-exp'>
                     <article className='article-exp-left'>
                         <div>
@@ -110,6 +109,7 @@ class NouvelEnvoi extends Component {
                         </div>
                     </article>
                 </section>
+                <button onClick={this.handleQrCode}>Qrcode</button>
             </>
         );
     }

@@ -107,9 +107,6 @@
     "endroid/qr-code-bundle": {
         "version": "4.0.7"
     },
-    "endroid/qrcode": {
-        "version": "4.4.8"
-    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.8"
     },

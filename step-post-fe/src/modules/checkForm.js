@@ -34,6 +34,6 @@ export function testFormAdress(data) {
          n++;
         }
     });
-    return (n === 0);
     console.log('test', result);
+    return (n === 0);
 }
