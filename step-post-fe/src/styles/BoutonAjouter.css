@@ -8,15 +8,24 @@
 .bouton-ajouter > h4 {
   white-space: nowrap;
 }
-.bouton-ajouter > a > button {
-  width: 2.5vw;
-  height: 2.5vw;
+.bouton-ajouter > div > a > button {
+  padding: 0 0.75vh 0 0.75vh;
+  border-radius: 5px;
   background-color: #FF5E1A;
-  border-radius: 50%;
   font-size: 1.5rem;
   color: white;
   border: none;
 }
-.bouton-ajouter > a > button:hover {
+.bouton-ajouter > div > a > button:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .bouton-ajouter > h4 {
+    font-size: 0.75rem;
+  }
+  .bouton-ajouter > div > a > button {
+    padding: 1vh 1vh;
+    font-size: 0.5rem;
+  }
 }/*# sourceMappingURL=BoutonAjouter.css.map */

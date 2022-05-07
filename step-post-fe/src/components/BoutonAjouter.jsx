@@ -5,9 +5,11 @@ function BoutonAjouter(props) {
     return (
         <span className="bouton-ajouter">
             <h4>{props.msg}</h4>
-            <Link to={props.url}>
-                <button>+</button>
-            </Link>
+            <div>
+                <Link to={props.url}>
+                    <button>+</button>
+                </Link>
+            </div>
         </span>
     )
 }

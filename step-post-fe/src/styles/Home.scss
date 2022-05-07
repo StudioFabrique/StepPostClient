@@ -44,6 +44,7 @@ body {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
       }
 
@@ -60,5 +61,20 @@ body {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .listecourriers-section {
+    >div:nth-child(1) {
+      >h3 {
+        font-size: .75rem;
+      }
+      >span {
+        align-items: center;
+      }
+    }
+    width: 90%;
+    font-size: .75rem;
   }
 }

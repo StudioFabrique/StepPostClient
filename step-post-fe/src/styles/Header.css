@@ -27,4 +27,14 @@ nav > div:nth-child(2) > ul {
 }
 nav > div:nth-child(2) > ul > li {
   padding: 0.5vw;
+}
+
+@media screen and (max-width: 600px) {
+  nav > div > img {
+    height: 3vh;
+  }
+  nav > div:nth-child(2) > ul > li > a > img {
+    width: 3vh;
+    height: 3vh;
+  }
 }/*# sourceMappingURL=Header.css.map */

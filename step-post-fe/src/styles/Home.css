@@ -37,6 +37,7 @@ body #root .listecourriers-section > div:nth-child(1) {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 body #root .listecourriers-section > ul {
   margin-top: 2vh;
@@ -48,4 +49,17 @@ body #root .listecourriers-section > ul {
 }
 body #root .listecourriers-section > ul > li {
   width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .listecourriers-section {
+    width: 90%;
+    font-size: 0.75rem;
+  }
+  .listecourriers-section > div:nth-child(1) > h3 {
+    font-size: 0.75rem;
+  }
+  .listecourriers-section > div:nth-child(1) > span {
+    align-items: center;
+  }
 }/*# sourceMappingURL=Home.css.map */
