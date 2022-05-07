@@ -1,4 +1,4 @@
-.bouton {
+.button {
   padding: 1vw;
   background-color: #140A82;
   color: white;
@@ -80,4 +80,4 @@
   .connexion-form-main > section:nth-child(2) > form > p {
     width: 80%;
   }
-}/*# sourceMappingURL=ConnexionForm.css.map */
+}/*# sourceMappingURL=Connexion.css.map */

@@ -50,16 +50,49 @@ body #root .listecourriers-section > ul {
 body #root .listecourriers-section > ul > li {
   width: 100%;
 }
+body #root .listecourriers-section > ul > li .courrier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3vh;
+  padding: 1vh;
+  border-bottom: solid #646464 2px;
+}
+body #root .listecourriers-section > ul > li .courrier:hover {
+  cursor: pointer;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px #646464;
+}
+body #root .listecourriers-section > ul > li .courrier > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+body #root .listecourriers-section > ul > li .courrier > div > span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+body #root .listecourriers-section > ul > li .courrier > div:nth-child(3) {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
 
 @media screen and (max-width: 600px) {
-  .listecourriers-section {
+  body #root .home-main .listecourriers-section {
     width: 90%;
+  }
+  body #root .home-main .listecourriers-section > div:nth-child(1) > h3 {
     font-size: 0.75rem;
   }
-  .listecourriers-section > div:nth-child(1) > h3 {
-    font-size: 0.75rem;
-  }
-  .listecourriers-section > div:nth-child(1) > span {
+  body #root .home-main .listecourriers-section > div:nth-child(1) > span {
     align-items: center;
+  }
+  body #root .home-main .listecourriers-section > ul > li > .courrier > div:nth-child(2) {
+    flex-direction: column-reverse;
+    font-size: 0.75rem;
   }
 }/*# sourceMappingURL=Home.css.map */

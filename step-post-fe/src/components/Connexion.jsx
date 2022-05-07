@@ -1,4 +1,5 @@
 import ConnexionForm from "./ConnexionForm";
+import '../styles/Connexion.css';
 
 function Connexion({onIsLogged}) {
 

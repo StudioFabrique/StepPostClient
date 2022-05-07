@@ -43,25 +43,23 @@ function ListeCourriers(props) {
     }
 
     return (
-        <>
-            <section className='listecourriers-section'>
-                <div>
-                    <h3>Statut de vos envois en cours</h3>
-                    <BoutonAjouter msg={'Nouvel envoi : '} url={'/carnet-d-adresses'} /> 
-                </div>
-                <ul>
-                    {
-                        courriers.map((statut, index) => {
-                            return (
-                                    <li key={index}>
-                                        <Courrier statut={statut} baseUrl={props.baseUrl} onCourrierClick={handleCourrierClick} />
-                                    </li>
-                            )
-                        })
-                    }
-                </ul>
-            </section>
-        </>
+        <section className='listecourriers-section'>
+            <div>
+                <h3>Statut de vos envois en cours</h3>
+                <BoutonAjouter msg={'Nouvel envoi : '} url={'/carnet-d-adresses'} />
+            </div>
+            <ul>
+                {
+                    courriers.map((statut, index) => {
+                        return (
+                            <li key={index}>
+                                <Courrier statut={statut} baseUrl={props.baseUrl} onCourrierClick={handleCourrierClick} />
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        </section>
     )
 }
 

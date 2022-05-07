@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { testField } from "../modules/checkForm";
 import { getToken } from "../modules/postData";
-import '../styles/ConnexionForm.css';
 import { regexMail, regexPassword } from '../modules/data.js';
 
 function ConnexionForm({ message, onFormSubmit }) {
@@ -46,7 +45,7 @@ function ConnexionForm({ message, onFormSubmit }) {
                             erreur ? <p>Email ou mot de passe incorrect(s), essayez à nouveau svp</p> : null
                         }
                         <div>
-                            <button className="bouton">Envoyer</button>
+                            <button className="button">Envoyer</button>
                         </div>
                     </form>
                 </section>
