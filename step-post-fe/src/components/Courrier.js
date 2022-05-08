@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { formatDate, setEtatMessage, toTitleCase } from "../modules/formatter";
 import { postData } from "../modules/postData";
-import '../styles/Courrier.css';
 import DetailsCourrier from "./DetailsCourrier";
 
 function Courrier({ statut, baseUrl, onCourrierClick }) {

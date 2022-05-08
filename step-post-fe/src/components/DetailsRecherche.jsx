@@ -1,5 +1,4 @@
 import DetailsCourrier from "./DetailsCourrier";
-import '../styles/DetailsRecherche.css';
 
 function DetailsRecherche(props) {
     const courrier = props.courrier;

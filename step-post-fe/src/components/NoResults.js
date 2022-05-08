@@ -1,5 +1,4 @@
 import { toTitleCase } from "../modules/formatter";
-import '../styles/RechercheNom.css';
 
 function NoResults({ nom, onRetourBtn }) {
 

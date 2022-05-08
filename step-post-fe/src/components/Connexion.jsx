@@ -1,7 +1,7 @@
 import ConnexionForm from "./ConnexionForm";
 import '../styles/Connexion.css';
 
-function Connexion({onIsLogged}) {
+function Connexion({ onIsLogged }) {
 
     const handleConnexion = (result) => {
         if (result) {
@@ -10,9 +10,7 @@ function Connexion({onIsLogged}) {
     }
 
     return (
-        <>
-            <ConnexionForm onFormSubmit={handleConnexion} />
-        </>
+        <ConnexionForm onFormSubmit={handleConnexion} />
     )
 }
 

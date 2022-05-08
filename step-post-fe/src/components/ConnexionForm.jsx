@@ -30,11 +30,11 @@ function ConnexionForm({ message, onFormSubmit }) {
     return (
         <>
             <main className="connexion-form-main">
-                <section>
+                <section className="section-connexion-titre">
                     <h2>Connexion</h2>
                 </section>
-                <section>
-                    <form onSubmit={handleSubmit}>
+                <section className="section-connexion-form">
+                    <form className="form-connexion" onSubmit={handleSubmit}>
                         <label>Adresse email :&nbsp;
                             <input type="email" autoFocus onChange={(e) => updateEmail(e.target.value)} />
                         </label>

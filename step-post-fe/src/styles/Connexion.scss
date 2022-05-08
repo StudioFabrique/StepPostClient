@@ -1,8 +1,9 @@
 $blue: #140A82;
+$orange: #FF5E1A;
 
 .button {
     padding: 1vw;
-    background-color: $blue;
+    background-color: $orange;
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -16,21 +17,21 @@ $blue: #140A82;
     align-items: center;
     row-gap: 5vh;
 
-    >section:nth-child(1) {
+    > .section-connexion-form {
         width: 35%;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
     }
 
-    >section:nth-child(2) {
+    >.section-connexion-form {
         width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        >form {
+        >.form-connexion {
             width: 70%;
             display: flex;
             flex-direction: column;
@@ -69,8 +70,8 @@ $blue: #140A82;
 @media screen and (max-width: 1000px) {
     .connexion-form-main {
 
-        >section:nth-child(1),
-        >section:nth-child(2) {
+        >.section-connexion-titre,
+        >.section-connexion-form {
             width: 75%;
         }
     }
@@ -79,19 +80,19 @@ $blue: #140A82;
 @media screen and (max-width: 600px) {
     .connexion-form-main {
 
-        >section:nth-child(1),
-        >section:nth-child(2) {
+        >.section-connexion-titre,
+        >.section-connexion-form {
             width: 90%;
         }
 
-        >section:nth-child(1) {
+        >.section-connexion-titre{
             font-size: .75rem;
         }
 
-        >section:nth-child(2) {
+        >.section-connexion-form {
             font-size: .75rem;
 
-            >form {
+            >.form-connexion {
                 width: 90%;
                 >p {
                     width: 80%;

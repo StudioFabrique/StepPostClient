@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { postData } from '../modules/postData.js';
-import '../styles/Home.css'
 import Recherche from './Recherche';
 import DetailsRecherche from './DetailsRecherche';
 import RechercheNom from './RechercheNom';

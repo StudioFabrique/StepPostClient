@@ -1,5 +1,4 @@
 import Courrier from './Courrier.js'
-import '../styles/ListeCourriers.css'
 import { useEffect, useState } from 'react';
 import BoutonAjouter from './BoutonAjouter.jsx';
 
