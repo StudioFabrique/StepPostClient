@@ -4,6 +4,7 @@ import ListeAdresses from './ListeAdresses';
 import NouvelEnvoi from './NouvelEnvoi';
 import AdresseForm from './AdresseForm';
 import { postData } from '../modules/postData';
+import Bordereau from './Bordereau';
 
 class AdressesFavorites extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class AdressesFavorites extends Component {
                         this.state.section === 0 ? <ListeAdresses onClickIcone={this.handleSectionUpdate} onNewAdress={this.handleNouvelleAdresse} /> : null
                     }
                     {
-                        this.state.section === 1 ? <NouvelEnvoi adresse={this.newId} /> : null
+                        this.state.section === 1 ? <Bordereau adresse={this.newId} /> : null
                     }
                     {
                         this.state.section === 2 ? <AdresseForm id={this.newId} onRetour={this.handleRetour} onEditerAdresse={this.handleEditerAdresse} /> : null
