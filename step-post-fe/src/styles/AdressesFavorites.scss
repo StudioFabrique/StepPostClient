@@ -1,11 +1,11 @@
 $blue: #140A82;
 $orange: #FF5E1A;
+
 .bouton-ajouter {
     >button {
-        width: 2.5vw;
-        height: 2.5vw;
+        padding: 0 .75vh 0 .75vh;
+        border-radius: 5px;
         background-color: $orange;
-        border-radius: 50%;
         font-size: 1.5rem;
         color: white;
         border: none;
@@ -15,6 +15,7 @@ $orange: #FF5E1A;
         }
     }
 }
+
 .main-nouvel-envoi {
     width: 100vw;
     display: flex;
@@ -31,9 +32,12 @@ $orange: #FF5E1A;
         row-gap: 2vh;
         column-gap: 1vw;
     }
-    >.section-recherche-nom, >.section-no-results {
+
+    >.section-recherche-nom,
+    >.section-no-results {
         width: 60%;
     }
+
     >.section-recherche-nom {
         display: flex;
         justify-content: space-between;

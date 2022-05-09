@@ -69,8 +69,10 @@ class AdresseForm extends Component {
             id: this.state.id,
         }];
         console.log('toto', testFormAdress(items[0]));
-        if (testFormAdress(items[0])) {
-            this.setState({ items: items[0], isSubmitted: true, erreur: false });
+        const result = testFormAdress(items[0]);
+        console.log('resut', result);
+        if (result !== false) {
+            this.setState({ items: result, isSubmitted: true, erreur: false });
         } else {
             this.setState({ erreur: true });
         }
@@ -141,7 +143,12 @@ class AdresseForm extends Component {
                         </div>
                         <div>
                             <label>Téléphone
-                                <input type="text" value={toTitleCase(this.state.telephone)} name="telephone" onChange={this.handleChange} />
+                                <input type="text" value={
+                                    this.state.telephone !== 'non disponible' ?
+                                        toTitleCase(this.state.telephone)
+                                        :
+                                        ''
+                                } name="telephone" onChange={this.handleChange} />
                             </label>
                             <label>Email
                                 <input type="text" value={this.state.email} name="email" onChange={this.handleChange} />

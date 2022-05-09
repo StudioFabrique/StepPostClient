@@ -9,7 +9,12 @@ function Adresse(props) {
             <p>{toTitleCase(adresse.complement)}</p>
             <p>{toTitleCase(`${adresse.codePostal} ${adresse.ville}`)}</p>
             {
-                props.isDest ? <p>( tél : {adresse.telephone} )</p> : null
+                props.isDest ?
+                    <>
+                        <p>( tél : {adresse.telephone} )</p>
+                        <p>{props.instructions}</p>
+                    </>
+                    : null
             }
         </article>
     )

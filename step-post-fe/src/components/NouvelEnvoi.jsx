@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { toTitleCase } from '../modules/formatter';
 import AdresseForm from './AdresseForm';
 import Bordereau from './Bordereau';
+import '../styles/NouvelEnvoi.css';
 
 class NouvelEnvoi extends Component {
     constructor(props) {
         super(props);
-        this.state = { type: '', dest: [], section: 0 }
+        this.state = { type: '', dest: [], section: 0, instructions: '' }
     }
 
     componentDidMount = () => {
@@ -20,7 +21,7 @@ class NouvelEnvoi extends Component {
     }
 
     handleRadioChange = (event) => {
-        this.setState({ type: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
         console.log('type', this.state.type);
     }
 
@@ -34,13 +35,19 @@ class NouvelEnvoi extends Component {
         if (!this.state.type) {
             console.log('oops');
         } else {
-            console.log(`${this.state.type} envoyé !`);
-            this.setState({section : 2});
+            console.log(`${this.state.type} envoyé !`);/* 
+            const newDest = this.state.dest;
+            if  (newDest.complement) {
+                newDest.complement = `${newDest.complement}\n${this.state.instructions}`;
+            } else {
+                newDest.complement = `${this.state.instructions}`;
+            } */
+            this.setState({ section: 2 });
         }
     }
 
     handleModifications = (newDest) => {
-        this.setState({ dest: newDest, section: 0});
+        this.setState({ dest: newDest, section: 0 });
     }
 
     handleRetour = () => {
@@ -51,35 +58,51 @@ class NouvelEnvoi extends Component {
         this.setState({ section: 1 });
     }
 
+    handleInstructions = (event) => {
+        this.setState({instructions: event.target.value});
+    } 
+
     render() {
         return (
             <>
                 {
                     this.state.section === 0 &&
                     <section className="section-ne-dest">
-                        <div>
-                            <p>
-                                {toTitleCase(`${this.state.dest.civilite} ${this.state.dest.prenom} ${this.state.dest.nom}`)}
-                            </p>
-                            <p>{toTitleCase(this.state.dest.adresse)}</p>
-                            <p>{toTitleCase(`${this.state.dest.codePostal} ${this.state.dest.ville}`)}</p>
-                            <p>{`(tél : ${this.state.dest.telephone})`}</p>
-                            <span>
-                                <button className='button' onClick={this.handleModifier}>Modifier</button>
-                            </span>
-                        </div>
-                        <form className="form-ne-dest" onSubmit={this.handleSubmit}>{/* 
+                        <form className="form-ne-dest" onSubmit={this.handleSubmit}>
+                            <div>
+                                <label>Lettre
+                                    <input type="radio" value="lettre" name="type" checked={this.state.type === "lettre"} onChange={this.handleRadioChange} />
+                                </label>
+                                <label>Colis
+                                    <input type="radio" value="colis" name="type" checked={this.state.type === "colis"} onChange={this.handleRadioChange} />
+                                </label>
+                            </div>
+                            <article className='article-ne-dest' >
+                                <div>
+                                    <p>
+                                        {toTitleCase(`${this.state.dest.civilite} ${this.state.dest.prenom} ${this.state.dest.nom}`)}
+                                    </p>
+                                    <p>{toTitleCase(this.state.dest.adresse)}</p>
+                                    <p>{toTitleCase(`${this.state.dest.codePostal} ${this.state.dest.ville}`)}</p>
+                                    <p>{`(tél : ${this.state.dest.telephone})`}</p>
+                                </div>
+                                <div>
+                                    <span>
+                                        <button className='button' onClick={this.handleModifier}>Modifier</button>
+                                    </span>
+                                </div>
+                            </article>
+                            <article className='article-ne-instructions' >
                         <label>Instruction de livraisons :
-                            <textarea cols="30" rows="3" value={this.state.dest.complement} />
-                        </label> */}
-                            <label>Lettre
-                                <input type="radio" value="lettre" checked={this.state.type === "lettre"} onChange={this.handleRadioChange} />
-                            </label>
-                            <label>Colis
-                                <input type="radio" value="colis" checked={this.state.type === "colis"} onChange={this.handleRadioChange} />
-                            </label>
-                            <button className="button" onClick={this.handleRetourAdresses}>Retour</button>
-                            <input type="submit" className='button' value="valider" />
+                            <textarea cols="30" rows="3" name="instructions" value={this.state.dest.complement} onChange={this.handleInstructions} />
+                        </label>
+                        </article>
+                            <article className='article-ne-buttons'>
+                                <div>
+                                    <button className="button" onClick={this.handleRetourAdresses}>Retour</button>
+                                    <input type="submit" className='button' value="valider" />
+                                </div>
+                            </article>
                         </form>
                     </section>
                 }
@@ -89,7 +112,7 @@ class NouvelEnvoi extends Component {
                 }
                 {
                     this.state.section === 2 &&
-                    <Bordereau adresse={this.state.dest} type={this.state.type} onRetour={this.handleRetour} />
+                    <Bordereau adresse={this.state.dest} type={this.state.type} instructions={this.state.instructions} onRetour={this.handleRetour} />
                 }
             </>
         )
