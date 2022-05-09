@@ -154,4 +154,10 @@ class MainController extends AbstractController
             'bordereau' => $result['bordereau'],
         ]);
     }
+
+    #[Route('/api/client/handshake', name: 'api_handshake')]
+    public function handShake() : Response
+    {
+        return $this->json(['result' => $this->getUser() !== null]);
+    }
 }

@@ -3,12 +3,14 @@ import { getData, getQrcode, postData } from '../modules/postData';
 import Adresse from './Adresse';
 import '../styles/Bordereau.css';
 import { qrcodeUrl } from '../modules/data';
+import PopupConfirmation from "./PopupConfirmation";
 
 class Bordereau extends Component {
     constructor(props) {
         super(props);
-        this.state = { exp: [], dest: [], type: '', qrcode: '', bordereau: '-----', valider: false };
+        this.state = { exp: [], dest: [], type: '', qrcode: '', bordereau: '-----', valider: false, isSubmitted: false };
         this.dest = this.props.adresse;
+        this.msg = "Confirmer l'impression du bordereau svp.";
     }
 
     componentDidMount = async () => {
@@ -25,25 +27,32 @@ class Bordereau extends Component {
         this.props.onRetour();
     }
 
-    handleQrCode = async () => {
+    handleQrCode = () => {
         if (!this.state.valider) {
-            let type;
-            if (this.state.type) {
-                type = 1;
-            } else {
-                type = 0;
-            }
-            console.log('type', type);
-            const response = await postData('/qrcode', [this.state.dest.id, type]);
-            console.log('qrcode : ', response);
-            this.setState({
-                qrcode: `${qrcodeUrl}${response.qrcode}`,
-                bordereau: response.bordereau,
-                valider: true
-            });
+            this.setState({isSubmitted: true})
         } else {
-            alert("Votre bordereau est déjà en cours d'impression");
+            alert("Votre bordereau est déjà en cours d'impression.");
         }
+    }
+
+    handleConfirm = async () => {
+        let type;
+        if (this.state.type) {
+            type = 1;
+        } else {
+            type = 0;
+        }
+        const response = await postData('/qrcode', [this.state.dest.id, type]);
+        this.setState({
+            qrcode: `${qrcodeUrl}${response.qrcode}`,
+            bordereau: response.bordereau,
+            valider: true,
+            isSubmitted: false
+        });
+    }
+
+    handleCancel = () => {
+        this.setState({isSubmitted: false});
     }
 
     render() {
@@ -117,6 +126,9 @@ class Bordereau extends Component {
                         </div>
                     </article>
                 </section>
+                {
+                    this.state.isSubmitted && <PopupConfirmation msg={this.msg} onCancelClick={this.handleCancel} onConfirmClick={this.handleConfirm} />
+                }
             </>
         );
     }

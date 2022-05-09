@@ -28,9 +28,10 @@ $orange: #FF5E1A;
     border: 1px solid #646464;
     border-radius: 5px;
 
-    > div:nth-child(2) {
+    >div:nth-child(2) {
         padding: 1vh 1vw;
     }
+
     >.popup-buttons {
         width: 50%;
         display: flex;
@@ -43,6 +44,7 @@ $orange: #FF5E1A;
             border-radius: 5px;
             font-weight: bold;
             color: white;
+
             &:hover {
                 cursor: pointer;
             }

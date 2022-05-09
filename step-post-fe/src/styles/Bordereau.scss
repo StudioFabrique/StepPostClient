@@ -12,14 +12,14 @@ $orange: #FF5E1A;
         width: 80%;
         display: flex;
         justify-content: flex-start;
+
         >div {
             display: flex;
             column-gap: 2VW;
         }
 
     }
-    >.section-bordereau-exp, >.section-bordereau-dest {
-    }
+
     .section-bordereau-exp {
         width: 80%;
         height: 80vh;
@@ -140,6 +140,7 @@ $orange: #FF5E1A;
                 height: 100%;
                 display: flex;
                 align-items: center;
+
                 >img {
                     height: 300px;
                     width: 300px;
@@ -178,7 +179,17 @@ $orange: #FF5E1A;
                     >article {
                         display: flex;
                         flex-direction: column;
-                        row-gap: .5vh;
+                        row-gap: 2vh;
+
+                        >div {
+                            display: flex;
+                            flex-direction: column;
+                            row-gap: .5vh;
+                        }
+
+                        >div:nth-child(2) {
+                            font-size: .85rem;
+                        }
                     }
                 }
             }
@@ -195,6 +206,7 @@ $orange: #FF5E1A;
                 color: $blue;
                 font-size: .86rem;
                 font-style: italic;
+
                 >span {
                     display: flex;
                     column-gap: .5vw;
@@ -212,21 +224,30 @@ $orange: #FF5E1A;
 
     .main-nouvel-envoi {
         height: 100%;
-        transform: scale(1);
+        row-gap: 0;
         color: black;
-        >button {
+        margin-top: 0;
+
+        >.section-bordereau-buttons {
             display: none;
         }
-        >section{
+
+        >.section-bordereau-exp,
+        >.section-bordereau-dest {
+            border: 1px solid black;
         }
+
         >.section-bordereau-exp {
-            padding: 1vw;
             width: 210mm;
-            height: 100mm;
+            height: 90mm;
 
             >.article-exp-left {
                 >div:nth-child(1) {
                     >div {
+                        >img {
+                            height: 8%;
+                        }
+
                         >label {
                             font-size: .5rem;
                         }
@@ -253,9 +274,9 @@ $orange: #FF5E1A;
         }
 
         >.section-bordereau-dest {
-            padding: 1vw;
             width: 210mm;
-            height: 100mm;
+            height: 90mm;
+
             >.article-dest-left {
                 >div:nth-child(1) {
                     >img {
@@ -264,14 +285,17 @@ $orange: #FF5E1A;
                     }
                 }
             }
+
             >.article-dest-right {
                 >div {
                     width: 100%;
                     transform: scale(.75);
                 }
+
                 >div:nth-child(1) {
                     height: 65%;
                 }
+
                 >div:nth-child(2) {
                     height: 35%;
                 }

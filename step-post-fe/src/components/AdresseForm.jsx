@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { postData } from '../modules/postData';
-import PopupEdition from './PopupEdition';
+import PopupConfirmation from './PopupConfirmation';
 import '../styles/AdresseForm.css';
 import { toTitleCase } from '../modules/formatter';
 import { testFormAdress } from '../modules/checkForm';
@@ -130,7 +130,7 @@ class AdresseForm extends Component {
                         </div>
                         <div>
                             <label><div><p>Complément d'adresse</p><p className="obligatoire"></p></div>
-                                <textarea rows="2" value={toTitleCase(this.state.complement)} name="complement" onChange={this.handleChange} />
+                                <textarea rows="2" value={this.state.complement} name="complement" onChange={this.handleChange} />
                             </label>
                         </div>
                         <div>
@@ -166,7 +166,7 @@ class AdresseForm extends Component {
                     </form>
                 </article>
                 {
-                    this.state.isSubmitted && <PopupEdition onCancelClick={this.handleCancel} onConfirmClick={this.handleConfirm} />
+                    this.state.isSubmitted && <PopupConfirmation msg={"Confirmez les modifications svp."} onCancelClick={this.handleCancel} onConfirmClick={this.handleConfirm} />
                 }
             </>
         );

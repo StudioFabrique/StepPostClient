@@ -6,6 +6,7 @@ import '../styles/Header.css';
 import { useState } from "react";
 import Historique from "./Historique";
 import AdressesFavorites from "./AdressesFavorites";
+import { getData, postData } from "../modules/postData";
 
 function Header() {
 

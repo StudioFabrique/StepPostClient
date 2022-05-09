@@ -3,7 +3,7 @@ import '../styles/AdressesFavorites.css';
 import ListeAdresses from './ListeAdresses';
 import NouvelEnvoi from './NouvelEnvoi';
 import AdresseForm from './AdresseForm';
-import { postData } from '../modules/postData';
+import { getData, postData } from '../modules/postData';
 
 class AdressesFavorites extends Component {
     constructor(props) {
@@ -18,6 +18,7 @@ class AdressesFavorites extends Component {
     }
 
     handleSectionUpdate = (newId, section) => {
+        this.handShake();
         this.newId = newId;
         this.setState({section: section});
     }
@@ -38,6 +39,13 @@ class AdressesFavorites extends Component {
     handleEditerAdresse = async adresse => {
         const response = await postData('/editAdresse', adresse);
         this.setState({section: 0});
+    }
+
+    handShake = async () => {
+        const response = await getData('/handshake');
+        if (response.code === 401) {
+            window.location.href = '/logout';
+        }
     }
 
     render() {

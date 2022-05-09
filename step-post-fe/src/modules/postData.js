@@ -15,11 +15,11 @@ export async function postData(url, data) {
             }
         })).json();
         if (response.code === 401) {
+            sessionStorage.setItem('token', '');
             window.location.href = "/";
         }
         return response
     } catch (err) {
-        console.log(err);
     }
 }
 

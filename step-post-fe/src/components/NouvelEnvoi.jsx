@@ -30,37 +30,42 @@ class NouvelEnvoi extends Component {
     }
 
     handleSubmit = (event) => {
+        this.handShake();
         event.preventDefault();
         console.log('submit', this.state.type);
         if (!this.state.type) {
-            console.log('oops');
+            alert('Choisissez un type de courrier svp.');
         } else {
-            console.log(`${this.state.type} envoyé !`);/* 
-            const newDest = this.state.dest;
-            if  (newDest.complement) {
-                newDest.complement = `${newDest.complement}\n${this.state.instructions}`;
-            } else {
-                newDest.complement = `${this.state.instructions}`;
-            } */
+            console.log(`${this.state.type} envoyé !`);
             this.setState({ section: 2 });
         }
     }
 
     handleModifications = (newDest) => {
+        this.handShake();
         this.setState({ dest: newDest, section: 0 });
     }
 
     handleRetour = () => {
+        this.handShake();
         this.setState({ section: 0 });
     }
 
     handleModifier = () => {
+        this.handShake();
         this.setState({ section: 1 });
     }
 
     handleInstructions = (event) => {
-        this.setState({instructions: event.target.value});
-    } 
+        this.setState({ instructions: event.target.value });
+    }
+
+    handShake = async () => {
+        const response = await getData('/handshake');
+        if (response.code === 401) {
+            window.location.href = '/logout';
+        }
+    }
 
     render() {
         return (
@@ -83,6 +88,7 @@ class NouvelEnvoi extends Component {
                                         {toTitleCase(`${this.state.dest.civilite} ${this.state.dest.prenom} ${this.state.dest.nom}`)}
                                     </p>
                                     <p>{toTitleCase(this.state.dest.adresse)}</p>
+                                    <p>{this.state.dest.complement}</p>
                                     <p>{toTitleCase(`${this.state.dest.codePostal} ${this.state.dest.ville}`)}</p>
                                     <p>{`(tél : ${this.state.dest.telephone})`}</p>
                                 </div>
@@ -93,10 +99,10 @@ class NouvelEnvoi extends Component {
                                 </div>
                             </article>
                             <article className='article-ne-instructions' >
-                        <label>Instruction de livraisons :
-                            <textarea cols="30" rows="3" name="instructions" value={this.state.dest.complement} onChange={this.handleInstructions} />
-                        </label>
-                        </article>
+                                <label>Instruction de livraisons :
+                                    <textarea cols="30" rows="3" name="instructions" value={this.state.instructions} onChange={this.handleInstructions} />
+                                </label>
+                            </article>
                             <article className='article-ne-buttons'>
                                 <div>
                                     <button className="button" onClick={this.handleRetourAdresses}>Retour</button>
