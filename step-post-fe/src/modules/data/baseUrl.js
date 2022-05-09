@@ -6,4 +6,6 @@ const baseUrl = `${url}:${port}/api/client`;
 
 const logUrl = `${url}:${port}/api/login_check`;
 
-export { baseUrl, logUrl };
+const qrcodeUrl = `${url}:${port}/assets/qrcodes/`;
+
+export { baseUrl, logUrl, qrcodeUrl };

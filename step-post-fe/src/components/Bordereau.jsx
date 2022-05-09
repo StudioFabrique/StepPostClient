@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { getData, getQrcode, postData } from '../modules/postData';
 import Adresse from './Adresse';
 import '../styles/NouvelEnvoi.css';
+import { qrcodeUrl } from '../modules/data';
 
 class Bordereau extends Component {
     constructor(props) {
         super(props);
-        this.state = { exp: [], dest: [], type: true, qrcode: '', bordereau: '-----' };
+        this.state = { exp: [], dest: [], type: '', qrcode: '', bordereau: '-----' };
         this.dest = this.props.adresse;
     }
 
@@ -15,16 +16,13 @@ class Bordereau extends Component {
         if (!this.dest.telephone) {
             this.dest.telephone = 'non disponible';
         }
-        this.setState({ exp: response.exp, dest: this.dest });
+        this.setState({ exp: response.exp, dest: this.dest, type: this.props.type });
         console.log('exp', this.state.exp);
 
     }
 
     handleRetour = () => {
-    }
-
-    handleChange = (event) => {
-        this.setState({ type: !this.state.type });
+        this.props.onRetour();
     }
 
     handleQrCode = async () => {
@@ -38,10 +36,9 @@ class Bordereau extends Component {
         const response = await postData('/qrcode', [this.state.dest.id, type]);
         console.log('qrcode : ', response);
         this.setState({
-            qrcode: `http://127.0.0.1:8000/assets/qrcodes/${response.qrcode}`,
+            qrcode: `${qrcodeUrl}${response.qrcode}`,
             bordereau: response.bordereau
         });
-        console.log('type-php', response.type);
     }
 
     render() {
@@ -52,9 +49,9 @@ class Bordereau extends Component {
                         <div>
                             <img src="img/logo.png" alt="logo step post" />
                             <div>
-                                <input type="radio" name="type" value="lettre" onChange={this.handleChange} />
+                                <input type="checkbox" name="type" checked={this.state.type === 'lettre'} readOnly />
                                 <label htmlFor="lettre">Lettre</label>
-                                <input type="radio" name="type" value="colis" onChange={this.handleChange} />
+                                <input type="checkbox" name="type" checked={this.state.type === 'colis'} readOnly />
                                 <label htmlFor="colis">Colis</label>
                             </div>
                             <p>Date et cachet STEP POST</p>
@@ -109,7 +106,8 @@ class Bordereau extends Component {
                         </div>
                     </article>
                 </section>
-                <button onClick={this.handleQrCode}>Qrcode</button>
+                <button className='button' onClick={this.handleQrCode}>Qrcode</button>
+                <button className='button' onClick={this.handleRetour}>Retour</button>
             </>
         );
     }
