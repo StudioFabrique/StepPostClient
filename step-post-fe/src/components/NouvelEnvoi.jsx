@@ -48,7 +48,6 @@ class NouvelEnvoi extends Component {
     }
 
     handleRetour = () => {
-        sessionStorage.setItem('token', '');
         this.handShake();
         this.setState({ section: 0 });
     }

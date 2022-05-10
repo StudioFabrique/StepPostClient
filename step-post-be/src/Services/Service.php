@@ -12,7 +12,6 @@ use App\Repository\StatutCourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Toto as ServicesToto;
-use Symfony\Component\Validator\Constraints\Length;
 
 class Service
 {
@@ -22,7 +21,7 @@ class Service
         $tmp = json_decode($_POST['data']);
         $data = array();
         foreach ($tmp as $el) :
-            array_push($data, strip_tags($el));
+            array_push($data, strtolower(strip_tags($el)));
         endforeach;
         return $data;
     }
@@ -158,22 +157,16 @@ class Service
         $nom = "";
         if (isset($_POST['data'])) :
             $nom = $this->stripTag()[0];
-            $tmp = array();/* 
             for ($i = 0; $i < strlen($nom); $i++) :
+                $tmp = array();
                 foreach($destinataires as $el) :
-                    if ($el->getNom()[$i] === $nom[$i]) :
-                        array_push($tmp, $destinataires);
+                    $elNom = $el->getNom();
+                    if ($elNom[$i] === $nom[$i]) :
+                        array_push($tmp, $el);
                     endif;
                 endforeach;
                 $destinataires = $tmp;
-            endfor; */
-            
-            foreach ($destinataires as $el) :
-                if (str_contains($el->getNom(), $nom)) :
-                    array_push($tmp, $el);
-                endif;
-            endforeach;
-            $destinataires = $tmp;
+            endfor;
         endif;
         if (count($destinataires) === 0) :
             return false;

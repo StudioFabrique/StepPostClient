@@ -1,79 +1,51 @@
 .bouton-ajouter > button {
-  padding: 0 .75vh 0 .75vh;
-  border-radius: 5px;
-  background-color: #FF5E1A;
-  font-size: 1.5rem;
-  color: white;
   border: none;
 }
-
+.bouton-ajouter > button > img {
+  width: 2vw;
+  height: 2vw;
+}
 .bouton-ajouter > button:hover {
   cursor: pointer;
 }
 
 .main-nouvel-envoi {
   width: 100vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
   row-gap: 5vh;
+  border-bottom: 5vh;
 }
-
 .main-nouvel-envoi > .section-adresses {
   width: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
   row-gap: 2vh;
-  -webkit-column-gap: 1vw;
-          column-gap: 1vw;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
 }
-
 .main-nouvel-envoi > .section-recherche-nom,
 .main-nouvel-envoi > .section-no-results {
   width: 60%;
 }
-
 .main-nouvel-envoi > .section-recherche-nom {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 1000px) {
   .main-nouvel-envoi > .section-adresses,
-  .main-nouvel-envoi > .section-no-results,
-  .main-nouvel-envoi > .section-recherche-nom {
+.main-nouvel-envoi > .section-no-results,
+.main-nouvel-envoi > .section-recherche-nom {
     width: 90%;
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
   .main-nouvel-envoi > .section-recherche-nom {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     row-gap: 2vh;
   }
-}
-/*# sourceMappingURL=AdressesFavorites.css.map */
+}/*# sourceMappingURL=AdressesFavorites.css.map */

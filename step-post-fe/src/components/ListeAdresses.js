@@ -18,12 +18,25 @@ class ListeAdresses extends Component {
 
     handleRecherche = async nom => {
         this.nom = nom;
+        console.log('nom', this.nom);
+        if (this.nom.length === 0) {
+            this.setState({ rechercheNom: false, noResults: false });
+        }
         const response = await postData(`/adressesFavorites`, [nom]);
         if (response.destinataires !== false) {
-            this.setState({ adresses: response.destinataires, rechercheNom: true, noResults: false});
+            if (this.nom.length === 0) {
+                this.setState({ adresses: response.destinataires, rechercheNom: false, noResults: false });
+            } else {
+                this.setState({ adresses: response.destinataires, rechercheNom: true, noResults: false });
+            }
         } else {
-            this.setState({ noResults: true });
+            if (this.nom.length === 0) {
+                this.setState({ adresses: [], noResults: false, rechercheNom: false });
+            } else {
+                this.setState({ adresses: [], noResults: true, rechercheNom: false });
+            }
         }
+
     }
 
     handleBtnRetour = async () => {
@@ -53,13 +66,17 @@ class ListeAdresses extends Component {
                             <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} />
                             <span className="bouton-ajouter">
                                 <h4>Nouvelle adresse</h4>
-                                <button className='button' onClick={this.props.onNewAdress}>+</button>
+                                <button onClick={this.props.onNewAdress}>
+                                    <img src="img/plus-btn.png" alt="lien nouvelle adresse" />
+                                </button>
                             </span>
                         </section> :
                         <section className='section-recherche-nom'>
                             <span className="bouton-ajouter">
                                 <h4>Nouvelle adresse</h4>
-                                <button className='button' onClick={this.props.onNewAdress}>+</button>
+                                <button onClick={this.props.onNewAdress}>
+                                    <img src="img/plus-btn.png" alt="lien nouvelle adresse" />
+                                </button>
                             </span>
                         </section>
                 }

@@ -1,0 +1,48 @@
+footer {
+  bottom: 0;
+  width: 98%;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #140A82;
+  border-top-right-radius: 30px;
+  color: white;
+}
+footer > div:nth-child(1) {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+footer > div:nth-child(1) > div {
+  display: flex;
+  justify-content: space-around;
+}
+footer > div:nth-child(1) > div > span {
+  display: flex;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+  align-items: center;
+  line-height: 20px;
+}
+footer > div:nth-child(1) > div > span > img {
+  width: auto;
+  height: 24px;
+}
+footer > div:nth-child(1) > div > span > p {
+  font-size: 0.75rem;
+}
+footer > div:nth-child(1) > div:nth-child(2) {
+  flex-direction: column;
+}
+footer > div:nth-child(1) > div:nth-child(3) {
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
+}
+footer > div:nth-child(2) {
+  background-color: #6D699A;
+  padding: 0.5vw;
+  font-size: 0.75rem;
+}/*# sourceMappingURL=Footer.css.map */

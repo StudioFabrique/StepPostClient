@@ -7,7 +7,9 @@ function BoutonAjouter(props) {
             <h4>{props.msg}</h4>
             <div>
                 <Link to={props.url}>
-                    <button>+</button>
+                    <button>
+                        <img src="img/plus-btn.png" alt="lien nouveau courrier" />
+                    </button>
                 </Link>
             </div>
         </span>

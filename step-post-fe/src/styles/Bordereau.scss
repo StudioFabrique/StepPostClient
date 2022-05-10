@@ -218,9 +218,10 @@ $orange: #FF5E1A;
 
 @media print {
 
-    nav {
+    nav, footer {
         display: none;
     }
+
 
     .main-nouvel-envoi {
         height: 100%;

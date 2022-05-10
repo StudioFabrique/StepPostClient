@@ -60,7 +60,7 @@ class Bordereau extends Component {
             <>
                 <section className='section-bordereau-buttons' >
                     <div>
-                        <button className='button' onClick={this.handleQrCode}>Qrcode</button>
+                        <button className='button' onClick={this.handleQrCode}>Imprimer</button>
                         <button className='button' onClick={this.handleRetour}>Retour</button>
                     </div>
                 </section>

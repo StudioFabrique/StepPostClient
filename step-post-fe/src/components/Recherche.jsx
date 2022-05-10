@@ -8,17 +8,14 @@ function Recherche({ onRecherche }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        let testName = testField(regexName, value);
-        let testNumbers = testField(regexNumbers, value);
-        if (testName || testNumbers) {
-            onRecherche(value);
-        }
+        let name = event.target.value;
+            onRecherche(name);
     }
 
     return (
         <>
-            <form className="form-recherche" onSubmit={handleSubmit}>
-                <input type="text" id="searchInput" onChange={(e) => setValue(e.target.value)} />
+            <form className="form-recherche">
+                <input type="text" id="searchInput" onChange={handleSubmit} />
                 <img src="img/icone-loupe.png" alt="icone loupe" />
             </form>
         </>
