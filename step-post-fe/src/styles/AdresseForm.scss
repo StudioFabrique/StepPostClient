@@ -109,3 +109,53 @@ main {
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    main {
+        >.article-form-adresse {
+            align-items: flex-start;
+            >.form-edition {
+                width: 90%;
+                font-size: .75rem;
+                >div:first-child {
+                    align-items: center;
+                    >label {
+                        >select {
+                            width: 10vw;
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
+
+@media screen and (max-width: 500px) {
+    main {
+        >.article-form-adresse {
+            align-items: flex-start;
+            >div {
+                width: 100%;
+                >h3 {
+                    font-size: .75rem;
+                }
+            }
+            >.form-edition {
+                width: 90%;
+                font-size: .75rem;
+                >div:first-child {
+                    align-items: center;
+                    >label {
+                        >select {
+                            width: 15vw;
+                        }
+                    }
+                    >p {
+                        white-space: nowrap;
+                        font-size: .5rem;
+                    }
+                }
+            }
+        }
+    }    
+}

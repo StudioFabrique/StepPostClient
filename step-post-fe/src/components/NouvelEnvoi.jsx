@@ -3,6 +3,7 @@ import { toTitleCase } from '../modules/formatter';
 import AdresseForm from './AdresseForm';
 import Bordereau from './Bordereau';
 import '../styles/NouvelEnvoi.css';
+import { getData } from '../modules/postData';
 
 class NouvelEnvoi extends Component {
     constructor(props) {

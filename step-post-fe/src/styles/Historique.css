@@ -1,40 +1,54 @@
 body {
   height: 90vh;
 }
+
 body #root {
   height: 100%;
 }
+
 body #root .section-historique {
   width: 80%;
 }
+
 body #root .section-historique table {
   width: 100%;
   border: 1px solid darkgray;
   border-radius: 5px;
   padding: 1vw 1vw;
 }
+
 body #root .section-historique table th,
 body #root .section-historique table td {
   padding: 1vh 1vw;
   font-weight: bold;
 }
+
 body #root .section-historique table > thead {
   text-align: left;
   background-color: #140A82;
   color: white;
 }
+
 body #root .section-historique table > thead > tr > th:hover {
   cursor: pointer;
 }
+
 body #root .section-historique table > tbody > tr:nth-child(even) {
   background-color: lightgray;
 }
+
 body #root .section-historique table > tbody > tr > td:nth-child(4) {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
 }
+
 body #root .section-historique table > tbody > tr:hover {
   cursor: pointer;
-}/*# sourceMappingURL=Historique.css.map */
+}
+/*# sourceMappingURL=Historique.css.map */

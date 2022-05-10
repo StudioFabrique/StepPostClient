@@ -33,6 +33,10 @@ class AdresseForm extends Component {
     }
 
     resetAdresse = () => {
+        if (!this.dest.civilite) { this.dest.civilite = ''; }
+        if (!this.dest.complement) { this.dest.complement = ''; }
+        if (!this.dest.telephone) { this.dest.telephone = ''; }
+        if (!this.dest.email) { this.dest.email = ''; }
         this.setState({
             civilite: this.dest.civilite,
             nom: this.dest.nom,
@@ -67,9 +71,7 @@ class AdresseForm extends Component {
             email: this.state.email,
             id: this.state.id,
         }];
-        console.log('toto', testFormAdress(items[0]));
         const result = testFormAdress(items[0]);
-        console.log('resut', result);
         if (result !== false) {
             this.setState({ items: result, isSubmitted: true, erreur: false });
         } else {
@@ -81,7 +83,7 @@ class AdresseForm extends Component {
         if (this.dest) {
             this.resetAdresse();
         }
-        this.setState({ items: [], isSubmitted: false });
+        this.setState({ isSubmitted: false });
     }
 
     handleConfirm = () => {
@@ -160,7 +162,7 @@ class AdresseForm extends Component {
                             </div>
                         }
                         <div>
-                            <button className='button' onClick={this.handleCancel}>Annuler</button>
+                            <button className='button' type="button" onClick={this.handleCancel}>Annuler</button>
                             <input className="button" type="submit" value="Envoyer" />
                         </div>
                     </form>
