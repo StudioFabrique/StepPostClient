@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { postData } from '../modules/postData';
 import PopupConfirmation from './PopupConfirmation';
 import '../styles/AdresseForm.css';
 import { toTitleCase } from '../modules/formatter';
@@ -82,7 +81,7 @@ class AdresseForm extends Component {
         if (this.dest) {
             this.resetAdresse();
         }
-        this.setState({ isSubmitted: false });
+        this.setState({ items: [], isSubmitted: false });
     }
 
     handleConfirm = () => {
@@ -161,6 +160,7 @@ class AdresseForm extends Component {
                             </div>
                         }
                         <div>
+                            <button className='button' onClick={this.handleCancel}>Annuler</button>
                             <input className="button" type="submit" value="Envoyer" />
                         </div>
                     </form>

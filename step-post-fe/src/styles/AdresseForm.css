@@ -70,9 +70,14 @@ main > .article-form-adresse .form-edition > div:last-child {
   width: 90%;
   display: flex;
   justify-content: flex-end;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
 }
 main > .article-form-adresse .form-edition > div:last-child > .button {
   padding: 1vw;
+}
+main > .article-form-adresse .form-edition > div:last-child > input {
+  background-color: #140A82;
 }
 main > .article-form-adresse > div {
   width: 50%;

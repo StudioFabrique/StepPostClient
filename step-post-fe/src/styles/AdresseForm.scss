@@ -1,3 +1,4 @@
+$blue: #140A82;
 .obligatoire {
     color: red;
 }
@@ -78,9 +79,13 @@ main {
                 width: 90%;
                 display: flex;
                 justify-content: flex-end;
+                column-gap: 1vw;
 
                 >.button {
                     padding: 1vw;
+                }
+                >input {
+                    background-color: $blue;;
                 }
             }
 

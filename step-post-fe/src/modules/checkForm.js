@@ -1,4 +1,4 @@
-import { regexAddress, regexMail, regexName, regexNumbers } from "./data";
+import { regexAddress, regexMail, regexName, regexNumbers, regexPassword } from "./data";
 
 export function testField(reg, value) {
     if (reg.test(value)) {
@@ -26,10 +26,11 @@ export function testFormAdress(data) {
         });
     }
 
-    let newData = [];
     let testData = [];
 
-    if (data.civilite) { newData.push(escapeHtml(data.civilite)); }
+    if (data.civilite) {
+        data.civilite = escapeHtml(data.civilite);
+    }
     if (data.prenom) {
         data.prenom = escapeHtml(data.prenom);
         testData.push(true);
@@ -69,7 +70,6 @@ export function testFormAdress(data) {
     if (data.email) {
         data.email = escapeHtml(data.email);
     }
-    console.log('newdata', data);
     let n = 0;
     testData.forEach((elem) => {
         if(!elem) {
@@ -82,33 +82,3 @@ export function testFormAdress(data) {
         return false;
     }    
 }
-
-/* export function testFormAdress(data) {
-    console.log("items", data);
-    let result = [];
-    if (data.civilite) {
-        result.push(testField(regexName, data.civilite));
-    }
-    result.push(testField(regexName, data.prenom));
-    result.push(testField(regexName, data.ville));
-    result.push(testField(regexName, data.nom));
-    result.push(testField(regexNumbers, data.codePostal));
-    result.push(testField(regexAddress, data.adresse));
-    if (data.complement) {
-        result.push(testField(regexAddress, data.complement));
-    }
-    if (data.telephone && data.telephone !== "non disponible") {
-        result.push(testField(regexNumbers, data.telephone));
-    }
-    if (data.email) {
-        result.push(testField(regexMail, data.email));
-    }
-    let n = 0;
-    result.forEach((elem) => {
-        if(!elem) {
-         n++;
-        }
-    });
-    console.log('test', result);
-    return (n === 0);
-} */
