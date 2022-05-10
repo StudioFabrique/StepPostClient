@@ -158,7 +158,7 @@ class Service
         $nom = "";
         if (isset($_POST['data'])) :
             $nom = $this->stripTag()[0];
-            $tmp = array();
+            $tmp = array();/* 
             for ($i = 0; $i < strlen($nom); $i++) :
                 foreach($destinataires as $el) :
                     if ($el->getNom()[$i] === $nom[$i]) :
@@ -166,13 +166,13 @@ class Service
                     endif;
                 endforeach;
                 $destinataires = $tmp;
-            endfor;
-            /* 
+            endfor; */
+            
             foreach ($destinataires as $el) :
                 if (str_contains($el->getNom(), $nom)) :
                     array_push($tmp, $el);
                 endif;
-            endforeach; */
+            endforeach;
             $destinataires = $tmp;
         endif;
         if (count($destinataires) === 0) :
