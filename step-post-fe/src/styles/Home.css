@@ -12,6 +12,7 @@
 }
 
 body #root .home-main {
+  margin-top: 5vh;
   width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -26,7 +27,7 @@ body #root .home-main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  row-gap: 5vh;
+  row-gap: 3vh;
 }
 
 body #root .home-main > div:last-child {
@@ -42,7 +43,6 @@ body #root .home-main > div:last-child {
 }
 
 body #root .listecourriers-section {
-  margin-top: 5vh;
   width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;

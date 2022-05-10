@@ -24,11 +24,16 @@ export async function postData(url, data) {
 }
 
 export async function getData(url) {
-    return await (await fetch(`${baseUrl}${url}`, {
+    const response =  await (await fetch(`${baseUrl}${url}`, {
         headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
         }
     })).json();
+    if (response.code === 401) {
+        sessionStorage.setItem('token', '');
+        window.location.href = "/";
+    }
+    return response
 }
 
 export async function getToken(data) {

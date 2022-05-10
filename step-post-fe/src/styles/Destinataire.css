@@ -82,4 +82,10 @@
 .section-adresses > .adresse > ul > li > a > img:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .section-adresses > .adresse {
+    white-space: nowrap;
+  }
+}
 /*# sourceMappingURL=Destinataire.css.map */

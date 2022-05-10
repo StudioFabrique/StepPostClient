@@ -14,57 +14,56 @@ class AdressesFavorites extends Component {
     }
 
     componentDidMount() {
+        this.handShake();
         this.props.onPageLanding(1);
     }
 
     handleSectionUpdate = (newId, section) => {
         this.handShake();
         this.newId = newId;
-        this.setState({section: section});
+        this.setState({ section: section });
     }
 
     handleRetour = () => {
-        this.setState({section: 0});
+        this.setState({ section: 0 });
     }
 
     handleNouvelleAdresse = () => {
-        this.setState({section: 3});
+        this.setState({ section: 3 });
     }
 
     handleAjouterAdresse = async adresse => {
-        const response = await postData('/addAdresse', adresse);
-        this.setState({section: 0});
+        await postData('/addAdresse', adresse);
+        this.setState({ section: 0 });
     }
 
     handleEditerAdresse = async adresse => {
-        const response = await postData('/editAdresse', adresse);
-        this.setState({section: 0});
+        await postData('/editAdresse', adresse);
+        this.setState({ section: 0 });
     }
 
     handShake = async () => {
-        const response = await getData('/handshake');
-        if (response.code === 401) {
-            window.location.href = '/logout';
-        }
+        await getData('/handshake');
     }
 
     render() {
         return (
-                <main className='main-nouvel-envoi'>
-                    {
-                        this.state.section === 0 && <ListeAdresses onClickIcone={this.handleSectionUpdate} onNewAdress={this.handleNouvelleAdresse} />
-                    }
-                    {
-                        this.state.section === 1 && <NouvelEnvoi adresse={this.newId} onRetour={this.handleRetour} />
-                    }
-                    {
-                        this.state.section === 2 && <AdresseForm id={this.newId} onRetour={this.handleRetour} onEditerAdresse={this.handleEditerAdresse} />
-                    }
-                    {
-                        this.state.section === 3 && <AdresseForm onRetour={this.handleRetour} onAjouterAdresse={this.handleAjouterAdresse} />
-                    }
-                </main>
+            <main className='main-nouvel-envoi'>
+                {
+                    this.state.section === 0 && <ListeAdresses onClickIcone={this.handleSectionUpdate} onNewAdress={this.handleNouvelleAdresse} />
+                }
+                {
+                    this.state.section === 1 && <NouvelEnvoi adresse={this.newId} onRetour={this.handleRetour} />
+                }
+                {
+                    this.state.section === 2 && <AdresseForm id={this.newId} onRetour={this.handleRetour} onEditerAdresse={this.handleEditerAdresse} />
+                }
+                {
+                    this.state.section === 3 && <AdresseForm onRetour={this.handleRetour} onAjouterAdresse={this.handleAjouterAdresse} />
+                }
+            </main>
         );
+
     }
 }
 

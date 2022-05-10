@@ -51,4 +51,10 @@ body #root .section-historique table > tbody > tr > td:nth-child(4) {
 body #root .section-historique table > tbody > tr:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  body #root .section-historique {
+    width: 90%;
+  }
+}
 /*# sourceMappingURL=Historique.css.map */

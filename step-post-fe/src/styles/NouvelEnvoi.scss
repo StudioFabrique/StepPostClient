@@ -77,3 +77,68 @@ $blue: #140A82;
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .section-ne-dest {
+        width: 90%;
+
+        >.form-ne-dest {
+            width: 100%;
+
+            >div:first-child {
+                width: 60%;
+            }
+
+            >.article-ne-dest,
+            >.article-ne-instructions,
+            >.article-ne-buttons {
+                width: 60%;
+            }
+
+            >.article-ne-dest {
+                flex-direction: column;
+                row-gap: 2vh;
+
+                >div:nth-child(1) {
+                    width: 100%;
+                }
+
+                >div:nth-child(2) {
+                    width: 100%;
+
+                    >span {
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 1vw;
+                    }
+                }
+            }
+
+            >.article-ne-instructions {
+                >label {
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    >.section-ne-dest {
+        >.form-ne-dest {
+            width: 100%;
+
+            >div:first-child {
+                width: 100%;
+            }
+
+            >.article-ne-dest,
+            >.article-ne-instructions,
+            >.article-ne-buttons {
+                width: 100%;
+            }
+        }
+    }
+}

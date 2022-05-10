@@ -12,6 +12,7 @@ use App\Repository\StatutCourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Toto as ServicesToto;
+use Symfony\Component\Validator\Constraints\Length;
 
 class Service
 {
@@ -158,11 +159,20 @@ class Service
         if (isset($_POST['data'])) :
             $nom = $this->stripTag()[0];
             $tmp = array();
+            for ($i = 0; $i < strlen($nom); $i++) :
+                foreach($destinataires as $el) :
+                    if ($el->getNom()[$i] === $nom[$i]) :
+                        array_push($tmp, $destinataires);
+                    endif;
+                endforeach;
+                $destinataires = $tmp;
+            endfor;
+            /* 
             foreach ($destinataires as $el) :
                 if (str_contains($el->getNom(), $nom)) :
                     array_push($tmp, $el);
                 endif;
-            endforeach;
+            endforeach; */
             $destinataires = $tmp;
         endif;
         if (count($destinataires) === 0) :

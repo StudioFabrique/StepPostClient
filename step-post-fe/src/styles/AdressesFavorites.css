@@ -23,9 +23,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   row-gap: 5vh;
 }
 
@@ -56,5 +56,24 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-nouvel-envoi > .section-adresses,
+  .main-nouvel-envoi > .section-no-results,
+  .main-nouvel-envoi > .section-recherche-nom {
+    width: 90%;
+    font-size: .85rem;
+  }
+  .main-nouvel-envoi > .section-recherche-nom {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    row-gap: 2vh;
+  }
 }
 /*# sourceMappingURL=AdressesFavorites.css.map */

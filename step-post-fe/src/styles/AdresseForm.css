@@ -201,7 +201,7 @@ main > .article-form-adresse > div > div > .button {
             align-items: center;
   }
   main > .article-form-adresse > .form-edition > div:first-child > label > select {
-    width: 15vw;
+    width: 20vw;
   }
   main > .article-form-adresse > .form-edition > div:first-child > p {
     white-space: nowrap;

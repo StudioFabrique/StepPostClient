@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
                 'telephone' => '0559567864',
             ],
             [
-                'civilite' => 'mlle',
+                'civilite' => 'mme',
                 'prenom' => 'Clarisse',
                 'nom' => 'david',
                 'email' => 'clarisse.david@yahoo.fr',
@@ -97,7 +97,7 @@ class AppFixtures extends Fixture
                 'telephone' => '07851234',
             ],
             [
-                'civilite' => 'mlle',
+                'civilite' => 'mme',
                 'prenom' => 'Bérangère',
                 'nom' => 'de la roche-foucault',
                 'email' => 'lilith666d@yahoo.fr',
@@ -117,7 +117,7 @@ class AppFixtures extends Fixture
                 'telephone' => '07851234',
             ],
             [
-                'civilite' => 'mlle',
+                'civilite' => 'mme',
                 'prenom' => 'janis',
                 'nom' => 'joplin',
                 'email' => 'pearl@yahoo.fr',

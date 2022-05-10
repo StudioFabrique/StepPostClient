@@ -48,6 +48,7 @@ class NouvelEnvoi extends Component {
     }
 
     handleRetour = () => {
+        sessionStorage.setItem('token', '');
         this.handShake();
         this.setState({ section: 0 });
     }
@@ -62,7 +63,9 @@ class NouvelEnvoi extends Component {
     }
 
     handShake = async () => {
+        console.log(sessionStorage.getItem('token'));
         const response = await getData('/handshake');
+        console.log(response);
         if (response.code === 401) {
             window.location.href = '/logout';
         }

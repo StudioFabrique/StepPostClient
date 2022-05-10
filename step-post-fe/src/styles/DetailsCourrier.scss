@@ -127,8 +127,11 @@ $orange: #FF5E1A;
         width: 15vw;
     }
     .details {
-        font-size: .5rem;
-        color: red;
+        >div {
+            >p {
+                font-size: .5rem;
+            }
+        }
     }
 
     .statuts {

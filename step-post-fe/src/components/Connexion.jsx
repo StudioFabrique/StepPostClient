@@ -5,7 +5,7 @@ function Connexion({ onIsLogged }) {
 
     const handleConnexion = (result) => {
         if (result) {
-            window.location.href = "/home";
+            window.location.href = "/";
         }
     }
 

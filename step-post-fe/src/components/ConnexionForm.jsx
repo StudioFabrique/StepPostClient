@@ -15,7 +15,6 @@ function ConnexionForm({ message, onFormSubmit }) {
 
         if (testMail && testPassword) {
             const response = await getToken([email, password]);
-            console.log('response', response);
             if (response.code === 401) {
                 onFormSubmit(false);
                 updateErreur(true);

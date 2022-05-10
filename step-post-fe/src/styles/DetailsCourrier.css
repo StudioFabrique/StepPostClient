@@ -147,9 +147,8 @@
   .trait {
     width: 15vw;
   }
-  .details {
+  .details > div > p {
     font-size: .5rem;
-    color: red;
   }
   .statuts {
     top: -300%;

@@ -60,3 +60,12 @@ $orange: #FF5E1A;
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .section-adresses {
+        >.adresse {
+            white-space: nowrap;
+        }
+    }
+    
+}

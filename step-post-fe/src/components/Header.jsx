@@ -3,7 +3,7 @@ import Home from "./Home";
 import Logout from "./Logout";
 import Connexion from "./Connexion";
 import '../styles/Header.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Historique from "./Historique";
 import AdressesFavorites from "./AdressesFavorites";
 import { getData, postData } from "../modules/postData";
@@ -11,6 +11,15 @@ import { getData, postData } from "../modules/postData";
 function Header() {
 
     const [isActive, updateActive] = useState(null);
+    const [isLogged, updateIsLogged] = useState(false);
+
+    useEffect(() => {
+        if (sessionStorage.getItem('token')) {
+            updateIsLogged(true);
+        } else {
+            updateIsLogged(false)
+        }
+    }, [sessionStorage.getItem('token')]);
 
     const handlePageActive = (page) => {
         updateActive(page);
@@ -24,7 +33,7 @@ function Header() {
                         <img src="img/logo.png" alt="logo step" />
                     </div>
                     {
-                        sessionStorage.getItem('token') ?
+                        isLogged &&
                             <div>
                                 <ul>
                                     <li>
@@ -49,12 +58,11 @@ function Header() {
                                     </li>
                                 </ul>
                             </div>
-                            : null
                     }
                 </nav>
                 <Routes>
-                    <Route path="/home" element={<Home onPageLanding={handlePageActive} />} />
-                    <Route path="/" element={<Connexion />} />
+                    <Route path="/" element={ isLogged ? <Home onPageLanding={handlePageActive} /> : <Connexion />} />
+                    <Route path="/home" element={ isLogged ? <Home onPageLanding={handlePageActive} /> : <Connexion />} />
                     <Route path="/historique" element={<Historique onPageLanding={handlePageActive} />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/carnet-d-adresses" element={<AdressesFavorites onPageLanding={handlePageActive} />} />
