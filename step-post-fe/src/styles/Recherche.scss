@@ -1,3 +1,4 @@
+@import './../index.scss';
 #searchInput {
     width: 30vw;
     padding: 1.5vw;
@@ -19,6 +20,10 @@
     column-gap: 1vw;
 }
 
+.recherche-adresse {
+    display: flex;
+    align-items: center;
+}
 .detailsRecherche {
     width: 70%;
     display: flex;
@@ -35,6 +40,7 @@
         justify-content: center;
         align-items: center;
         row-gap: 1vh;
+        color: $blue;
 
     }
 }

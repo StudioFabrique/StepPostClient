@@ -5,9 +5,9 @@ import BoutonAjouter from './BoutonAjouter.jsx';
 function ListeCourriers(props) {
     const [courriers, updateCourriers] = useState([]);
     const [id, updateId] = useState(null);
-    useEffect(() => { toto() }, [props]);
+    useEffect(() => { init() }, [props]);
 
-    function toto() {
+    function init() {
         updateId(null);
         const tmp = [];
         props.statuts.forEach((elem) => {

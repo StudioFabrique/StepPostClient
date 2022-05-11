@@ -1,5 +1,3 @@
-import { regexAddress, regexMail, regexName, regexNumbers, regexPassword } from "./data";
-
 export function testField(reg, value) {
     if (reg.test(value)) {
         return true;
@@ -21,7 +19,7 @@ export function testFormAdress(data) {
     };
 
     function escapeHtml(string) {
-        return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return String(string).replace(/[&<>"'`=]/g, function (s) {
             return entityMap[s];
         });
     }

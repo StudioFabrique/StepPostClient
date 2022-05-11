@@ -1,72 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #140A82;
+  font-family: rubik;
+}
+
 #searchInput {
   width: 30vw;
   padding: 1.5vw;
   border-radius: 5px;
-  box-shadow: 4px 4px 4px #646464;
+  -webkit-box-shadow: 4px 4px 4px #646464;
+          box-shadow: 4px 4px 4px #646464;
 }
 
 .form-recherche {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  -moz-column-gap: 1vw;
-       column-gap: 1vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
 }
 
 .rechercheNom {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  -moz-column-gap: 1vw;
-       column-gap: 1vw;
-  align-items: center;
+  -webkit-column-gap: 1vw;
+          column-gap: 1vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   column-gap: 1vw;
+}
+
+.recherche-adresse {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .detailsRecherche {
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 1px solid #646464;
   padding: 1vw;
   border-radius: 5px;
 }
+
 .detailsRecherche > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   row-gap: 1vh;
+  color: #140A82;
 }
 
 @media screen and (max-width: 1000px) {
   .detailsRecherche {
     width: 80%;
   }
-
   .form-recherche > img {
     width: 24px;
   }
 }
+
 @media screen and (max-width: 600px) {
   .rechercheNom {
     width: 90%;
-    font-size: 0.75rem;
+    font-size: .75rem;
   }
-
   .detailsRecherche {
     width: 90%;
     height: 15vh;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     row-gap: 2vh;
   }
   .detailsRecherche > div:nth-child(1) {
-    flex-direction: row;
-    -moz-column-gap: 5vw;
-         column-gap: 5vw;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-column-gap: 5vw;
+            column-gap: 5vw;
   }
   .detailsRecherche > div:nth-child(1) > h4,
-.detailsRecherche > div:nth-child(1) > .button {
-    font-size: 0.75rem;
+  .detailsRecherche > div:nth-child(1) > .button {
+    font-size: .75rem;
   }
-}/*# sourceMappingURL=Recherche.css.map */
+}
+/*# sourceMappingURL=Recherche.css.map */

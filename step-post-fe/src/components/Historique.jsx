@@ -7,7 +7,6 @@ import NoResults from './NoResults';
 import Logs from './Logs';
 import '../styles/Historique.css';
 import { resetSortArray } from '../modules/sortArray.js';
-import { baseUrl } from '../modules/data.js';
 
 class Historique extends Component {
     constructor(props) {
@@ -90,7 +89,7 @@ class Historique extends Component {
     render() {
         return (
             <>
-                <main className='home-main'>
+                <main className='main-historique'>
                     <Recherche onRecherche={this.handleRecherche} />
                     {
                         this.state.isRechercheActive ? <DetailsRecherche courrier={this.state.rechercheValue} onCloseRecherche={this.handleCloseRecherche} /> : null

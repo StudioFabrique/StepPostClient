@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { testField } from "../modules/checkForm";
 import { regexName, regexNumbers } from "../modules/data";
@@ -8,14 +9,17 @@ function Recherche({ onRecherche }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        let name = event.target.value;
-            onRecherche(name);
+        let testName = testField(regexName, value);
+        let testNumbers = testField(regexNumbers, value);
+        if (testName || testNumbers) {
+            onRecherche(value);
+        }
     }
 
     return (
         <>
-            <form className="form-recherche">
-                <input type="text" id="searchInput" onChange={handleSubmit} />
+            <form className="form-recherche" onSubmit={handleSubmit}>
+                <input type="text" id="searchInput" onChange={(e) => setValue(e.target.value)} />
                 <img src="img/icone-loupe.png" alt="icone loupe" />
             </form>
         </>

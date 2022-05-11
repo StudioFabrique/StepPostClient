@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { postData, getData } from '../modules/postData.js';
-import Recherche from './Recherche';
 import RechercheNom from './RechercheNom';
 import NoResults from './NoResults';
-import Destinataire from './Destinataire'
+import Destinataire from './Destinataire';
+import RechercheAdresse from './RechercheAdresse';
 
 class ListeAdresses extends Component {
     constructor(props) {
@@ -58,7 +58,7 @@ class ListeAdresses extends Component {
         return (
             <>
                 <section className='section-recherche'>
-                    <Recherche onRecherche={this.handleRecherche} />
+                    <RechercheAdresse onRecherche={this.handleRecherche} />
                 </section>
                 {
                     this.state.rechercheNom ?

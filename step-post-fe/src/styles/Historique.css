@@ -1,46 +1,87 @@
-body {
-  height: 90vh;
+.main-historique {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  row-gap: 3vh;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
 }
-body #root {
-  height: 100%;
-}
-body #root .section-historique {
+
+.main-historique > .section-historique {
   width: 80%;
 }
-body #root .section-historique table {
+
+.main-historique > .section-historique > table {
   width: 100%;
   border: 1px solid darkgray;
   border-radius: 5px;
   padding: 1vw 1vw;
 }
-body #root .section-historique table th,
-body #root .section-historique table td {
+
+.main-historique > .section-historique > table > th,
+.main-historique > .section-historique > table > td {
   padding: 1vh 1vw;
   font-weight: bold;
 }
-body #root .section-historique table > thead {
+
+.main-historique > .section-historique > table > thead {
   text-align: left;
   background-color: #140A82;
   color: white;
 }
-body #root .section-historique table > thead > tr > th:hover {
-  cursor: pointer;
-}
-body #root .section-historique table > tbody > tr:nth-child(even) {
-  background-color: lightgray;
-}
-body #root .section-historique table > tbody > tr > td:nth-child(4) {
-  display: flex;
-  align-items: center;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
-}
-body #root .section-historique table > tbody > tr:hover {
+
+.main-historique > .section-historique > table > thead > tr > th:hover {
   cursor: pointer;
 }
 
+.main-historique > .section-historique > table > tbody > tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+.main-historique > .section-historique > table > tbody > tr > td:nth-child(4) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+}
+
+.main-historique > .section-historique > table > tbody > tr > td {
+  padding: 1vh 1vw;
+}
+
+.main-historique > .section-historique > table > tbody > tr:hover {
+  cursor: pointer;
+}
+
+.main-historique > div:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5vw;
+          column-gap: .5vw;
+}
+
 @media screen and (max-width: 600px) {
-  body #root .section-historique {
+  .main-historique .section-historique {
     width: 90%;
+    font-size: .75rem;
   }
-}/*# sourceMappingURL=Historique.css.map */
+}
+/*# sourceMappingURL=Historique.css.map */

@@ -102,7 +102,7 @@ class NouvelEnvoi extends Component {
                                 </div>
                             </article>
                             <article className='article-ne-instructions' >
-                                <label>Instruction de livraisons :
+                                <label>Instruction de livraison :
                                     <textarea cols="30" rows="3" name="instructions" value={this.state.instructions} onChange={this.handleInstructions} />
                                 </label>
                             </article>
