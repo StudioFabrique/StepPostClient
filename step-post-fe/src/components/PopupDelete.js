@@ -13,8 +13,8 @@ function PopupDelete({adresse, onCancelClick, onConfirmClick}) {
                 <p>{toTitleCase(`${adresse.codePostal} ${adresse.ville}`)}</p>
             </div>
             <div className="popup-buttons">
-                <button onClick={() => onCancelClick()}>Annuler</button>
-                <button onClick={() => onConfirmClick(adresse.id)}>Confirmer</button>
+                <button className="button" onClick={() => onCancelClick()}>Annuler</button>
+                <button className="button-valider" onClick={() => onConfirmClick(adresse.id)}>Confirmer</button>
             </div>
         </article>
         </>

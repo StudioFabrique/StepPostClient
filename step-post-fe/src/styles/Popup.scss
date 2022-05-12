@@ -1,5 +1,6 @@
 $blue: #140A82;
 $orange: #FF5E1A;
+$green: #24A640;
 
 .screen {
     position: fixed;
@@ -21,7 +22,7 @@ $orange: #FF5E1A;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    row-gap: 2vh;
+    row-gap: 3vh;
     align-items: center;
     z-index: 10000;
     background-color: white;
@@ -36,26 +37,13 @@ $orange: #FF5E1A;
         width: 50%;
         display: flex;
         justify-content: center;
-        column-gap: 1vw;
+        column-gap: 2vw;
+    }
+}
 
-        >button {
-            padding: 1vh 1VW;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            color: white;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        >button:nth-child(1) {
-            background-color: $orange;
-        }
-
-        >button:nth-child(2) {
-            background-color: $blue;
-        }
+@media screen and (max-width: 600px) {
+    .popup {
+        white-space: nowrap;
+        font-size: .75em;
     }
 }

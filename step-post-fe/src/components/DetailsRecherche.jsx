@@ -5,6 +5,7 @@ function DetailsRecherche(props) {
     console.log('courrier', courrier);
 
     function handleClick() {
+        window.print();
         props.onCloseRecherche();
     }
 

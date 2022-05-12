@@ -123,9 +123,9 @@ class Historique extends Component {
                         </table>
                     </section>
                     <div>
-                        <button onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
+                        <button className='button' onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
                         <p>{this.state.page + 1}</p>
-                        <button onClick={() => this.handleClick(this.state.page + 1, 'plus')} style={{ visibility: this.state.statuts.length >= this.max ? 'visible' : 'hidden' }}>{'>'}</button>
+                        <button className='button' onClick={() => this.handleClick(this.state.page + 1, 'plus')} style={{ visibility: this.state.statuts.length >= this.max ? 'visible' : 'hidden' }}>{'>'}</button>
                     </div>
                 </main>
             </>

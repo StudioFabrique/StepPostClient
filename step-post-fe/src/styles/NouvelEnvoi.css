@@ -111,10 +111,6 @@
           column-gap: 1vw;
 }
 
-.section-ne-dest > .form-ne-dest > .article-ne-buttons > div > input {
-  background-color: #140A82;
-}
-
 @media screen and (max-width: 1000px) {
   .section-ne-dest {
     width: 90%;

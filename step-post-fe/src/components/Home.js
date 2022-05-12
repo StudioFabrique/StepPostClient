@@ -32,6 +32,7 @@ class Home extends Component {
   }
 
   handleRecherche = async msg => {
+    console.log('nom', msg);
     const response = await postData(`/searchCourrier`, [msg]);
     if (response.statuts !== false && response.statuts !== true) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
@@ -84,9 +85,9 @@ class Home extends Component {
           }
           <ListeCourriers statuts={this.state.statuts} />
           <div>
-            <button onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
+            <button className='button' onClick={() => this.handleClick(this.state.page - 1, 'minus')} style={{ visibility: this.state.page > 0 ? 'visible' : 'hidden' }}>{'<'}</button>
             <p>{this.state.page + 1}</p>
-            <button onClick={() => this.handleClick(this.state.page + 1, 'plus')} style={{ visibility: this.state.statuts.length >= this.max ? 'visible' : 'hidden' }}>{'>'}</button>
+            <button className='button' onClick={() => this.handleClick(this.state.page + 1, 'plus')} style={{ visibility: this.state.statuts.length >= this.max ? 'visible' : 'hidden' }}>{'>'}</button>
           </div>
         </main>
       </>

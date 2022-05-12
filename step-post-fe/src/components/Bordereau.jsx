@@ -49,6 +49,7 @@ class Bordereau extends Component {
             valider: true,
             isSubmitted: false
         });
+        window.print();
     }
 
     handleCancel = () => {
@@ -58,12 +59,6 @@ class Bordereau extends Component {
     render() {
         return (
             <>
-                <section className='section-bordereau-buttons' >
-                    <div>
-                        <button className='button' onClick={this.handleQrCode}>Imprimer</button>
-                        <button className='button' onClick={this.handleRetour}>Retour</button>
-                    </div>
-                </section>
                 <section className='section-bordereau-exp'>
                     <article className='article-exp-left'>
                         <div>
@@ -121,10 +116,16 @@ class Bordereau extends Component {
                             <p>Signature :</p>
                             <span>
                                 <p>Date :</p>
-                                <p>.. / .. / ..</p>
+                                <p> .. /  ..  /  .. </p>
                             </span>
                         </div>
                     </article>
+                </section>
+                <section className='section-bordereau-buttons' >
+                    <div>
+                        <button className='button' onClick={this.handleRetour}>Retour</button>
+                        <button className='button-valider' onClick={this.handleQrCode}>Imprimer</button>
+                    </div>
                 </section>
                 {
                     this.state.isSubmitted && <PopupConfirmation msg={this.msg} onCancelClick={this.handleCancel} onConfirmClick={this.handleConfirm} />

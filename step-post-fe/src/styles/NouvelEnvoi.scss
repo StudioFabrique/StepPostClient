@@ -1,4 +1,6 @@
 $blue: #140A82;
+$orange: #FF5E1A;
+$green: #24A640;
 
 .section-ne-dest {
     width: 80%;
@@ -69,10 +71,6 @@ $blue: #140A82;
             >div {
                 display: flex;
                 column-gap: 1vw;
-
-                >input {
-                    background-color: $blue;
-                }
             }
         }
     }

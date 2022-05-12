@@ -109,7 +109,7 @@ class NouvelEnvoi extends Component {
                             <article className='article-ne-buttons'>
                                 <div>
                                     <button className="button" onClick={this.handleRetourAdresses}>Retour</button>
-                                    <input type="submit" className='button' value="valider" />
+                                    <input type="submit" className='button-valider' value="valider" />
                                 </div>
                             </article>
                         </form>

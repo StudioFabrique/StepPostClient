@@ -20,6 +20,7 @@ function ConnexionForm({ message, onFormSubmit }) {
                 updateErreur(true);
             } else {
                 sessionStorage.setItem('token', response.token);
+                console.log(sessionStorage.getItem('token'));
                 updateErreur(false);
                 onFormSubmit(true);
             }
@@ -44,7 +45,7 @@ function ConnexionForm({ message, onFormSubmit }) {
                             erreur ? <p>Email ou mot de passe incorrect(s), essayez à nouveau svp</p> : null
                         }
                         <div>
-                            <button className="button">Envoyer</button>
+                            <button className="button-valider">Envoyer</button>
                         </div>
                     </form>
                 </section>

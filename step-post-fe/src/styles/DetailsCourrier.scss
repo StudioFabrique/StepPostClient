@@ -1,4 +1,6 @@
+$blue: #140A82;
 $orange: #FF5E1A;
+$green: #24A640;
 
 #searchInput {
     width: 30vw;
@@ -27,13 +29,14 @@ $orange: #FF5E1A;
     border-radius: 50%;
     width: 1vw;
     height: 1vw;
-    background-color: darkgrey;
+    background-color: $green
 }
 
 .trait {
     display: flex;
     width: 10vw;
     height: .25vw;
+    background-color: $green;
 }
 
 .timeline {
@@ -122,10 +125,12 @@ $orange: #FF5E1A;
     }
 
 }
+
 @media screen and (max-width: 600px) {
     .trait {
         width: 15vw;
     }
+
     .details {
         >div {
             >p {

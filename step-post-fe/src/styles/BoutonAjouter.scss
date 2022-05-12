@@ -1,4 +1,6 @@
+$blue: #140A82;
 $orange: #FF5E1A;
+$green: #24A640;
 
 .bouton-ajouter {
     display: flex;
@@ -9,16 +11,17 @@ $orange: #FF5E1A;
     >h4 {
         white-space: nowrap;
     }
+
     >div {
         >a {
             >button {
                 border: none;
-        
+
                 >img {
                     width: calc(24px + .5vw);
                     height: calc(24px + .5vw);
                 }
-        
+
                 &:hover {
                     cursor: pointer;
                 }
@@ -32,6 +35,7 @@ $orange: #FF5E1A;
         >h4 {
             font-size: .75rem;
         }
+
         >div {
             >a {
                 >button {

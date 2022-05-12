@@ -163,7 +163,7 @@ class AdresseForm extends Component {
                         }
                         <div>
                             <button className='button' type="button" onClick={this.handleCancel}>Annuler</button>
-                            <input className="button" type="submit" value="Envoyer" />
+                            <input className="button-valider" type="submit" value="Envoyer" />
                         </div>
                     </form>
                 </article>

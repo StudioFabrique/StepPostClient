@@ -1,16 +1,3 @@
-.button {
-  padding: .5vw;
-  color: white;
-  font-weight: bold;
-  background-color: #FF5E1A;
-  border: none;
-  border-radius: 5px;
-}
-
-.button:hover {
-  cursor: pointer;
-}
-
 body #root .home-main {
   margin-top: 5vh;
   width: 100vw;
@@ -164,6 +151,23 @@ body #root .listecourriers-section > ul > li .courrier > div:nth-child(3) {
         -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
     font-size: .75rem;
+  }
+}
+
+@media print {
+  body {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+  body #root nav,
+  body #root footer,
+  body #root .button {
+    display: none;
+  }
+  body #root .home-main > .form-recherche,
+  body #root .home-main > .listecourriers-section,
+  body #root .home-main > div:last-child {
+    display: none;
   }
 }
 /*# sourceMappingURL=Home.css.map */

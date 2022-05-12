@@ -34,7 +34,7 @@
   border-radius: 50%;
   width: 1vw;
   height: 1vw;
-  background-color: darkgrey;
+  background-color: #24A640;
 }
 
 .trait {
@@ -43,6 +43,7 @@
   display: flex;
   width: 10vw;
   height: .25vw;
+  background-color: #24A640;
 }
 
 .timeline {

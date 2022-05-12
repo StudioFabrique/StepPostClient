@@ -20,7 +20,7 @@ function Recherche({ onRecherche }) {
         <>
             <form className="form-recherche" onSubmit={handleSubmit}>
                 <input type="text" id="searchInput" onChange={(e) => setValue(e.target.value)} />
-                <img src="img/icone-loupe.png" alt="icone loupe" />
+                <button className="button" type="" ><img src="img/icone-chercher.png" alt="icone loupe" /></button>
             </form>
         </>
     )

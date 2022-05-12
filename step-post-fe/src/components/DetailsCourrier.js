@@ -11,11 +11,11 @@ function DetailsCourrier(props) {
         tab.push(
             <>
                 <div className="cercleContainer">
-                    <div className='cercle' style={{ backgroundColor: (i === l - 1) ? '#24A640' : '#FF5E1A' }}></div>
+                    <div className='cercle'></div>
                     <div className='statuts'>{statuts[i].etat}</div>
                     <div className='statuts-date'>{formatDate(statuts[i].date)} </div>
                 </div>
-                <div className="trait" style={{ backgroundColor: (i === l - 2) ? '#24A640' : '#FF5E1A' }}></div>
+                <div className="trait"></div>
             </>
         );
     }

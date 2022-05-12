@@ -1,8 +1,10 @@
 $blue: #140A82;
 $orange: #FF5E1A;
+$green: #24A640;
 
 .main-nouvel-envoi {
     margin-top: 10vh;
+    margin-bottom: 5vh;
     display: flex;
     min-height: 70vh;
     align-items: center;
@@ -11,7 +13,7 @@ $orange: #FF5E1A;
     >.section-bordereau-buttons {
         width: 80%;
         display: flex;
-        justify-content: flex-start;
+        justify-content: flex-end;
 
         >div {
             display: flex;
@@ -204,8 +206,8 @@ $orange: #FF5E1A;
                 background-color: white;
                 column-gap: .5vw;
                 color: $blue;
-                font-size: .86rem;
                 font-style: italic;
+                padding: .75vw;
 
                 >span {
                     display: flex;
@@ -218,7 +220,10 @@ $orange: #FF5E1A;
 
 @media print {
 
-    nav, footer {
+    nav,
+    footer,
+    .popup,
+    .screen {
         display: none;
     }
 

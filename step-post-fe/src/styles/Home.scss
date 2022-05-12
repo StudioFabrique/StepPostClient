@@ -1,17 +1,6 @@
+$blue: #140A82;
 $orange: #FF5E1A;
-
-.button {
-  padding: .5vw;
-  color: white;
-  font-weight: bold;
-  background-color: $orange;
-  border: none;
-  border-radius: 5px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
+$green: #24A640;
 
 body {
 
@@ -116,6 +105,7 @@ body {
               align-items: center;
             }
           }
+
           >ul {
             >li {
               >.courrier {
@@ -129,6 +119,29 @@ body {
         }
       }
 
+    }
+  }
+}
+
+@media print {
+  body {
+    transform: scale(1.5);
+    #root {
+
+      nav,
+      footer,
+      .button {
+        display: none;
+      }
+
+      .home-main {
+
+        >.form-recherche,
+        >.listecourriers-section,
+        >div:last-child {
+          display: none;
+        }
+      }
     }
   }
 }
