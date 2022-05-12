@@ -34,13 +34,14 @@ class Home extends Component {
   handleRecherche = async msg => {
     console.log('nom', msg);
     const response = await postData(`/searchCourrier`, [msg]);
-    if (response.statuts !== false && response.statuts !== true) {
+    if (response.statuts !== false) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
+      console.log('thisnom', this.nom);
       const response = await postData(`/getLogs`, [0, this.max, this.nom, false]);
       if (response.statuts !== false) {
-        this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true });
+        this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true, noResults: false });
         this.nom = response.statuts[0].nom;
       } else {
         this.setState({ noResults: true, rechercheNom: false });

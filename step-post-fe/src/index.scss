@@ -9,10 +9,13 @@ $green: #24A640;
 }
 
 body {
-    position: relative;
     min-height: 100vh;
     color: $blue;
     font-family: rubik;
+    >div:nth-child(1) {
+        position: relative;
+        min-height: 100%;
+    }
 }
 
 .button {

@@ -11,7 +11,7 @@ function Recherche({ onRecherche }) {
         event.preventDefault();
         let testName = testField(regexName, value);
         let testNumbers = testField(regexNumbers, value);
-        if (testName || testNumbers) {
+        if ((testName || testNumbers) && value.length !== 0) {
             onRecherche(value);
         }
     }

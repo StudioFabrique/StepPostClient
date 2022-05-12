@@ -17,7 +17,6 @@ function EditerAdresse(props) {
     const [ville, updateVille] = useState('');
     const [email, updateEmail] = useState('');
     const [telephone, updateTelephone] = useState('');
-    const [testForm, updateTestForm] = useState(false);
 
 
     useEffect(() => { init() }, [props]);
