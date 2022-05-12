@@ -9,9 +9,9 @@ body {
   color: #140A82;
   font-family: rubik;
 }
-body > div:nth-child(1) {
+body > #root {
   position: relative;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .button {

@@ -15,6 +15,12 @@ $green: #24A640;
     column-gap: 1vw;
 }
 
+.button {
+    >img {
+        height: 2.75vw;
+        width: 2.75vw;
+    }
+}
 .rechercheNom {
     width: 80%;
     display: flex;

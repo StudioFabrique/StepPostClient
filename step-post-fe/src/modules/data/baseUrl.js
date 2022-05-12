@@ -19,4 +19,4 @@ const logUrl = `${url}/api/login_check`;
 
 const qrcodeUrl = `${url}/assets/qrcodes/`;
 
-export { baseUrl, logUrl, qrcodeUrl };  */
+export { baseUrl, logUrl, qrcodeUrl }; */

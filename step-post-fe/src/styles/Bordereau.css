@@ -193,11 +193,9 @@ footer,
 
   .main-nouvel-envoi {
     height: 100%;
+    width: 100%;
     row-gap: 0;
     color: black;
-    margin-top: 2vh;
-    margin-left: auto;
-    margin-right: auto;
   }
   .main-nouvel-envoi > .section-bordereau-buttons {
     display: none;

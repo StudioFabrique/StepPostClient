@@ -4,7 +4,7 @@ footer {
   height: 20vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   background-color: #140A82;
   border-top-right-radius: 30px;
   color: white;
