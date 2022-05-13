@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Entity\Courrier;
 use App\Entity\Destinataires;
 use App\Entity\Expediteur;
-use App\Entity\StatutCourrier;
+use App\Entity\Statutcourrier;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
-use App\Repository\StatutCourrierRepository;
+use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Toto as ServicesToto;
@@ -115,12 +115,12 @@ class Service
 
     public function searchCourrier(
         CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $StatutcourrierRepository,
     ) {
         $data = $this->stripTag();
         $courrier = $courrierRepository->findOneBy(['bordereau' => $data[0]]);
         if ($courrier !== null) :
-            $statuts = $statutCourrierRepository->findBy(
+            $statuts = $StatutcourrierRepository->findBy(
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
             );
@@ -136,12 +136,12 @@ class Service
     }
 
     public function detailsCourrier(
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $StatutcourrierRepository,
         CourrierRepository $courrierRepository,
     ) {
         $data = $this->stripTag();
         $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
-        $statuts = $statutCourrierRepository->findBy(['courrier' => $courrier]);
+        $statuts = $StatutcourrierRepository->findBy(['courrier' => $courrier]);
         $data = $this->getInfosCourrier($statuts, $courrier);
         return $data;
     }
@@ -191,7 +191,7 @@ class Service
 
     public function getLogs(
         CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $StatutcourrierRepository,
         Expediteur $user
     ) {
         $tmp = $this->stripTag();
@@ -225,7 +225,7 @@ class Service
         endif;
         $courriers = array();
         foreach ($datas as $data) :
-            $statut = $statutCourrierRepository->findBy(
+            $statut = $StatutcourrierRepository->findBy(
                 ['courrier' => $data->getId()],
                 ['date' => 'DESC']
             );
@@ -318,9 +318,7 @@ class Service
     public function expediteur(Expediteur $user)
     {
         return [
-            'civilite' => $user->getCivilite(),
-            'prenom' => $user->getPrenom(),
-            'nom' => $user->getNom(),
+            'nom' => $user->getName(),
             'adresse' => $user->getAdresse(),
             'complement' => $user->getComplement(),
             'codePostal' => $user->getCodePostal(),
@@ -351,15 +349,16 @@ class Service
         $courrier->setExpediteur($user);
         $courrier->setBordereau(0);
 
-        $statutCourrier = new StatutCourrier();
-        $statutCourrier->setDate(new \DateTime());
+        $statutcourrier = new Statutcourrier();
+        $statutcourrier->setDate(new \DateTime());
         $statut = $statutRepository->findOneBy(['etat' => 'en attente']);
-        $statutCourrier->setStatut($statut);
-        $statutCourrier->setCourrier($courrier);
+        $statutcourrier->setStatut($statut);
+        $statutcourrier->setCourrier($courrier);
+        $statutcourrier->setFacteurId(0);
 
         $manager = $doctrine->getManager();
         $manager->persist($courrier);
-        $manager->persist($statutCourrier);
+        $manager->persist($statutcourrier);
         $manager->flush();
 
         $id = $courrier->getId();

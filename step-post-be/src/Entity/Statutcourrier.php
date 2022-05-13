@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\StatutCourrierRepository;
+use App\Repository\StatutcourrierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StatutCourrierRepository::class)]
-class StatutCourrier
+#[ORM\Entity(repositoryClass: StatutcourrierRepository::class)]
+class Statutcourrier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

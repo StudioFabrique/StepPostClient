@@ -31,6 +31,6 @@ class Toto
         $nameFile = uniqid('', '').'.png';
         $result->saveToFile((\dirname(__DIR__, 2).'/public/assets/qrcodes/'.$nameFile));
 
-        return $nameFile;
+        return $result->getDataUri();
     }
 }

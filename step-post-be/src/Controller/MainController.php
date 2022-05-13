@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
-use App\Repository\StatutCourrierRepository;
+use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use App\Services\Service as Service;
 use App\Services\Toto as ServicesToto;
@@ -24,12 +24,12 @@ class MainController extends AbstractController
     #[Route('/api/client/searchCourrier', name: 'api_searchCourrier')]
     public function searchCourrier(
         CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $statutcourrierRepository,
         Service $service,
     ): Response {
         $result = $service->searchCourrier(
             $courrierRepository,
-            $statutCourrierRepository,
+            $statutcourrierRepository,
         );
         if (!$result) :
             return $this->json(['statuts' => false]);
@@ -43,12 +43,12 @@ class MainController extends AbstractController
 
     #[Route('/api/client/detailsCourrier', name: 'api_detailsCourrier')]
     public function detailsCourrier(
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $statutcourrierRepository,
         CourrierRepository $courrierRepository,
         Service $service,
     ): Response {
         $data = $service->detailsCourrier(
-            $statutCourrierRepository,
+            $statutcourrierRepository,
             $courrierRepository
         );
         return $this->json([
@@ -75,13 +75,13 @@ class MainController extends AbstractController
     public function getLogs(
         ExpediteurRepository $expediteurRepository,
         CourrierRepository $courrierRepository,
-        StatutCourrierRepository $statutCourrierRepository,
+        StatutcourrierRepository $statutcourrierRepository,
         Service $service,
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $result = $service->getLogs(
             $courrierRepository,
-            $statutCourrierRepository,
+            $statutcourrierRepository,
             $user
         );
         return $this->json([

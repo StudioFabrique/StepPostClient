@@ -37,7 +37,7 @@ class Bordereau extends Component {
             }
             const response = await postData('/qrcode', [this.state.dest.id, type]);
             this.setState({
-                qrcode: `${qrcodeUrl}${response.qrcode}`,
+                qrcode: `${response.qrcode}`,
                 bordereau: response.bordereau,
                 valider: true,
                 isSubmitted: true
@@ -49,6 +49,7 @@ class Bordereau extends Component {
 
     handleConfirm = () => {
         window.print();
+        this.setState({isSubmitted: false});
     }
 
     handleCancel = () => {

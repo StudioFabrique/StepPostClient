@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\StatutCourrier;
+use App\Entity\Statutcourrier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<StatutCourrier>
+ * @extends ServiceEntityRepository<Statutcourrier>
  *
- * @method StatutCourrier|null find($id, $lockMode = null, $lockVersion = null)
- * @method StatutCourrier|null findOneBy(array $criteria, array $orderBy = null)
- * @method StatutCourrier[]    findAll()
- * @method StatutCourrier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Statutcourrier|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Statutcourrier|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Statutcourrier[]    findAll()
+ * @method Statutcourrier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StatutCourrierRepository extends ServiceEntityRepository
+class StatutcourrierRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, StatutCourrier::class);
+        parent::__construct($registry, Statutcourrier::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(StatutCourrier $entity, bool $flush = true): void
+    public function add(Statutcourrier $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class StatutCourrierRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(StatutCourrier $entity, bool $flush = true): void
+    public function remove(Statutcourrier $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class StatutCourrierRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return StatutCourrier[] Returns an array of StatutCourrier objects
+    //  * @return Statutcourrier[] Returns an array of Statutcourrier objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class StatutCourrierRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?StatutCourrier
+    public function findOneBySomeField($value): ?Statutcourrier
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
