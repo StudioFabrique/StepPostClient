@@ -24,6 +24,9 @@ class StatutCourrier
     #[ORM\JoinColumn(nullable: false)]
     private $statut;
 
+    #[ORM\Column(type: 'integer')]
+    private $facteurId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class StatutCourrier
     public function setStatut(?Statut $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getFacteurId(): ?int
+    {
+        return $this->facteurId;
+    }
+
+    public function setFacteurId(int $facteurId): self
+    {
+        $this->facteurId = $facteurId;
 
         return $this;
     }

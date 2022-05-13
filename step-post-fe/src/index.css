@@ -9,31 +9,35 @@ body {
   color: #140A82;
   font-family: rubik;
 }
+
 body > #root {
   position: relative;
   min-height: 100vh;
 }
 
 .button {
-  padding: 0.5vw;
+  padding: .5vw;
   color: white;
   font-weight: bold;
   background-color: #140A82;
   border: none;
   border-radius: 5px;
 }
+
 .button:hover {
   cursor: pointer;
 }
 
 .button-valider {
-  padding: 0.5vw;
+  padding: .5vw;
   color: white;
   font-weight: bold;
   background-color: #24A640;
   border: none;
   border-radius: 5px;
 }
+
 .button-valider:hover {
   cursor: pointer;
-}/*# sourceMappingURL=index.css.map */
+}
+/*# sourceMappingURL=index.css.map */

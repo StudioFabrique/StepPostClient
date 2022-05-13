@@ -2,16 +2,18 @@ $blue: #140A82;
 $orange: #FF5E1A;
 $green: #24A640;
 
-.main-nouvel-envoi {
+.main-bordereau {
     margin-top: 10vh;
     margin-bottom: 5vh;
+    width: 70%;
+    height: 35%;
     display: flex;
+    flex-direction: column;
     min-height: 70vh;
     align-items: center;
     row-gap: 3vh;
 
     >.section-bordereau-buttons {
-        width: 80%;
         display: flex;
         justify-content: flex-end;
 
@@ -23,8 +25,8 @@ $green: #24A640;
     }
 
     .section-bordereau-exp {
-        width: 80%;
-        height: 80vh;
+        width: 21cm;
+        height: 90mm;
         display: flex;
         background-color: lightgray;
         padding: 1vw;
@@ -44,7 +46,7 @@ $green: #24A640;
                 row-gap: 1vh;
 
                 >img {
-                    height: 8vh;
+                    height: 4vh;
                 }
 
                 >p {
@@ -77,7 +79,6 @@ $green: #24A640;
 
         >.article-exp-right {
             width: 50%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -124,8 +125,8 @@ $green: #24A640;
     }
 
     >.section-bordereau-dest {
-        width: 80%;
-        height: 80vh;
+        width: 21cm;
+        height: 90mm;
         display: flex;
         background-color: lightgray;
         padding: 1vw;
@@ -144,8 +145,8 @@ $green: #24A640;
                 align-items: center;
 
                 >img {
-                    height: 300px;
-                    width: 300px;
+                    height: 150px;
+                    width: 150px;
                 }
             }
 
@@ -190,14 +191,14 @@ $green: #24A640;
                         }
 
                         >div:nth-child(2) {
-                            font-size: .85rem;
+                            font-size: .85em;
                         }
                     }
                 }
             }
 
             >div:nth-child(2) {
-                width: 50%;
+                width: 75%;
                 height: 35%;
                 display: flex;
                 justify-content: space-around;
@@ -207,7 +208,6 @@ $green: #24A640;
                 column-gap: .5vw;
                 color: $blue;
                 font-style: italic;
-                padding: .75vw;
 
                 >span {
                     display: flex;
@@ -219,7 +219,6 @@ $green: #24A640;
 }
 
 @media print {
-
     nav,
     footer,
     .popup,
@@ -228,7 +227,8 @@ $green: #24A640;
     }
 
 
-    .main-nouvel-envoi {
+    .main-bordereau {
+        transform: scale(.75);
         height: 100%;
         width: 100%;
         row-gap: 0;
@@ -241,7 +241,6 @@ $green: #24A640;
         >.section-bordereau-exp,
         >.section-bordereau-dest {
             border: 1px solid black;
-            display: flex;
         }
 
         >.section-bordereau-exp {
@@ -252,22 +251,23 @@ $green: #24A640;
                 >div:nth-child(1) {
                     >div {
                         >img {
-                            height: 8%;
+                            width: 170px;
+                            height: auto;
                         }
 
                         >label {
-                            font-size: .5rem;
+                            font-size: 5pt;
                         }
                     }
 
                     >p {
-                        font-size: .5rem;
+                        font-size: 5pt;
                     }
                 }
 
                 >div:nth-child(2) {
                     >p {
-                        font-size: .5rem;
+                        font-size: 5pt;
                     }
                 }
             }
@@ -275,7 +275,6 @@ $green: #24A640;
             >.article-exp-right {
                 >div {
                     width: 100%;
-                    transform: scale(.75);
                 }
             }
         }
@@ -296,15 +295,14 @@ $green: #24A640;
             >.article-dest-right {
                 >div {
                     width: 100%;
-                    transform: scale(.75);
                 }
 
                 >div:nth-child(1) {
-                    height: 65%;
+                    height: 60%;
                 }
 
                 >div:nth-child(2) {
-                    height: 35%;
+                    height: 30%;
                 }
             }
         }

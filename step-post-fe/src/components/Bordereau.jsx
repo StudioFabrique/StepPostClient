@@ -27,28 +27,27 @@ class Bordereau extends Component {
         this.props.onRetour();
     }
 
-    handleQrCode = () => {
+    handleQrCode = async () => {
         if (!this.state.valider) {
-            this.setState({isSubmitted: true})
+            let type;
+            if (this.state.type) {
+                type = 1;
+            } else {
+                type = 0;
+            }
+            const response = await postData('/qrcode', [this.state.dest.id, type]);
+            this.setState({
+                qrcode: `${qrcodeUrl}${response.qrcode}`,
+                bordereau: response.bordereau,
+                valider: true,
+                isSubmitted: true
+            });
         } else {
             alert("Votre bordereau est déjà en cours d'impression.");
         }
     }
 
-    handleConfirm = async () => {
-        let type;
-        if (this.state.type) {
-            type = 1;
-        } else {
-            type = 0;
-        }
-        const response = await postData('/qrcode', [this.state.dest.id, type]);
-        this.setState({
-            qrcode: `${qrcodeUrl}${response.qrcode}`,
-            bordereau: response.bordereau,
-            valider: true,
-            isSubmitted: false
-        });
+    handleConfirm = () => {
         window.print();
     }
 
@@ -58,7 +57,7 @@ class Bordereau extends Component {
 
     render() {
         return (
-            <>
+            <main  className='main-bordereau'>
                 <section className='section-bordereau-exp'>
                     <article className='article-exp-left'>
                         <div>
@@ -130,7 +129,7 @@ class Bordereau extends Component {
                 {
                     this.state.isSubmitted && <PopupConfirmation msg={this.msg} onCancelClick={this.handleCancel} onConfirmClick={this.handleConfirm} />
                 }
-            </>
+            </main>
         );
     }
 }

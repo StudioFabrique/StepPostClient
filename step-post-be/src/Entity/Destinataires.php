@@ -13,7 +13,7 @@ class Destinataires
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $civilite;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -28,13 +28,13 @@ class Destinataires
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $complement;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'integer')]
     private $codePostal;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $telephone;
 
     #[ORM\ManyToOne(targetEntity: Expediteur::class)]

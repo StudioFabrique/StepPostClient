@@ -32,14 +32,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $nom;
-
-    #[ORM\Column(type: 'string', length: 20, nullable: true)]
-    private $civilite;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $prenom;
-
+    private $name;
+    
     #[ORM\Column(type: 'string', length: 255)]
     private $adresse;
 
@@ -52,8 +46,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $telephone;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $fonction;
     
     public function getId(): ?int
     {
@@ -71,14 +68,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): self
+    public function setName(string $name): self
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
@@ -140,30 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getCivilite(): ?string
-    {
-        return $this->civilite;
-    }
-
-    public function setCivilite(?string $civilite): self
-    {
-        $this->civilite = $civilite;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -220,6 +193,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getFonction(): ?string
+    {
+        return $this->fonction;
+    }
+
+    public function setFonction(?string $fonction): self
+    {
+        $this->fonction = $fonction;
 
         return $this;
     }

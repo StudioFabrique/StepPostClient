@@ -35,9 +35,7 @@ class AppFixtures extends Fixture
         $exp->setEmail("tata@toto.fr");
         $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
         $exp->setPassword($hash);
-        $exp->setCivilite('mme');
-        $exp->setPrenom('anne-sophie');
-        $exp->setNom("clementine");
+        $exp->setName("hopital");
         $exp->setAdresse('12 rue Frodon Sacquet');
         $exp->setCodePostal(64000);
         $exp->setVille('pau');
@@ -167,6 +165,7 @@ class AppFixtures extends Fixture
                     $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
                     $statutCourrier->setStatut($etats[$j]);
                     $statutCourrier->setCourrier($courrier);
+                    $statutCourrier->setFacteurId(0);
                     $manager->persist($statutCourrier);
                     $compteur++;
                 endfor;
@@ -194,6 +193,7 @@ class AppFixtures extends Fixture
                     $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
                     $statutCourrier->setStatut($etats[$j]);
                     $statutCourrier->setCourrier($courrier);
+                    $statutCourrier->setFacteurId(0);
                     $manager->persist($statutCourrier);
                     $compteur++;
                 endfor;

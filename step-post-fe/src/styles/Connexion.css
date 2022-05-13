@@ -1,75 +1,128 @@
 .connexion-form-main {
   height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   row-gap: 5vh;
 }
+
 .connexion-form-main > .section-connexion-titre {
   width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
+
 .connexion-form-main > .section-connexion-form {
   width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
+
 .connexion-form-main > .section-connexion-form {
   width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .connexion-form-main > .section-connexion-form > .form-connexion {
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 3vh;
 }
+
 .connexion-form-main > .section-connexion-form > .form-connexion > label {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 1vh;
 }
+
 .connexion-form-main > .section-connexion-form > .form-connexion > label > input {
   width: 100%;
   padding: 1vw;
   border-radius: 5px;
   border: solid 1px #646464;
-  box-shadow: 4px 4px 4px #646464;
+  -webkit-box-shadow: 4px 4px 4px #646464;
+          box-shadow: 4px 4px 4px #646464;
 }
+
 .connexion-form-main > .section-connexion-form > .form-connexion > p {
   width: 100%;
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: red;
 }
+
 .connexion-form-main > .section-connexion-form > .form-connexion > div {
   width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: right;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
 }
 
 @media screen and (max-width: 1000px) {
   .connexion-form-main > .section-connexion-titre,
-.connexion-form-main > .section-connexion-form {
+  .connexion-form-main > .section-connexion-form {
     width: 75%;
   }
 }
+
 @media screen and (max-width: 600px) {
   .connexion-form-main > .section-connexion-titre,
-.connexion-form-main > .section-connexion-form {
+  .connexion-form-main > .section-connexion-form {
     width: 90%;
   }
   .connexion-form-main > .section-connexion-titre {
-    font-size: 0.75rem;
+    font-size: .75rem;
   }
   .connexion-form-main > .section-connexion-form {
-    font-size: 0.75rem;
+    font-size: .75rem;
   }
   .connexion-form-main > .section-connexion-form > .form-connexion {
     width: 90%;
@@ -77,4 +130,5 @@
   .connexion-form-main > .section-connexion-form > .form-connexion > p {
     width: 80%;
   }
-}/*# sourceMappingURL=Connexion.css.map */
+}
+/*# sourceMappingURL=Connexion.css.map */
