@@ -85,7 +85,8 @@ class MainController extends AbstractController
             $user
         );
         return $this->json([
-            'statuts' => $result,
+            'statuts' => $result[0],
+            'total' => $result[1],
         ]);
     }
 

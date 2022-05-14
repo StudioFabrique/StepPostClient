@@ -152,7 +152,7 @@ class Service
     ) {
         $destinataires = $destinatairesRepository->findBy(
             ['expediteur' => $user],
-            ['name' => 'ASC']
+            ['nom' => 'ASC']
         );
         $nom = "";
         if (isset($_POST['data'])) :
@@ -221,9 +221,10 @@ class Service
             );
         endif;
         if (count($datas) === 0) :
-            return false;
+            return [false, 0];
         endif;
         $courriers = array();
+        $total = count($datas);
         foreach ($datas as $data) :
             $statut = $StatutcourrierRepository->findBy(
                 ['courrier' => $data->getId()],
@@ -254,7 +255,7 @@ class Service
             array_push($statuts, $courriers[$i]);
         endfor;
 
-        return $statuts;
+        return [$statuts, $total];
     }
 
     public function deleteAdresse(

@@ -14,6 +14,7 @@ class Home extends Component {
     this.max = 3;
     this.nom = "";
     this.tmpName = '';
+    this.total = 0;
   }
 
   async componentDidMount() {
@@ -40,6 +41,7 @@ class Home extends Component {
       const response = await postData(`/getLogs`, [0, this.max, this.nom, false]);
       if (response.statuts !== false) {
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true, noResults: false });
+        this.total = response.total;
         this.nom = response.statuts[0].nom;
       } else {
         this.setState({ noResults: true, rechercheNom: false });
@@ -61,7 +63,8 @@ class Home extends Component {
     const response = await postData(`/getLogs`, datas);
     this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
     this.nom = "";
-  }
+    this.total = 0;
+    }
 
   handleBtnRetour = () => {
     this.handleResetList();
@@ -76,7 +79,7 @@ class Home extends Component {
             this.state.isRechercheActive && <DetailsRecherche courrier={this.state.rechercheValue} onCloseRecherche={this.handleCloseRecherche} />
           }
           {
-            this.state.rechercheNom && <RechercheNom nom={this.nom} onRetourBtn={this.handleBtnRetour} />
+            this.state.rechercheNom && <RechercheNom nom={this.nom} total={this.total} onRetourBtn={this.handleBtnRetour} />
           }
           {
             this.state.noResults && <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
