@@ -19,7 +19,6 @@ class Bordereau extends Component {
             this.dest.telephone = 'non disponible';
         }
         this.setState({ exp: response.exp, dest: this.dest, type: this.props.type });
-        console.log('exp', this.state.exp);
 
     }
 

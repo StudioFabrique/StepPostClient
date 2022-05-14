@@ -3,10 +3,8 @@ function Timeline(props) {
         <>
             {
                 props.statuts.map((statut) => {
-                    return(
-                        <>
-                            <div className="cercle"></div>
-                        </>
+                    return (
+                        <div className="cercle"></div>
                     )
                 })
             }

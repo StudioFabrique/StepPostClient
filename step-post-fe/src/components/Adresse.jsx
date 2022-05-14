@@ -5,21 +5,24 @@ function Adresse(props) {
     return (
         <article className='article-ne-adresse'>
             <div>
-                <p>{toTitleCase(`${adresse.civilite} ${adresse.prenom} ${adresse.nom}`)}</p>
+            {
+                props.isDest ?
+                <p>{toTitleCase(`${adresse.civilite} ${adresse.prenom} ${adresse.nom}`)}</p> :
+                <p>{toTitleCase(adresse.nom)}</p>
+            }
                 <p>{toTitleCase(adresse.adresse)}</p>
-                <p>{toTitleCase(adresse.complement)}</p>
+                <p>{adresse.complement}</p>
                 <p>{toTitleCase(`${adresse.codePostal} ${adresse.ville}`)}</p>
             </div>
             {
                 props.isDest ?
                     <div>
                         {
-                            props.instructions ?
+                            props.instructions &&
                                 <>
                                     <p>Instructions de livraison :</p>
                                     <p>{props.instructions}</p>
                                 </>
-                                : null
                         }
                         <p>( tél : {adresse.telephone} )</p>
                     </div>

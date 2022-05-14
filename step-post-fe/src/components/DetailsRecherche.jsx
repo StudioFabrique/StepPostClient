@@ -2,7 +2,6 @@ import DetailsCourrier from "./DetailsCourrier";
 
 function DetailsRecherche(props) {
     const courrier = props.courrier;
-    console.log('courrier', courrier);
 
     function handleClick() {
         window.print();

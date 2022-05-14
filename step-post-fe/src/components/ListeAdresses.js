@@ -18,7 +18,6 @@ class ListeAdresses extends Component {
 
     handleRecherche = async nom => {
         this.nom = nom;
-        console.log('nom', this.nom);
         if (this.nom.length === 0) {
             this.setState({ rechercheNom: false, noResults: false });
         }

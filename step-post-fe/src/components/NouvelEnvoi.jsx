@@ -12,18 +12,15 @@ class NouvelEnvoi extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.state.section);
         const dest = this.props.adresse;
         if (!dest.telephone) {
             dest.telephone = 'non disponible';
         }
         this.setState({ dest: dest });
-        console.log('dest', this.state.dest);
     }
 
     handleRadioChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
-        console.log('type', this.state.type);
     }
 
     handleRetourAdresses = () => {
@@ -33,11 +30,9 @@ class NouvelEnvoi extends Component {
     handleSubmit = (event) => {
         this.handShake();
         event.preventDefault();
-        console.log('submit', this.state.type);
         if (!this.state.type) {
             alert('Choisissez un type de courrier svp.');
         } else {
-            console.log(`${this.state.type} envoyé !`);
             this.setState({ section: 2 });
         }
     }
@@ -62,9 +57,7 @@ class NouvelEnvoi extends Component {
     }
 
     handShake = async () => {
-        console.log(sessionStorage.getItem('token'));
         const response = await getData('/handshake');
-        console.log(response);
         if (response.code === 401) {
             window.location.href = '/logout';
         }

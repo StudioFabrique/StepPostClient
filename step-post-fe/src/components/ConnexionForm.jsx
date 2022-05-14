@@ -20,7 +20,6 @@ function ConnexionForm({ message, onFormSubmit }) {
                 updateErreur(true);
             } else {
                 sessionStorage.setItem('token', response.token);
-                console.log(sessionStorage.getItem('token'));
                 updateErreur(false);
                 onFormSubmit(true);
             }

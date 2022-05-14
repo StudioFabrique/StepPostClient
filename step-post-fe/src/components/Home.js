@@ -32,13 +32,11 @@ class Home extends Component {
   }
 
   handleRecherche = async msg => {
-    console.log('nom', msg);
     const response = await postData(`/searchCourrier`, [msg]);
     if (response.statuts !== false) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
-      console.log('thisnom', this.nom);
       const response = await postData(`/getLogs`, [0, this.max, this.nom, false]);
       if (response.statuts !== false) {
         this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: true, noResults: false });
@@ -63,7 +61,6 @@ class Home extends Component {
     const response = await postData(`/getLogs`, datas);
     this.setState({ statuts: response.statuts, page: 0, isRechercheActive: false, rechercheNom: false, noResults: false });
     this.nom = "";
-    console.log('longueur', this.state.statuts);
   }
 
   handleBtnRetour = () => {
