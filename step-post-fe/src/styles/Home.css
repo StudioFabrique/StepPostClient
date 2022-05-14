@@ -6,7 +6,7 @@ body #root .home-main {
   align-items: center;
   justify-content: center;
   row-gap: 3vh;
-  margin-bottom: 5vh;
+  padding-bottom: 25vh;
 }
 body #root .home-main > div:last-child {
   display: flex;
@@ -86,9 +86,6 @@ body #root .listecourriers-section > ul > li .courrier > div:nth-child(3) {
   }
 }
 @media print {
-  body {
-    transform: scale(1.5);
-  }
   body #root nav,
 body #root footer,
 body #root .button {
@@ -97,6 +94,14 @@ body #root .button {
   body #root .home-main > .form-recherche,
 body #root .home-main > .listecourriers-section,
 body #root .home-main > div:last-child {
+    display: none;
+  }
+  body #root .home-main > .detailsRecherche {
+    width: 90%;
+    flex-direction: column;
+    row-gap: 5vh;
+  }
+  body #root .home-main > .detailsRecherche > div > span > img {
     display: none;
   }
 }/*# sourceMappingURL=Home.css.map */

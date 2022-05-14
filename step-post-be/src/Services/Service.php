@@ -152,7 +152,7 @@ class Service
     ) {
         $destinataires = $destinatairesRepository->findBy(
             ['expediteur' => $user],
-            ['nom' => 'ASC']
+            ['name' => 'ASC']
         );
         $nom = "";
         if (isset($_POST['data'])) :
@@ -213,7 +213,7 @@ class Service
             $datas = $courrierRepository->findBy(
                 [
                     'expediteur' => $user,
-                    'nom' => $nom
+                    'name' => $nom
                 ],
                 [
                     'id' => 'DESC'

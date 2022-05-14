@@ -52,6 +52,19 @@ $green: #24A640;
         row-gap: 1vh;
         color: $blue;
 
+        >span {
+            display: flex;
+            align-items: center;
+            column-gap: .75vw;
+            >img {
+                height: 24px;
+                width: auto;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
     }
 }
 

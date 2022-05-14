@@ -13,7 +13,7 @@ body {
       align-items: center;
       justify-content: center;
       row-gap: 3vh;
-      margin-bottom: 5vh;
+      padding-bottom: 25vh;
 
       >div:last-child {
         display: flex;
@@ -125,7 +125,6 @@ body {
 
 @media print {
   body {
-    transform: scale(1.5);
     #root {
 
       nav,
@@ -140,6 +139,20 @@ body {
         >.listecourriers-section,
         >div:last-child {
           display: none;
+        }
+
+        >.detailsRecherche {
+          width: 90%;
+          flex-direction: column;
+          row-gap: 5vh;
+
+          >div {
+            >span {
+              >img {
+                display: none;
+              }
+            }
+          }
         }
       }
     }

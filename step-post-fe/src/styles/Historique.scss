@@ -9,7 +9,7 @@ $green: #24A640;
     align-items: center;
     row-gap: 3vh;
     margin-top: 5vh;
-    margin-bottom: 3vh;
+    padding-bottom: 25vh;
 
     >.section-historique {
         width: 80%;
@@ -77,6 +77,42 @@ $green: #24A640;
         .section-historique {
             width: 90%;
             font-size: .75rem;
+        }
+    }
+}
+
+@media print {
+    body {
+        #root {
+
+            nav,
+            footer,
+            .button {
+                display: none;
+            }
+
+            .main-historique {
+
+                >.form-recherche,
+                >.section-historique,
+                >div:last-child {
+                    display: none;
+                }
+
+                >.detailsRecherche {
+                    width: 90%;
+                    flex-direction: column;
+                    row-gap: 5vh;
+
+                    >div {
+                        >span {
+                            >img {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

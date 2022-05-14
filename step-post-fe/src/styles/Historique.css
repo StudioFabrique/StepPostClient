@@ -5,7 +5,7 @@
   align-items: center;
   row-gap: 3vh;
   margin-top: 5vh;
-  margin-bottom: 3vh;
+  padding-bottom: 25vh;
 }
 .main-historique > .section-historique {
   width: 80%;
@@ -55,5 +55,25 @@
   .main-historique .section-historique {
     width: 90%;
     font-size: 0.75rem;
+  }
+}
+@media print {
+  body #root nav,
+body #root footer,
+body #root .button {
+    display: none;
+  }
+  body #root .main-historique > .form-recherche,
+body #root .main-historique > .section-historique,
+body #root .main-historique > div:last-child {
+    display: none;
+  }
+  body #root .main-historique > .detailsRecherche {
+    width: 90%;
+    flex-direction: column;
+    row-gap: 5vh;
+  }
+  body #root .main-historique > .detailsRecherche > div > span > img {
+    display: none;
   }
 }/*# sourceMappingURL=Historique.css.map */

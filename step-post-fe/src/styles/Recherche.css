@@ -49,6 +49,19 @@
   row-gap: 1vh;
   color: #140A82;
 }
+.detailsRecherche > div > span {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.75vw;
+       column-gap: 0.75vw;
+}
+.detailsRecherche > div > span > img {
+  height: 24px;
+  width: auto;
+}
+.detailsRecherche > div > span > img:hover {
+  cursor: pointer;
+}
 
 @media screen and (max-width: 1000px) {
   .detailsRecherche {
