@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
         $exp->setEmail("tata@toto.fr");
         $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
         $exp->setPassword($hash);
-        $exp->setName("hopital");
+        $exp->setName("step post");
         $exp->setAdresse('12 rue Frodon Sacquet');
         $exp->setCodePostal(64000);
         $exp->setVille('pau');
@@ -154,7 +154,7 @@ class AppFixtures extends Fixture
                 $courrier->setType(1);
                 $courrier->setBordereau($bordereau);
                 $courrier->setCivilite($destinataire['civilite']);
-                $courrier->setNom($destinataire['nom']);
+                $courrier->setName($destinataire['nom']);
                 $courrier->setPrenom($destinataire['prenom']);
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);
@@ -181,7 +181,7 @@ class AppFixtures extends Fixture
                 $courrier->setType(1);
                 $courrier->setBordereau($bordereau);
                 $courrier->setCivilite($destinataire['civilite']);
-                $courrier->setNom($destinataire['nom']);
+                $courrier->setName($destinataire['nom']);
                 $courrier->setPrenom($destinataire['prenom']);
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);

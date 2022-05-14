@@ -38,7 +38,7 @@ class Service
         $destinataire = [
             'civilite' => $courrier->getCivilite(),
             'prenom' => $courrier->getPrenom(),
-            'nom' => $courrier->getNom(),
+            'nom' => $courrier->getName(),
             'adresse' => $courrier->getAdresse(),
             'codePostal' => $courrier->getCodePostal(),
             'ville' => $courrier->getVille(),
@@ -234,7 +234,7 @@ class Service
                 $courriers = [...$courriers, [
                     'id' => $statut[0]->getCourrier()->getId(),
                     'date' => $statut[0]->getDate(),
-                    'nom' => $statut[0]->getCourrier()->getNom(),
+                    'nom' => $statut[0]->getCourrier()->getName(),
                     'prenom' => $statut[0]->getCourrier()->getPrenom(),
                     'etat' => $statut[0]->getStatut()->getEtat(),
                     'bordereau' => $statut[0]->getCourrier()->getBordereau(),
@@ -341,7 +341,7 @@ class Service
         $courrier->setType($data[1]);
         $courrier->setCivilite($dest->getCivilite());
         $courrier->setPrenom($dest->getPrenom());
-        $courrier->setNom($dest->getNom());
+        $courrier->setName($dest->getNom());
         $courrier->setAdresse($dest->getAdresse());
         $courrier->setComplement($dest->getComplement());
         $courrier->setCodePostal($dest->getCodePostal());

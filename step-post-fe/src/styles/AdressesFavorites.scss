@@ -18,8 +18,8 @@ $green: #24A640;
 }
 
 .main-nouvel-envoi {
+    position: relative;
     width: 100vw;
-    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,6 +27,7 @@ $green: #24A640;
     row-gap: 5vh;
     margin-top: 10vh;
     margin-bottom: 5vh;
+    padding-bottom: 25vh;
 
     >.section-adresses {
         width: 60%;

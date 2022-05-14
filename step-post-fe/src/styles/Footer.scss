@@ -3,12 +3,12 @@ $orange: #FF5E1A;
 $green: #24A640;
 
 footer {
+    position:absolute;
     bottom: 0;
     width: 98%;
     height: 20vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     background-color: $blue;
     border-top-right-radius: 30px;
     color: white;
