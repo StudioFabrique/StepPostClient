@@ -93,6 +93,7 @@ body #root .button {
   }
   body #root .home-main > .form-recherche,
 body #root .home-main > .listecourriers-section,
+body #root .home-main > .rechercheNom,
 body #root .home-main > div:last-child {
     display: none;
   }

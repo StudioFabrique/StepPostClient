@@ -118,33 +118,33 @@ class AdresseForm extends Component {
                         </div>
                         <div>
                             <label><div><p>Prénom / Service</p><p className="obligatoire">*</p></div>
-                                <input type="text" value={toTitleCase(this.state.prenom)} name="prenom" onChange={this.handleChange} />
+                                <input type="text" placeholder='Jean' value={toTitleCase(this.state.prenom)} name="prenom" onChange={this.handleChange} />
                             </label>
                             <label><div><p>Nom / Entreprise</p><p className="obligatoire">*</p></div>
-                                <input type="text" value={toTitleCase(this.state.nom)} name="nom" onChange={this.handleChange} />
+                                <input type="text" placeholder='Dupont' value={toTitleCase(this.state.nom)} name="nom" onChange={this.handleChange} />
                             </label>
                         </div>
                         <div>
                             <label><div><p>Adresse</p><p className="obligatoire">*</p></div>
-                                <textarea rows="2" value={toTitleCase(this.state.adresse)} name="adresse" onChange={this.handleChange} />
+                                <textarea placeholder='2 rue du Château' rows="2" value={toTitleCase(this.state.adresse)} name="adresse" onChange={this.handleChange} />
                             </label>
                         </div>
                         <div>
                             <label><div><p>Complément d'adresse</p><p className="obligatoire"></p></div>
-                                <textarea rows="2" value={this.state.complement} name="complement" onChange={this.handleChange} />
+                                <textarea placeholder='au fond de la cour' rows="2" value={this.state.complement} name="complement" onChange={this.handleChange} />
                             </label>
                         </div>
                         <div>
                             <label><div><p>Code Postal</p><p className="obligatoire">*</p></div>
-                                <input type="text" value={toTitleCase(this.state.codePostal)} name="codePostal" onChange={this.handleChange} />
+                                <input placeholder='64000' type="text" value={toTitleCase(this.state.codePostal)} name="codePostal" onChange={this.handleChange} />
                             </label>
                             <label><div><p>Ville</p><p className="obligatoire">*</p></div>
-                                <input type="text" value={toTitleCase(this.state.ville)} name="ville" onChange={this.handleChange} />
+                                <input placeholder='Pau' type="text" value={toTitleCase(this.state.ville)} name="ville" onChange={this.handleChange} />
                             </label>
                         </div>
                         <div>
                             <label>Téléphone
-                                <input type="text" value={
+                                <input placeholder='0559585756' type="text" value={
                                     this.state.telephone !== 'non disponible' ?
                                         toTitleCase(this.state.telephone)
                                         :
@@ -152,7 +152,7 @@ class AdresseForm extends Component {
                                 } name="telephone" onChange={this.handleChange} />
                             </label>
                             <label>Email
-                                <input type="text" value={this.state.email} name="email" onChange={this.handleChange} />
+                                <input placeholder='jean.dupont@exemple.fr' type="text" value={this.state.email} name="email" onChange={this.handleChange} />
                             </label>
                         </div>
                         {

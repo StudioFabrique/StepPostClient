@@ -65,6 +65,7 @@ body #root .button {
   }
   body #root .main-historique > .form-recherche,
 body #root .main-historique > .section-historique,
+body #root .main-historique > .rechercheNom,
 body #root .main-historique > div:last-child {
     display: none;
   }

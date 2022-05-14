@@ -35,10 +35,10 @@ function ConnexionForm({ message, onFormSubmit }) {
                 <section className="section-connexion-form">
                     <form className="form-connexion" onSubmit={handleSubmit}>
                         <label>Adresse email :&nbsp;
-                            <input type="email" autoFocus onChange={(e) => updateEmail(e.target.value)} />
+                            <input type="email" placeholder="jean.dupont@exemple.fr" autoFocus onChange={(e) => updateEmail(e.target.value)} />
                         </label>
                         <label>Mot de passe :&nbsp;
-                            <input type="password" onChange={(e) => updatePassword(e.target.value)} />
+                            <input type="password" placeholder="Abcd@1234" onChange={(e) => updatePassword(e.target.value)} />
                         </label>
                         {
                             erreur ? <p>Email ou mot de passe incorrect(s), essayez à nouveau svp</p> : null
