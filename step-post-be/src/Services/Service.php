@@ -235,6 +235,7 @@ class Service
                 $courriers = [...$courriers, [
                     'id' => $statut[0]->getCourrier()->getId(),
                     'date' => $statut[0]->getDate(),
+                    'civilite' => $statut[0]->getCourrier()->getCivilite(),
                     'nom' => $statut[0]->getCourrier()->getName(),
                     'prenom' => $statut[0]->getCourrier()->getPrenom(),
                     'etat' => $statut[0]->getStatut()->getEtat(),

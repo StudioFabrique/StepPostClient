@@ -79,7 +79,7 @@ class Home extends Component {
             this.state.isRechercheActive && <DetailsRecherche courrier={this.state.rechercheValue} onCloseRecherche={this.handleCloseRecherche} />
           }
           {
-            this.state.rechercheNom && <RechercheNom nom={this.nom} total={this.total} onRetourBtn={this.handleBtnRetour} />
+            this.state.rechercheNom && <RechercheNom nom={this.nom} civilite={this.state.statuts[0].civilite} total={this.total} onRetourBtn={this.handleBtnRetour} />
           }
           {
             this.state.noResults && <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />

@@ -169,7 +169,7 @@ $green: #24A640;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                row-gap: 3vh;
+                row-gap: 2vh;
 
                 >span {
                     display: flex;
@@ -182,12 +182,11 @@ $green: #24A640;
                     >article {
                         display: flex;
                         flex-direction: column;
-                        row-gap: 2vh;
+                        row-gap: 1vh;
 
                         >div {
                             display: flex;
                             flex-direction: column;
-                            row-gap: .5vh;
                         }
 
                         >div:nth-child(2) {
