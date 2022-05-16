@@ -218,6 +218,9 @@ $green: #24A640;
 }
 
 @media print {
+    @page {
+        size: portrait;
+    }
     nav,
     footer,
     .popup,
@@ -227,11 +230,12 @@ $green: #24A640;
 
 
     .main-bordereau {
-        transform: scale(.75);
+        transform: scale(.8);
         height: 100%;
         width: 100%;
         row-gap: 0;
         color: black;
+        margin: auto;
 
         >.section-bordereau-buttons {
             display: none;
