@@ -159,7 +159,7 @@ class Service
             $nom = $this->stripTag()[0];
             for ($i = 0; $i < strlen($nom); $i++) :
                 $tmp = array();
-                foreach($destinataires as $el) :
+                foreach ($destinataires as $el) :
                     $elNom = $el->getNom();
                     if ($elNom[$i] === $nom[$i]) :
                         array_push($tmp, $el);
@@ -234,6 +234,7 @@ class Service
             if ($this->isDistributed($tmp, $filtre)) :
                 $courriers = [...$courriers, [
                     'id' => $statut[0]->getCourrier()->getId(),
+                    'type' => $statut[0]->getCourrier()->getType(),
                     'date' => $statut[0]->getDate(),
                     'civilite' => $statut[0]->getCourrier()->getCivilite(),
                     'nom' => $statut[0]->getCourrier()->getName(),
