@@ -75,9 +75,9 @@ class NouvelEnvoi extends Component {
                   Lettre
                   <input
                     type="radio"
-                    value="lettre"
+                    value="1"
                     name="type"
-                    checked={this.state.type === "lettre"}
+                    checked={this.state.type === "1"}
                     onChange={this.handleRadioChange}
                   />
                 </label>
@@ -85,9 +85,9 @@ class NouvelEnvoi extends Component {
                   Colis
                   <input
                     type="radio"
-                    value="colis"
+                    value="0"
                     name="type"
-                    checked={this.state.type === "colis"}
+                    checked={this.state.type === "0"}
                     onChange={this.handleRadioChange}
                   />
                 </label>
@@ -157,7 +157,7 @@ class NouvelEnvoi extends Component {
           <Bordereau
             adresse={this.state.dest}
             exp={this.state.exp}
-            type={this.state.type}
+            type={parseInt(this.state.type)}
             instructions={this.state.instructions}
             onRetour={this.handleRetour}
           />

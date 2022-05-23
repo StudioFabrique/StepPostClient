@@ -8,28 +8,27 @@ import PopupConfirmation from "./PopupConfirmation";
 function Bordereau(props) {
   let valider = false;
   const msg = "Confirmer l'impression du bordereau svp.";
-  let type;
   const [qrcode, updateQrcode] = useState("");
   const [bordereau, updateBordereau] = useState("-----");
   const [isSubmitted, updateIsSubmitted] = useState(false);
   const [exp, upsdateExp] = useState([]);
   const [dest, updateDest] = useState([]);
+  const [type, updateType] = useState(null);
 
   useEffect(() => {
     updateDest(props.adresse);
     upsdateExp(props.exp);
-    console.log("exp", exp);
-    type = props.type;
+    updateType(props.type);
     if (!dest.telephone) {
       dest.telephone = "non disponible";
     }
-    console.log("type", type);
-    console.log("dest", dest);
   }, [props]);
 
   useEffect(() => {
     if (qrcode !== "") {
-      window.print();
+      setTimeout(() => {
+        window.print();
+      }, 1000);
     }
   }, [qrcode]);
 
@@ -39,19 +38,10 @@ function Bordereau(props) {
 
   const handleQrCode = async () => {
     if (!valider) {
-      if (type === "lettre") {
-        type = 1;
-      } else {
-        type = 0;
-      }
       updateIsSubmitted(true);
     } else {
       alert("Votre bordereau est déjà en cours d'impression.");
     }
-  };
-
-  const setExp = async () => {
-    return await getData("/expediteur");
   };
 
   const handleConfirm = async () => {
@@ -65,72 +55,6 @@ function Bordereau(props) {
     updateIsSubmitted(false);
     valider = false;
   };
-  /* class Bordereau extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      exp: [],
-      dest: [],
-      qrcode: "",
-      bordereau: "-----",
-      isSubmitted: false,
-    };
-    this.type = "";
-    this.valider = false;
-    this.dest = this.props.adresse;
-    this.msg = "Confirmer l'impression du bordereau svp.";
-  }
-
-  componentDidMount = async () => {
-    const response = await getData("/expediteur");
-    if (!this.dest.telephone) {
-      this.dest.telephone = "non disponible";
-    }
-    this.setState({
-      exp: response.exp,
-      dest: this.dest,
-      type: this.props.type,
-    });
-  };
-
-  componentDidUpdate = () => {
-    if (qrcode !== "") {
-      setTimeout(() => {
-        window.print();
-      }, 1000);
-    }
-  };
-
-  handleRetour = () => {
-    this.props.onRetour();
-  };
-
-  handleQrCode = async () => {
-    if (!this.valider) {
-      if (this.type === "lettre") {
-        this.type = 1;
-      } else {
-        this.type = 0;
-      }
-      this.setState({ isSubmitted: true });
-    } else {
-      alert("Votre bordereau est déjà en cours d'impression.");
-    }
-  };
-
-  handleConfirm = async () => {
-    const response = await postData("/qrcode", [dest.id, this.type]);
-    this.setState({
-      qrcode: response.qrcode,
-      bordereau: response.bordereau,
-    });
-    this.valider = true;
-    this.setState({ isSubmitted: false });
-  };
-
-  handleCancel = () => {
-    this.setState({ isSubmitted: false, valider: false });
-  }; */
 
   return (
     <main className="main-bordereau">
@@ -142,14 +66,14 @@ function Bordereau(props) {
               <input
                 type="checkbox"
                 name="type"
-                checked={type === "lettre"}
+                checked={type === 1}
                 readOnly
               />
               <label htmlFor="lettre">Lettre</label>
               <input
                 type="checkbox"
                 name="type"
-                checked={type === "colis"}
+                checked={type === 0}
                 readOnly
               />
               <label htmlFor="colis">Colis</label>
