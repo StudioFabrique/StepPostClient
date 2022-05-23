@@ -11,12 +11,12 @@ class Bordereau extends Component {
     this.state = {
       exp: [],
       dest: [],
-      type: "",
       qrcode: "",
       bordereau: "-----",
-      valider: false,
       isSubmitted: false,
     };
+    this.type = "";
+    this.valider = false;
     this.dest = this.props.adresse;
     this.msg = "Confirmer l'impression du bordereau svp.";
   }
@@ -38,30 +38,35 @@ class Bordereau extends Component {
   };
 
   handleQrCode = async () => {
-    if (!this.state.valider) {
-      let type;
-      if (!this.state.valider) {
-        if (this.state.type === "lettre") {
-          type = 1;
-        } else {
-          type = 0;
-        }
+    if (!this.valider) {
+      if (this.type === "lettre") {
+        this.type = 1;
+      } else {
+        this.type = 0;
       }
-      const response = await postData("/qrcode", [this.state.dest.id, type]);
-      this.setState({
-        qrcode: `${response.qrcode}`,
-        bordereau: response.bordereau,
-        valider: true,
-      });
       this.setState({ isSubmitted: true });
     } else {
       alert("Votre bordereau est déjà en cours d'impression.");
     }
   };
 
-  handleConfirm = () => {
-    window.print();
+  handleConfirm = async () => {
+    const response = await postData("/qrcode", [this.state.dest.id, this.type]);
+    this.setState({
+      qrcode: response.qrcode,
+      bordereau: response.bordereau,
+    });
+    this.valider = true;
     this.setState({ isSubmitted: false });
+  };
+
+  componentDidUpdate = () => {
+    if (this.state.qrcode !== "") {
+      console.log(this.state.qrcode);
+      setTimeout(() => {
+        window.print();
+      }, 1000);
+    }
   };
 
   handleCancel = () => {
