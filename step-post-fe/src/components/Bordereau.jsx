@@ -37,27 +37,29 @@ class Bordereau extends Component {
     this.props.onRetour();
   };
 
-  handleQrCode = async () => {
+  handleQrCode = () => {
     if (!this.state.valider) {
-      let type;
-      if (this.state.type === "lettre") {
-        type = 1;
-      } else {
-        type = 0;
-      }
-      const response = await postData("/qrcode", [this.state.dest.id, type]);
-      this.setState({
-        qrcode: `${response.qrcode}`,
-        bordereau: response.bordereau,
-        valider: true,
-        isSubmitted: true,
-      });
+      this.setState({ isSubmitted: true });
     } else {
       alert("Votre bordereau est déjà en cours d'impression.");
     }
   };
 
-  handleConfirm = () => {
+  handleConfirm = async () => {
+    let type;
+    if (!this.state.valider) {
+      if (this.state.type === "lettre") {
+        type = 1;
+      } else {
+        type = 0;
+      }
+    }
+    const response = await postData("/qrcode", [this.state.dest.id, type]);
+    this.setState({
+      qrcode: `${response.qrcode}`,
+      bordereau: response.bordereau,
+      valider: true,
+    });
     window.print();
     this.setState({ isSubmitted: false });
   };
