@@ -8,7 +8,7 @@ import { getData } from "../modules/postData";
 class NouvelEnvoi extends Component {
   constructor(props) {
     super(props);
-    this.state = { type: "", dest: [], exp: [], section: 0, instructions: "" };
+    this.state = { type: "", dest: [], section: 0, instructions: "" };
   }
 
   componentDidMount = async () => {
@@ -16,8 +16,7 @@ class NouvelEnvoi extends Component {
     if (!dest.telephone) {
       dest.telephone = "non disponible";
     }
-    const response = await getData("/expediteur");
-    this.setState({ dest: dest, exp: response.exp });
+    this.setState({ dest: dest });
   };
 
   handleRadioChange = (event) => {
@@ -156,7 +155,6 @@ class NouvelEnvoi extends Component {
         {this.state.section === 2 && (
           <Bordereau
             adresse={this.state.dest}
-            exp={this.state.exp}
             type={parseInt(this.state.type)}
             instructions={this.state.instructions}
             onRetour={this.handleRetour}
