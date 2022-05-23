@@ -1,9 +1,9 @@
-import React, { Component, useEffect, useState } from "react";
-import { getData, getQrcode, postData } from "../modules/postData";
+import React, { useEffect, useState } from "react";
+import { postData } from "../modules/postData";
 import Adresse from "./Adresse";
 import "../styles/Bordereau.css";
-import { qrcodeUrl } from "../modules/data";
 import PopupConfirmation from "./PopupConfirmation";
+import { baseUrl } from "../modules/data/baseUrl";
 
 function Bordereau(props) {
   let valider = false;
@@ -11,26 +11,29 @@ function Bordereau(props) {
   const [qrcode, updateQrcode] = useState("");
   const [bordereau, updateBordereau] = useState("-----");
   const [isSubmitted, updateIsSubmitted] = useState(false);
-  const [exp, upsdateExp] = useState([]);
+  const [exp, updateExp] = useState({});
   const [dest, updateDest] = useState([]);
   const [type, updateType] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     updateDest(props.adresse);
-    upsdateExp(props.exp);
+    fetch(`${baseUrl}/expediteur`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    }).then((response) => response.json().then(({ exp }) => updateExp(exp)));
     updateType(props.type);
     if (!dest.telephone) {
       dest.telephone = "non disponible";
     }
-  }, [props]);
+  }, []);
 
   useEffect(() => {
-    if (qrcode !== "") {
-      setTimeout(() => {
-        window.print();
-      }, 1000);
+    if (isLoaded) {
+      window.print();
     }
-  }, [qrcode]);
+  }, [isLoaded]);
 
   const handleRetour = () => {
     props.onRetour();
@@ -103,7 +106,7 @@ function Bordereau(props) {
         <article className="article-dest-left">
           <div>
             {qrcode ? (
-              <img src={qrcode} alt="qrcode" />
+              <img src={qrcode} alt="qrcode" onLoad={() => setIsLoaded(true)} />
             ) : (
               <h5>
                 Le QR code et le numéro de bordereau seront générés lors de
