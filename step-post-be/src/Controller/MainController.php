@@ -157,8 +157,16 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/client/handshake', name: 'api_handshake')]
-    public function handShake() : Response
+    public function handShake(): Response
     {
         return $this->json(['result' => $this->getUser() !== null]);
+    }
+
+    #[Route('/api/client/getdestbyid', name: 'api_getdestbyid')]
+    public function getDestById(DestinatairesRepository $destinatairesRepository): Response
+    {
+        $data = strip_tags($_POST['data']);
+        $dest = $destinatairesRepository->findOneBy(['id' => $data]);
+        return $this->json(['result' => $dest]);
     }
 }
