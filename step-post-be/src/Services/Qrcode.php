@@ -6,14 +6,14 @@ use DateTime;
 use Endroid\QrCode\Builder\BuilderInterface;
 use Endroid\QrCode\Encoding\Encoding;
 
-class Toto
+class Qrcode
 {
 
     protected $builder;
 
     public function __construct(BuilderInterface $builder)
     {
-        $this->builder = $builder;   
+        $this->builder = $builder;
     }
 
     public function qrcode(string $bordereau)
@@ -22,14 +22,14 @@ class Toto
         $dateString = $objDateTime->format('d-m-Y H:i:s');
 
         $result = $this->builder
-        ->data($bordereau)
-        ->encoding(new Encoding('UTF-8'))
-        ->size(300)
-        ->labelText($dateString)
-        ->build();
+            ->data($bordereau)
+            ->encoding(new Encoding('UTF-8'))
+            ->size(300)
+            ->labelText($dateString)
+            ->build();
 
-        $nameFile = uniqid('', '').'.png';
-        $result->saveToFile((\dirname(__DIR__, 2).'/public/assets/qrcodes/'.$nameFile));
+        $nameFile = uniqid('', '') . '.png';
+        $result->saveToFile((\dirname(__DIR__, 2) . '/public/assets/qrcodes/' . $nameFile));
 
         return $result->getDataUri();
     }

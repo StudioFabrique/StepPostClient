@@ -8,7 +8,7 @@ use App\Repository\ExpediteurRepository;
 use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use App\Services\Service as Service;
-use App\Services\Toto as ServicesToto;
+use App\Services\Qrcode as ServicesQrcode;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -135,7 +135,7 @@ class MainController extends AbstractController
 
     #[Route('/api/client/qrcode', name: 'api_qrcode')]
     public function qrCode(
-        ServicesToto $serviceToto,
+        ServicesQrcode $servicesQrcode,
         Service $service,
         ManagerRegistry $doctrine,
         DestinatairesRepository $destinatairesRepository,
@@ -144,7 +144,7 @@ class MainController extends AbstractController
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $result = $service->qrcode(
-            $serviceToto,
+            $servicesQrcode,
             $doctrine,
             $destinatairesRepository,
             $statutRepository,
@@ -166,7 +166,19 @@ class MainController extends AbstractController
     public function getDestById(DestinatairesRepository $destinatairesRepository): Response
     {
         $data = strip_tags($_POST['data']);
-        $dest = $destinatairesRepository->findOneBy(['id' => $data]);
-        return $this->json(['result' => $dest]);
+        $el = $destinatairesRepository->findOneBy(['id' => $data]);
+        $adresse = [
+            'id' => $el->getId(),
+            'civilite' => $el->getCivilite(),
+            'prenom' => $el->getPrenom(),
+            'nom' => $el->getNom(),
+            'adresse' => $el->getAdresse(),
+            'complement' => $el->getComplement(),
+            'codePostal' => $el->getCodePostal(),
+            'ville' => $el->getVille(),
+            'telephone' => $el->getTelephone(),
+            'email' => $el->getEmail(),
+        ];
+        return $this->json(['adresse' => $adresse]);
     }
 }

@@ -11,7 +11,7 @@ use App\Repository\DestinatairesRepository;
 use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Services\Toto as ServicesToto;
+use App\Services\Qrcode as ServicesQrcode;
 
 class Service
 {
@@ -330,7 +330,7 @@ class Service
     }
 
     public function qrcode(
-        ServicesToto $serviceToto,
+        ServicesQrcode $servicesQrcode,
         ManagerRegistry $doctrine,
         DestinatairesRepository $destinatairesRepository,
         StatutRepository $statutRepository,
@@ -373,7 +373,7 @@ class Service
         $manager->persist($courrier);
         $manager->flush();
 
-        $qrcode = $serviceToto->qrcode($bordereau);
+        $qrcode = $servicesQrcode->qrcode($bordereau);
         return [
             'qrcode' => $qrcode,
             'bordereau' => $bordereau

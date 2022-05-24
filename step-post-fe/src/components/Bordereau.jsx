@@ -32,6 +32,7 @@ function Bordereau(props) {
   useEffect(() => {
     if (isLoaded) {
       window.print();
+      valider = true;
     }
   }, [isLoaded]);
 
@@ -51,7 +52,6 @@ function Bordereau(props) {
     const response = await postData("/qrcode", [dest.id, type]);
     updateQrcode(response.qrcode);
     updateBordereau(response.bordereau);
-    valider = true;
     updateIsSubmitted(false);
   };
   const handleCancel = () => {
