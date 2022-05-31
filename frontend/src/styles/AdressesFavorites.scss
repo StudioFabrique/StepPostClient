@@ -1,69 +1,70 @@
-$blue: #140A82;
-$orange: #FF5E1A;
-$green: #24A640;
+$blue: #140a82;
+$orange: #ff5e1a;
+$green: #24a640;
 
 .bouton-ajouter {
-    >button {
-        border: none;
+  > button {
+    border: none;
 
-        >img {
-            width: 2vw;
-            height: 2vw;
-        }
-
-        &:hover {
-            cursor: pointer;
-        }
+    > img {
+      width: 2vw;
+      height: 2vw;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .main-nouvel-envoi {
-    position: relative;
-    width: 100vw;
+  position: relative;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  row-gap: 5vh;
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+  padding-bottom: 25vh;
+
+  > .section-adresses {
+    width: 60%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
-    row-gap: 5vh;
-    margin-top: 10vh;
-    margin-bottom: 5vh;
-    padding-bottom: 25vh;
+    row-gap: 2vh;
+    column-gap: 1vw;
+  }
 
-    >.section-adresses {
-        width: 60%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        row-gap: 2vh;
-        column-gap: 1vw;
-    }
+  > .section-recherche-nom,
+  > .section-no-results {
+    width: 60%;
+  }
 
-    >.section-recherche-nom,
-    >.section-no-results {
-        width: 60%;
-    }
-
-    >.section-recherche-nom {
-        display: flex;
-        justify-content: space-between;
-    }
-
+  > .section-recherche-nom {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-    .main-nouvel-envoi {
-
-        >.section-adresses,
-        >.section-no-results,
-        >.section-recherche-nom {
-            width: 90%;
-            font-size: .85rem;
-        }
-
-        >.section-recherche-nom {
-            flex-direction: column;
-            align-items: flex-start;
-            row-gap: 2vh;
-        }
+  .main-nouvel-envoi {
+    > .section-adresses,
+    > .section-no-results,
+    > .section-recherche-nom {
+      width: 90%;
+      font-size: 0.85rem;
     }
+
+    > .section-recherche-nom {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 2vh;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
 }

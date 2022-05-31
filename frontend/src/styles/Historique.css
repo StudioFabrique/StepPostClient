@@ -28,16 +28,19 @@
   padding: 1vw 1vw;
 }
 
-.main-historique > .section-historique > table > th,
-.main-historique > .section-historique > table > td {
-  padding: 1vh 1vw;
+.main-historique > .section-historique > table th,
+.main-historique > .section-historique > table td {
   font-weight: bold;
 }
 
 .main-historique > .section-historique > table > thead {
   text-align: left;
-  background-color: #140A82;
+  background-color: #140a82;
   color: white;
+}
+
+.main-historique > .section-historique > table > thead > tr > th {
+  padding: 1vh 1vw;
 }
 
 .main-historique > .section-historique > table > thead > tr > th:hover {
@@ -55,8 +58,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-column-gap: .5vw;
-          column-gap: .5vw;
+  -webkit-column-gap: 0.5vw;
+          column-gap: 0.5vw;
 }
 
 .main-historique > .section-historique > table > tbody > tr > td {
@@ -74,14 +77,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-column-gap: .5vw;
-          column-gap: .5vw;
+  -webkit-column-gap: 0.5vw;
+          column-gap: 0.5vw;
 }
 
 @media screen and (max-width: 600px) {
   .main-historique .section-historique {
     width: 90%;
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
 }
 

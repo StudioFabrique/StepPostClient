@@ -1,56 +1,55 @@
 .icone {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 nav {
+  display: flex;
+
+  > div {
+    width: 50vw;
+    padding: 0.75vw;
+
+    > img {
+      height: 6vh;
+      width: auto;
+    }
+  }
+
+  > div:nth-child(2) {
     display: flex;
+    justify-content: flex-end;
 
-    >div {
-        width: 50vw;
-        padding: .75vw;
-
-        >img {
-            height: 6vh;
-            width: auto;
-        }
+    > ul {
+      display: flex;
+      list-style-type: none;
+      column-gap: 1vw;
+      align-items: center;
+      > li {
+        padding: 0.5vw;
+      }
     }
-
-    >div:nth-child(2) {
-        display: flex;
-        justify-content: flex-end;
-
-        >ul {
-            display: flex;
-            list-style-type: none;
-            column-gap: 1vw;
-            align-items: center;
-            >li {
-                padding: .5vw;
-            }
-        }
-
-    }
+  }
 }
 
 @media screen and (max-width: 600px) {
-    nav {
-        >div {
-            >img {
-                height: 3vh;
-            }
-        }
-        >div:nth-child(2) {
-            >ul {
-                >li {
-                    >a {
-                        >img {
-                            width: 3vh;
-                            height: 3vh;
-                        }
-                    }
-                }
-            }
-        }
+  nav {
+    > div {
+      > img {
+        height: 6vh;
+      }
     }
+    > div:nth-child(2) {
+      > ul {
+        > li {
+          > a {
+            > img {
+              width: 3vh;
+              height: 3vh;
+            }
+          }
+        }
+      }
+    }
+  }
 }

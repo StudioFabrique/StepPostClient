@@ -67,7 +67,7 @@
   .main-nouvel-envoi > .section-no-results,
   .main-nouvel-envoi > .section-recherche-nom {
     width: 90%;
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
   .main-nouvel-envoi > .section-recherche-nom {
     -webkit-box-orient: vertical;
