@@ -1,70 +1,98 @@
-$blue: #140A82;
-$orange: #FF5E1A;
-$green: #24A640;
+$blue: #140a82;
+$orange: #ff5e1a;
+$green: #24a640;
 
 footer {
-    position:absolute;
-    bottom: 0;
-    width: 98%;
-    height: 20vh;
+  position: absolute;
+  bottom: 0;
+  width: 98%;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $blue;
+  border-top-right-radius: 30px;
+  color: white;
+
+  > div:nth-child(1) {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    background-color: $blue;
-    border-top-right-radius: 30px;
-    color: white;
+    align-items: center;
 
-    >div:nth-child(1) {
-        width: 100%;
-        height: 100%;
+    > div:nth-child(1) {
+      padding: 0 2vw;
+      display: flex;
+      column-gap: 2vw;
+    }
+
+    > div:nth-child(2) {
+      width: 80%;
+      height: 90%;
+      display: flex;
+      column-gap: 2vw;
+      font-size: 0.75em;
+      margin-left: 10vw;
+
+      > div:nth-child(1) {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
 
-        >div:nth-child(1) {
-            padding: 0 2vW;
-            display: flex;
-            column-gap: 2vw;
+      > div:nth-child(2) {
+        display: flex;
+        column-gap: 1vw;
+
+        > span {
+          display: flex;
+          align-items: center;
+          column-gap: 0.5vw;
         }
-
-        >div:nth-child(2) {
-            width: 80%;
-            height: 90%;
-            display: flex;
-            column-gap: 2vw;
-            font-size: .75em;
-            margin-left: 10vw;
-
-            >div:nth-child(1) {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-evenly;
-            }
-
-            >div:nth-child(2) {
-                display: flex;
-                column-gap: 1vw;
-
-                >span {
-                    display: flex;
-                    align-items: center;
-                    column-gap: .5vw;
-                }
-            }
-        }
+      }
     }
+  }
 
-    >div:nth-child(2) {
-        background-color: #6D699A;
-        padding: .5vw 1vw;
-        font-size: .75rem;
-    }
+  > div:nth-child(2) {
+    background-color: #6d699a;
+    padding: 0.5vw 1vw;
+    font-size: 0.75rem;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-    footer {
-        >div {
-            >div:nth-child(2) {
-                margin: 0;
-            }
-        }
+  footer {
+    > div {
+      > div:nth-child(2) {
+        margin: 0;
+      }
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    height: 24vh;
+    > div:nth-child(1) {
+      margin-top: 2vh;
+      flex-direction: column;
+      row-gap: 2vh;
+      > div {
+        > img {
+          height: 7vh;
+          width: auto;
+        }
+      }
+      > div:nth-child(2) {
+        justify-content: space-between;
+        margin-left: 0%;
+        margin-bottom: 2vh;
+        > div:nth-child(2) {
+          flex-direction: column;
+          > span {
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
 }
