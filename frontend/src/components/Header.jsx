@@ -1,12 +1,4 @@
-import {
-  BrowserRouter,
-  Link,
-  Navigate,
-  NavLink,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Logout from "./Logout";
 import Connexion from "./Connexion";
@@ -14,7 +6,6 @@ import "../styles/Header.css";
 import { useEffect, useState } from "react";
 import Historique from "./Historique";
 import AdressesFavorites from "./AdressesFavorites";
-import { getData, postData } from "../modules/postData";
 
 function Header() {
   const [isActive, updateActive] = useState(null);
@@ -26,7 +17,7 @@ function Header() {
     } else {
       updateIsLogged(false);
     }
-  }, [sessionStorage.getItem("token")]);
+  }, [localStorage.getItem("token")]);
 
   const handlePageActive = (page) => {
     updateActive(page);
