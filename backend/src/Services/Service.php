@@ -199,6 +199,7 @@ class Service
         $max = $tmp[1];
         $nom = $tmp[2];
         $filtre = $tmp[3];
+        $total = 0; // nombre total de courriers trouvés pour une recherche par nom avec le filtre
         // par defaut les données sont triées par id décroissantes, les variables $sort et $direction (ASC ou DESc) servent à définir un tri différent que celui par défaut
         if (isset($tmp[4])) :
             $sort = $tmp[4];
@@ -243,6 +244,7 @@ class Service
                     'bordereau' => $statut[0]->getCourrier()->getBordereau(),
                 ]];
             endif;
+            $total = count($courriers);
         endforeach;
         if (isset($sort)) :
             $courriers = $this->sortArrayByType($courriers, $sort, $direction);

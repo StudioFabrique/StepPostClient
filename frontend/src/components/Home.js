@@ -130,7 +130,10 @@ class Home extends Component {
             onClick={() => this.handleClick(this.state.page + 1, "plus")}
             style={{
               visibility:
-                this.state.statuts.length >= this.max ? "visible" : "hidden",
+                this.state.statuts.length >= this.max &&
+                this.state.statuts.length * (this.state.page + 1) !== this.total
+                  ? "visible"
+                  : "hidden",
             }}
           >
             {">"}
