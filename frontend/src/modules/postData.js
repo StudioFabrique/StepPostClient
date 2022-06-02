@@ -17,7 +17,7 @@ export async function postData(url, data) {
       })
     ).json();
     if (response.code === 401) {
-      sessionStorage.setItem("token", "");
+      localStorage.setItem("token", "");
       window.location.href = "/";
     }
     return response;
