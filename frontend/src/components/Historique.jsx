@@ -52,6 +52,7 @@ class Historique extends Component {
   }
 
   handleRecherche = async (msg) => {
+    this.total = 0;
     if (this.state.isRechercheActive) {
       this.setState({ isRechercheActive: false });
     }
@@ -128,6 +129,7 @@ class Historique extends Component {
       noResults: false,
     });
     this.nom = "";
+    this.total = 0;
   };
 
   handleBtnRetour = () => {
@@ -193,7 +195,11 @@ class Historique extends Component {
               onClick={() => this.handleClick(this.state.page + 1, "plus")}
               style={{
                 visibility:
-                  this.state.statuts.length >= this.max ? "visible" : "hidden",
+                  this.state.statuts.length >= this.max &&
+                  this.state.statuts.length * (this.state.page + 1) !==
+                    this.total
+                    ? "visible"
+                    : "hidden",
               }}
             >
               {">"}

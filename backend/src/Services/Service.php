@@ -162,7 +162,9 @@ class Service
                 foreach ($destinataires as $el) :
                     $elNom = $el->getNom();
                     if ($elNom[$i] === $nom[$i]) :
-                        array_push($tmp, $el);
+                        if (!(strlen($elNom) < strlen($nom))) :
+                            array_push($tmp, $el);
+                        endif;
                     endif;
                 endforeach;
                 $destinataires = $tmp;
