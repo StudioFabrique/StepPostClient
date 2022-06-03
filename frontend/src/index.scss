@@ -8,7 +8,8 @@ $green: #24A640;
     padding: 0;
 }
 
-html, body {
+html,
+body {
     height: 100vh;
 }
 
@@ -16,6 +17,7 @@ body {
     position: relative;
     color: $blue;
     font-family: rubik;
+
     >#root {
         position: relative;
         min-height: 100vh;
@@ -33,6 +35,10 @@ body {
 
     &:hover {
         cursor: pointer;
+    }
+
+    &:active {
+        transform: translate(2px, 2px);
     }
 }
 

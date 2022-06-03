@@ -86,6 +86,7 @@ class Home extends Component {
       rechercheNom: false,
       noResults: false,
     });
+    console.log(("total", response.total));
     this.nom = "";
     this.total = 0;
   };
