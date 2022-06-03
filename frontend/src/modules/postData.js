@@ -17,8 +17,7 @@ export async function postData(url, data) {
       })
     ).json();
     if (response.code === 401) {
-      localStorage.setItem("token", "");
-      window.location.href = "/";
+      window.location.href = "/logout";
     }
     return response;
   } catch (err) {}
@@ -33,8 +32,7 @@ export async function getData(url) {
     })
   ).json();
   if (response.code === 401) {
-    localStorage.setItem("token", "");
-    window.location.href = "/";
+    window.location.href = "/logout";
   }
   return response;
 }
