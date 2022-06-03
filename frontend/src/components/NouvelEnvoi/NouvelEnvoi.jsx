@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { toTitleCase } from "../../modules/formatter";
 import Bordereau from "../Bordereau/Bordereau";
 import "./NouvelEnvoi.css";
-import { getData } from "../../modules/postData";
 import AdresseForm from "../AdresseForm/AdresseForm";
 
 class NouvelEnvoi extends Component {
@@ -28,7 +27,6 @@ class NouvelEnvoi extends Component {
   };
 
   handleSubmit = (event) => {
-    this.handShake();
     event.preventDefault();
     if (!this.state.type) {
       alert("Choisissez un type de courrier svp.");
@@ -38,29 +36,19 @@ class NouvelEnvoi extends Component {
   };
 
   handleModifications = (newDest) => {
-    this.handShake();
     this.setState({ dest: newDest, section: 0 });
   };
 
   handleRetour = () => {
-    this.handShake();
     this.setState({ section: 0 });
   };
 
   handleModifier = () => {
-    this.handShake();
     this.setState({ section: 1 });
   };
 
   handleInstructions = (event) => {
     this.setState({ instructions: event.target.value });
-  };
-
-  handShake = async () => {
-    const response = await getData("/handshake");
-    if (response.code === 401) {
-      window.location.href = "/logout";
-    }
   };
 
   render() {

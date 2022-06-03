@@ -4,10 +4,14 @@ import "./Bordereau.css";
 import PopupConfirmation from "../PopupConfirmation/PopupConfirmation";
 import { baseUrl } from "../../modules/data/baseUrl";
 import Adresse from "../Adresse/Adresse";
+import { useAuth } from "../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function Bordereau(props) {
-  let valider = false;
+  const auth = useAuth();
+  const navigate = useNavigate();
   const msg = "Confirmer l'impression du bordereau svp.";
+  const [valider, updateValider] = useState(false);
   const [qrcode, updateQrcode] = useState("");
   const [bordereau, updateBordereau] = useState("-----");
   const [isSubmitted, updateIsSubmitted] = useState(false);
@@ -20,9 +24,17 @@ function Bordereau(props) {
     updateDest(props.adresse);
     fetch(`${baseUrl}/expediteur`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${auth.token}`,
       },
-    }).then((response) => response.json().then(({ exp }) => updateExp(exp)));
+    }).then((response) =>
+      response.json().then((result) => {
+        if (result.code !== 401) {
+          updateExp(result.exp);
+        } else {
+          navigate("/logout");
+        }
+      })
+    );
     updateType(props.type);
     if (!dest.telephone) {
       dest.telephone = "non disponible";
@@ -32,7 +44,7 @@ function Bordereau(props) {
   useEffect(() => {
     if (isLoaded) {
       window.print();
-      valider = true;
+      updateValider(true);
     }
   }, [isLoaded]);
 
@@ -56,7 +68,7 @@ function Bordereau(props) {
   };
   const handleCancel = () => {
     updateIsSubmitted(false);
-    valider = false;
+    updateValider(false);
   };
 
   return (

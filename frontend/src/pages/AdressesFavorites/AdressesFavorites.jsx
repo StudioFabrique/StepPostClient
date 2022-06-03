@@ -3,7 +3,7 @@ import "./AdressesFavorites.css";
 import ListeAdresses from "../../components/ListeAdresses/ListeAdresses";
 import NouvelEnvoi from "../../components/NouvelEnvoi/NouvelEnvoi";
 import AdresseForm from "../../components/AdresseForm/AdresseForm";
-import { getData, postData } from "../../modules/postData";
+import { postData } from "../../modules/postData";
 
 class AdressesFavorites extends Component {
   constructor(props) {
@@ -14,12 +14,10 @@ class AdressesFavorites extends Component {
   }
 
   componentDidMount() {
-    this.handShake();
     this.props.onPageLanding(1);
   }
 
   handleSectionUpdate = (newId, section) => {
-    this.handShake();
     this.newId = newId;
     this.setState({ section: section });
   };
@@ -40,10 +38,6 @@ class AdressesFavorites extends Component {
   handleEditerAdresse = async (adresse) => {
     await postData("/editAdresse", adresse);
     this.setState({ section: 0 });
-  };
-
-  handShake = async () => {
-    await getData("/handshake");
   };
 
   render() {

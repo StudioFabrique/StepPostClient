@@ -34,7 +34,6 @@ export const ProtectedRoute = ({ children }) => {
   const location = useLocation();
 
   if (!auth.token) {
-    console.log("token", location);
     return <Connexion to="/" replace state={{ from: location }} />;
   }
   return children;

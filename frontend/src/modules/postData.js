@@ -38,11 +38,14 @@ export async function getData(url) {
 }
 
 export async function getToken(data) {
-  return await (
-    await fetch(logUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: data[0], password: data[1] }),
-    })
-  ).json();
+  try {
+    const response = await (
+      await fetch(logUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: data[0], password: data[1] }),
+      })
+    ).json();
+    return response;
+  } catch (err) {}
 }

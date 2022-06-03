@@ -5,12 +5,11 @@ function DetailsCourrier(props) {
   const statuts = props.detailsCourrier;
   const dest = props.destinataire;
   let tab = [];
-  let l = statuts.length;
 
   for (let i = 0; i < statuts.length; i++) {
     tab.push(
       <>
-        <div className="cercleContainer">
+        <div className="cercleContainer" key={i}>
           <div className="cercle"></div>
           <div className="statuts">{statuts[i].etat}</div>
           <div className="statuts-date">{formatDate(statuts[i].date)} </div>

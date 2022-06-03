@@ -1,26 +1,34 @@
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import {
-  AuthProvider,
   ProtectedRoute,
+  useAuth,
 } from "../../components/AuthProvider/AuthProvider";
 import { Route, Routes } from "react-router-dom";
 import Historique from "../Historique/Historique";
 import AdressesFavorites from "../AdressesFavorites/AdressesFavorites";
 import Logout from "../../components/Logout/Logout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Home from "../Home/Home";
 
 function App() {
-  document.title = "Step Post";
+  const auth = useAuth();
   const [pageActive, updatePageActive] = useState(null);
+  const savedToken = localStorage.getItem("token");
+  useEffect(() => {
+    if (savedToken) {
+      auth.onLogin(savedToken);
+    }
+  }, []);
+
+  document.title = "Step Post";
 
   const handlePageActive = (page) => {
     updatePageActive(page);
   };
 
   return (
-    <AuthProvider>
+    <>
       <Header pageActive={pageActive} />
       <Routes>
         <Route
@@ -50,7 +58,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
-    </AuthProvider>
+    </>
   );
 }
 

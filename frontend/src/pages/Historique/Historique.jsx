@@ -138,75 +138,72 @@ class Historique extends Component {
 
   render() {
     return (
-      <>
-        <main className="main-historique">
-          <Recherche onRecherche={this.handleRecherche} />
-          {this.state.isRechercheActive ? (
-            <DetailsRecherche
-              courrier={this.state.rechercheValue}
-              onCloseRecherche={this.handleCloseRecherche}
-            />
-          ) : null}
-          {this.state.rechercheNom ? (
-            <RechercheNom
-              nom={this.nom}
-              total={this.total}
-              onRetourBtn={this.handleBtnRetour}
-            />
-          ) : null}
-          {this.state.noResults ? (
-            <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
-          ) : null}
-          <section className="section-historique">
-            <table>
-              <thead>
-                <tr>
-                  <th onClick={() => this.handleSort(0)}>Bordereau</th>
-                  <th onClick={() => this.handleSort(1)}>Date</th>
-                  <th onClick={() => this.handleSort(2)}>Nom</th>
-                  <th onClick={() => this.handleSort(3)}>Statut</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.statuts.map((courrier, index) => {
-                  return (
-                    <Logs
-                      key={index}
-                      courrier={courrier}
-                      onRowClick={this.handleRecherche}
-                    />
-                  );
-                })}
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-          </section>
-          <div>
-            <button
-              className="button"
-              onClick={() => this.handleClick(this.state.page - 1, "minus")}
-              style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
-            >
-              {"<"}
-            </button>
-            <p>{this.state.page + 1}</p>
-            <button
-              className="button"
-              onClick={() => this.handleClick(this.state.page + 1, "plus")}
-              style={{
-                visibility:
-                  this.state.statuts.length >= this.max &&
-                  this.state.statuts.length * (this.state.page + 1) !==
-                    this.total
-                    ? "visible"
-                    : "hidden",
-              }}
-            >
-              {">"}
-            </button>
-          </div>
-        </main>
-      </>
+      <main className="main-historique">
+        <Recherche onRecherche={this.handleRecherche} />
+        {this.state.isRechercheActive ? (
+          <DetailsRecherche
+            courrier={this.state.rechercheValue}
+            onCloseRecherche={this.handleCloseRecherche}
+          />
+        ) : null}
+        {this.state.rechercheNom ? (
+          <RechercheNom
+            nom={this.nom}
+            total={this.total}
+            onRetourBtn={this.handleBtnRetour}
+          />
+        ) : null}
+        {this.state.noResults ? (
+          <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
+        ) : null}
+        <section className="section-historique">
+          <table>
+            <thead>
+              <tr>
+                <th onClick={() => this.handleSort(0)}>Bordereau</th>
+                <th onClick={() => this.handleSort(1)}>Date</th>
+                <th onClick={() => this.handleSort(2)}>Nom</th>
+                <th onClick={() => this.handleSort(3)}>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.statuts.map((courrier, index) => {
+                return (
+                  <Logs
+                    key={index}
+                    courrier={courrier}
+                    onRowClick={this.handleRecherche}
+                  />
+                );
+              })}
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </section>
+        <div>
+          <button
+            className="button"
+            onClick={() => this.handleClick(this.state.page - 1, "minus")}
+            style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
+          >
+            {"<"}
+          </button>
+          <p>{this.state.page + 1}</p>
+          <button
+            className="button"
+            onClick={() => this.handleClick(this.state.page + 1, "plus")}
+            style={{
+              visibility:
+                this.state.statuts.length >= this.max &&
+                this.state.statuts.length * (this.state.page + 1) !== this.total
+                  ? "visible"
+                  : "hidden",
+            }}
+          >
+            {">"}
+          </button>
+        </div>
+      </main>
     );
   }
 }
