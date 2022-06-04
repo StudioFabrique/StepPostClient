@@ -7,12 +7,12 @@ import {
 import { postData } from "../../modules/postData";
 import DetailsCourrier from "../DetailsCourrier/DetailsCourrier";
 
-function Courrier({ statut, baseUrl, onCourrierClick }) {
+function Courrier({ statut, onCourrierClick }) {
   const [detailsCourrier, setDetailsCourrier] = useState([]);
   const [destinataire, setDestinataire] = useState([]);
 
   async function handleClick() {
-    const response = await postData(`/detailsCourrier`, [statut.id]);
+    const response = await postData(`/details-courrier`, [statut.id]);
     setDetailsCourrier(response.courrier);
     setDestinataire(response.destinataire);
     onCourrierClick(statut.id);

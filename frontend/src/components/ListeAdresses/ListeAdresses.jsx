@@ -21,7 +21,7 @@ class ListeAdresses extends Component {
     if (this.nom.length === 0) {
       this.setState({ rechercheNom: false, noResults: false });
     }
-    const response = await postData(`/adressesFavorites`, [nom]);
+    const response = await postData(`/adresses-favorites`, [nom]);
     if (response.destinataires !== false) {
       if (this.nom.length === 0) {
         this.setState({
@@ -47,7 +47,7 @@ class ListeAdresses extends Component {
 
   handleBtnRetour = async () => {
     this.nom = "";
-    const response = await getData("/adressesFavorites");
+    const response = await getData("/adresses-favorites");
     this.setState({
       adresses: response.destinataires,
       rechercheNom: false,
@@ -56,7 +56,7 @@ class ListeAdresses extends Component {
   };
 
   handleRefreshAdresses = async () => {
-    const response = await getData("/adressesFavorites");
+    const response = await getData("/adresses-favorites");
     this.setState({ adresses: response.destinataires, section: "adresses" });
   };
 

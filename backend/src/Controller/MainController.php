@@ -21,7 +21,7 @@ class MainController extends AbstractController
      * retourne false qd la recherche par bordereau n'a rien trouvé,
      * sinon retourne les infos sur le courrier recherché
      */
-    #[Route('/api/client/searchCourrier', name: 'api_searchCourrier')]
+    #[Route('/api/client/search-courrier', name: 'api_search-courrier')]
     public function searchCourrier(
         CourrierRepository $courrierRepository,
         StatutcourrierRepository $statutcourrierRepository,
@@ -41,7 +41,7 @@ class MainController extends AbstractController
         endif;
     }
 
-    #[Route('/api/client/detailsCourrier', name: 'api_detailsCourrier')]
+    #[Route('/api/client/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(
         StatutcourrierRepository $statutcourrierRepository,
         CourrierRepository $courrierRepository,
@@ -57,7 +57,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/api/client/adressesFavorites', name: 'api_adressesFavorites')]
+    #[Route('/api/client/adresses-favorites', name: 'api_adresses-favorites')]
     public function adressesFavorites(
         DestinatairesRepository $destinatairesRepository,
         ExpediteurRepository $expediteurRepository,
@@ -71,8 +71,8 @@ class MainController extends AbstractController
         return $this->json(['destinataires' => $result]);
     }
 
-    #[Route('/api/client/getLogs', name: 'api_getLogs')]
-    public function getLogs(
+    #[Route('/api/client/get-courriers', name: 'api_get-courriers')]
+    public function getCourriers(
         ExpediteurRepository $expediteurRepository,
         CourrierRepository $courrierRepository,
         StatutcourrierRepository $statutcourrierRepository,
@@ -90,7 +90,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/api/client/deleteAdresse', name: 'api_deleteAdresse')]
+    #[Route('/api/client/delete-adresse', name: 'api_delete-adresse')]
     public function deleteAdresse(
         Service $service,
         DestinatairesRepository $destinatairesRepository,
@@ -103,7 +103,7 @@ class MainController extends AbstractController
         return $this->json(['result' => true]);
     }
 
-    #[Route('/api/client/editAdresse', name: 'api_editAdresse')]
+    #[Route('/api/client/edit-adresse', name: 'api_edit-adresse')]
     public function editAdresse(
         DestinatairesRepository $destinatairesRepository,
         ManagerRegistry $doctrine,
@@ -115,7 +115,7 @@ class MainController extends AbstractController
         )]);
     }
 
-    #[Route('/api/client/addAdresse', name: 'api_addAdresse')]
+    #[Route('/api/client/add-adresse', name: 'api_add-adresse')]
     public function addAdresse(
         Service $service,
         ManagerRegistry $doctrine,
@@ -155,13 +155,7 @@ class MainController extends AbstractController
             'bordereau' => $result['bordereau'],
         ]);
     }
-
-    #[Route('/api/client/handshake', name: 'api_handshake')]
-    public function handShake(): Response
-    {
-        return $this->json(['result' => $this->getUser() !== null]);
-    }
-
+    /* 
     #[Route('/api/client/getdestbyid', name: 'api_getdestbyid')]
     public function getDestById(DestinatairesRepository $destinatairesRepository): Response
     {
@@ -180,5 +174,5 @@ class MainController extends AbstractController
             'email' => $el->getEmail(),
         ];
         return $this->json(['adresse' => $adresse]);
-    }
+    } */
 }

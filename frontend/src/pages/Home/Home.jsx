@@ -31,7 +31,7 @@ class Home extends Component {
 
   async handleClick(p, operator) {
     const datas = [p, this.max, this.nom, false];
-    const response = await postData(`/getLogs`, datas);
+    const response = await postData(`/get-courriers`, datas);
     if (operator === "minus") {
       this.setState({ statuts: response.statuts, page: this.state.page - 1 });
     } else {
@@ -40,12 +40,12 @@ class Home extends Component {
   }
 
   handleRecherche = async (msg) => {
-    const response = await postData(`/searchCourrier`, [msg]);
+    const response = await postData(`/search-courrier`, [msg]);
     if (response.statuts !== false) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
-      const response = await postData(`/getLogs`, [
+      const response = await postData(`/get-courriers`, [
         0,
         this.max,
         this.nom,
@@ -78,7 +78,7 @@ class Home extends Component {
      * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
      */
     const datas = [0, this.max, "", false];
-    const response = await postData(`/getLogs`, datas);
+    const response = await postData(`/get-courriers`, datas);
     this.setState({
       statuts: response.statuts,
       page: 0,

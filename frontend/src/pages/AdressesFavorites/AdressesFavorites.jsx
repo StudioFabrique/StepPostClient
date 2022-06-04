@@ -31,12 +31,12 @@ class AdressesFavorites extends Component {
   };
 
   handleAjouterAdresse = async (adresse) => {
-    await postData("/addAdresse", adresse);
+    await postData("/add-adresse", adresse);
     this.setState({ section: 0 });
   };
 
   handleEditerAdresse = async (adresse) => {
-    await postData("/editAdresse", adresse);
+    await postData("/edit-adresse", adresse);
     this.setState({ section: 0 });
   };
 

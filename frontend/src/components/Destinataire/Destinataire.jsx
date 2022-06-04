@@ -13,15 +13,11 @@ function Destinataire(props) {
   };
 
   const handleConfirm = async (id) => {
-    const response = await postData(`/deleteAdresse`, [id]);
+    const response = await postData(`/delete-adresse`, [id]);
     if (response.result) {
       updatePopupIsActive(false);
       props.onDelete();
     }
-  };
-
-  const handleNewBordereau = () => {
-    props.onNewBordereau(adresse.id);
   };
 
   const handleClickIcone = (newId, section) => {

@@ -43,7 +43,7 @@ class Historique extends Component {
       this.sort,
       this.direction[this.sort],
     ];
-    const response = await postData(`/getLogs`, datas);
+    const response = await postData(`/get-courriers`, datas);
     if (operator === "minus") {
       this.setState({ statuts: response.statuts, page: this.state.page - 1 });
     } else {
@@ -56,12 +56,12 @@ class Historique extends Component {
     if (this.state.isRechercheActive) {
       this.setState({ isRechercheActive: false });
     }
-    const response = await postData(`/searchCourrier`, [msg]);
+    const response = await postData(`/search-courrier`, [msg]);
     if (response.statuts) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
-      const response = await postData(`/getLogs`, [
+      const response = await postData(`/get-courriers`, [
         0,
         this.max,
         this.nom,
@@ -91,7 +91,7 @@ class Historique extends Component {
   handleSort = async (sort) => {
     this.direction[sort] = !this.direction[sort];
     this.sort = sort;
-    const response = await postData(`/getLogs`, [
+    const response = await postData(`/get-courriers`, [
       0,
       this.max,
       this.nom,
@@ -120,7 +120,7 @@ class Historique extends Component {
       this.sort,
       this.direction[this.sort],
     ];
-    const response = await postData(`/getLogs`, datas);
+    const response = await postData(`/get-courriers`, datas);
     this.setState({
       statuts: response.statuts,
       page: 0,
