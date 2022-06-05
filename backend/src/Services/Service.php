@@ -16,134 +16,26 @@ use App\Services\Qrcode as ServicesQrcode;
 class Service
 {
 
-    public function stripTag(): array
-    {
-        $tmp = json_decode($_POST['data']);
-        $data = array();
-        foreach ($tmp as $el) :
-            array_push($data, strtolower(strip_tags($el)));
-        endforeach;
-        return $data;
-    }
-
-    public function getInfosCourrier(array $statuts, Courrier $courrier): array
-    {
-        $result = array();
-        foreach ($statuts as $statut) :
-            array_push($result, [
-                'date' => $statut->getDate(),
-                'etat' => $statut->getStatut()->getEtat(),
-            ]);
-        endforeach;
-        $destinataire = [
-            'civilite' => $courrier->getCivilite(),
-            'prenom' => $courrier->getPrenom(),
-            'nom' => $courrier->getName(),
-            'adresse' => $courrier->getAdresse(),
-            'codePostal' => $courrier->getCodePostal(),
-            'ville' => $courrier->getVille(),
-        ];
-        return [$result, $destinataire];
-    }
-
-    public function isDistributed(string $tmp, bool $filtre): bool
-    {
-        if (!$filtre) :
-            return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
-        else :
-            return ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI");
-        endif;
-    }
-
-    public function sortArrayByType(array $data, int $sort, bool $direction): array
-    {
-        switch ($sort):
-
-            case 0:
-                if ($direction) :
-                    usort($data, function ($a, $b) {
-                        return $a['bordereau'] <=> $b['bordereau'];
-                    });
-                else :
-                    usort($data, function ($a, $b) {
-                        return $b['bordereau'] <=> $a['bordereau'];
-                    });
-                endif;
-                break;
-
-            case 1:
-                if ($direction) :
-                    usort($data, function ($a, $b) {
-                        return $a['date'] <=> $b['date'];
-                    });
-                else :
-                    usort($data, function ($a, $b) {
-                        return $b['date'] <=> $a['date'];
-                    });
-                endif;
-                break;
-
-            case 2:
-                if ($direction) :
-                    usort($data, function ($a, $b) {
-                        return $a['nom'] <=> $b['nom'];
-                    });
-                else :
-                    usort($data, function ($a, $b) {
-                        return $b['nom'] <=> $a['nom'];
-                    });
-                endif;
-                break;
-
-            case 3:
-                if ($direction) :
-                    usort($data, function ($a, $b) {
-                        return $a['etat'] <=> $b['etat'];
-                    });
-                else :
-                    usort($data, function ($a, $b) {
-                        return $b['etat'] <=> $a['etat'];
-                    });
-                endif;
-                break;
-
-            case 'default':
-                break;
-        endswitch;
-        return $data;
-    }
-
-    public function searchCourrier(
-        CourrierRepository $courrierRepository,
-        StatutcourrierRepository $StatutcourrierRepository,
+    public function addAdresse(
+        ManagerRegistry $doctrine,
+        Expediteur $exp,
     ) {
         $data = $this->stripTag();
-        $courrier = $courrierRepository->findOneBy(['bordereau' => $data[0]]);
-        if ($courrier !== null) :
-            $statuts = $StatutcourrierRepository->findBy(
-                ['courrier' => $courrier->getId()],
-                ['date' => 'ASC']
-            );
-            $data = $this->getInfosCourrier($statuts, $courrier);
-            $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
-            return ([
-                'statuts' => $data[0],
-                'destinataire' => $data[1],
-            ]);
-        else :
-            return false;
-        endif;
-    }
+        $dest = new Destinataires();
+        $dest->setCivilite($data[0]);
+        $dest->setNom($data[1]);
+        $dest->setPrenom($data[2]);
+        $dest->setAdresse($data[3]);
+        $dest->setComplement($data[4]);
+        $dest->setCodePostal($data[5]);
+        $dest->setVille($data[6]);
+        $dest->setTelephone($data[7]);
+        $dest->setEmail($data[8]);
+        $dest->setExpediteur($exp);
 
-    public function detailsCourrier(
-        StatutcourrierRepository $StatutcourrierRepository,
-        CourrierRepository $courrierRepository,
-    ) {
-        $data = $this->stripTag();
-        $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
-        $statuts = $StatutcourrierRepository->findBy(['courrier' => $courrier]);
-        $data = $this->getInfosCourrier($statuts, $courrier);
-        return $data;
+        $manager = $doctrine->getManager();
+        $manager->persist($dest);
+        $manager->flush();
     }
 
     public function adressesFavorites(
@@ -191,7 +83,65 @@ class Service
         return $adresses;
     }
 
-    public function getLogs(
+    public function deleteAdresse(
+        DestinatairesRepository $destinatairesRepository,
+        ManagerRegistry $doctrine
+    ) {
+        $id = $this->stripTag($_POST['data'])[0];
+        $dest = $destinatairesRepository->findOneBy(['id' => $id]);
+        $manager = $doctrine->getManager();
+        $manager->remove($dest);
+        $manager->flush();
+    }
+
+    public function detailsCourrier(
+        StatutcourrierRepository $StatutcourrierRepository,
+        CourrierRepository $courrierRepository,
+    ) {
+        $data = $this->stripTag();
+        $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
+        $statuts = $StatutcourrierRepository->findBy(['courrier' => $courrier]);
+        $data = $this->getInfosCourrier($statuts, $courrier);
+        return $data;
+    }
+
+    public function editAdresse(
+        DestinatairesRepository $destinatairesRepository,
+        ManagerRegistry $doctrine,
+    ) {
+        $data = $this->stripTag();
+
+        $dest = $destinatairesRepository->findOneBy(['id' => end($data)]);
+
+        $dest->setCivilite($data[0]);
+        $dest->setNom($data[1]);
+        $dest->setPrenom($data[2]);
+        $dest->setAdresse($data[3]);
+        $dest->setComplement($data[4]);
+        $dest->setCodePostal($data[5]);
+        $dest->setVille($data[6]);
+        $dest->setTelephone($data[7]);
+        $dest->setEmail($data[8]);
+
+        $manager = $doctrine->getManager();
+        $manager->persist($dest);
+        $manager->flush();
+
+        return $data;
+    }
+
+    public function expediteur(Expediteur $user)
+    {
+        return [
+            'nom' => $user->getName(),
+            'adresse' => $user->getAdresse(),
+            'complement' => $user->getComplement(),
+            'codePostal' => $user->getCodePostal(),
+            'ville' => $user->getVille(),
+        ];
+    }
+
+    public function getCourriers(
         CourrierRepository $courrierRepository,
         StatutcourrierRepository $StatutcourrierRepository,
         Expediteur $user
@@ -264,73 +214,33 @@ class Service
         return [$statuts, $total];
     }
 
-    public function deleteAdresse(
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine
-    ) {
-        $id = $this->stripTag($_POST['data'])[0];
-        $dest = $destinatairesRepository->findOneBy(['id' => $id]);
-        $manager = $doctrine->getManager();
-        $manager->remove($dest);
-        $manager->flush();
-    }
-
-    public function editAdresse(
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine,
-    ) {
-        $data = $this->stripTag();
-
-        $dest = $destinatairesRepository->findOneBy(['id' => end($data)]);
-
-        $dest->setCivilite($data[0]);
-        $dest->setNom($data[1]);
-        $dest->setPrenom($data[2]);
-        $dest->setAdresse($data[3]);
-        $dest->setComplement($data[4]);
-        $dest->setCodePostal($data[5]);
-        $dest->setVille($data[6]);
-        $dest->setTelephone($data[7]);
-        $dest->setEmail($data[8]);
-
-        $manager = $doctrine->getManager();
-        $manager->persist($dest);
-        $manager->flush();
-
-        return $data;
-    }
-
-    public function addAdresse(
-        ManagerRegistry $doctrine,
-        Expediteur $exp,
-    ) {
-        $data = $this->stripTag();
-        $dest = new Destinataires();
-        $dest->setCivilite($data[0]);
-        $dest->setNom($data[1]);
-        $dest->setPrenom($data[2]);
-        $dest->setAdresse($data[3]);
-        $dest->setComplement($data[4]);
-        $dest->setCodePostal($data[5]);
-        $dest->setVille($data[6]);
-        $dest->setTelephone($data[7]);
-        $dest->setEmail($data[8]);
-        $dest->setExpediteur($exp);
-
-        $manager = $doctrine->getManager();
-        $manager->persist($dest);
-        $manager->flush();
-    }
-
-    public function expediteur(Expediteur $user)
+    public function getInfosCourrier(array $statuts, Courrier $courrier): array
     {
-        return [
-            'nom' => $user->getName(),
-            'adresse' => $user->getAdresse(),
-            'complement' => $user->getComplement(),
-            'codePostal' => $user->getCodePostal(),
-            'ville' => $user->getVille(),
+        $result = array();
+        foreach ($statuts as $statut) :
+            array_push($result, [
+                'date' => $statut->getDate(),
+                'etat' => $statut->getStatut()->getEtat(),
+            ]);
+        endforeach;
+        $destinataire = [
+            'civilite' => $courrier->getCivilite(),
+            'prenom' => $courrier->getPrenom(),
+            'nom' => $courrier->getName(),
+            'adresse' => $courrier->getAdresse(),
+            'codePostal' => $courrier->getCodePostal(),
+            'ville' => $courrier->getVille(),
         ];
+        return [$result, $destinataire];
+    }
+
+    public function isDistributed(string $tmp, bool $filtre): bool
+    {
+        if (!$filtre) :
+            return ($tmp !== "distribué" && $tmp !== "retour" && $tmp !== "NPAI");
+        else :
+            return ($tmp === "distribué" || $tmp === "retour" || $tmp === "NPAI");
+        endif;
     }
 
     public function qrcode(
@@ -382,5 +292,95 @@ class Service
             'qrcode' => $qrcode,
             'bordereau' => $bordereau
         ];
+    }
+
+    public function searchCourrier(
+        CourrierRepository $courrierRepository,
+        StatutcourrierRepository $StatutcourrierRepository,
+    ) {
+        $data = $this->stripTag();
+        $courrier = $courrierRepository->findOneBy(['bordereau' => $data[0]]);
+        if ($courrier !== null) :
+            $statuts = $StatutcourrierRepository->findBy(
+                ['courrier' => $courrier->getId()],
+                ['date' => 'ASC']
+            );
+            $data = $this->getInfosCourrier($statuts, $courrier);
+            $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+            return ([
+                'statuts' => $data[0],
+                'destinataire' => $data[1],
+            ]);
+        else :
+            return false;
+        endif;
+    }
+
+    public function sortArrayByType(array $data, int $sort, bool $direction): array
+    {
+        switch ($sort):
+
+            case 0:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['bordereau'] <=> $b['bordereau'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['bordereau'] <=> $a['bordereau'];
+                    });
+                endif;
+                break;
+
+            case 1:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['date'] <=> $b['date'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['date'] <=> $a['date'];
+                    });
+                endif;
+                break;
+
+            case 2:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['nom'] <=> $b['nom'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['nom'] <=> $a['nom'];
+                    });
+                endif;
+                break;
+
+            case 3:
+                if ($direction) :
+                    usort($data, function ($a, $b) {
+                        return $a['etat'] <=> $b['etat'];
+                    });
+                else :
+                    usort($data, function ($a, $b) {
+                        return $b['etat'] <=> $a['etat'];
+                    });
+                endif;
+                break;
+
+            case 'default':
+                break;
+        endswitch;
+        return $data;
+    }
+
+    public function stripTag(): array
+    {
+        $tmp = json_decode($_POST['data']);
+        $data = array();
+        foreach ($tmp as $el) :
+            array_push($data, strtolower(strip_tags($el)));
+        endforeach;
+        return $data;
     }
 }
