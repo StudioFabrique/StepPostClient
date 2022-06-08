@@ -199,7 +199,7 @@ class Service
             $total = count($courriers);
         endforeach;
         if (isset($sort)) :
-            $courriers = $this->sortArrayByType($courriers, $sort, $direction);
+            $courriers = $this->triTableau($courriers, $sort, $direction);
         endif;
         if (count($courriers) < ($max * ($page + 1))) :
             $length = count($courriers);
@@ -316,7 +316,17 @@ class Service
         endif;
     }
 
-    public function sortArrayByType(array $data, int $sort, bool $direction): array
+    public function stripTag(): array
+    {
+        $tmp = json_decode($_POST['data']);
+        $data = array();
+        foreach ($tmp as $el) :
+            array_push($data, strtolower(strip_tags($el)));
+        endforeach;
+        return $data;
+    }
+
+    public function triTableau(array $data, int $sort, bool $direction): array
     {
         switch ($sort):
 
@@ -371,16 +381,6 @@ class Service
             case 'default':
                 break;
         endswitch;
-        return $data;
-    }
-
-    public function stripTag(): array
-    {
-        $tmp = json_decode($_POST['data']);
-        $data = array();
-        foreach ($tmp as $el) :
-            array_push($data, strtolower(strip_tags($el)));
-        endforeach;
         return $data;
     }
 }
