@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { postData, getData } from "../../modules/postData.js";
+import { postData, getData } from "../../modules/fetchData";
 import RechercheNom from "../RechercheNom/RechercheNom";
 import NoResults from "../NoResults/NoResults";
 import Destinataire from "../Destinataire/Destinataire";

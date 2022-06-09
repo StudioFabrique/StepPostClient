@@ -3,7 +3,7 @@ import "./AdressesFavorites.css";
 import ListeAdresses from "../../components/ListeAdresses/ListeAdresses";
 import NouvelEnvoi from "../../components/NouvelEnvoi/NouvelEnvoi";
 import AdresseForm from "../../components/AdresseForm/AdresseForm";
-import { postData } from "../../modules/postData";
+import { postData } from "../../modules/fetchData";
 
 class AdressesFavorites extends Component {
   constructor(props) {

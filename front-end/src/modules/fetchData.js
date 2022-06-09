@@ -37,13 +37,13 @@ export async function getData(url) {
   return response;
 }
 
-export async function getToken(data) {
+export async function getToken(email, password) {
   try {
     const response = await (
       await fetch(logUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: data[0], password: data[1] }),
+        body: JSON.stringify({ username: email, password: password }),
       })
     ).json();
     return response;

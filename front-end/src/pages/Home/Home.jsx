@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ListeCourriers from "../../components/ListeCourriers/ListeCourriers";
-import { postData } from "../../modules/postData.js";
+import { postData } from "../../modules/fetchData";
 import "./Home.css";
 import Recherche from "../../components/Recherche/Recherche";
 import DetailsRecherche from "../../components/DetailsRecherche/DetailsRecherche";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toTitleCase } from "../../modules/formatter";
 import "./Destinataire.css";
 import PopupDelete from "../PopupDelete/PopupDelete";
-import { postData } from "../../modules/postData";
+import { postData } from "../../modules/fetchData";
 
 function Destinataire(props) {
   const adresse = props.adresse;

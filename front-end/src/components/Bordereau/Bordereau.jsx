@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { postData } from "../../modules/postData";
+import { postData } from "../../modules/fetchData";
 import "./Bordereau.css";
 import PopupConfirmation from "../PopupConfirmation/PopupConfirmation";
 import { baseUrl } from "../../modules/data/baseUrl";

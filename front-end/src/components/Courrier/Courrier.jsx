@@ -4,7 +4,7 @@ import {
   setEtatMessage,
   toTitleCase,
 } from "../../modules/formatter";
-import { postData } from "../../modules/postData";
+import { postData } from "../../modules/fetchData";
 import DetailsCourrier from "../DetailsCourrier/DetailsCourrier";
 
 function Courrier({ statut, onCourrierClick }) {

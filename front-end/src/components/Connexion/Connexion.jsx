@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { testField } from "../../modules/checkForm";
-import { getToken } from "../../modules/postData";
+import { getToken } from "../../modules/fetchData";
 import { regexMail, regexPassword } from "../../modules/data.js";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import "./Connexion.css";
@@ -18,7 +18,7 @@ function Connexion() {
     let testPassword = testField(regexPassword, password);
     if (testMail && testPassword) {
       try {
-        const response = await getToken([email, password]);
+        const response = await getToken(email, password);
         if (response.code === 401) {
           updateErreur(true);
         } else {
