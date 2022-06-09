@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\CourrierRepository;
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
-use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
@@ -20,67 +18,46 @@ class MainController extends AbstractController
     #[Route('/api/add-adresse', name: 'api_add-adresse')]
     public function addAdresse(
         Service $service,
-        ManagerRegistry $doctrine,
         ExpediteurRepository $expediteurRepository,
     ): Response {
         $exp = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
-        $service->addAdresse($doctrine, $exp);
+        $service->addAdresse($exp);
         return $this->json(['result' => true]);
     }
 
     #[Route('/api/adresses-favorites', name: 'api_adresses-favorites')]
     public function adressesFavorites(
-        DestinatairesRepository $destinatairesRepository,
         ExpediteurRepository $expediteurRepository,
         Service $service,
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
-        $result = $service->adressesFavorites(
-            $destinatairesRepository,
-            $user
-        );
+        $result = $service->adressesFavorites($user);
         return $this->json(['destinataires' => $result]);
+    }
+
+    #[Route('/api/delete-adresse', name: 'api_delete-adresse')]
+    public function deleteAdresse(
+        Service $service,
+    ): Response {
+        $service->deleteAdresse();
+        return $this->json(['result' => true]);
     }
 
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(
-        StatutcourrierRepository $statutcourrierRepository,
-        CourrierRepository $courrierRepository,
         Service $service,
     ): Response {
-        $data = $service->detailsCourrier(
-            $statutcourrierRepository,
-            $courrierRepository
-        );
+        $data = $service->detailsCourrier();
         return $this->json([
             'courrier' => $data[0],
             'destinataire' => $data[1]
         ]);
     }
 
-    #[Route('/api/delete-adresse', name: 'api_delete-adresse')]
-    public function deleteAdresse(
-        Service $service,
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine
-    ): Response {
-        $service->deleteAdresse(
-            $destinatairesRepository,
-            $doctrine
-        );
-        return $this->json(['result' => true]);
-    }
-
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
-    public function editAdresse(
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine,
-        Service $service,
-    ): Response {
-        return $this->json(['result' => $service->editAdresse(
-            $destinatairesRepository,
-            $doctrine
-        )]);
+    public function editAdresse(Service $service,): Response
+    {
+        return $this->json(['result' => $service->editAdresse()]);
     }
 
     #[Route('/api/expediteur', name: 'api_expediteur')]
@@ -93,16 +70,10 @@ class MainController extends AbstractController
     #[Route('/api/get-courriers', name: 'api_get-courriers')]
     public function getCourriers(
         ExpediteurRepository $expediteurRepository,
-        CourrierRepository $courrierRepository,
-        StatutcourrierRepository $statutcourrierRepository,
         Service $service,
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
-        $result = $service->getCourriers(
-            $courrierRepository,
-            $statutcourrierRepository,
-            $user
-        );
+        $result = $service->getCourriers($user);
         return $this->json([
             'statuts' => $result[0],
             'total' => $result[1],
@@ -113,18 +84,12 @@ class MainController extends AbstractController
     public function qrCode(
         ServicesQrcode $servicesQrcode,
         Service $service,
-        ManagerRegistry $doctrine,
-        DestinatairesRepository $destinatairesRepository,
         ExpediteurRepository $expediteurRepository,
-        StatutRepository $statutRepository,
     ): Response {
         $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $result = $service->qrcode(
+            $user,
             $servicesQrcode,
-            $doctrine,
-            $destinatairesRepository,
-            $statutRepository,
-            $user
         );
         return $this->json([
             'qrcode' => $result['qrcode'],
@@ -138,14 +103,9 @@ class MainController extends AbstractController
      */
     #[Route('/api/search-courrier', name: 'api_search-courrier')]
     public function searchCourrier(
-        CourrierRepository $courrierRepository,
-        StatutcourrierRepository $statutcourrierRepository,
         Service $service,
     ): Response {
-        $result = $service->searchCourrier(
-            $courrierRepository,
-            $statutcourrierRepository,
-        );
+        $result = $service->searchCourrier();
         if (!$result) :
             return $this->json(['statuts' => false]);
         else :

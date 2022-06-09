@@ -15,11 +15,30 @@ use App\Services\Qrcode as ServicesQrcode;
 
 class Service
 {
+    private $courrierRepository;
+    private $destinatairesRepository;
+    private $doctrine;
+    private $statutRepository;
+    private $statutcourrierRepository;
 
-    public function addAdresse(
+
+
+    public function __construct(
+        CourrierRepository $courrierRepository,
+        DestinatairesRepository $destinataireRepository,
         ManagerRegistry $doctrine,
-        Expediteur $exp,
+        StatutRepository $statutRepository,
+        StatutcourrierRepository $statutcourrierRepository,
     ) {
+        $this->courrierRepository = $courrierRepository;
+        $this->destinatairesRepository = $destinataireRepository;
+        $this->doctrine = $doctrine;
+        $this->statutRepository = $statutRepository;
+        $this->statutcourrierRepository = $statutcourrierRepository;
+    }
+
+    public function addAdresse(Expediteur $exp)
+    {
         $data = $this->stripTag();
         $dest = new Destinataires();
         $dest->setCivilite($data[0]);
@@ -33,17 +52,15 @@ class Service
         $dest->setEmail($data[8]);
         $dest->setExpediteur($exp);
 
-        $manager = $doctrine->getManager();
+        $manager = $this->doctrine->getManager();
         $manager->persist($dest);
         $manager->flush();
     }
 
-    public function adressesFavorites(
-        DestinatairesRepository $destinatairesRepository,
-        Expediteur $user,
-    ) {
-        $destinataires = $destinatairesRepository->findBy(
-            ['expediteur' => $user],
+    public function adressesFavorites(Expediteur $exp)
+    {
+        $destinataires = $this->destinatairesRepository->findBy(
+            ['expediteur' => $exp],
             ['nom' => 'ASC']
         );
         $nom = "";
@@ -83,36 +100,28 @@ class Service
         return $adresses;
     }
 
-    public function deleteAdresse(
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine
-    ) {
+    public function deleteAdresse()
+    {
         $id = $this->stripTag($_POST['data'])[0];
-        $dest = $destinatairesRepository->findOneBy(['id' => $id]);
-        $manager = $doctrine->getManager();
+        $dest = $this->destinatairesRepository->findOneBy(['id' => $id]);
+        $manager = $this->doctrine->getManager();
         $manager->remove($dest);
         $manager->flush();
     }
 
-    public function detailsCourrier(
-        StatutcourrierRepository $StatutcourrierRepository,
-        CourrierRepository $courrierRepository,
-    ) {
+    public function detailsCourrier()
+    {
         $data = $this->stripTag();
-        $courrier = $courrierRepository->findOneBy(['id' => $data[0]]);
-        $statuts = $StatutcourrierRepository->findBy(['courrier' => $courrier]);
+        $courrier = $this->courrierRepository->findOneBy(['id' => $data[0]]);
+        $statuts = $this->statutcourrierRepository->findBy(['courrier' => $courrier]);
         $data = $this->getInfosCourrier($statuts, $courrier);
         return $data;
     }
 
-    public function editAdresse(
-        DestinatairesRepository $destinatairesRepository,
-        ManagerRegistry $doctrine,
-    ) {
+    public function editAdresse()
+    {
         $data = $this->stripTag();
-
-        $dest = $destinatairesRepository->findOneBy(['id' => end($data)]);
-
+        $dest = $this->destinatairesRepository->findOneBy(['id' => end($data)]);
         $dest->setCivilite($data[0]);
         $dest->setNom($data[1]);
         $dest->setPrenom($data[2]);
@@ -123,7 +132,7 @@ class Service
         $dest->setTelephone($data[7]);
         $dest->setEmail($data[8]);
 
-        $manager = $doctrine->getManager();
+        $manager = $this->doctrine->getManager();
         $manager->persist($dest);
         $manager->flush();
 
@@ -141,11 +150,8 @@ class Service
         ];
     }
 
-    public function getCourriers(
-        CourrierRepository $courrierRepository,
-        StatutcourrierRepository $StatutcourrierRepository,
-        Expediteur $user
-    ) {
+    public function getCourriers(Expediteur $user)
+    {
         $tmp = $this->stripTag();
         $page = $tmp[0];
         $max = $tmp[1];
@@ -158,12 +164,12 @@ class Service
             $direction = $tmp[5];
         endif;
         if ($nom === "") :
-            $datas = $courrierRepository->findBy(
+            $datas = $this->courrierRepository->findBy(
                 ['expediteur' => $user],
                 ['id' => 'DESC']
             );
         else :
-            $datas = $courrierRepository->findBy(
+            $datas = $this->courrierRepository->findBy(
                 [
                     'expediteur' => $user,
                     'name' => $nom
@@ -179,7 +185,7 @@ class Service
         $courriers = array();
         $total = count($datas);
         foreach ($datas as $data) :
-            $statut = $StatutcourrierRepository->findBy(
+            $statut = $this->statutcourrierRepository->findBy(
                 ['courrier' => $data->getId()],
                 ['date' => 'DESC']
             );
@@ -244,14 +250,11 @@ class Service
     }
 
     public function qrcode(
-        ServicesQrcode $servicesQrcode,
-        ManagerRegistry $doctrine,
-        DestinatairesRepository $destinatairesRepository,
-        StatutRepository $statutRepository,
-        Expediteur $user
+        Expediteur $user,
+        ServicesQrcode $service,
     ) {
         $data = $this->stripTag();
-        $dest = $destinatairesRepository->findOneBy(
+        $dest = $this->destinatairesRepository->findOneBy(
             ['id' => $data[0]]
         );
         $courrier = new Courrier();
@@ -268,12 +271,12 @@ class Service
 
         $statutcourrier = new Statutcourrier();
         $statutcourrier->setDate(new \DateTime());
-        $statut = $statutRepository->findOneBy(['etat' => 'en attente']);
+        $statut = $this->statutRepository->findOneBy(['etat' => 'en attente']);
         $statutcourrier->setStatut($statut);
         $statutcourrier->setCourrier($courrier);
         $statutcourrier->setFacteurId(0);
 
-        $manager = $doctrine->getManager();
+        $manager = $this->doctrine->getManager();
         $manager->persist($courrier);
         $manager->persist($statutcourrier);
         $manager->flush();
@@ -287,21 +290,19 @@ class Service
         $manager->persist($courrier);
         $manager->flush();
 
-        $qrcode = $servicesQrcode->qrcode($bordereau);
+        $qrcode = $service->qrcode($bordereau);
         return [
             'qrcode' => $qrcode,
             'bordereau' => $bordereau
         ];
     }
 
-    public function searchCourrier(
-        CourrierRepository $courrierRepository,
-        StatutcourrierRepository $StatutcourrierRepository,
-    ) {
+    public function searchCourrier()
+    {
         $data = $this->stripTag();
-        $courrier = $courrierRepository->findOneBy(['bordereau' => $data[0]]);
+        $courrier = $this->courrierRepository->findOneBy(['bordereau' => $data[0]]);
         if ($courrier !== null) :
-            $statuts = $StatutcourrierRepository->findBy(
+            $statuts = $this->statutcourrierRepository->findBy(
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
             );
