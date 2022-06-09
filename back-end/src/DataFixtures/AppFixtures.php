@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
 
 
         $client = new Client();
-        $client->setRaisonSociale("Toto Company");
+        $client->setRaisonSociale("Step Post");
         $manager->persist($client);
 
 
@@ -41,7 +41,6 @@ class AppFixtures extends Fixture
         $exp->setVille('pau');
         $exp->setTelephone('12345678');
         $exp->setClient($client);
-        $expediteur1 = $exp;
         $manager->persist($exp);
 
         $statuts = ["en attente", "pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
@@ -146,7 +145,7 @@ class AppFixtures extends Fixture
             $dest->setCodePostal($destinataire['codePostal']);
             $dest->setVille($destinataire['ville']);
             $dest->setTelephone($destinataire['telephone']);
-            $dest->setExpediteur($expediteur1);
+            $dest->setExpediteur($exp);
             $manager->persist($dest);
             for ($i = 0; $i < 7; $i++) :
                 $bordereau++;
@@ -159,7 +158,7 @@ class AppFixtures extends Fixture
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);
                 $courrier->setVille($destinataire['ville']);
-                $courrier->setExpediteur($expediteur1);
+                $courrier->setExpediteur($exp);
                 for ($j = 0; $j < 3; $j++) :
                     $statutCourrier = new StatutCourrier();
                     $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
@@ -186,7 +185,7 @@ class AppFixtures extends Fixture
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);
                 $courrier->setVille($destinataire['ville']);
-                $courrier->setExpediteur($expediteur1);
+                $courrier->setExpediteur($exp);
                 $manager->persist($courrier);
                 for ($j = 0; $j < 5; $j++) :
                     $statutCourrier = new StatutCourrier();

@@ -8,11 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExpediteurRepository::class)]
 class Expediteur extends User
-{
+{/* 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private $id; */
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'expediteur')]
     #[ORM\JoinColumn(nullable: true)]
@@ -22,11 +22,11 @@ class Expediteur extends User
     {
         $this->courriers = new ArrayCollection();
     }
-
+    /* 
     public function getId(): ?int
     {
         return $this->id;
-    }
+    } */
 
     public function getClient(): ?Client
     {

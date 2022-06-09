@@ -190,7 +190,7 @@ class Service
                 ['date' => 'DESC']
             );
             $tmp = $statut[0]->getStatut()->getEtat();
-            if ($this->isDistributed($tmp, $filtre)) :
+            if ($this->isDistributed($tmp, $filtre)) :/* 
                 $courriers = [...$courriers, [
                     'id' => $statut[0]->getCourrier()->getId(),
                     'type' => $statut[0]->getCourrier()->getType(),
@@ -200,7 +200,8 @@ class Service
                     'prenom' => $statut[0]->getCourrier()->getPrenom(),
                     'etat' => $statut[0]->getStatut()->getEtat(),
                     'bordereau' => $statut[0]->getCourrier()->getBordereau(),
-                ]];
+                ]]; */
+                array_push($courriers, $statut[0]);
             endif;
             $total = count($courriers);
         endforeach;
@@ -217,7 +218,7 @@ class Service
             array_push($statuts, $courriers[$i]);
         endfor;
 
-        return [$statuts, $total];
+        return [$courriers, $total];
     }
 
     public function getInfosCourrier(array $statuts, Courrier $courrier): array
