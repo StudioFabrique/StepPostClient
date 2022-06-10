@@ -12,27 +12,22 @@ function DetailsRecherche(props) {
   };
 
   return (
-    <>
-      <article className="detailsRecherche">
-        <div>
-          <span>
-            <h4>Courrier n° : {courrier.destinataire.bordereau}</h4>
-            <img
-              src="img/icone-print.png"
-              alt="icone impression"
-              onClick={handleImpression}
-            />
-          </span>
-          <button className="button" onClick={handleClick}>
-            Fermer
-          </button>
-        </div>
-        <DetailsCourrier
-          detailsCourrier={courrier.statuts}
-          destinataire={courrier.destinataire}
-        />
-      </article>
-    </>
+    <article className="detailsRecherche">
+      <div>
+        <span>
+          <h4>Courrier n° : {courrier[0].courrier.bordereau}</h4>
+          <img
+            src="img/icone-print.png"
+            alt="icone impression"
+            onClick={handleImpression}
+          />
+        </span>
+        <button className="button" onClick={handleClick}>
+          Fermer
+        </button>
+      </div>
+      <DetailsCourrier statutsCourrier={courrier} />
+    </article>
   );
 }
 

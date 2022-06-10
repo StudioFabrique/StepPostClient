@@ -48,10 +48,7 @@ class MainController extends AbstractController
         Service $service,
     ): Response {
         $data = $service->detailsCourrier();
-        return $this->json([
-            'courrier' => $data[0],
-            'destinataire' => $data[1]
-        ]);
+        return $this->json(['statuts' => $data]);
     }
 
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
@@ -110,8 +107,7 @@ class MainController extends AbstractController
             return $this->json(['statuts' => false]);
         else :
             return $this->json([
-                'statuts' => $result['statuts'],
-                'destinataire' => $result['destinataire']
+                'statuts' => $result,
             ]);
         endif;
     }

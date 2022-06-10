@@ -58,7 +58,10 @@ class Historique extends Component {
     }
     const response = await postData(`/search-courrier`, [msg]);
     if (response.statuts) {
-      this.setState({ isRechercheActive: true, rechercheValue: response });
+      this.setState({
+        isRechercheActive: true,
+        rechercheValue: response.statuts,
+      });
     } else if (response.statuts === false) {
       this.nom = msg;
       const response = await postData(`/get-courriers`, [
@@ -76,7 +79,7 @@ class Historique extends Component {
           isRechercheActive: false,
           rechercheNom: true,
         });
-        this.nom = response.statuts[0].nom;
+        this.nom = response.statuts[0].courrier.nom;
         this.total = response.total;
       } else {
         this.setState({ noResults: true, rechercheNom: false });

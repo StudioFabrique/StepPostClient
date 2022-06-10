@@ -112,10 +112,10 @@ class Service
     public function detailsCourrier()
     {
         $data = $this->stripTag();
-        $courrier = $this->courrierRepository->findOneBy(['id' => $data[0]]);
-        $statuts = $this->statutcourrierRepository->findBy(['courrier' => $courrier]);
-        $data = $this->getInfosCourrier($statuts, $courrier);
-        return $data;
+        //$courrier = $this->courrierRepository->findOneBy(['id' => $data[0]]);
+        $statuts = $this->statutcourrierRepository->findBy(['courrier' => $this->courrierRepository->find($data[0])]);
+        //$data = $this->getInfosCourrier($statuts, $courrier);
+        return $statuts;
     }
 
     public function editAdresse()
@@ -190,17 +190,7 @@ class Service
                 ['date' => 'DESC']
             );
             $tmp = $statut[0]->getStatut()->getEtat();
-            if ($this->isDistributed($tmp, $filtre)) :/* 
-                $courriers = [...$courriers, [
-                    'id' => $statut[0]->getCourrier()->getId(),
-                    'type' => $statut[0]->getCourrier()->getType(),
-                    'date' => $statut[0]->getDate(),
-                    'civilite' => $statut[0]->getCourrier()->getCivilite(),
-                    'nom' => $statut[0]->getCourrier()->getName(),
-                    'prenom' => $statut[0]->getCourrier()->getPrenom(),
-                    'etat' => $statut[0]->getStatut()->getEtat(),
-                    'bordereau' => $statut[0]->getCourrier()->getBordereau(),
-                ]]; */
+            if ($this->isDistributed($tmp, $filtre)) :
                 array_push($courriers, $statut[0]);
             endif;
             $total = count($courriers);
@@ -218,7 +208,7 @@ class Service
             array_push($statuts, $courriers[$i]);
         endfor;
 
-        return [$courriers, $total];
+        return [$statuts, $total];
     }
 
     public function getInfosCourrier(array $statuts, Courrier $courrier): array
@@ -307,12 +297,9 @@ class Service
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
             );
-            $data = $this->getInfosCourrier($statuts, $courrier);
-            $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
-            return ([
-                'statuts' => $data[0],
-                'destinataire' => $data[1],
-            ]);
+            //$data = $this->getInfosCourrier($statuts, $courrier);
+            //$data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+            return ($statuts);
         else :
             return false;
         endif;
@@ -335,11 +322,11 @@ class Service
             case 0:
                 if ($direction) :
                     usort($data, function ($a, $b) {
-                        return $a['bordereau'] <=> $b['bordereau'];
+                        return $a->getCourrier()->getBordereau() <=> $b->getCourrier()->getBordereau();
                     });
                 else :
                     usort($data, function ($a, $b) {
-                        return $b['bordereau'] <=> $a['bordereau'];
+                        return $b->getCourrier()->getBordereau() <=> $a->getCourrier()->getBordereau();
                     });
                 endif;
                 break;
@@ -347,11 +334,11 @@ class Service
             case 1:
                 if ($direction) :
                     usort($data, function ($a, $b) {
-                        return $a['date'] <=> $b['date'];
+                        return $a->getDate() <=> $b->getDate();
                     });
                 else :
                     usort($data, function ($a, $b) {
-                        return $b['date'] <=> $a['date'];
+                        return $b->getDate() <=> $a->getDate();
                     });
                 endif;
                 break;
@@ -359,11 +346,11 @@ class Service
             case 2:
                 if ($direction) :
                     usort($data, function ($a, $b) {
-                        return $a['nom'] <=> $b['nom'];
+                        return $a->getCourrier()->getName() <=> $b->getCourrier()->getName();
                     });
                 else :
                     usort($data, function ($a, $b) {
-                        return $b['nom'] <=> $a['nom'];
+                        return $b->getCourrier()->getName() <=> $a->getCourrier()->getName();
                     });
                 endif;
                 break;
@@ -371,11 +358,11 @@ class Service
             case 3:
                 if ($direction) :
                     usort($data, function ($a, $b) {
-                        return $a['etat'] <=> $b['etat'];
+                        return $a->getStatut()->getEtat() <=> $b->getStatut()->getEtat();
                     });
                 else :
                     usort($data, function ($a, $b) {
-                        return $b['etat'] <=> $a['etat'];
+                        return $b->getStatut()->getEtat() <=> $a->getStatut()->getEtat();
                     });
                 endif;
                 break;

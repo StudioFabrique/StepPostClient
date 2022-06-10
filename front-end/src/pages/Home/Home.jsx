@@ -60,7 +60,7 @@ class Home extends Component {
           noResults: false,
         });
         this.total = response.total;
-        this.nom = response.statuts[0].nom;
+        this.nom = response.statuts[0].courrier.name;
       } else {
         this.setState({ noResults: true, rechercheNom: false });
         this.tmpName = this.nom;
@@ -86,7 +86,7 @@ class Home extends Component {
       rechercheNom: false,
       noResults: false,
     });
-    console.log(("total", response.total));
+    console.log(("total", this.state.statuts));
     this.nom = "";
     this.total = 0;
   };

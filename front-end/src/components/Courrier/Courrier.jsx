@@ -8,39 +8,39 @@ import { postData } from "../../modules/fetchData";
 import DetailsCourrier from "../DetailsCourrier/DetailsCourrier";
 
 function Courrier({ statut, onCourrierClick }) {
-  const [detailsCourrier, setDetailsCourrier] = useState([]);
-  const [destinataire, setDestinataire] = useState([]);
+  const [statutsCourrier, setStatutsCourrier] = useState([]);
 
   async function handleClick() {
-    const response = await postData(`/details-courrier`, [statut.id]);
-    setDetailsCourrier(response.courrier);
-    setDestinataire(response.destinataire);
+    const response = await postData(`/details-courrier`, [statut.courrier.id]);
+    setStatutsCourrier(response.statuts);
     onCourrierClick(statut.id);
   }
 
   return (
     <article
       className="courrier"
-      id={`${statut.id}-${statut.bordereau}`}
+      key={`${statut.id}-${statut.courrier.bordereau}`}
       onClick={handleClick}
       style={{ backgroundColor: statut.isActive ? "#E0E0E0" : "white" }}
     >
       <div>
         <h4 className="date">{formatDate(statut.date)}</h4>
-        <p>Bordereau n° : {statut.bordereau}</p>
+        <p>Bordereau n° : {statut.courrier.bordereau}</p>
       </div>
       <div>
         <span>
-          <p>{setEtatMessage(statut.etat, toTitleCase(statut.nom))}</p>
+          <p>
+            {setEtatMessage(
+              statut.statut.etat,
+              toTitleCase(statut.courrier.name)
+            )}
+          </p>
         </span>
-        <span>{statut.type === 0 ? <p>Colis</p> : <p>Lettre</p>}</span>
+        <span>{statut.courrier.type === 0 ? <p>Colis</p> : <p>Lettre</p>}</span>
       </div>
       <div className="detailsLivraison">
         {statut.isActive && (
-          <DetailsCourrier
-            detailsCourrier={detailsCourrier}
-            destinataire={destinataire}
-          />
+          <DetailsCourrier statutsCourrier={statutsCourrier} />
         )}
       </div>
     </article>

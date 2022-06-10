@@ -11,20 +11,7 @@ function ListeCourriers(props) {
 
   function init() {
     updateId(null);
-    const tmp = [];
-    props.statuts.forEach((elem) => {
-      tmp.push({
-        bordereau: elem.bordereau,
-        date: elem.date,
-        etat: elem.etat,
-        id: elem.id,
-        nom: elem.nom,
-        prenom: elem.prenom,
-        type: elem.type,
-        isActive: false,
-      });
-    });
-    updateCourriers(tmp);
+    updateCourriers(props.statuts);
   }
 
   // effet d'arcodéon
@@ -53,11 +40,7 @@ function ListeCourriers(props) {
         {courriers.map((statut, index) => {
           return (
             <li key={index}>
-              <Courrier
-                statut={statut}
-                baseUrl={props.baseUrl}
-                onCourrierClick={handleCourrierClick}
-              />
+              <Courrier statut={statut} onCourrierClick={handleCourrierClick} />
             </li>
           );
         })}

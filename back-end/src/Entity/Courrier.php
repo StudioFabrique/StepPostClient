@@ -176,5 +176,4 @@ class Courrier
 
         return $this;
     }
-
 }
