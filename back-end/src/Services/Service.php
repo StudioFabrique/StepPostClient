@@ -82,22 +82,7 @@ class Service
         if (count($destinataires) === 0) :
             return false;
         endif;
-        $adresses = array();
-        foreach ($destinataires as $el) :
-            $adresses = [...$adresses, [
-                'id' => $el->getId(),
-                'civilite' => $el->getCivilite(),
-                'prenom' => $el->getPrenom(),
-                'nom' => $el->getNom(),
-                'adresse' => $el->getAdresse(),
-                'complement' => $el->getComplement(),
-                'codePostal' => $el->getCodePostal(),
-                'ville' => $el->getVille(),
-                'telephone' => $el->getTelephone(),
-                'email' => $el->getEmail(),
-            ]];
-        endforeach;
-        return $adresses;
+        return $destinataires;
     }
 
     public function deleteAdresse()

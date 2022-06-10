@@ -24,12 +24,9 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-
-
         $client = new Client();
         $client->setRaisonSociale("Step Post");
         $manager->persist($client);
-
 
         $exp = new Expediteur();
         $exp->setEmail("tata@toto.fr");
@@ -189,7 +186,7 @@ class AppFixtures extends Fixture
                 $manager->persist($courrier);
                 for ($j = 0; $j < 5; $j++) :
                     $statutCourrier = new StatutCourrier();
-                    $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
+                    $statutCourrier->setDate((new \DateTime('2000-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
                     $statutCourrier->setStatut($etats[$j]);
                     $statutCourrier->setCourrier($courrier);
                     $statutCourrier->setFacteurId(0);
