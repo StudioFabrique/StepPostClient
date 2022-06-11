@@ -12,12 +12,14 @@ use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Qrcode as ServicesQrcode;
+use Symfony\Component\HttpFoundation\Request;
 
 class Service
 {
     private $courrierRepository;
     private $destinatairesRepository;
     private $doctrine;
+    private $request;
     private $statutRepository;
     private $statutcourrierRepository;
 
@@ -33,6 +35,7 @@ class Service
         $this->courrierRepository = $courrierRepository;
         $this->destinatairesRepository = $destinataireRepository;
         $this->doctrine = $doctrine;
+        $this->request = Request::createFromGlobals();
         $this->statutRepository = $statutRepository;
         $this->statutcourrierRepository = $statutcourrierRepository;
     }

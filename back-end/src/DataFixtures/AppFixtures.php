@@ -82,9 +82,9 @@ class AppFixtures extends Fixture
             ],
             [
                 'civilite' => 'mme',
-                'prenom' => 'clarisse',
-                'nom' => 'david',
-                'email' => 'clarisse.david@yahoo.fr',
+                'prenom' => 'gilberte',
+                'nom' => 'dupontelle',
+                'email' => 'gilberte.dupontelle@yahoo.fr',
                 'adresse' => '56 rue Xavier Pinson',
                 'codePostal' => 64360,
                 'ville' => 'jurançon',
@@ -102,20 +102,20 @@ class AppFixtures extends Fixture
             ],
             [
                 'civilite' => 'mr',
-                'prenom' => 'john',
-                'nom' => 'bonham',
+                'prenom' => 'renée',
+                'nom' => 'dupont',
                 'email' => 'bonzo@ledzep.co.uk',
-                'adresse' => '13 place Maureen Tucker',
+                'adresse' => '13 place verdun',
                 'codePostal' => 64000,
                 'ville' => 'Pau',
                 'telephone' => '07851234',
             ],
             [
-                'civilite' => 'mme',
-                'prenom' => 'janis',
-                'nom' => 'joplin',
-                'email' => 'pearl@yahoo.fr',
-                'adresse' => '67 rue jimi hendrix',
+                'civilite' => 'mr',
+                'prenom' => 'albert',
+                'nom' => 'dupontel',
+                'email' => 'bernie@willis.fr',
+                'adresse' => '67 du touquet',
                 'codePostal' => 64470,
                 'ville' => 'serres-castets',
                 'telephone' => '07851234',
@@ -171,7 +171,7 @@ class AppFixtures extends Fixture
 
         foreach ($destinataires as $destinataire) :
 
-            for ($i = 0; $i < 120; $i++) :
+            for ($i = 0; $i < 1200; $i++) :
                 $bordereau++;
                 $courrier = new Courrier();
                 $courrier->setType(1);
