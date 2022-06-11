@@ -97,9 +97,7 @@ class Service
     public function detailsCourrier()
     {
         $data = $this->stripTag();
-        //$courrier = $this->courrierRepository->findOneBy(['id' => $data[0]]);
         $statuts = $this->statutcourrierRepository->findBy(['courrier' => $this->courrierRepository->find($data[0])]);
-        //$data = $this->getInfosCourrier($statuts, $courrier);
         return $statuts;
     }
 
@@ -135,7 +133,7 @@ class Service
         ];
     }
 
-    public function getCourriers(Expediteur $user)
+    public function getCourriers(Expediteur $user): array
     {
         $tmp = $this->stripTag();
         $page = $tmp[0];
@@ -282,8 +280,6 @@ class Service
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
             );
-            //$data = $this->getInfosCourrier($statuts, $courrier);
-            //$data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
             return ($statuts);
         else :
             return false;

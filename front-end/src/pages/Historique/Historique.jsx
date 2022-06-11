@@ -79,7 +79,7 @@ class Historique extends Component {
           isRechercheActive: false,
           rechercheNom: true,
         });
-        this.nom = response.statuts[0].courrier.nom;
+        this.nom = response.statuts[0].courrier.name;
         this.total = response.total;
       } else {
         this.setState({ noResults: true, rechercheNom: false });
