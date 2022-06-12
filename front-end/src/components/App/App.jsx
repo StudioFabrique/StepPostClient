@@ -1,15 +1,12 @@
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-import {
-  ProtectedRoute,
-  useAuth,
-} from "../../components/AuthProvider/AuthProvider";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import { ProtectedRoute, useAuth } from "../AuthProvider/AuthProvider";
 import { Route, Routes } from "react-router-dom";
-import Historique from "../Historique/Historique";
-import AdressesFavorites from "../AdressesFavorites/AdressesFavorites";
-import Logout from "../../components/Logout/Logout";
+import Historique from "../../pages/Historique/Historique";
+import AdressesFavorites from "../../pages/AdressesFavorites/AdressesFavorites";
+import Logout from "../Logout/Logout";
 import { useEffect, useState } from "react";
-import Home from "../Home/Home";
+import Home from "../../pages/Home/Home";
 
 function App() {
   const auth = useAuth();

@@ -42,7 +42,10 @@ class Home extends Component {
   handleRecherche = async (msg) => {
     const response = await postData(`/search-courrier`, [msg]);
     if (response.statuts !== false) {
-      this.setState({ isRechercheActive: true, rechercheValue: response });
+      this.setState({
+        isRechercheActive: true,
+        rechercheValue: response.statuts,
+      });
     } else if (response.statuts === false) {
       this.nom = msg;
       const response = await postData(`/get-courriers`, [

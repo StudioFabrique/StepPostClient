@@ -24,17 +24,19 @@ export async function postData(url, data) {
 }
 
 export async function getData(url) {
-  const response = await (
-    await fetch(`${baseUrl}${url}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-  ).json();
-  if (response.code === 401) {
-    window.location.href = "/logout";
-  }
-  return response;
+  try {
+    const response = await (
+      await fetch(`${baseUrl}${url}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+    ).json();
+    if (response.code === 401) {
+      window.location.href = "/logout";
+    }
+    return response;
+  } catch (error) {}
 }
 
 export async function getToken(email, password) {

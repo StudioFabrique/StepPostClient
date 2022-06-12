@@ -278,7 +278,7 @@ class Service
     {
         $data = $this->stripTag();
         $courrier = $this->courrierRepository->findOneBy(['bordereau' => $data[0]]);
-        if ($courrier !== null) :
+        if (isset($courrier)) :
             $statuts = $this->statutcourrierRepository->findBy(
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
