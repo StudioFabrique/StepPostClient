@@ -171,7 +171,7 @@ class AppFixtures extends Fixture
 
         foreach ($destinataires as $destinataire) :
 
-            for ($i = 0; $i < 1200; $i++) :
+            for ($i = 0; $i < 120; $i++) :
                 $bordereau++;
                 $courrier = new Courrier();
                 $courrier->setType(1);

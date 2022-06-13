@@ -14,8 +14,8 @@ class MainController extends AbstractController
     #[Route('/api/add-adresse', name: 'api_add-adresse')]
     public function addAdresse(Service $service): Response
     {
-        $exp = $this->getUser();
-        $service->addAdresse($exp);
+        $user = $this->getUser();
+        $service->addAdresse($user);
         return $this->json(['result' => true]);
     }
 
@@ -49,7 +49,7 @@ class MainController extends AbstractController
     public function expediteur(Service $service): Response
     {
         $user = $this->getUser();
-        return $this->json(['exp' => $service->expediteur($user)]);
+        return $this->json(['exp' => $service->getExpediteur($user)]);
     }
 
     #[Route('/api/get-courriers', name: 'api_get-courriers')]

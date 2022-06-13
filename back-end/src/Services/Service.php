@@ -19,7 +19,6 @@ class Service
     private $courrierRepository;
     private $destinatairesRepository;
     private $doctrine;
-    private $request;
     private $statutRepository;
     private $statutcourrierRepository;
 
@@ -40,7 +39,7 @@ class Service
         $this->statutcourrierRepository = $statutcourrierRepository;
     }
 
-    public function addAdresse(Expediteur $exp)
+    public function addAdresse(Expediteur $user)
     {
         $data = $this->stripTag();
         $dest = new Destinataires();
@@ -53,20 +52,19 @@ class Service
         $dest->setVille($data[6]);
         $dest->setTelephone($data[7]);
         $dest->setEmail($data[8]);
-        $dest->setExpediteur($exp);
+        $dest->setExpediteur($user);
 
         $manager = $this->doctrine->getManager();
         $manager->persist($dest);
         $manager->flush();
     }
 
-    public function adressesFavorites(Expediteur $exp)
+    public function adressesFavorites(Expediteur $user)
     {
         $destinataires = $this->destinatairesRepository->findBy(
-            ['expediteur' => $exp],
+            ['expediteur' => $user],
             ['nom' => 'ASC']
         );
-        $nom = "";
         if (isset($_POST['data'])) :
             $nom = $this->stripTag()[0];
             for ($i = 0; $i < strlen($nom); $i++) :
@@ -125,7 +123,7 @@ class Service
         return $data;
     }
 
-    public function expediteur(Expediteur $user)
+    public function getExpediteur(Expediteur $user)
     {
         return [
             'nom' => $user->getName(),
