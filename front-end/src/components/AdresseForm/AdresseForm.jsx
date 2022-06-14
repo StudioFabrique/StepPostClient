@@ -82,7 +82,7 @@ class AdresseForm extends Component {
       },
     ];
     const result = testFormAdress(items[0]);
-    if (result !== false) {
+    if (result) {
       this.setState({ items: result, isSubmitted: true, erreur: false });
     } else {
       this.setState({ erreur: true });
@@ -140,6 +140,7 @@ class AdresseForm extends Component {
                   <p className="obligatoire">*</p>
                 </div>
                 <input
+                  required
                   type="text"
                   placeholder="Jean"
                   value={toTitleCase(this.state.prenom)}
@@ -153,6 +154,7 @@ class AdresseForm extends Component {
                   <p className="obligatoire">*</p>
                 </div>
                 <input
+                  required
                   type="text"
                   placeholder="Dupont"
                   value={toTitleCase(this.state.nom)}
@@ -168,6 +170,7 @@ class AdresseForm extends Component {
                   <p className="obligatoire">*</p>
                 </div>
                 <textarea
+                  required
                   placeholder="2 rue du Château"
                   rows="2"
                   value={toTitleCase(this.state.adresse)}
@@ -198,6 +201,7 @@ class AdresseForm extends Component {
                   <p className="obligatoire">*</p>
                 </div>
                 <input
+                  required
                   placeholder="64000"
                   type="text"
                   value={toTitleCase(this.state.codePostal)}
@@ -211,6 +215,7 @@ class AdresseForm extends Component {
                   <p className="obligatoire">*</p>
                 </div>
                 <input
+                  required
                   placeholder="Pau"
                   type="text"
                   value={toTitleCase(this.state.ville)}
