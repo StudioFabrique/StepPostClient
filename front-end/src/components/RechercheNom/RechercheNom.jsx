@@ -5,6 +5,7 @@ function RechercheNom(props) {
   const [msg, updateMsg] = useState("");
 
   useEffect(() => {
+    console.log("toto", props);
     if (props.civilite) {
       updateMsg(toTitleCase(`${props.civilite} ${props.nom}`));
     } else {

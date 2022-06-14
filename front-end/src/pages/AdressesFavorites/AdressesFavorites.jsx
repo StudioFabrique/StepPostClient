@@ -25,16 +25,16 @@ class AdressesFavorites extends Component {
   handleRetour = () => {
     this.setState({ section: 0 });
   };
-  //  affiche le formulaire d'ajout d'adresse
+
   handleNouvelleAdresse = () => {
     this.setState({ section: 3 });
   };
-  //  envoie la nouvelle adresse au service back-end pour l'enregistrer
+
   handleAjouterAdresse = async (adresse) => {
     await postData("/add-adresse", adresse);
     this.setState({ section: 0 });
   };
-  //  envoie l'adresse modifiée au back-end pour la mettre à jour
+
   handleEditerAdresse = async (adresse) => {
     await postData("/edit-adresse", adresse);
     this.setState({ section: 0 });

@@ -2,8 +2,8 @@ import { formatDate, toTitleCase } from "../../modules/formatter";
 import "./DetailsCourrier.css";
 
 function DetailsCourrier(props) {
-  const statuts = props.statutsCourrier;
-  const dest = statuts[0].courrier;
+  const statuts = props.detailsCourrier;
+  const dest = props.destinataire;
   let tab = [];
 
   for (let i = 0; i < statuts.length; i++) {
@@ -25,8 +25,8 @@ function DetailsCourrier(props) {
         <div>{tab}</div>
       </article>
       <article className="details">
-        <div key={`${dest.id}-${dest.name}`}>
-          <p>{toTitleCase(`${dest.civilite} ${dest.prenom} ${dest.name}`)}</p>
+        <div key={`${dest.id}-${dest.nom}`}>
+          <p>{toTitleCase(`${dest.civilite} ${dest.prenom} ${dest.nom}`)}</p>
           <p>{toTitleCase(`${dest.adresse}`)}</p>
           <p>{toTitleCase(`${dest.codePostal} ${dest.ville}`)}</p>
         </div>

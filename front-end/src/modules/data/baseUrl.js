@@ -1,13 +1,21 @@
 const port = 8000;
 
-const remoteUrl = `https://test-poste.herokuapp.com`;
+//const url = `https://test-poste.herokuapp.com`;
 
-const localUrl = `http://127.0.0.1:${port}`;
+const url = `http://127.0.0.1`;
 
-const baseUrl = `${localUrl}/api`;
+const baseUrl = `${url}:${port}/api`;
 
-const logUrl = `${baseUrl}/login_check`;
+const logUrl = `${url}:${port}/api/login_check`;
 
-const qrcodeUrl = `${localUrl}/assets/qrcodes/`;
+const qrcodeUrl = `${url}:${port}/assets/qrcodes/`;
 
-export { baseUrl, logUrl, qrcodeUrl };
+export { baseUrl, logUrl, qrcodeUrl }; /* 
+
+const baseUrl = `${url}/api/client`;
+
+const logUrl = `${url}/api/login_check`;
+
+const qrcodeUrl = `${url}/assets/qrcodes/`;
+
+export { baseUrl, logUrl, qrcodeUrl }; */

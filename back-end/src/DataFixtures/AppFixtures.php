@@ -24,9 +24,12 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+
+
         $client = new Client();
-        $client->setRaisonSociale("Step Post");
+        $client->setRaisonSociale("Toto Company");
         $manager->persist($client);
+
 
         $exp = new Expediteur();
         $exp->setEmail("tata@toto.fr");
@@ -38,6 +41,7 @@ class AppFixtures extends Fixture
         $exp->setVille('pau');
         $exp->setTelephone('12345678');
         $exp->setClient($client);
+        $expediteur1 = $exp;
         $manager->persist($exp);
 
         $statuts = ["en attente", "pris en charge", "avisé", "mis en instance", "distribué", "non réclamé", "npai"];
@@ -142,7 +146,7 @@ class AppFixtures extends Fixture
             $dest->setCodePostal($destinataire['codePostal']);
             $dest->setVille($destinataire['ville']);
             $dest->setTelephone($destinataire['telephone']);
-            $dest->setExpediteur($exp);
+            $dest->setExpediteur($expediteur1);
             $manager->persist($dest);
             for ($i = 0; $i < 7; $i++) :
                 $bordereau++;
@@ -155,7 +159,7 @@ class AppFixtures extends Fixture
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);
                 $courrier->setVille($destinataire['ville']);
-                $courrier->setExpediteur($exp);
+                $courrier->setExpediteur($expediteur1);
                 for ($j = 0; $j < 3; $j++) :
                     $statutCourrier = new StatutCourrier();
                     $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
@@ -182,11 +186,11 @@ class AppFixtures extends Fixture
                 $courrier->setAdresse($destinataire['adresse']);
                 $courrier->setCodePostal($destinataire['codePostal']);
                 $courrier->setVille($destinataire['ville']);
-                $courrier->setExpediteur($exp);
+                $courrier->setExpediteur($expediteur1);
                 $manager->persist($courrier);
                 for ($j = 0; $j < 5; $j++) :
                     $statutCourrier = new StatutCourrier();
-                    $statutCourrier->setDate((new \DateTime('2000-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
+                    $statutCourrier->setDate((new \DateTime('2022-01-01'))->add(new DateInterval('P' . $compteur . 'D')));
                     $statutCourrier->setStatut($etats[$j]);
                     $statutCourrier->setCourrier($courrier);
                     $statutCourrier->setFacteurId(0);

@@ -67,7 +67,7 @@ body #root .listecourriers-section > ul > li .courrier > div:nth-child(3) {
   width: 80%;
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 600px) {

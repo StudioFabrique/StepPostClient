@@ -12,7 +12,6 @@ use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Qrcode as ServicesQrcode;
-use Symfony\Component\HttpFoundation\Request;
 
 class Service
 {
@@ -34,12 +33,11 @@ class Service
         $this->courrierRepository = $courrierRepository;
         $this->destinatairesRepository = $destinataireRepository;
         $this->doctrine = $doctrine;
-        $this->request = Request::createFromGlobals();
         $this->statutRepository = $statutRepository;
         $this->statutcourrierRepository = $statutcourrierRepository;
     }
 
-    public function addAdresse(Expediteur $user)
+    public function addAdresse(Expediteur $exp)
     {
         $data = $this->stripTag();
         $dest = new Destinataires();
@@ -52,19 +50,20 @@ class Service
         $dest->setVille($data[6]);
         $dest->setTelephone($data[7]);
         $dest->setEmail($data[8]);
-        $dest->setExpediteur($user);
+        $dest->setExpediteur($exp);
 
         $manager = $this->doctrine->getManager();
         $manager->persist($dest);
         $manager->flush();
     }
 
-    public function adressesFavorites(Expediteur $user)
+    public function adressesFavorites(Expediteur $exp)
     {
         $destinataires = $this->destinatairesRepository->findBy(
-            ['expediteur' => $user],
+            ['expediteur' => $exp],
             ['nom' => 'ASC']
         );
+        $nom = "";
         if (isset($_POST['data'])) :
             $nom = $this->stripTag()[0];
             for ($i = 0; $i < strlen($nom); $i++) :
@@ -83,7 +82,22 @@ class Service
         if (count($destinataires) === 0) :
             return false;
         endif;
-        return $destinataires;
+        $adresses = array();
+        foreach ($destinataires as $el) :
+            $adresses = [...$adresses, [
+                'id' => $el->getId(),
+                'civilite' => $el->getCivilite(),
+                'prenom' => $el->getPrenom(),
+                'nom' => $el->getNom(),
+                'adresse' => $el->getAdresse(),
+                'complement' => $el->getComplement(),
+                'codePostal' => $el->getCodePostal(),
+                'ville' => $el->getVille(),
+                'telephone' => $el->getTelephone(),
+                'email' => $el->getEmail(),
+            ]];
+        endforeach;
+        return $adresses;
     }
 
     public function deleteAdresse()
@@ -98,8 +112,10 @@ class Service
     public function detailsCourrier()
     {
         $data = $this->stripTag();
-        $statuts = $this->statutcourrierRepository->findBy(['courrier' => $this->courrierRepository->find($data[0])]);
-        return $statuts;
+        $courrier = $this->courrierRepository->findOneBy(['id' => $data[0]]);
+        $statuts = $this->statutcourrierRepository->findBy(['courrier' => $courrier]);
+        $data = $this->getInfosCourrier($statuts, $courrier);
+        return $data;
     }
 
     public function editAdresse()
@@ -123,7 +139,7 @@ class Service
         return $data;
     }
 
-    public function getExpediteur(Expediteur $user)
+    public function expediteur(Expediteur $user)
     {
         return [
             'nom' => $user->getName(),
@@ -134,7 +150,7 @@ class Service
         ];
     }
 
-    public function getCourriers(Expediteur $user): array
+    public function getCourriers(Expediteur $user)
     {
         $tmp = $this->stripTag();
         $page = $tmp[0];
@@ -189,7 +205,16 @@ class Service
         endif;
         $statuts = array();
         for ($i = ($page * $max); $i < $length; $i++) :
-            array_push($statuts, $courriers[$i]);
+            $statuts = [...$statuts, [
+                'id' => $courriers[$i]->getCourrier()->getId(),
+                'type' => $courriers[$i]->getCourrier()->getType(),
+                'date' => $courriers[$i]->getDate(),
+                'civilite' => $courriers[$i]->getCourrier()->getCivilite(),
+                'nom' => $courriers[$i]->getCourrier()->getName(),
+                'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
+                'etat' => $courriers[$i]->getStatut()->getEtat(),
+                'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
+            ]];
         endfor;
 
         return [$statuts, $total];
@@ -276,12 +301,17 @@ class Service
     {
         $data = $this->stripTag();
         $courrier = $this->courrierRepository->findOneBy(['bordereau' => $data[0]]);
-        if (isset($courrier)) :
+        if ($courrier !== null) :
             $statuts = $this->statutcourrierRepository->findBy(
                 ['courrier' => $courrier->getId()],
                 ['date' => 'ASC']
             );
-            return ($statuts);
+            $data = $this->getInfosCourrier($statuts, $courrier);
+            $data[1] = [...$data[1], 'bordereau' => $statuts[0]->getCourrier()->getBordereau()];
+            return ([
+                'statuts' => $data[0],
+                'destinataire' => $data[1],
+            ]);
         else :
             return false;
         endif;
