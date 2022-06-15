@@ -182,7 +182,7 @@ class Service
         if (count($datas) === 0) :
             return [false, 0];
         endif;
-        $courriers = array();
+        $statuts = array();
         $total = count($datas);
         foreach ($datas as $data) :
             $statut = $this->statutcourrierRepository->findBy(
@@ -191,33 +191,33 @@ class Service
             );
             $tmp = $statut[0]->getStatut()->getEtat();
             if ($this->isDistributed($tmp, $filtre)) :
-                array_push($courriers, $statut[0]);
+                array_push($statuts, $statut[0]);
             endif;
-            $total = count($courriers);
+            $total = count($statuts);
         endforeach;
         if (isset($sort)) :
-            $courriers = $this->triTableau($courriers, $sort, $direction);
+            $statuts = $this->triTableau($statuts, $sort, $direction);
         endif;
-        if (count($courriers) < ($max * ($page + 1))) :
-            $length = count($courriers);
+        if (count($statuts) < ($max * ($page + 1))) :
+            $length = count($statuts);
         else :
             $length = ($max * ($page + 1));
         endif;
-        $statuts = array();
+        $courriers = array();
         for ($i = ($page * $max); $i < $length; $i++) :
-            $statuts = [...$statuts, [
-                'id' => $courriers[$i]->getCourrier()->getId(),
-                'type' => $courriers[$i]->getCourrier()->getType(),
-                'date' => $courriers[$i]->getDate(),
-                'civilite' => $courriers[$i]->getCourrier()->getCivilite(),
-                'nom' => $courriers[$i]->getCourrier()->getName(),
-                'prenom' => $courriers[$i]->getCourrier()->getPrenom(),
-                'etat' => $courriers[$i]->getStatut()->getEtat(),
-                'bordereau' => $courriers[$i]->getCourrier()->getBordereau(),
+            $courriers = [...$courriers, [
+                'id' => $statuts[$i]->getCourrier()->getId(),
+                'type' => $statuts[$i]->getCourrier()->getType(),
+                'date' => $statuts[$i]->getDate(),
+                'civilite' => $statuts[$i]->getCourrier()->getCivilite(),
+                'nom' => $statuts[$i]->getCourrier()->getName(),
+                'prenom' => $statuts[$i]->getCourrier()->getPrenom(),
+                'etat' => $statuts[$i]->getStatut()->getEtat(),
+                'bordereau' => $statuts[$i]->getCourrier()->getBordereau(),
             ]];
         endfor;
 
-        return [$statuts, $total];
+        return [$courriers, $total];
     }
 
     public function getInfosCourrier(array $statuts, Courrier $courrier): array
