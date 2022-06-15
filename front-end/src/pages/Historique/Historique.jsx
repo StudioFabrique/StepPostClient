@@ -182,7 +182,6 @@ class Historique extends Component {
         </section>
         <div>
           <button
-            className="button"
             onClick={() => this.handleClick(this.state.page - 1, "minus")}
             style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
           >
@@ -190,7 +189,6 @@ class Historique extends Component {
           </button>
           <p>{this.state.page + 1}</p>
           <button
-            className="button"
             onClick={() => this.handleClick(this.state.page + 1, "plus")}
             style={{
               visibility:
