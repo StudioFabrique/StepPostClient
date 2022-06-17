@@ -211,7 +211,6 @@ class Service
                 'date' => $statuts[$i]->getDate(),
                 'civilite' => $statuts[$i]->getCourrier()->getCivilite(),
                 'nom' => $statuts[$i]->getCourrier()->getName(),
-                'prenom' => $statuts[$i]->getCourrier()->getPrenom(),
                 'etat' => $statuts[$i]->getStatut()->getEtat(),
                 'bordereau' => $statuts[$i]->getCourrier()->getBordereau(),
             ]];

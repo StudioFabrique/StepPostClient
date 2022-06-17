@@ -47,6 +47,21 @@ class StatutcourrierRepository extends ServiceEntityRepository
         }
     }
 
+    public function getStatutCourrier(int $id): array
+    {
+        $query = $this->createQueryBuilder('s')
+            ->select('s.date', 'c.name', 'c.prenom', 'c.id', 'c.adresse', 'c.codePostal', 'c.type', 'c.bordereau', 'c.ville', 'st.etat')
+            ->join('s.courrier', 'c')
+            ->join('c.expediteur', 'e')
+            ->join('s.statut', 'st')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('s.date', 'DESC')
+            ->getQuery();
+        return $query->getResult();
+    }
+
+
     // /**
     //  * @return Statutcourrier[] Returns an array of Statutcourrier objects
     //  */

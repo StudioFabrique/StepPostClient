@@ -47,6 +47,18 @@ class ExpediteurRepository extends ServiceEntityRepository
         }
     }
 
+
+    //  return id
+    public function getExpId(string $email): int
+    {
+        $query = $this->createQueryBuilder('e')
+            ->select('e.id')
+            ->where('e.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery();
+        return $query->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Expediteur[] Returns an array of Expediteur objects
     //  */

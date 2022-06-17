@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\DestinatairesRepository;
 use App\Repository\ExpediteurRepository;
+use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
@@ -114,5 +115,12 @@ class MainController extends AbstractController
                 'destinataire' => $result['destinataire']
             ]);
         endif;
+    }
+
+    #[Route('/api/total-courriers', name: 'api_total-courriers')]
+    public function totalCourriers(StatutcourrierRepository $statutcourrierRepository, ExpediteurRepository $expediteurRepository): Response
+    {
+        $userId = $expediteurRepository->getExpId($this->getUser()->getUserIdentifier());
+        return $this->json(['statuts' => $statutcourrierRepository->getStatutCourrier($userId)]);
     }
 }
