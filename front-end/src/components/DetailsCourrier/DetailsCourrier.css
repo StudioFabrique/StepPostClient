@@ -2,14 +2,22 @@
   width: 30vw;
   padding: 1.5vw;
   border-radius: 5px;
-  box-shadow: 4px 4px 4px #646464;
+  -webkit-box-shadow: 4px 4px 4px #646464;
+          box-shadow: 4px 4px 4px #646464;
 }
 
 .detailsLivraison {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .detailsLivraison > .details {
   font-size: 1rem;
 }
@@ -20,6 +28,8 @@
 
 .cercle {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-radius: 50%;
   width: 1vw;
@@ -28,22 +38,34 @@
 }
 
 .trait {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 10vw;
-  height: 0.25vw;
+  height: .25vw;
   background-color: #24A640;
 }
 
 .timeline {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .timeline > div {
   list-style-type: none;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 .timeline > div > .trait:last-child {
   display: none;
 }
@@ -57,22 +79,30 @@
   white-space: nowrap;
   top: -150%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.75rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: .75rem;
 }
 
 .statuts-date {
   position: absolute;
   top: 150%;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  font-size: 0.75rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: .75rem;
 }
 
 @media screen and (max-width: 1700px) {
@@ -80,48 +110,49 @@
     width: 8vw;
   }
 }
+
 @media screen and (max-width: 1500px) {
   .trait {
     width: 7vw;
   }
 }
+
 @media screen and (max-width: 1400px) {
   .trait {
     width: 6vw;
   }
 }
+
 @media screen and (max-width: 1200px) {
   .trait {
     width: 5vw;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .statuts {
-    font-size: 0.5rem;
+    font-size: .5rem;
   }
-
   .statuts-date {
-    font-size: 0.5rem;
+    font-size: .5rem;
   }
-
   .details {
-    font-size: 0.75rem;
+    font-size: .75rem;
   }
-
   .trait {
     width: 7vw;
   }
 }
+
 @media screen and (max-width: 600px) {
   .trait {
     width: 15vw;
   }
-
   .details > div > p {
-    font-size: 0.5rem;
+    font-size: .5rem;
   }
-
   .statuts {
     top: -300%;
   }
-}/*# sourceMappingURL=DetailsCourrier.css.map */
+}
+/*# sourceMappingURL=DetailsCourrier.css.map */

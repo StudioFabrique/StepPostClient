@@ -2,6 +2,9 @@ import { toTitleCase } from "../../modules/formatter";
 
 function Adresse(props) {
   const adresse = props.adresse;
+  if (adresse.telephone === "") {
+    adresse.telephone = "N/A";
+  }
   return (
     <article className="article-ne-adresse">
       <div>

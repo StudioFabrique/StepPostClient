@@ -2,13 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\DestinatairesRepository;
-use App\Repository\ExpediteurRepository;
-use App\Repository\StatutcourrierRepository;
-use App\Repository\StatutRepository;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,19 +14,17 @@ class MainController extends AbstractController
     #[Route('/api/add-adresse', name: 'api_add-adresse')]
     public function addAdresse(
         Service $service,
-        ExpediteurRepository $expediteurRepository,
     ): Response {
-        $exp = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $exp = $this->getUser();
         $service->addAdresse($exp);
         return $this->json(['result' => true]);
     }
 
     #[Route('/api/adresses-favorites', name: 'api_adresses-favorites')]
     public function adressesFavorites(
-        ExpediteurRepository $expediteurRepository,
         Service $service,
     ): Response {
-        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $user = $this->getUser();
         $result = $service->adressesFavorites($user);
         return $this->json(['destinataires' => $result]);
     }
@@ -62,18 +55,17 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/expediteur', name: 'api_expediteur')]
-    public function expediteur(ExpediteurRepository $expediteurRepository, Service $service): Response
+    public function expediteur(Service $service): Response
     {
-        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $user = $this->getUser();
         return $this->json(['exp' => $service->expediteur($user)]);
     }
 
     #[Route('/api/get-courriers', name: 'api_get-courriers')]
     public function getCourriers(
-        ExpediteurRepository $expediteurRepository,
         Service $service,
     ): Response {
-        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $user = $this->getUser();
         $result = $service->getCourriers($user);
         return $this->json([
             'statuts' => $result[0],
@@ -85,9 +77,8 @@ class MainController extends AbstractController
     public function qrCode(
         ServicesQrcode $servicesQrcode,
         Service $service,
-        ExpediteurRepository $expediteurRepository,
     ): Response {
-        $user = $expediteurRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $user = $this->getUser();
         $result = $service->qrcode(
             $user,
             $servicesQrcode,
@@ -115,12 +106,5 @@ class MainController extends AbstractController
                 'destinataire' => $result['destinataire']
             ]);
         endif;
-    }
-
-    #[Route('/api/total-courriers', name: 'api_total-courriers')]
-    public function totalCourriers(StatutcourrierRepository $statutcourrierRepository, ExpediteurRepository $expediteurRepository): Response
-    {
-        $userId = $expediteurRepository->getExpId($this->getUser()->getUserIdentifier());
-        return $this->json(['statuts' => $statutcourrierRepository->getStatutCourrier($userId)]);
     }
 }
