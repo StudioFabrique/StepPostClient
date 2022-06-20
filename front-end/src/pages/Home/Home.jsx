@@ -40,8 +40,12 @@ class Home extends Component {
   }
 
   handleRecherche = async (msg) => {
+    this.total = 0;
+    if (this.state.isRechercheActive) {
+      this.setState({ isRechercheActive: false });
+    }
     const response = await postData(`/search-courrier`, [msg]);
-    if (response.statuts !== false) {
+    if (response.statuts) {
       this.setState({ isRechercheActive: true, rechercheValue: response });
     } else if (response.statuts === false) {
       this.nom = msg;
@@ -49,7 +53,7 @@ class Home extends Component {
         0,
         this.max,
         this.nom,
-        false,
+        this.filtre,
       ]);
       if (response.statuts !== false) {
         this.setState({
@@ -57,10 +61,9 @@ class Home extends Component {
           page: 0,
           isRechercheActive: false,
           rechercheNom: true,
-          noResults: false,
         });
-        this.total = response.total;
         this.nom = response.statuts[0].nom;
+        this.total = response.total;
       } else {
         this.setState({ noResults: true, rechercheNom: false });
         this.tmpName = this.nom;

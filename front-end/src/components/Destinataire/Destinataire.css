@@ -1,83 +1,50 @@
 .section-adresses {
   width: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
   row-gap: 2vh;
-  -webkit-column-gap: 1vw;
-          column-gap: 1vw;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
 }
-
 .section-adresses > .adresse {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  row-gap: .5vh;
+  row-gap: 0.5vh;
   padding: 1VW;
   border: 1px solid #140A82;
   border-radius: 10px;
-  -webkit-column-gap: 1vw;
-          column-gap: 1vw;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
 }
-
 .section-adresses > .adresse:hover {
-  -webkit-box-shadow: 4px 4px 4px #646464;
-          box-shadow: 4px 4px 4px #646464;
+  box-shadow: 4px 4px 4px #646464;
 }
-
 .section-adresses > .adresse:hover > ul {
   visibility: visible;
 }
-
 .section-adresses > .adresse > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-
 .section-adresses > .adresse > div > span {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .section-adresses > .adresse > ul {
   visibility: hidden;
   list-style-type: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   border-left: 1px #140A82 solid;
-  padding: 0 0 0 .5vw;
+  padding: 0 0 0 0.5vw;
 }
-
 .section-adresses > .adresse > ul > li > img,
 .section-adresses > .adresse > ul > li > a > img {
   height: 24px;
   width: auto;
 }
-
 .section-adresses > .adresse > ul > li > img:hover,
 .section-adresses > .adresse > ul > li > a > img:hover {
   cursor: pointer;
@@ -87,5 +54,4 @@
   .section-adresses > .adresse {
     white-space: nowrap;
   }
-}
-/*# sourceMappingURL=Destinataire.css.map */
+}/*# sourceMappingURL=Destinataire.css.map */

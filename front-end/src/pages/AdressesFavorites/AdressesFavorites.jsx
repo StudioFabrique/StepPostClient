@@ -1,73 +1,65 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "./AdressesFavorites.css";
 import ListeAdresses from "../../components/ListeAdresses/ListeAdresses";
 import NouvelEnvoi from "../../components/NouvelEnvoi/NouvelEnvoi";
 import AdresseForm from "../../components/AdresseForm/AdresseForm";
 import { postData } from "../../modules/fetchData";
 
-class AdressesFavorites extends Component {
-  constructor(props) {
-    super(props);
-    // section 0 : liste d'adresses, 1 : création de bordereau, 2 : édition d'adresse, 3 : création d'adresse
-    this.state = { section: 0 };
-    this.newId = null;
-  }
+function AdressesFavorites({ onPageLanding }) {
+  const [section, setSection] = useState(0);
+  const [newId, setNewId] = useState(null);
 
-  componentDidMount() {
-    this.props.onPageLanding(1);
-  }
+  useEffect(() => {
+    onPageLanding(1);
+  }, [onPageLanding]);
 
-  handleSectionUpdate = (newId, section) => {
-    this.newId = newId;
-    this.setState({ section: section });
+  const handleSectionUpdate = (newId, section) => {
+    setNewId(newId);
+    setSection(section);
   };
 
-  handleRetour = () => {
-    this.setState({ section: 0 });
+  const handleRetour = () => {
+    setSection(0);
   };
 
-  handleNouvelleAdresse = () => {
-    this.setState({ section: 3 });
+  const handleNouvelleAdresse = () => {
+    setSection(3);
   };
 
-  handleAjouterAdresse = async (adresse) => {
+  const handleAjouterAdresse = async (adresse) => {
     await postData("/add-adresse", adresse);
-    this.setState({ section: 0 });
+    setSection(0);
   };
 
-  handleEditerAdresse = async (adresse) => {
+  const handleEditerAdresse = async (adresse) => {
     await postData("/edit-adresse", adresse);
-    this.setState({ section: 0 });
+    setSection(0);
   };
 
-  render() {
-    return (
-      <main className="main-nouvel-envoi">
-        {this.state.section === 0 && (
-          <ListeAdresses
-            onClickIcone={this.handleSectionUpdate}
-            onNewAdress={this.handleNouvelleAdresse}
-          />
-        )}
-        {this.state.section === 1 && (
-          <NouvelEnvoi adresse={this.newId} onRetour={this.handleRetour} />
-        )}
-        {this.state.section === 2 && (
-          <AdresseForm
-            id={this.newId}
-            onRetour={this.handleRetour}
-            onEditerAdresse={this.handleEditerAdresse}
-          />
-        )}
-        {this.state.section === 3 && (
-          <AdresseForm
-            onRetour={this.handleRetour}
-            onAjouterAdresse={this.handleAjouterAdresse}
-          />
-        )}
-      </main>
-    );
-  }
+  return (
+    <main className="main-nouvel-envoi">
+      {section === 0 && (
+        <ListeAdresses
+          onClickIcone={handleSectionUpdate}
+          onNewAdress={handleNouvelleAdresse}
+        />
+      )}
+      {section === 1 && <NouvelEnvoi adresse={newId} onRetour={handleRetour} />}
+      {section === 2 && (
+        <AdresseForm
+          id={newId}
+          onRetour={handleRetour}
+          onEditerAdresse={handleEditerAdresse}
+        />
+      )}
+      {section === 3 && (
+        <AdresseForm
+          onRetour={handleRetour}
+          onAjouterAdresse={handleAjouterAdresse}
+        />
+      )}
+    </main>
+  );
 }
 
 export default AdressesFavorites;
