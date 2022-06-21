@@ -4,7 +4,7 @@ const remoteUrl = `https://test-poste.herokuapp.com`;
 
 const localUrl = `http://127.0.0.1:${port}`;
 
-const baseUrl = `${localUrl}/api`;
+const baseUrl = `${remoteUrl}/api`;
 
 const logUrl = `${baseUrl}/login_check`;
 
