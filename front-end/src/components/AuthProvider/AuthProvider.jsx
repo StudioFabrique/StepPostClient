@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Connexion from "../Connexion/Connexion";
 
 const AuthContext = createContext(null);
@@ -23,7 +23,7 @@ function useProvideAuth() {
 
   const onLogout = () => {
     setToken(null);
-    localStorage.setItem("token", "");
+    localStorage.removeItem("token");
     navigate("/");
   };
   return { token, onLogin, onLogout };
@@ -31,10 +31,9 @@ function useProvideAuth() {
 
 export const ProtectedRoute = ({ children }) => {
   const auth = useAuth();
-  const location = useLocation();
 
   if (!auth.token) {
-    return <Connexion to="/" replace state={{ from: location }} />;
+    return <Connexion />;
   }
   return children;
 };

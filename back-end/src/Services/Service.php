@@ -158,7 +158,7 @@ class Service
         $nom = $tmp[2];
         $filtre = $tmp[3];
         $total = 0; // nombre total de courriers trouvés pour une recherche par nom avec le filtre
-        // par defaut les données sont triées par id décroissantes, les variables $sort et $direction (ASC ou DESc) servent à définir un tri différent que celui par défaut
+        // par defaut les données sont triées par id décroissantes, les variables $sort et $direction (ASC ou DESC) servent à définir un tri différent que celui par défaut
         if (isset($tmp[4])) :
             $sort = $tmp[4];
             $direction = $tmp[5];
@@ -183,7 +183,6 @@ class Service
             return [false, 0];
         endif;
         $statuts = array();
-        $total = count($datas);
         foreach ($datas as $data) :
             $statut = $this->statutcourrierRepository->findBy(
                 ['courrier' => $data->getId()],
