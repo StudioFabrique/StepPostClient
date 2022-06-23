@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { postData } from "../../modules/fetchData";
 import "./Bordereau.css";
 import PopupConfirmation from "../PopupConfirmation/PopupConfirmation";
-import { baseUrl } from "../../modules/data/baseUrl";
+import { baseUrl } from "../../modules/data/urls";
 import Adresse from "../Adresse/Adresse";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";

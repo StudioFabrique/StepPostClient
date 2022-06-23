@@ -1,4 +1,4 @@
-import { baseUrl, logUrl } from "./data";
+import { baseUrl, logUrl } from "./data/urls.js";
 
 export async function postData(url, data) {
   const fd = new FormData();
