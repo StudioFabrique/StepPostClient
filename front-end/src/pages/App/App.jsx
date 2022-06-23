@@ -19,7 +19,7 @@ function App() {
     if (savedToken) {
       auth.onLogin(savedToken);
     }
-  }, []);
+  }, [auth, savedToken]);
 
   document.title = "Step Post";
 

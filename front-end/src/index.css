@@ -45,4 +45,7 @@ body > #root {
 }
 .button-valider:hover {
   cursor: pointer;
+}
+.button-valider:active {
+  transform: translate(2px, 2px);
 }/*# sourceMappingURL=index.css.map */

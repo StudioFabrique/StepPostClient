@@ -96,6 +96,26 @@ class AdresseForm extends Component {
     this.setState({ isSubmitted: false });
   };
 
+  handleReset = () => {
+    if (this.dest) {
+      this.resetAdresse();
+    } else {
+      this.setState({
+        civilite: "",
+        nom: "",
+        prenom: "",
+        adresse: "",
+        complement: "",
+        codePostal: "",
+        ville: "",
+        telephone: "",
+        email: "",
+        id: "",
+      });
+    }
+    console.log("state", this.state);
+  };
+
   handleConfirm = () => {
     if (this.dest) {
       this.props.onEditerAdresse(this.state.items);
@@ -254,11 +274,11 @@ class AdresseForm extends Component {
               <button
                 className="button"
                 type="button"
-                onClick={this.handleCancel}
+                onClick={this.handleReset}
               >
-                Annuler
+                Reinitialiser
               </button>
-              <input className="button-valider" type="submit" value="Envoyer" />
+              <input className="button-valider" type="submit" value="Valider" />
             </div>
           </form>
         </article>
