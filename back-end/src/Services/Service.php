@@ -142,7 +142,7 @@ class Service
     public function expediteur(Expediteur $user)
     {
         return [
-            'nom' => $user->getName(),
+            'nom' => $user->getNom(),
             'adresse' => $user->getAdresse(),
             'complement' => $user->getComplement(),
             'codePostal' => $user->getCodePostal(),

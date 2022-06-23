@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
         $exp->setEmail("tata@toto.fr");
         $hash = $this->passwordHasher->hashPassword($exp, "Abcd@1234");
         $exp->setPassword($hash);
-        $exp->setName("step post");
+        $exp->setNom("step post");
         $exp->setAdresse('12 rue Frodon Sacquet');
         $exp->setCodePostal(64000);
         $exp->setVille('pau');
