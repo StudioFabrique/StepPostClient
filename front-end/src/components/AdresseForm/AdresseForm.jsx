@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PopupConfirmation from "../PopupConfirmation/PopupConfirmation";
 import "./AdresseForm.css";
-import { toTitleCase } from "../../modules/formatter";
+import {} from "../../modules/formatter";
 import { testFormAdress } from "../../modules/checkForm";
 
 class AdresseForm extends Component {
@@ -162,7 +162,7 @@ class AdresseForm extends Component {
                 <input
                   type="text"
                   placeholder="Jean"
-                  value={toTitleCase(this.state.prenom)}
+                  value={this.state.prenom}
                   name="prenom"
                   onChange={this.handleChange}
                 />
@@ -175,7 +175,7 @@ class AdresseForm extends Component {
                 <input
                   type="text"
                   placeholder="Dupont"
-                  value={toTitleCase(this.state.nom)}
+                  value={this.state.nom}
                   name="nom"
                   onChange={this.handleChange}
                 />
@@ -190,7 +190,7 @@ class AdresseForm extends Component {
                 <textarea
                   placeholder="2 rue du Château"
                   rows="2"
-                  value={toTitleCase(this.state.adresse)}
+                  value={this.state.adresse}
                   name="adresse"
                   onChange={this.handleChange}
                 />
@@ -220,7 +220,7 @@ class AdresseForm extends Component {
                 <input
                   placeholder="64000"
                   type="text"
-                  value={toTitleCase(this.state.codePostal)}
+                  value={this.state.codePostal}
                   name="codePostal"
                   onChange={this.handleChange}
                 />
@@ -233,7 +233,7 @@ class AdresseForm extends Component {
                 <input
                   placeholder="Pau"
                   type="text"
-                  value={toTitleCase(this.state.ville)}
+                  value={this.state.ville}
                   name="ville"
                   onChange={this.handleChange}
                 />
@@ -247,7 +247,7 @@ class AdresseForm extends Component {
                   type="text"
                   value={
                     this.state.telephone !== "non disponible"
-                      ? toTitleCase(this.state.telephone)
+                      ? this.state.telephone
                       : ""
                   }
                   name="telephone"
