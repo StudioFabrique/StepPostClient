@@ -80,7 +80,6 @@
   .detailsRecherche {
     width: 80%;
   }
-
   .form-recherche > img {
     width: 24px;
   }
@@ -101,7 +100,6 @@
     width: 8vw;
     height: auto;
   }
-
   .form-recherche {
     width: 90%;
     row-gap: 2vh;
@@ -121,12 +119,10 @@
     width: 6vw;
     height: 6vw;
   }
-
   .rechercheNom {
     width: 90%;
     font-size: 0.75rem;
   }
-
   .detailsRecherche {
     width: 90%;
     height: 15vh;
