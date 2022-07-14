@@ -16,16 +16,16 @@ class Statutcourrier
     #[ORM\Column(type: 'datetime')]
     private $date;
 
-    #[ORM\ManyToOne(targetEntity: Courrier::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $courrier;
-
     #[ORM\ManyToOne(targetEntity: Statut::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $statut;
 
     #[ORM\Column(type: 'integer')]
     private $facteurId;
+
+    #[ORM\ManyToOne(targetEntity: Courrier::class, inversedBy: 'statutcourriers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $courrier;
 
     public function getId(): ?int
     {
@@ -40,18 +40,6 @@ class Statutcourrier
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getCourrier(): ?Courrier
-    {
-        return $this->courrier;
-    }
-
-    public function setCourrier(?Courrier $courrier): self
-    {
-        $this->courrier = $courrier;
 
         return $this;
     }
@@ -76,6 +64,18 @@ class Statutcourrier
     public function setFacteurId(int $facteurId): self
     {
         $this->facteurId = $facteurId;
+
+        return $this;
+    }
+
+    public function getCourrier(): ?Courrier
+    {
+        return $this->courrier;
+    }
+
+    public function setCourrier(?Courrier $courrier): self
+    {
+        $this->courrier = $courrier;
 
         return $this;
     }

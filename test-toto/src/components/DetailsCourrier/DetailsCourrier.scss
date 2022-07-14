@@ -1,0 +1,145 @@
+$blue: #140A82;
+$orange: #FF5E1A;
+$green: #24A640;
+
+#searchInput {
+    width: 30vw;
+    padding: 1.5vw;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px #646464;
+}
+
+/* .detailsLivraison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >.details {
+        font-size: 1rem;
+    }
+} */
+
+.date {
+    color: $orange;
+}
+
+.cercle {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    width: 1vw;
+    height: 1vw;
+    background-color: $green
+}
+
+.trait {
+    display: flex;
+    width: 10vw;
+    height: .25vw;
+    background-color: $green;
+}
+
+.timeline {
+    display: flex;
+
+    >div {
+        list-style-type: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        >.trait:last-child {
+            display: none;
+        }
+    }
+}
+
+.cercleContainer {
+    position: relative;
+}
+
+.statuts {
+    position: absolute;
+    white-space: nowrap;
+    top: -150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .75rem;
+}
+
+.statuts-date {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: .75rem;
+}
+
+@media screen and (max-width: 1700px) {
+    .trait {
+        width: 8vw;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .trait {
+        width: 7vw;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .trait {
+        width: 6vw;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .trait {
+        width: 5vw;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .statuts {
+        font-size: .5rem;
+    }
+
+    .statuts-date {
+        font-size: .5rem;
+    }
+
+    .details {
+        font-size: .75rem;
+    }
+
+    .trait {
+        width: 7vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .trait {
+        width: 15vw;
+    }
+
+    .details {
+        >div {
+            >p {
+                font-size: .5rem;
+            }
+        }
+    }
+
+    .statuts {
+        top: -300%;
+    }
+}

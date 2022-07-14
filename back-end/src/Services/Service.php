@@ -21,8 +21,6 @@ class Service
     private $statutRepository;
     private $statutcourrierRepository;
 
-
-
     public function __construct(
         CourrierRepository $courrierRepository,
         DestinatairesRepository $destinataireRepository,
@@ -384,3 +382,23 @@ class Service
         return $data;
     }
 }
+
+
+   /*     #[Route('/toto', name: 'app_toto')]
+    public function toto(CourrierRepository $courrierRepository, SerializerInterface $serializer): Response
+    {
+        $courriers = $courrierRepository->findByExampleField(1)[0];
+        $json = $serializer->serialize(
+            $courriers,
+            JsonEncoder::FORMAT,
+
+            [
+                AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                    return $object->getName();
+                },
+            ],
+            [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s'],
+
+        );
+        return new Response($json);
+    } */

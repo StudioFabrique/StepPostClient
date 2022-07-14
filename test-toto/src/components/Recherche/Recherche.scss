@@ -1,0 +1,168 @@
+$blue: #140a82;
+$orange: #ff5e1a;
+$green: #24a640;
+
+#searchInput {
+  width: 30vw;
+  padding: 1.5vw;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px #646464;
+}
+
+.form-recherche {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  >div:nth-child(1) {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+
+    >label {
+      font-size: 0.85em;
+    }
+  }
+
+  >div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    column-gap: 1vw;
+  }
+}
+
+.button {
+  >img {
+    height: 2.75vw;
+    width: 2.75vw;
+  }
+}
+
+.rechercheNom {
+  width: 80%;
+  display: flex;
+  column-gap: 1vw;
+  align-items: center;
+  column-gap: 1vw;
+}
+
+.recherche-adresse {
+  display: flex;
+  align-items: center;
+}
+
+.detailsRecherche {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #646464;
+  padding: 1vw;
+  border-radius: 5px;
+
+  >div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1vh;
+    color: $blue;
+
+    >span {
+      display: flex;
+      align-items: center;
+      column-gap: 0.75vw;
+
+      >img {
+        height: 24px;
+        width: auto;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .detailsRecherche {
+    width: 80%;
+  }
+
+  .form-recherche {
+    >img {
+      width: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .section-recherche {
+    width: 90%;
+
+    .recherche-adresse {
+      width: 90%;
+      column-gap: 2vw;
+
+      >#searchInput {
+        width: 80%;
+      }
+
+      >img {
+        width: 8vw;
+        height: auto;
+      }
+    }
+  }
+
+  .form-recherche {
+    width: 90%;
+    row-gap: 2vh;
+
+    >div:nth-child(1) {
+      >label {
+        font-size: 0.65em;
+      }
+    }
+
+    >div:nth-child(2) {
+      width: 100%;
+      column-gap: 2vw;
+
+      >#searchInput {
+        width: 80%;
+      }
+
+      >.button {
+        img {
+          width: 6vw;
+          height: 6vw;
+        }
+      }
+    }
+  }
+
+  .rechercheNom {
+    width: 90%;
+    font-size: 0.75rem;
+  }
+
+  .detailsRecherche {
+    width: 90%;
+    height: 15vh;
+    flex-direction: column;
+    row-gap: 1vh;
+
+    >div:nth-child(1) {
+      flex-direction: row;
+      column-gap: 5vw;
+
+      >h4,
+      >.button {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

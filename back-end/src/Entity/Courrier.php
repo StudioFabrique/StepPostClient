@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CourrierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: CourrierRepository::class)]
 class Courrier
@@ -46,6 +49,14 @@ class Courrier
     #[ORM\ManyToOne(targetEntity: Expediteur::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $expediteur;
+
+    #[ORM\OneToMany(mappedBy: 'courrier', targetEntity: Statutcourrier::class)]
+    private $statutcourriers;
+
+    public function __construct()
+    {
+        $this->statutcourriers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,4 +188,34 @@ class Courrier
         return $this;
     }
 
+    /**
+     * @return Collection<int, Statutcourrier>
+     * @MaxDepth(2)
+     */
+    public function getStatutcourriers(): Collection
+    {
+        return $this->statutcourriers;
+    }
+
+    public function addStatutcourrier(Statutcourrier $statutcourrier): self
+    {
+        if (!$this->statutcourriers->contains($statutcourrier)) {
+            $this->statutcourriers[] = $statutcourrier;
+            $statutcourrier->setCourrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatutcourrier(Statutcourrier $statutcourrier): self
+    {
+        if ($this->statutcourriers->removeElement($statutcourrier)) {
+            // set the owning side to null (unless already changed)
+            if ($statutcourrier->getCourrier() === $this) {
+                $statutcourrier->setCourrier(null);
+            }
+        }
+
+        return $this;
+    }
 }

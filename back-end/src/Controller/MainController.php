@@ -2,11 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\CourrierRepository;
+use App\Repository\ExpediteurRepository;
+use App\Services\CourriersService;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class MainController extends AbstractController
 {
@@ -36,7 +46,7 @@ class MainController extends AbstractController
         $service->deleteAdresse();
         return $this->json(['result' => true]);
     }
-
+    /* 
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(
         Service $service,
@@ -46,7 +56,7 @@ class MainController extends AbstractController
             'courrier' => $data[0],
             'destinataire' => $data[1]
         ]);
-    }
+    } */
 
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
     public function editAdresse(Service $service,): Response
@@ -106,5 +116,20 @@ class MainController extends AbstractController
                 'destinataire' => $result['destinataire']
             ]);
         endif;
+    }
+
+    //  récupération de la liste des courriers en cours de distribution
+    #[Route('/api/courriers', name: 'api_courriers')]
+    public function courriers(CourriersService $courrierService, ExpediteurRepository $exp): Response
+    {
+        $user = $exp->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $results = $courrierService->courriers($user->getId());
+        return $this->json(['response' => $results]);
+    }
+
+    #[Route('/api/details-courrier', name: 'api_details-courrier')]
+    public function detailsCourrier(CourriersService $courrierService): Response
+    {
+        return $this->json(['result' => $courrierService->detailsCourrier()]);
     }
 }

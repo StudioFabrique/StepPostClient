@@ -50,19 +50,20 @@ class CourrierRepository extends ServiceEntityRepository
     // /**
     //  * @return Courrier[] Returns an array of Courrier objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByExampleField(int $value)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.expediteur = :val')
             ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('c.statutcourriers', 'sc')
+            ->addSelect('sc')
+            ->orderBy('c.id', 'DESC')
+            //->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Courrier
@@ -81,7 +82,6 @@ class CourrierRepository extends ServiceEntityRepository
             ->orderBy('c.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 }
