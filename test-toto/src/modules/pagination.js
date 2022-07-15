@@ -9,7 +9,7 @@ export function getCourriers(page, max, listeCourriers) {
 
 export function setLimit(page, max, listeCourriers) {
   let size;
-  if (listeCourriers.length < max + (page + 1)) {
+  if (listeCourriers.length < max * (page + 1)) {
     size = listeCourriers.length;
   } else {
     size = max * (page + 1);

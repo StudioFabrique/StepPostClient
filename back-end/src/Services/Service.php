@@ -12,6 +12,7 @@ use App\Repository\StatutcourrierRepository;
 use App\Repository\StatutRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Services\Qrcode as ServicesQrcode;
+use Symfony\Component\HttpFoundation\Request;
 
 class Service
 {
@@ -316,7 +317,8 @@ class Service
 
     public function stripTag(): array
     {
-        $tmp = json_decode($_POST['data']);
+        $request = Request::createFromGlobals();
+        $tmp = json_decode($request->request->get('data'));
         $data = array();
         foreach ($tmp as $el) :
             array_push($data, strtolower(strip_tags($el)));

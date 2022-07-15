@@ -6,12 +6,13 @@
 }
 
 .form-recherche {
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .form-recherche > div:nth-child(1) {
-  width: 100%;
+  width: 37vw;
   display: flex;
   justify-content: left;
 }

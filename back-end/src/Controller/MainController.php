@@ -7,6 +7,7 @@ use App\Repository\ExpediteurRepository;
 use App\Services\CourriersService;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
+use App\Services\RechercheService;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -118,6 +119,13 @@ class MainController extends AbstractController
         endif;
     }
 
+
+    #[Route('/api/bordereau', name: 'api_bordereau')]
+    public function getCourrierByBordereau(RechercheService $rechercheService): Response
+    {
+        return $this->json(['result' => $rechercheService->getCourrierByBordereau()]);
+    }
+
     //  récupération de la liste des courriers en cours de distribution
     #[Route('/api/courriers', name: 'api_courriers')]
     public function courriers(CourriersService $courrierService, ExpediteurRepository $exp): Response
@@ -131,5 +139,11 @@ class MainController extends AbstractController
     public function detailsCourrier(CourriersService $courrierService): Response
     {
         return $this->json(['result' => $courrierService->detailsCourrier()]);
+    }
+
+    #[Route('/api/nom', name: 'api_nom')]
+    public function nom(CourriersService $courrierService): Response
+    {
+        return $this->json(['result' => $courrierService->getCourriersByNom()]);
     }
 }

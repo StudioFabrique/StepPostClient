@@ -7,6 +7,7 @@ import {
 } from "../../modules/formatter";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import DetailsCourrier from "../DetailsCourrier/DetailsCourrier";
+import { baseUrl } from "../../modules/data";
 
 function Courrier({ courrier, onClick }) {
   const [statuts, setStatuts] = useState([]);
@@ -14,7 +15,7 @@ function Courrier({ courrier, onClick }) {
 
   const handleClick = async () => {
     const response = await postData(
-      "http://127.0.0.1:8000/api/details-courrier",
+      `${baseUrl}/details-courrier`,
       [courrier.id],
       auth.token
     );
@@ -23,7 +24,11 @@ function Courrier({ courrier, onClick }) {
   };
 
   return (
-    <article className="courrier" onClick={handleClick}>
+    <article
+      className="courrier"
+      onClick={handleClick}
+      style={{ backgroundColor: courrier.isActive ? "#E0E0E0" : "white" }}
+    >
       <div>
         <h4 className="date">{formatDate(courrier.date)}</h4>
         <p>Bordereau n° : {courrier.bordereau}</p>

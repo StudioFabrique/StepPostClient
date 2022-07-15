@@ -17,18 +17,18 @@ function ListeCourriers(props) {
 
   useEffect(() => {
     updateCourriers(getCourriers(page, max, listeCourriers));
+    updateId(null);
   }, [page]);
 
-  //  effet d'acordéon
+  //  effet d'accordéon
   const handleCourrierClick = (newId) => {
     if (id) {
-      courriers.find((statut) => statut.id === id).isActive = false;
+      courriers.find((item) => item.id === id).isActive = false;
     }
     if (id === newId) {
       newId = null;
     } else {
-      const newCourrier = courriers.find((statut) => statut.id === newId);
-      newCourrier.isActive = true;
+      courriers.find((item) => item.id === newId).isActive = true;
     }
     updateId(newId);
   };

@@ -51,7 +51,19 @@ class CourrierRepository extends ServiceEntityRepository
     //  * @return Courrier[] Returns an array of Courrier objects
     //  */
 
-    public function findByExampleField(int $value)
+
+    public function findByBordereau(int $value)
+    {
+        return $this->createQueryBuilder(('c'))
+            ->andWhere('c.bordereau =:val')
+            ->setParameter('val', $value)
+            ->leftJoin('c.statutcourriers', 'sc')
+            ->addSelect('sc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCourriers(int $value)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.expediteur = :val')
@@ -60,6 +72,18 @@ class CourrierRepository extends ServiceEntityRepository
             ->addSelect('sc')
             ->orderBy('c.id', 'DESC')
             //->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNom(string $value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.name = :val')
+            ->setParameter('val', $value)
+            ->leftJoin('c.statutcourriers', 'sc')
+            ->addSelect('sc')
+            ->orderBy('c.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
