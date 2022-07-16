@@ -62,6 +62,27 @@ function ListeCourriers(props) {
           );
         })}
       </ul>
+      <div>
+        <button
+          onClick={() => this.handleClick(this.state.page - 1, "minus")}
+          style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
+        >
+          {"<"}
+        </button>
+        <p>{this.state.page + 1}</p>
+        <button
+          onClick={() => this.handleClick(this.state.page + 1, "plus")}
+          style={{
+            visibility:
+              this.state.statuts.length >= this.max &&
+              this.state.statuts.length * (this.state.page + 1) !== this.total
+                ? "visible"
+                : "hidden",
+          }}
+        >
+          {">"}
+        </button>
+      </div>
     </section>
   );
 }

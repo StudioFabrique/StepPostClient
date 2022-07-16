@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ListeCourriers from "../../components/ListeCourriers/ListeCourriers";
-import { postData } from "../../modules/fetchData";
+import { getData, postData } from "../../modules/fetchData";
 import "./Home.css";
 import Recherche from "../../components/Recherche/Recherche";
 import DetailsRecherche from "../../components/DetailsRecherche/DetailsRecherche";
@@ -80,18 +80,15 @@ class Home extends Component {
     /**
      * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
      */
-    const datas = [0, this.max, "", false];
-    const response = await postData(`/get-courriers`, datas);
+    const response = await getData(`/courriers`);
     this.setState({
-      statuts: response.statuts,
+      statuts: response.response,
       page: 0,
       isRechercheActive: false,
       rechercheNom: false,
       noResults: false,
     });
-    console.log(("total", response.total));
     this.nom = "";
-    this.total = 0;
   };
 
   handleBtnRetour = () => {
