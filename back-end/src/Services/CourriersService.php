@@ -48,7 +48,7 @@ class CourriersService
                         'adresse' => $result->getAdresse(),
                         'codePostal' => $result->getCodePostal(),
                         'ville' => $result->getVille(),
-                        'etat' => $statut->getStatut()->getEtat(),
+                        'etat' => $statut->getStatut()->getId(),
                         'date' => $statut->getDate()
                     ]
                 ];

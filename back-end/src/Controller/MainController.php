@@ -47,7 +47,7 @@ class MainController extends AbstractController
         $service->deleteAdresse();
         return $this->json(['result' => true]);
     }
-    /* 
+
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(
         Service $service,
@@ -57,7 +57,7 @@ class MainController extends AbstractController
             'courrier' => $data[0],
             'destinataire' => $data[1]
         ]);
-    } */
+    }
 
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
     public function editAdresse(Service $service,): Response
@@ -119,7 +119,7 @@ class MainController extends AbstractController
         endif;
     }
 
-
+    /* 
     #[Route('/api/bordereau', name: 'api_bordereau')]
     public function getCourrierByBordereau(RechercheService $rechercheService): Response
     {
@@ -145,5 +145,5 @@ class MainController extends AbstractController
     public function nom(CourriersService $courrierService): Response
     {
         return $this->json(['result' => $courrierService->getCourriersByNom()]);
-    }
+    } */
 }

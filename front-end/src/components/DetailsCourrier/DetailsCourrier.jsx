@@ -1,3 +1,4 @@
+import React from "react";
 import { formatDate, toTitleCase } from "../../modules/formatter";
 import "./DetailsCourrier.css";
 
@@ -11,14 +12,14 @@ function DetailsCourrier(props) {
         <div>
           {statuts.map((statut, index) => {
             return (
-              <>
+              <React.Fragment key={index}>
                 <div className="cercleContainer">
                   <div className="cercle"></div>
                   <div className="statuts">{statut.etat}</div>
                   <div className="statuts-date">{formatDate(statut.date)} </div>
                 </div>
                 <div className="trait"></div>
-              </>
+              </React.Fragment>
             );
           })}
         </div>
