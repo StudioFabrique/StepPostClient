@@ -49,3 +49,11 @@ export async function getToken(email, password) {
     return response;
   } catch (err) {}
 }
+
+export async function handShake(token) {
+  return await (
+    await fetch(`${baseUrl}/handshake`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  ).json();
+}

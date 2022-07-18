@@ -16,12 +16,8 @@ class Home extends Component {
       statuts: [],
       page: 0,
       isRechercheActive: false,
-      rechercheValue: [],
+      rechercheValue: {},
     };
-    this.max = 3;
-    this.nom = "";
-    this.tmpName = "";
-    this.total = 0;
   }
 
   async componentDidMount() {
@@ -39,59 +35,52 @@ class Home extends Component {
     }
   }
 
-  handleRecherche = async (msg) => {
-    this.total = 0;
-    if (this.state.isRechercheActive) {
-      this.setState({ isRechercheActive: false });
-    }
-    const response = await postData(`/search-courrier`, [msg]);
-    if (response.statuts) {
-      this.setState({ isRechercheActive: true, rechercheValue: response });
-    } else if (response.statuts === false) {
-      this.nom = msg;
-      const response = await postData(`/get-courriers`, [
-        0,
-        this.max,
-        this.nom,
-        this.filtre,
-      ]);
-      if (response.statuts !== false) {
-        this.setState({
-          statuts: response.statuts,
-          page: 0,
-          isRechercheActive: false,
-          rechercheNom: true,
-        });
-        this.nom = response.statuts[0].nom;
-        this.total = response.total;
-      } else {
-        this.setState({ noResults: true, rechercheNom: false });
-        this.tmpName = this.nom;
-        this.nom = "";
-      }
+  handleCloseRecherche = () => {
+    this.setState({ isRechercheActive: false, rechercheValue: {} });
+  };
+
+  handleRechercheBordereau = async (value) => {
+    this.setState({
+      noResults: false,
+      isRechercheActive: false,
+    });
+    const response = await postData("/bordereau", [value]);
+    if (response.result === false) {
+      this.setState({ noResults: true });
+    } else {
+      this.setState({
+        isRechercheActive: true,
+        rechercheValue: response.result,
+      });
     }
   };
 
-  handleCloseRecherche = () => {
-    this.setState({ isRechercheActive: false, rechercheValue: "" });
+  handleRechercheNom = async (value) => {
+    this.setState({
+      noResults: false,
+      isRechercheActive: false,
+      rechercheNom: false,
+    });
+    const response = await postData("/nom", [value, true]);
+    if (response.result === false) {
+      this.setState({ noResults: true });
+    } else {
+      this.setState({ statuts: response.result, rechercheNom: true });
+    }
   };
 
   handleResetList = async () => {
     /**
-     * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
+     * datas : true signifie ici qu'on veut en retours les courriers en cours de distribution.
      */
-    const datas = [0, this.max, "", false];
-    const response = await postData(`/get-courriers`, datas);
+    const datas = [true];
+    const response = await postData(`/courriers`, datas);
     this.setState({
-      statuts: response.statuts,
-      page: 0,
+      statuts: response.result,
       isRechercheActive: false,
       rechercheNom: false,
       noResults: false,
     });
-    console.log(("total", response.total));
-    this.nom = "";
-    this.total = 0;
   };
 
   handleBtnRetour = () => {
@@ -101,7 +90,10 @@ class Home extends Component {
   render() {
     return (
       <main className="home-main">
-        <Recherche onRecherche={this.handleRecherche} />
+        <Recherche
+          onRechercheBordereau={this.handleRechercheBordereau}
+          onRechercheNom={this.handleRechercheNom}
+        />
         {this.state.isRechercheActive && (
           <DetailsRecherche
             courrier={this.state.rechercheValue}
@@ -110,37 +102,16 @@ class Home extends Component {
         )}
         {this.state.rechercheNom && (
           <RechercheNom
-            nom={this.nom}
+            nom={this.state.statuts[0].nom}
             civilite={this.state.statuts[0].civilite}
-            total={this.total}
+            total={this.state.statuts.length}
             onRetourBtn={this.handleBtnRetour}
           />
         )}
         {this.state.noResults && (
           <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
         )}
-        <ListeCourriers statuts={this.state.statuts} />
-        <div>
-          <button
-            onClick={() => this.handleClick(this.state.page - 1, "minus")}
-            style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
-          >
-            {"<"}
-          </button>
-          <p>{this.state.page + 1}</p>
-          <button
-            onClick={() => this.handleClick(this.state.page + 1, "plus")}
-            style={{
-              visibility:
-                this.state.statuts.length >= this.max &&
-                this.state.statuts.length * (this.state.page + 1) !== this.total
-                  ? "visible"
-                  : "hidden",
-            }}
-          >
-            {">"}
-          </button>
-        </div>
+        <ListeCourriers courriers={this.state.statuts} />
       </main>
     );
   }

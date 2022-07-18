@@ -85,6 +85,21 @@ body {
           }
         }
       }
+
+      >.button-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: .5vw;
+
+        >button {
+          padding: 0 .2vw;
+        }
+
+        >p {
+          font-size: .75em;
+        }
+      }
     }
   }
 }

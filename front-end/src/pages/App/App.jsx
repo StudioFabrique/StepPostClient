@@ -10,6 +10,7 @@ import AdressesFavorites from "../AdressesFavorites/AdressesFavorites";
 import Logout from "../../components/Logout/Logout";
 import { useEffect, useState } from "react";
 import Home from "../Home/Home";
+import { handShake } from "../../modules/fetchData";
 
 function App() {
   const auth = useAuth();
@@ -17,7 +18,11 @@ function App() {
   const savedToken = localStorage.getItem("token");
   useEffect(() => {
     if (savedToken) {
-      auth.onLogin(savedToken);
+      if (handShake(savedToken)) {
+        auth.onLogin(savedToken);
+      } else {
+        auth.Logout();
+      }
     }
   }, [auth, savedToken]);
 

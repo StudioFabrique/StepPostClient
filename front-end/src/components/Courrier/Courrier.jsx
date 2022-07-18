@@ -7,39 +7,44 @@ import {
 import { postData } from "../../modules/fetchData";
 import DetailsCourrier from "../DetailsCourrier/DetailsCourrier";
 
-function Courrier({ statut, onCourrierClick }) {
-  const [detailsCourrier, setDetailsCourrier] = useState([]);
-  const [destinataire, setDestinataire] = useState([]);
+function Courrier({ courrier, onCourrierClick }) {
+  const [statuts, setStatuts] = useState([]);
 
   async function handleClick() {
-    const response = await postData(`/details-courrier`, [statut.id]);
-    setDetailsCourrier(response.courrier);
-    setDestinataire(response.destinataire);
-    onCourrierClick(statut.id);
+    const response = await postData(`/details-courrier`, [courrier.id]);
+    setStatuts(response.result);
+    onCourrierClick(courrier.id);
   }
 
   return (
     <article
       className="courrier"
-      id={`${statut.id}-${statut.bordereau}`}
+      id={`${courrier.id}-${courrier.bordereau}`}
       onClick={handleClick}
-      style={{ backgroundColor: statut.isActive ? "#E0E0E0" : "white" }}
+      style={{ backgroundColor: courrier.isActive ? "#E0E0E0" : "white" }}
     >
       <div>
-        <h4 className="date">{formatDate(statut.date)}</h4>
-        <p>Bordereau n° : {statut.bordereau}</p>
+        <h4 className="date">{formatDate(courrier.date)}</h4>
+        <p>Bordereau n° : {courrier.bordereau}</p>
       </div>
       <div>
         <span>
-          <p>{setEtatMessage(statut.etat, toTitleCase(statut.nom))}</p>
+          <p>{setEtatMessage(courrier.etat, toTitleCase(courrier.nom))}</p>
         </span>
-        <span>{statut.type === 0 ? <p>Colis</p> : <p>Lettre</p>}</span>
+        <span>{courrier.type === 0 ? <p>Colis</p> : <p>Lettre</p>}</span>
       </div>
       <div className="detailsLivraison">
-        {statut.isActive && (
+        {courrier.isActive && (
           <DetailsCourrier
-            detailsCourrier={detailsCourrier}
-            destinataire={destinataire}
+            statuts={statuts}
+            destinataire={{
+              civilite: courrier.civilite,
+              prenom: courrier.prenom,
+              nom: courrier.nom,
+              adresse: courrier.adresse,
+              codePostal: courrier.codePostal,
+              ville: courrier.ville,
+            }}
           />
         )}
       </div>

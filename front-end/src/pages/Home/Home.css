@@ -69,6 +69,19 @@ body #root .listecourriers-section > ul > li .courrier > div:nth-child(3) {
   justify-content: space-between;
   font-size: 1rem;
 }
+body #root .listecourriers-section > .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+}
+body #root .listecourriers-section > .button-group > button {
+  padding: 0 0.2vw;
+}
+body #root .listecourriers-section > .button-group > p {
+  font-size: 0.75em;
+}
 
 @media screen and (max-width: 600px) {
   body #root .home-main .listecourriers-section {

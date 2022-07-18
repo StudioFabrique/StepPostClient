@@ -16,7 +16,7 @@ function DetailsRecherche(props) {
       <article className="detailsRecherche">
         <div>
           <span>
-            <h4>Courrier n° : {courrier.destinataire.bordereau}</h4>
+            <h4>Courrier n° : {courrier.bordereau}</h4>
             <img
               src="img/icone-print.png"
               alt="icone impression"
@@ -28,8 +28,15 @@ function DetailsRecherche(props) {
           </button>
         </div>
         <DetailsCourrier
-          detailsCourrier={courrier.statuts}
-          destinataire={courrier.destinataire}
+          statuts={courrier.statuts}
+          destinataire={{
+            civilite: courrier.civilite,
+            prenom: courrier.prenom,
+            nom: courrier.nom,
+            adresse: courrier.adresse,
+            codePostal: courrier.codePostal,
+            ville: courrier.ville,
+          }}
         />
       </article>
     </>

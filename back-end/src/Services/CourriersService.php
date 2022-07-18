@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entity\Courrier;
 use App\Repository\CourrierRepository;
 use App\Repository\StatutcourrierRepository;
 
@@ -23,8 +24,10 @@ class CourriersService
 
     public function courriers($user): array
     {
+        $filtre = $this->service->stripTag()[0];
         $results = $this->courrierRepository->findCourriers($user);
-        return $this->createCourrierModel($results);;
+        $courriersFiltres = $this->filtrageCourriers($results, $filtre);
+        return $this->createCourrierModel($courriersFiltres);
     }
 
     public function createCourrierModel(array $results)
@@ -32,27 +35,21 @@ class CourriersService
         $listeCourriers = array();
         foreach ($results as $result) :
             $statut = $result->getStatutcourriers()[count($result->getStatutcourriers()) - 1];
-            /**
-             *   la valeur '5' représente le statut 'distribué',
-             *  ici on ne veut que les courriers qui n'ont pas encore été distribués
-             * */
-            if ($statut->getStatut()->getId() < 5) :
-                $listeCourriers = [
-                    ...$listeCourriers, [
-                        'id' => $result->getId(),
-                        'type' => $result->getType(),
-                        'bordereau' => $result->getBordereau(),
-                        'civilite' => $result->getCivilite(),
-                        'nom' => $result->getName(),
-                        'prenom' => $result->getPrenom(),
-                        'adresse' => $result->getAdresse(),
-                        'codePostal' => $result->getCodePostal(),
-                        'ville' => $result->getVille(),
-                        'etat' => $statut->getStatut()->getId(),
-                        'date' => $statut->getDate()
-                    ]
-                ];
-            endif;
+            $listeCourriers = [
+                ...$listeCourriers, [
+                    'id' => $result->getId(),
+                    'type' => $result->getType(),
+                    'bordereau' => $result->getBordereau(),
+                    'civilite' => $result->getCivilite(),
+                    'nom' => $result->getName(),
+                    'prenom' => $result->getPrenom(),
+                    'adresse' => $result->getAdresse(),
+                    'codePostal' => $result->getCodePostal(),
+                    'ville' => $result->getVille(),
+                    'etat' => $statut->getStatut()->getEtat(),
+                    'date' => $statut->getDate()
+                ]
+            ];
         endforeach;
         return $listeCourriers;
     }
@@ -70,14 +67,21 @@ class CourriersService
         return $listeStatutsCourrier;
     }
 
-    public function getCourriersByNom()
+    public function filtrageCourriers(array $courriers, bool $filtre): array
     {
-        $nom = $this->service->stripTag()[0];
-        $results = $this->courrierRepository->findNom($nom);
-        if (count($results) === 0) :
-            return false;
-        else :
-            return $this->createCourrierModel($results);
-        endif;
+        $courriersFiltres = array();
+        foreach ($courriers as $courrier) :
+            $statut = $courrier->getStatutcourriers()[count($courrier->getStatutcourriers()) - 1];
+            if ($filtre) :
+                if ($statut->getStatut()->getId() < 5) :
+                    $courriersFiltres = [...$courriersFiltres, $courrier];
+                endif;
+            else :
+                if ($statut->getStatut()->getId() > 4) :
+                    $courriersFiltres = [...$courriersFiltres, $courrier];
+                endif;
+            endif;
+        endforeach;
+        return $courriersFiltres;
     }
 }

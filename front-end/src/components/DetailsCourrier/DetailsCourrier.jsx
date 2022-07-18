@@ -3,7 +3,7 @@ import { formatDate, toTitleCase } from "../../modules/formatter";
 import "./DetailsCourrier.css";
 
 function DetailsCourrier(props) {
-  const statuts = props.detailsCourrier;
+  const statuts = props.statuts;
   const dest = props.destinataire;
 
   return (

@@ -7,13 +7,16 @@ use App\Repository\CourrierRepository;
 class RechercheService
 {
     private $courrierRepository;
+    private $courrierService;
     private $service;
 
     public function __construct(
         CourrierRepository $courrierRepository,
+        CourriersService $courrierService,
         Service $service,
     ) {
         $this->courrierRepository = $courrierRepository;
+        $this->courrierService = $courrierService;
         $this->service = $service;
     }
 
@@ -44,5 +47,16 @@ class RechercheService
             'statuts' => $statuts
         ];
         return $courrier;
+    }
+
+    public function getCourriersByNom()
+    {
+        $data = $this->service->stripTag();
+        $results = $this->courrierRepository->findNom($data[0]);
+        if (count($results) === 0) :
+            return false;
+        else :
+            return $this->courrierService->createCourrierModel($this->courrierService->filtrageCourriers($results, $data[1]));
+        endif;
     }
 }

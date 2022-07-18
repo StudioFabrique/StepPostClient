@@ -47,7 +47,7 @@ class MainController extends AbstractController
         $service->deleteAdresse();
         return $this->json(['result' => true]);
     }
-
+    /* 
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(
         Service $service,
@@ -57,7 +57,7 @@ class MainController extends AbstractController
             'courrier' => $data[0],
             'destinataire' => $data[1]
         ]);
-    }
+    } */
 
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
     public function editAdresse(Service $service,): Response
@@ -119,7 +119,7 @@ class MainController extends AbstractController
         endif;
     }
 
-    /* 
+
     #[Route('/api/bordereau', name: 'api_bordereau')]
     public function getCourrierByBordereau(RechercheService $rechercheService): Response
     {
@@ -132,7 +132,7 @@ class MainController extends AbstractController
     {
         $user = $exp->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $results = $courrierService->courriers($user->getId());
-        return $this->json(['response' => $results]);
+        return $this->json(['result' => $results]);
     }
 
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
@@ -141,9 +141,15 @@ class MainController extends AbstractController
         return $this->json(['result' => $courrierService->detailsCourrier()]);
     }
 
-    #[Route('/api/nom', name: 'api_nom')]
-    public function nom(CourriersService $courrierService): Response
+    #[Route('/api/handshake', name: 'api_handshake')]
+    public function handShake(): Response
     {
-        return $this->json(['result' => $courrierService->getCourriersByNom()]);
-    } */
+        return $this->json(['result' => true]);
+    }
+
+    #[Route('/api/nom', name: 'api_nom')]
+    public function nom(RechercheService $rechercheService): Response
+    {
+        return $this->json(['result' => $rechercheService->getCourriersByNom()]);
+    }
 }

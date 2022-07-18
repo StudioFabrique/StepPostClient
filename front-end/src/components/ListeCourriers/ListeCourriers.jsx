@@ -1,31 +1,23 @@
 import Courrier from "../Courrier/Courrier.jsx";
 import { useEffect, useState } from "react";
 import BoutonAjouter from "../BoutonAjouter/BoutonAjouter.jsx";
+import { getCourriers } from "../../modules/pagination";
 
 function ListeCourriers(props) {
   const [courriers, updateCourriers] = useState([]);
   const [id, updateId] = useState(null);
-  useEffect(() => {
-    init();
-  }, [props]);
+  const [page, updatePage] = useState(null);
+  const max = 3;
 
-  function init() {
+  useEffect(() => {
+    updatePage(0);
+    updateCourriers(getCourriers(page, max, props.courriers));
+  }, [props.courriers]);
+
+  useEffect(() => {
+    updateCourriers(getCourriers(page, max, props.courriers));
     updateId(null);
-    const tmp = [];
-    props.statuts.forEach((elem) => {
-      tmp.push({
-        bordereau: elem.bordereau,
-        date: elem.date,
-        etat: elem.etat,
-        id: elem.id,
-        nom: elem.nom,
-        prenom: elem.prenom,
-        type: elem.type,
-        isActive: false,
-      });
-    });
-    updateCourriers(tmp);
-  }
+  }, [page]);
 
   // effet d'arcodéon
 
@@ -50,18 +42,38 @@ function ListeCourriers(props) {
         <BoutonAjouter msg={"Nouvel envoi : "} url={"/carnet-d-adresses"} />
       </div>
       <ul>
-        {courriers.map((statut, index) => {
+        {courriers.map((courrier, index) => {
           return (
             <li key={index}>
               <Courrier
-                statut={statut}
-                baseUrl={props.baseUrl}
+                courrier={courrier}
                 onCourrierClick={handleCourrierClick}
               />
             </li>
           );
         })}
       </ul>
+      <div className="button-group">
+        <button
+          style={{ visibility: page > 0 ? "visible" : "hidden" }}
+          onClick={() => updatePage(page - 1)}
+        >
+          {" < "}
+        </button>
+        <p>{page + 1}</p>
+        <button
+          style={{
+            visibility:
+              courriers.length >= max &&
+              courriers.length * page + 1 !== props.courriers.length
+                ? "visible"
+                : "hidden",
+          }}
+          onClick={() => updatePage(page + 1)}
+        >
+          {" > "}
+        </button>
+      </div>
     </section>
   );
 }

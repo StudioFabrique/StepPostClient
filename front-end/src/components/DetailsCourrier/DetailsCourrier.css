@@ -5,15 +5,15 @@
   box-shadow: 4px 4px 4px #646464;
 }
 
-.detailsLivraison {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.detailsLivraison > .details {
-  font-size: 1rem;
-}
+/* .detailsLivraison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    >.details {
+        font-size: 1rem;
+    }
+} */
 .date {
   color: #FF5E1A;
 }
@@ -99,15 +99,12 @@
   .statuts {
     font-size: 0.5rem;
   }
-
   .statuts-date {
     font-size: 0.5rem;
   }
-
   .details {
     font-size: 0.75rem;
   }
-
   .trait {
     width: 7vw;
   }
@@ -116,11 +113,9 @@
   .trait {
     width: 15vw;
   }
-
   .details > div > p {
     font-size: 0.5rem;
   }
-
   .statuts {
     top: -300%;
   }
