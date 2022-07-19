@@ -9,6 +9,9 @@
 }
 .main-historique > .section-historique {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vh;
 }
 .main-historique > .section-historique > table {
   width: 100%;
@@ -50,38 +53,50 @@
 .main-historique > .section-historique > table > tbody > tr:hover {
   cursor: pointer;
 }
-.main-historique > div:last-child {
+.main-historique > .section-historique > .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+}
+.main-historique > .section-historique > .button-group > button {
+  padding: 0 0.2vw;
+}
+.main-historique > .section-historique > .button-group > p {
+  font-size: 0.75em;
+}
+.main-historique > .section-historique > div:last-child {
   display: flex;
   align-items: center;
   -moz-column-gap: 1vw;
        column-gap: 1vw;
   font-size: 0.75em;
 }
-
 @media screen and (max-width: 600px) {
-  .main-historique .section-historique {
+  .main-historique .main-historique .section-historique {
     width: 90%;
     font-size: 0.75rem;
   }
 }
 @media print {
-  body #root nav,
-body #root footer,
-body #root .button {
+  .main-historique body #root nav,
+.main-historique body #root footer,
+.main-historique body #root .button {
     display: none;
   }
-  body #root .main-historique > .form-recherche,
-body #root .main-historique > .section-historique,
-body #root .main-historique > .rechercheNom,
-body #root .main-historique > div:last-child {
+  .main-historique body #root .main-historique > .form-recherche,
+.main-historique body #root .main-historique > .section-historique,
+.main-historique body #root .main-historique > .rechercheNom,
+.main-historique body #root .main-historique > div:last-child {
     display: none;
   }
-  body #root .main-historique > .detailsRecherche {
+  .main-historique body #root .main-historique > .detailsRecherche {
     width: 90%;
     flex-direction: column;
     row-gap: 5vh;
   }
-  body #root .main-historique > .detailsRecherche > div > span > img {
+  .main-historique body #root .main-historique > .detailsRecherche > div > span > img {
     display: none;
   }
 }/*# sourceMappingURL=Historique.css.map */

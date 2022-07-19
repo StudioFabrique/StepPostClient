@@ -11,10 +11,13 @@ $green: #24a640;
   margin-top: 5vh;
   padding-bottom: 25vh;
 
-  > .section-historique {
+  >.section-historique {
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vh;
 
-    > table {
+    >table {
       width: 100%;
       border: 1px solid darkgray;
       border-radius: 5px;
@@ -25,13 +28,13 @@ $green: #24a640;
         font-weight: bold;
       }
 
-      > thead {
+      >thead {
         text-align: left;
         background-color: $blue;
         color: white;
 
-        > tr {
-          > th {
+        >tr {
+          >th {
             padding: 1vh 1vw;
 
             &:hover {
@@ -42,22 +45,23 @@ $green: #24a640;
         }
       }
 
-      > tbody {
-        > tr:nth-child(even) {
+      >tbody {
+        >tr:nth-child(even) {
           background-color: lightgray;
         }
 
-        > tr {
-          > td:nth-child(4) {
+        >tr {
+          >td:nth-child(4) {
             display: flex;
             align-items: center;
             column-gap: 0.5vw;
           }
+
           &:hover {
             filter: brightness(1.1);
           }
 
-          > td {
+          >td {
             padding: 1vh 1vw;
           }
 
@@ -67,51 +71,68 @@ $green: #24a640;
         }
       }
     }
-  }
 
-  > div:last-child {
-    display: flex;
-    align-items: center;
-    column-gap: 1vw;
-    font-size: 0.75em;
-  }
-}
+    >.button-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: .5vw;
 
-@media screen and (max-width: 600px) {
-  .main-historique {
-    .section-historique {
-      width: 90%;
-      font-size: 0.75rem;
-    }
-  }
-}
-
-@media print {
-  body {
-    #root {
-      nav,
-      footer,
-      .button {
-        display: none;
+      >button {
+        padding: 0 .2vw;
       }
 
-      .main-historique {
-        > .form-recherche,
-        > .section-historique,
-        > .rechercheNom,
-        > div:last-child {
+      >p {
+        font-size: .75em;
+      }
+    }
+
+    >div:last-child {
+      display: flex;
+      align-items: center;
+      column-gap: 1vw;
+      font-size: 0.75em;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .main-historique {
+      .section-historique {
+        width: 90%;
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  @media print {
+    body {
+      #root {
+
+        nav,
+        footer,
+        .button {
           display: none;
         }
 
-        > .detailsRecherche {
-          width: 90%;
-          flex-direction: column;
-          row-gap: 5vh;
+        .main-historique {
 
-          > div {
-            > span {
-              > img {
-                display: none;
+          >.form-recherche,
+          >.section-historique,
+          >.rechercheNom,
+          >div:last-child {
+            display: none;
+          }
+
+          >.detailsRecherche {
+            width: 90%;
+            flex-direction: column;
+            row-gap: 5vh;
+
+            >div {
+              >span {
+                >img {
+                  display: none;
+                }
               }
             }
           }

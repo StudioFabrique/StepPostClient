@@ -71,10 +71,9 @@ class Home extends Component {
 
   handleResetList = async () => {
     /**
-     * datas : true signifie ici qu'on veut en retours les courriers en cours de distribution.
+     * true signifie ici qu'on veut en retours les courriers en cours de distribution.
      */
-    const datas = [true];
-    const response = await postData(`/courriers`, datas);
+    const response = await postData(`/courriers`, [true]);
     this.setState({
       statuts: response.result,
       isRechercheActive: false,
@@ -109,7 +108,7 @@ class Home extends Component {
           />
         )}
         {this.state.noResults && (
-          <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
+          <NoResults onRetourBtn={this.handleBtnRetour} />
         )}
         <ListeCourriers courriers={this.state.statuts} />
       </main>

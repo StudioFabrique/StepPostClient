@@ -4,9 +4,9 @@ import Recherche from "../../components/Recherche/Recherche";
 import DetailsRecherche from "../../components/DetailsRecherche/DetailsRecherche";
 import RechercheNom from "../../components/RechercheNom/RechercheNom";
 import NoResults from "../../components/NoResults/NoResults";
-import Logs from "../../components/Logs/Logs";
 import "./Historique.css";
-import { resetSortArray } from "../../modules/sortArray.js";
+import ListeHistoriques from "../../components/ListeHistoriques/ListeHistoriques";
+import { triTableau } from "../../modules/triTableaux";
 
 class Historique extends Component {
   constructor(props) {
@@ -15,192 +15,106 @@ class Historique extends Component {
       noResults: false,
       rechercheNom: false,
       statuts: [],
-      page: 0,
       isRechercheActive: false,
       rechercheValue: [],
+      loading: false,
     };
-    this.max = 10;
-    this.nom = "";
-    this.tmpName = "";
-    this.filtre = true;
-    // false = 'DESC' true = 'ASC'
-    this.direction = [false, false, false, false];
-    this.sort = 0;
-    this.total = 0;
+    this.filtre = [false, false, false, false];
   }
 
   async componentDidMount() {
-    this.handleResetList();
+    this.refreshList();
     this.props.onPageLanding(2);
   }
 
-  async handleClick(p, operator) {
-    const datas = [
-      p,
-      this.max,
-      this.nom,
-      this.filtre,
-      this.sort,
-      this.direction[this.sort],
-    ];
-    const response = await postData(`/get-courriers`, datas);
-    if (operator === "minus") {
-      this.setState({ statuts: response.statuts, page: this.state.page - 1 });
-    } else {
-      this.setState({ statuts: response.statuts, page: this.state.page + 1 });
-    }
-  }
-
-  handleRecherche = async (msg) => {
-    this.total = 0;
-    if (this.state.isRechercheActive) {
-      this.setState({ isRechercheActive: false });
-    }
-    const response = await postData(`/search-courrier`, [msg]);
-    if (response.statuts) {
-      this.setState({ isRechercheActive: true, rechercheValue: response });
-    } else if (response.statuts === false) {
-      this.nom = msg;
-      const response = await postData(`/get-courriers`, [
-        0,
-        this.max,
-        this.nom,
-        this.filtre,
-        0,
-        false,
-      ]);
-      if (response.statuts !== false) {
-        this.setState({
-          statuts: response.statuts,
-          page: 0,
-          isRechercheActive: false,
-          rechercheNom: true,
-        });
-        this.nom = response.statuts[0].nom;
-        this.total = response.total;
-      } else {
-        this.setState({ noResults: true, rechercheNom: false });
-        this.tmpName = this.nom;
-        this.nom = "";
-      }
-    }
-    this.direction = resetSortArray();
-    this.sort = 0;
-  };
-
-  handleSort = async (sort) => {
-    this.direction[sort] = !this.direction[sort];
-    this.sort = sort;
-    const response = await postData(`/get-courriers`, [
-      0,
-      this.max,
-      this.nom,
-      this.filtre,
-      this.sort,
-      this.direction[this.sort],
-    ]);
-    this.setState({ statuts: response.statuts, page: 0 });
+  handleBtnRetour = () => {
+    this.refreshList();
   };
 
   handleCloseRecherche = () => {
     this.setState({ isRechercheActive: false, rechercheValue: "" });
   };
 
-  handleResetList = async () => {
-    /**
-     * datas : numéro de page, nbre max d'entrées, nom en cas de recherche, filtre "distribué ou pas"
-     */
-    this.direction = resetSortArray();
-    this.sort = 0;
-    const datas = [
-      0,
-      this.max,
-      "",
-      this.filtre,
-      this.sort,
-      this.direction[this.sort],
-    ];
-    const response = await postData(`/get-courriers`, datas);
+  handleRechercheBordereau = async (value) => {
     this.setState({
-      statuts: response.statuts,
-      page: 0,
+      noResults: false,
+      isRechercheActive: false,
+    });
+    const response = await postData("/bordereau", [value]);
+    if (response.result === false) {
+      this.setState({ noResults: true });
+    } else {
+      this.setState({
+        isRechercheActive: true,
+        rechercheValue: response.result,
+      });
+    }
+  };
+
+  handleRechercheNom = async (value) => {
+    this.setState({
+      noResults: false,
+      isRechercheActive: false,
+      rechercheNom: false,
+    });
+    const response = await postData("/nom", [value, false]);
+    if (response.result === false) {
+      this.setState({ noResults: true });
+    } else {
+      this.setState({ statuts: response.result, rechercheNom: true });
+    }
+  };
+
+  handleSort = async (value) => {
+    this.setState({ loading: true });
+    this.filtre[value] = !this.filtre[value];
+    this.setState({
+      statuts: await triTableau(this.state.statuts, value, this.filtre[value]),
+      loading: false,
+    });
+  };
+
+  refreshList = async () => {
+    const response = await postData(`/courriers`, [false]);
+    this.setState({
+      statuts: response.result,
       isRechercheActive: false,
       rechercheNom: false,
       noResults: false,
     });
-    this.nom = "";
-    this.total = 0;
-  };
-
-  handleBtnRetour = () => {
-    this.handleResetList();
   };
 
   render() {
     return (
       <main className="main-historique">
-        <Recherche onRecherche={this.handleRecherche} />
-        {this.state.isRechercheActive ? (
+        <Recherche
+          onRechercheBordereau={this.handleRechercheBordereau}
+          onRechercheNom={this.handleRechercheNom}
+        />
+        {this.state.isRechercheActive && (
           <DetailsRecherche
             courrier={this.state.rechercheValue}
             onCloseRecherche={this.handleCloseRecherche}
           />
-        ) : null}
-        {this.state.rechercheNom ? (
+        )}
+        {this.state.rechercheNom && (
           <RechercheNom
-            nom={this.nom}
-            total={this.total}
+            nom={this.state.statuts[0].nom}
+            civilite={this.state.statuts[0].civilite}
+            total={this.state.statuts.length}
             onRetourBtn={this.handleBtnRetour}
           />
-        ) : null}
-        {this.state.noResults ? (
-          <NoResults nom={this.tmpName} onRetourBtn={this.handleBtnRetour} />
-        ) : null}
-        <section className="section-historique">
-          <table>
-            <thead>
-              <tr>
-                <th onClick={() => this.handleSort(0)}>Bordereau</th>
-                <th onClick={() => this.handleSort(1)}>Date</th>
-                <th onClick={() => this.handleSort(2)}>Nom</th>
-                <th onClick={() => this.handleSort(3)}>Statut</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.statuts.map((courrier, index) => {
-                return (
-                  <Logs
-                    key={index}
-                    courrier={courrier}
-                    onRowClick={this.handleRecherche}
-                  />
-                );
-              })}
-            </tbody>
-            <tfoot></tfoot>
-          </table>
-        </section>
-        <div>
-          <button
-            onClick={() => this.handleClick(this.state.page - 1, "minus")}
-            style={{ visibility: this.state.page > 0 ? "visible" : "hidden" }}
-          >
-            {"<"}
-          </button>
-          <p>{this.state.page + 1}</p>
-          <button
-            onClick={() => this.handleClick(this.state.page + 1, "plus")}
-            style={{
-              visibility:
-                this.state.statuts.length >= this.max &&
-                this.state.statuts.length * (this.state.page + 1) !== this.total
-                  ? "visible"
-                  : "hidden",
-            }}
-          >
-            {">"}
-          </button>
-        </div>
+        )}
+        {this.state.noResults && (
+          <NoResults onRetourBtn={this.handleBtnRetour} />
+        )}
+        {!this.state.loading && (
+          <ListeHistoriques
+            courriers={this.state.statuts}
+            onHistoriqueRowClick={this.handleRechercheBordereau}
+            onSort={this.handleSort}
+          />
+        )}
       </main>
     );
   }
