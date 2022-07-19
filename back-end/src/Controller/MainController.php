@@ -2,22 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\CourrierRepository;
 use App\Repository\ExpediteurRepository;
+use App\Services\AdressesService;
 use App\Services\CourriersService;
 use App\Services\Service as Service;
 use App\Services\Qrcode as ServicesQrcode;
 use App\Services\RechercheService;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class MainController extends AbstractController
 {
@@ -41,23 +34,10 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/delete-adresse', name: 'api_delete-adresse')]
-    public function deleteAdresse(
-        Service $service,
-    ): Response {
-        $service->deleteAdresse();
-        return $this->json(['result' => true]);
+    public function deleteAdresse(AdressesService $adressesService): Response
+    {
+        return $this->json(['result' => $adressesService->removeAdresse()]);
     }
-    /* 
-    #[Route('/api/details-courrier', name: 'api_details-courrier')]
-    public function detailsCourrier(
-        Service $service,
-    ): Response {
-        $data = $service->detailsCourrier();
-        return $this->json([
-            'courrier' => $data[0],
-            'destinataire' => $data[1]
-        ]);
-    } */
 
     #[Route('/api/edit-adresse', name: 'api_edit-adresse')]
     public function editAdresse(Service $service,): Response
@@ -70,18 +50,6 @@ class MainController extends AbstractController
     {
         $user = $this->getUser();
         return $this->json(['exp' => $service->expediteur($user)]);
-    }
-
-    #[Route('/api/get-courriers', name: 'api_get-courriers')]
-    public function getCourriers(
-        Service $service,
-    ): Response {
-        $user = $this->getUser();
-        $result = $service->getCourriers($user);
-        return $this->json([
-            'statuts' => $result[0],
-            'total' => $result[1],
-        ]);
     }
 
     #[Route('/api/qrcode', name: 'api_qrcode')]
@@ -100,26 +68,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    /**
-     * retourne false qd la recherche par bordereau n'a rien trouvé,
-     * sinon retourne les infos sur le courrier recherché
-     */
-    #[Route('/api/search-courrier', name: 'api_search-courrier')]
-    public function searchCourrier(
-        Service $service,
-    ): Response {
-        $result = $service->searchCourrier();
-        if (!$result) :
-            return $this->json(['statuts' => false]);
-        else :
-            return $this->json([
-                'statuts' => $result['statuts'],
-                'destinataire' => $result['destinataire']
-            ]);
-        endif;
-    }
-
-
+    //  recherche d'un courrier par numéro de bordereau
     #[Route('/api/bordereau', name: 'api_bordereau')]
     public function getCourrierByBordereau(RechercheService $rechercheService): Response
     {
@@ -135,18 +84,21 @@ class MainController extends AbstractController
         return $this->json(['result' => $results]);
     }
 
+    //  récupération des statuts d'un courrier pour afficher la timeline coté front-end
     #[Route('/api/details-courrier', name: 'api_details-courrier')]
     public function detailsCourrier(CourriersService $courrierService): Response
     {
         return $this->json(['result' => $courrierService->detailsCourrier()]);
     }
 
+    //  vérification de la validité d'un jeton de session envoyé dans les headers
     #[Route('/api/handshake', name: 'api_handshake')]
     public function handShake(): Response
     {
         return $this->json(['result' => true]);
     }
 
+    //  récupération de la liste des courriers associés à un destinataire précis
     #[Route('/api/nom', name: 'api_nom')]
     public function nom(RechercheService $rechercheService): Response
     {

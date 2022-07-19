@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Entity\Courrier;
 use App\Repository\CourrierRepository;
 use App\Repository\StatutcourrierRepository;
 

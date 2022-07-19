@@ -101,11 +101,12 @@ class Service
 
     public function deleteAdresse()
     {
-        $id = $this->stripTag($_POST['data'])[0];
+        $id = $this->stripTag()[0];
         $dest = $this->destinatairesRepository->findOneBy(['id' => $id]);
         $manager = $this->doctrine->getManager();
         $manager->remove($dest);
         $manager->flush();
+        return true;
     }
 
     public function detailsCourrier()
