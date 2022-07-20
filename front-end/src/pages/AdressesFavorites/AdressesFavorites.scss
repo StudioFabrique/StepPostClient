@@ -3,10 +3,10 @@ $orange: #ff5e1a;
 $green: #24a640;
 
 .bouton-ajouter {
-  > button {
+  >button {
     border: none;
 
-    > img {
+    >img {
       width: 2vw;
       height: 2vw;
     }
@@ -25,11 +25,10 @@ $green: #24a640;
   align-items: center;
   justify-content: space-evenly;
   row-gap: 5vh;
-  margin-top: 10vh;
   margin-bottom: 5vh;
   padding-bottom: 25vh;
 
-  > .section-adresses {
+  >.section-adresses {
     width: 60%;
     display: flex;
     flex-wrap: wrap;
@@ -38,12 +37,12 @@ $green: #24a640;
     column-gap: 1vw;
   }
 
-  > .section-recherche-nom,
-  > .section-no-results {
+  >.section-recherche-nom,
+  >.section-no-results {
     width: 60%;
   }
 
-  > .section-recherche-nom {
+  >.section-recherche-nom {
     display: flex;
     justify-content: space-between;
   }
@@ -51,14 +50,15 @@ $green: #24a640;
 
 @media screen and (max-width: 1000px) {
   .main-nouvel-envoi {
-    > .section-adresses,
-    > .section-no-results,
-    > .section-recherche-nom {
+
+    >.section-adresses,
+    >.section-no-results,
+    >.section-recherche-nom {
       width: 90%;
       font-size: 0.85rem;
     }
 
-    > .section-recherche-nom {
+    >.section-recherche-nom {
       flex-direction: column;
       align-items: flex-start;
       row-gap: 2vh;
@@ -66,5 +66,4 @@ $green: #24a640;
   }
 }
 
-@media screen and (max-width: 600px) {
-}
+@media screen and (max-width: 600px) {}

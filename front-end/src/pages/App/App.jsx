@@ -11,6 +11,7 @@ import Logout from "../../components/Logout/Logout";
 import { useEffect, useState } from "react";
 import Home from "../Home/Home";
 import { handShake } from "../../modules/fetchData";
+import AddAddress from "../../components/AddAddress/AddAddress";
 
 function App() {
   const auth = useAuth();
@@ -41,6 +42,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Home onPageLanding={handlePageActive} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ajout-adresse"
+          element={
+            <ProtectedRoute>
+              <AddAddress />
             </ProtectedRoute>
           }
         />
